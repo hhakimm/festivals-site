@@ -1,5 +1,6 @@
 import { applyFilters } from './filter.js';
 import { openModal, closeModal, bindModalClose } from './modal.js';
+import { parseQuery, serializeState } from './url-sync.js';
 
 const cardsEl = document.getElementById('cards');
 const emptyEl = document.getElementById('empty-state');
@@ -63,15 +64,29 @@ function update() {
   }
 }
 
+function syncUrl() {
+  const query = serializeState(state);
+  const newUrl = window.location.pathname + query;
+  window.history.replaceState(null, '', newUrl);
+}
+
 cardsEl.addEventListener('click', (e) => {
   const card = e.target.closest('.card');
   if (!card) return;
   const id = card.dataset.festivalId;
   const festival = allFestivals.find(f => f.id === id);
-  if (festival) openModal(festival);
+  if (festival) {
+    state.festival = festival.id;
+    openModal(festival);
+    syncUrl();
+  }
 });
 
-bindModalClose(closeModal);
+bindModalClose(() => {
+  closeModal();
+  state.festival = null;
+  syncUrl();
+});
 
 async function init() {
   try {
@@ -79,7 +94,22 @@ async function init() {
     if (!res.ok) throw new Error('fetch failed');
     allFestivals = await res.json();
     errorEl.hidden = true;
+
+    const initial = parseQuery(window.location.search);
+    state.month = initial.month;
+    state.region = initial.region;
+    state.category = initial.category;
+    state.festival = initial.festival;
+
+    syncFilterUI();
     update();
+
+    if (state.festival) {
+      const f = allFestivals.find(x => x.id === state.festival);
+      if (f) openModal(f);
+      else state.festival = null;
+    }
+    syncUrl();
   } catch (err) {
     console.error(err);
     cardsEl.hidden = true;
@@ -113,16 +143,19 @@ function setMonth(value) {
   state.month = value === 'all' ? null : Number(value);
   syncFilterUI();
   update();
+  syncUrl();
 }
 function setRegion(value) {
   state.region = value === 'all' ? null : value;
   syncFilterUI();
   update();
+  syncUrl();
 }
 function setCategory(value) {
   state.category = value === 'all' ? null : value;
   syncFilterUI();
   update();
+  syncUrl();
 }
 function resetAll() {
   state.month = null;
@@ -130,6 +163,7 @@ function resetAll() {
   state.category = null;
   syncFilterUI();
   update();
+  syncUrl();
 }
 
 monthChipsEl.addEventListener('click', (e) => {
