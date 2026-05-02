@@ -88,3 +88,58 @@ async function init() {
 }
 
 init();
+
+const monthChipsEl = document.getElementById('month-chips');
+const categoryChipsEl = document.getElementById('category-chips');
+const regionSelectEl = document.getElementById('region-select');
+const resetBtnEl = document.getElementById('reset-filters');
+const emptyResetBtnEl = emptyEl.querySelector('[data-reset]');
+
+function setActiveChip(groupEl, attr, value) {
+  groupEl.querySelectorAll('.chip').forEach(chip => {
+    chip.classList.toggle('is-active', chip.dataset[attr] === value);
+  });
+}
+
+function syncFilterUI() {
+  setActiveChip(monthChipsEl, 'month', state.month == null ? 'all' : String(state.month));
+  setActiveChip(categoryChipsEl, 'category', state.category == null ? 'all' : state.category);
+  regionSelectEl.value = state.region == null ? 'all' : state.region;
+  const anyActive = state.month != null || state.region != null || state.category != null;
+  resetBtnEl.hidden = !anyActive;
+}
+
+function setMonth(value) {
+  state.month = value === 'all' ? null : Number(value);
+  syncFilterUI();
+  update();
+}
+function setRegion(value) {
+  state.region = value === 'all' ? null : value;
+  syncFilterUI();
+  update();
+}
+function setCategory(value) {
+  state.category = value === 'all' ? null : value;
+  syncFilterUI();
+  update();
+}
+function resetAll() {
+  state.month = null;
+  state.region = null;
+  state.category = null;
+  syncFilterUI();
+  update();
+}
+
+monthChipsEl.addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if (chip) setMonth(chip.dataset.month);
+});
+categoryChipsEl.addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if (chip) setCategory(chip.dataset.category);
+});
+regionSelectEl.addEventListener('change', (e) => setRegion(e.target.value));
+resetBtnEl.addEventListener('click', resetAll);
+emptyResetBtnEl.addEventListener('click', resetAll);
