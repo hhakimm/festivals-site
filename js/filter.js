@@ -14,3 +14,22 @@ export function monthsCovered(festival) {
 export function isInMonth(festival, month) {
   return monthsCovered(festival).has(month);
 }
+
+export function matchesRegion(festival, region) {
+  if (region == null) return true;
+  return festival.region === region;
+}
+
+export function matchesCategory(festival, category) {
+  if (category == null) return true;
+  return festival.category === category;
+}
+
+export function applyFilters(festivals, { month, region, category }) {
+  return festivals
+    .filter(f => (month == null || isInMonth(f, month)))
+    .filter(f => matchesRegion(f, region))
+    .filter(f => matchesCategory(f, category))
+    .slice()
+    .sort((a, b) => a.startDate.localeCompare(b.startDate));
+}
