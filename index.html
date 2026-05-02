@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>한국 축제 캘린더</title>
+  <meta name="description" content="월별·지역별로 떠나는 한국 축제 여행" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">한국 축제 캘린더</h1>
+      <p class="site-subtitle">월별·지역별로 떠나는 축제 여행</p>
+    </div>
+  </header>
+
+  <section class="filter-bar" aria-label="축제 필터">
+    <div class="container">
+      <div class="filter-group" role="group" aria-label="월 선택">
+        <span class="filter-label">월</span>
+        <div class="chip-group" id="month-chips">
+          <button type="button" class="chip is-active" data-month="all">전체</button>
+          <button type="button" class="chip" data-month="1">1월</button>
+          <button type="button" class="chip" data-month="2">2월</button>
+          <button type="button" class="chip" data-month="3">3월</button>
+          <button type="button" class="chip" data-month="4">4월</button>
+          <button type="button" class="chip" data-month="5">5월</button>
+          <button type="button" class="chip" data-month="6">6월</button>
+          <button type="button" class="chip" data-month="7">7월</button>
+          <button type="button" class="chip" data-month="8">8월</button>
+          <button type="button" class="chip" data-month="9">9월</button>
+          <button type="button" class="chip" data-month="10">10월</button>
+          <button type="button" class="chip" data-month="11">11월</button>
+          <button type="button" class="chip" data-month="12">12월</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="region-select">지역</label>
+        <select id="region-select" class="select">
+          <option value="all">전체</option>
+          <option value="서울특별시">서울특별시</option>
+          <option value="부산광역시">부산광역시</option>
+          <option value="대구광역시">대구광역시</option>
+          <option value="인천광역시">인천광역시</option>
+          <option value="광주광역시">광주광역시</option>
+          <option value="대전광역시">대전광역시</option>
+          <option value="울산광역시">울산광역시</option>
+          <option value="세종특별자치시">세종특별자치시</option>
+          <option value="경기도">경기도</option>
+          <option value="강원특별자치도">강원특별자치도</option>
+          <option value="충청북도">충청북도</option>
+          <option value="충청남도">충청남도</option>
+          <option value="전북특별자치도">전북특별자치도</option>
+          <option value="전라남도">전라남도</option>
+          <option value="경상북도">경상북도</option>
+          <option value="경상남도">경상남도</option>
+          <option value="제주특별자치도">제주특별자치도</option>
+        </select>
+      </div>
+
+      <div class="filter-group" role="group" aria-label="카테고리 선택">
+        <span class="filter-label">카테고리</span>
+        <div class="chip-group" id="category-chips">
+          <button type="button" class="chip is-active" data-category="all">전체</button>
+          <button type="button" class="chip" data-category="전통">전통</button>
+          <button type="button" class="chip" data-category="음식">음식</button>
+          <button type="button" class="chip" data-category="꽃">꽃</button>
+          <button type="button" class="chip" data-category="불꽃">불꽃</button>
+          <button type="button" class="chip" data-category="음악">음악</button>
+          <button type="button" class="chip" data-category="문화">문화</button>
+          <button type="button" class="chip" data-category="겨울">겨울</button>
+        </div>
+      </div>
+
+      <div class="filter-meta">
+        <span id="result-count" class="result-count">총 0개의 축제</span>
+        <button type="button" id="reset-filters" class="reset-btn" hidden>필터 초기화</button>
+      </div>
+    </div>
+  </section>
+
+  <main class="main">
+    <div class="container">
+      <div id="cards" class="card-grid" aria-live="polite"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <p>선택한 조건에 맞는 축제가 없습니다.</p>
+        <button type="button" class="reset-btn" data-reset>필터 초기화</button>
+      </div>
+      <div id="error-state" class="error-state" hidden>
+        <p>데이터를 불러오지 못했습니다. 새로고침해 주세요.</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-content">
+      <button type="button" class="modal-close" data-modal-close aria-label="닫기">×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
