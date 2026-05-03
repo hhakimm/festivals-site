@@ -34,12 +34,16 @@ function escapeHtml(s) {
 }
 
 function renderCards(festivals) {
-  cardsEl.innerHTML = festivals.map(f => `
+  cardsEl.innerHTML = festivals.map(f => {
+    const tagHtml = f.category
+      ? `<span class="tag" data-category="${escapeHtml(f.category)}">${escapeHtml(f.category)}</span>`
+      : '';
+    return `
     <article class="card" data-festival-id="${escapeHtml(f.id)}">
       <img class="card-image" alt="${escapeHtml(f.name)}" src="${escapeHtml(f.image)}"
            onerror="this.src='images/placeholder.svg'" loading="lazy" />
       <div class="card-body">
-        <span class="tag" data-category="${escapeHtml(f.category)}">${escapeHtml(f.category)}</span>
+        ${tagHtml}
         <h2 class="card-title">${escapeHtml(f.name)}</h2>
         <div class="card-meta">
           <span>${escapeHtml(formatRange(f.startDate, f.endDate))}</span>
@@ -48,7 +52,8 @@ function renderCards(festivals) {
         <p class="card-description">${escapeHtml(f.description)}</p>
       </div>
     </article>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function update() {

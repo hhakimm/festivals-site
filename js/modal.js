@@ -22,12 +22,15 @@ export function openModal(festival) {
   const linkHtml = festival.officialUrl
     ? `<a class="modal-link" href="${escapeHtml(festival.officialUrl)}" target="_blank" rel="noopener noreferrer">공식사이트 가기</a>`
     : '';
+  const tagHtml = festival.category
+    ? `<span class="tag" data-category="${escapeHtml(festival.category)}">${escapeHtml(festival.category)}</span>`
+    : '';
 
   modalBody.innerHTML = `
     <img class="modal-image" alt="${escapeHtml(festival.name)}" src="${escapeHtml(festival.image)}"
          onerror="this.src='images/placeholder.svg'" />
     <div class="modal-body-inner">
-      <span class="tag" data-category="${escapeHtml(festival.category)}">${escapeHtml(festival.category)}</span>
+      ${tagHtml}
       <h2 id="modal-title" class="modal-title">${escapeHtml(festival.name)}</h2>
       <div class="modal-meta">
         <span>${escapeHtml(formatRange(festival.startDate, festival.endDate))}</span>

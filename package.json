@@ -4,6 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "test": "node --test \"tests/*.test.js\""
+    "test": "node --test \"tests/*.test.js\"",
+    "sync": "node --env-file=.env scripts/sync-festivals.js",
+    "diagnose": "node --env-file=.env scripts/test-detail.js"
   }
 }
