@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>한국 축제 캘린더</title>
   <meta name="description" content="월별·지역별로 떠나는 한국 축제 여행" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Noto+Serif+KR:wght@400;500;600&display=swap" />
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
   <script defer src="vendor/leaflet/leaflet.js"></script>
@@ -12,15 +18,17 @@
 <body>
   <header class="site-header">
     <div class="container">
+      <p class="site-eyebrow">Korean Festival Almanac · 二〇二六</p>
       <h1 class="site-title">한국 축제 캘린더</h1>
-      <p class="site-subtitle">월별·지역별로 떠나는 축제 여행</p>
+      <span class="site-rule" aria-hidden="true"></span>
+      <p class="site-subtitle"><em>월별·지역별로 떠나는</em> 한국 축제 여행</p>
     </div>
   </header>
 
   <section class="filter-bar" aria-label="축제 필터">
     <div class="container">
       <div class="filter-group" role="group" aria-label="월 선택">
-        <span class="filter-label">월</span>
+        <span class="filter-label">Month · 월</span>
         <div class="chip-group" id="month-chips">
           <button type="button" class="chip is-active" data-month="all">전체</button>
           <button type="button" class="chip" data-month="1">1월</button>
@@ -39,7 +47,7 @@
       </div>
 
       <div class="filter-group">
-        <label class="filter-label" for="region-select">지역</label>
+        <label class="filter-label" for="region-select">Region · 지역</label>
         <select id="region-select" class="select">
           <option value="all">전체</option>
           <option value="서울특별시">서울특별시</option>
@@ -87,14 +95,28 @@
       <div id="cards" class="card-grid" aria-live="polite"></div>
       <div id="map" class="map-view" hidden></div>
       <div id="empty-state" class="empty-state" hidden>
-        <p>선택한 조건에 맞는 축제가 없습니다.</p>
-        <button type="button" class="reset-btn" data-reset>필터 초기화</button>
+        <p class="empty-state-headline"><em>고요한</em> 한 페이지</p>
+        <p class="empty-state-text">선택한 조건에 맞는 축제가 없습니다.</p>
+        <button type="button" class="reset-btn" data-reset>필터 초기화 →</button>
       </div>
       <div id="error-state" class="error-state" hidden>
         <p>데이터를 불러오지 못했습니다. 새로고침해 주세요.</p>
       </div>
     </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-line">
+        <span>자료 © <a href="https://api.visitkorea.or.kr/" target="_blank" rel="noopener noreferrer">한국관광공사 TourAPI</a></span>
+        <span aria-hidden="true">·</span>
+        <span>지도 © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a></span>
+        <span aria-hidden="true">·</span>
+        <span><a href="https://github.com/hhakimm/festivals-site" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+      </p>
+      <p class="footer-note"><em>일정은 변동될 수 있으니 공식사이트에서 확인해 주세요.</em></p>
+    </div>
+  </footer>
 
   <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
     <div class="modal-backdrop" data-modal-close></div>
