@@ -138,6 +138,12 @@ function extractHref(html) {
   return urlMatch ? urlMatch[0].trim() : '';
 }
 
+function parseCoord(v) {
+  if (v == null || v === '') return null;
+  const n = parseFloat(v);
+  return Number.isFinite(n) && n !== 0 ? n : null;
+}
+
 function transform(item, detail) {
   const overview = stripHtml(detail?.overview || '');
   const homepage = extractHref(detail?.homepage || '');
@@ -152,6 +158,8 @@ function transform(item, detail) {
     description: overview || (item.eventplace || item.addr1 || '').trim(),
     image: item.firstimage || item.firstimage2 || 'images/placeholder.svg',
     officialUrl: homepage,
+    lat: parseCoord(item.mapy),
+    lng: parseCoord(item.mapx),
   };
 }
 
@@ -342,12 +350,14 @@ const monthCount = Array(13).fill(0);
 const regionCount = {};
 let withDescription = 0;
 let withUrl = 0;
+let withCoords = 0;
 for (const f of festivals) {
   const sm = Number(f.startDate.slice(5, 7));
   monthCount[sm]++;
   regionCount[f.region] = (regionCount[f.region] || 0) + 1;
   if (f.description && f.description.length > 30) withDescription++;
   if (f.officialUrl) withUrl++;
+  if (f.lat != null && f.lng != null) withCoords++;
 }
 
 console.log('');
@@ -356,3 +366,4 @@ console.log('  월별(시작일 기준):', monthCount.slice(1).map((c, i) => `${
 console.log('  지역:', Object.entries(regionCount).map(([k, v]) => `${k}:${v}`).join(' '));
 console.log(`  상세설명 보유: ${withDescription}/${festivals.length}`);
 console.log(`  공식사이트 보유: ${withUrl}/${festivals.length}`);
+console.log(`  좌표 보유: ${withCoords}/${festivals.length}`);

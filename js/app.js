@@ -1,11 +1,17 @@
 import { applyFilters } from './filter.js';
 import { openModal, closeModal, bindModalClose } from './modal.js';
 import { parseQuery, serializeState } from './url-sync.js';
+import { ensureMap, renderMarkers, invalidateSize } from './map.js';
 
 const cardsEl = document.getElementById('cards');
+const mapEl = document.getElementById('map');
 const emptyEl = document.getElementById('empty-state');
 const errorEl = document.getElementById('error-state');
 const countEl = document.getElementById('result-count');
+const viewListBtn = document.getElementById('view-list');
+const viewMapBtn = document.getElementById('view-map');
+
+let currentView = 'list'; // 'list' | 'map'
 
 const state = {
   month: null,
@@ -56,18 +62,52 @@ function renderCards(festivals) {
   }).join('');
 }
 
+function openFestivalById(id) {
+  const f = allFestivals.find((x) => x.id === id);
+  if (!f) return;
+  state.festival = f.id;
+  openModal(f);
+  syncUrl();
+}
+
 function update() {
   const filtered = applyFilters(allFestivals, state);
   countEl.textContent = `총 ${filtered.length}개의 축제`;
+
+  // 모든 뷰 컨테이너를 일단 숨기고 해당 뷰만 노출
+  cardsEl.hidden = true;
+  mapEl.hidden = true;
+  emptyEl.hidden = true;
+
   if (filtered.length === 0) {
-    cardsEl.hidden = true;
     emptyEl.hidden = false;
+    return;
+  }
+
+  if (currentView === 'map') {
+    mapEl.hidden = false;
+    invalidateSize();
+    renderMarkers(filtered, openFestivalById);
   } else {
     cardsEl.hidden = false;
-    emptyEl.hidden = true;
     renderCards(filtered);
   }
 }
+
+function setView(view) {
+  if (view !== 'list' && view !== 'map') return;
+  if (view === currentView) return;
+  currentView = view;
+  viewListBtn.classList.toggle('is-active', view === 'list');
+  viewMapBtn.classList.toggle('is-active', view === 'map');
+  viewListBtn.setAttribute('aria-selected', view === 'list' ? 'true' : 'false');
+  viewMapBtn.setAttribute('aria-selected', view === 'map' ? 'true' : 'false');
+  if (view === 'map') ensureMap();
+  update();
+}
+
+viewListBtn.addEventListener('click', () => setView('list'));
+viewMapBtn.addEventListener('click', () => setView('map'));
 
 function syncUrl() {
   const query = serializeState(state);

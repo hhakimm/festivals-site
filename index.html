@@ -6,6 +6,8 @@
   <title>한국 축제 캘린더</title>
   <meta name="description" content="월별·지역별로 떠나는 한국 축제 여행" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+  <script defer src="vendor/leaflet/leaflet.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -69,7 +71,13 @@
 
       <div class="filter-meta">
         <span id="result-count" class="result-count">총 0개의 축제</span>
-        <button type="button" id="reset-filters" class="reset-btn" hidden>필터 초기화</button>
+        <div class="filter-meta-right">
+          <div class="view-toggle" role="tablist" aria-label="보기 방식">
+            <button type="button" id="view-list" class="view-btn is-active" role="tab" aria-selected="true">목록</button>
+            <button type="button" id="view-map" class="view-btn" role="tab" aria-selected="false">지도</button>
+          </div>
+          <button type="button" id="reset-filters" class="reset-btn" hidden>필터 초기화</button>
+        </div>
       </div>
     </div>
   </section>
@@ -77,6 +85,7 @@
   <main class="main">
     <div class="container">
       <div id="cards" class="card-grid" aria-live="polite"></div>
+      <div id="map" class="map-view" hidden></div>
       <div id="empty-state" class="empty-state" hidden>
         <p>선택한 조건에 맞는 축제가 없습니다.</p>
         <button type="button" class="reset-btn" data-reset>필터 초기화</button>
