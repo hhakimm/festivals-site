@@ -1,0 +1,54 @@
+name: Sync festivals data
+
+on:
+  schedule:
+    # 매주 월요일 00:00 UTC = 09:00 KST
+    - cron: '0 0 * * MON'
+  workflow_dispatch: # 수동 실행 가능
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Restore detail cache
+        uses: actions/cache@v4
+        with:
+          path: data/.detail-cache.json
+          key: detail-cache-${{ github.run_id }}
+          restore-keys: |
+            detail-cache-
+
+      - name: Sync festivals from TourAPI
+        env:
+          TOUR_API_KEY: ${{ secrets.TOUR_API_KEY }}
+        run: |
+          if [ -z "$TOUR_API_KEY" ]; then
+            echo "::error::TOUR_API_KEY secret is not set"
+            exit 1
+          fi
+          echo "TOUR_API_KEY=$TOUR_API_KEY" > .env
+          npm run sync
+          rm -f .env
+
+      - name: Commit and push if data changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/festivals.json
+          if git diff --staged --quiet; then
+            echo "데이터 변경 없음 — 커밋 안 함"
+          else
+            git commit -m "chore: auto-sync festivals data from TourAPI"
+            git push
+          fi
