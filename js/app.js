@@ -39,7 +39,7 @@ function escapeHtml(s) {
     .replaceAll("'", '&#39;');
 }
 
-const MAX_DURATION_DAYS = 21;
+const MAX_DURATION_DAYS = 30;
 
 function durationDays(f) {
   const [sy, sm, sd] = f.startDate.split('-').map(Number);
@@ -150,7 +150,7 @@ async function init() {
     const res = await fetch('data/festivals.json');
     if (!res.ok) throw new Error('fetch failed');
     const raw = await res.json();
-    // 21일 넘게 진행되는 장기 행사·전시는 제외 (축제로서 의미 약화)
+    // 30일 넘게 진행되는 장기 행사·전시는 제외 (축제로서 의미 약화)
     allFestivals = raw.filter((f) => durationDays(f) <= MAX_DURATION_DAYS);
     errorEl.hidden = true;
 
@@ -236,3 +236,12 @@ categoryChipsEl.addEventListener('click', (e) => {
 regionSelectEl.addEventListener('change', (e) => setRegion(e.target.value));
 resetBtnEl.addEventListener('click', resetAll);
 emptyResetBtnEl.addEventListener('click', resetAll);
+
+// PWA 서비스 워커 등록 — 오프라인 + 자동 업데이트
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('./sw.js')
+      .catch((err) => console.warn('Service Worker 등록 실패:', err));
+  });
+}

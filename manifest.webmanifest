@@ -1,0 +1,26 @@
+{
+  "name": "한국 축제 캘린더",
+  "short_name": "축제캘린더",
+  "description": "월별·지역별로 떠나는 한국 축제",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "theme_color": "#111111",
+  "lang": "ko-KR",
+  "categories": ["travel", "lifestyle"],
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "./icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
