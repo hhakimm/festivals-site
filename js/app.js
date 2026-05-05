@@ -1,8 +1,10 @@
 import { applyFilters } from './filter.js';
-import { openModal, closeModal, bindModalClose } from './modal.js';
+import { openModal, closeModal, bindModalClose, onFavToggle, showToast } from './modal.js';
 import { parseQuery, serializeState } from './url-sync.js';
 import { ensureMap, renderMarkers, invalidateSize } from './map.js';
+import { isFavorite, toggleFavorite, getFavorites } from './favorites.js';
 
+// ── DOM 참조 ──
 const cardsEl = document.getElementById('cards');
 const mapEl = document.getElementById('map');
 const emptyEl = document.getElementById('empty-state');
@@ -10,26 +12,39 @@ const errorEl = document.getElementById('error-state');
 const countEl = document.getElementById('result-count');
 const viewListBtn = document.getElementById('view-list');
 const viewMapBtn = document.getElementById('view-map');
+const tabFestivalsBtn = document.getElementById('tab-festivals');
+const tabPlacesBtn = document.getElementById('tab-places');
+const monthFilterGroup = document.getElementById('month-filter-group');
+const categoryFilterGroup = document.getElementById('category-filter-group');
+const searchInputEl = document.getElementById('search-input');
+const searchClearEl = document.getElementById('search-clear');
+const favoritesToggleEl = document.getElementById('favorites-toggle');
+const nearbyToggleEl = document.getElementById('nearby-toggle');
+const sortSelectEl = document.getElementById('sort-select');
+const weekendSectionEl = document.getElementById('weekend-recommend');
+const weekendTitleEl = document.getElementById('weekend-title');
+const weekendCardsEl = document.getElementById('weekend-cards');
+const weekendLinkEl = document.getElementById('weekend-link');
 
-let currentView = 'list'; // 'list' | 'map'
+// ── 상태 ──
+let currentTab = 'festivals'; // 'festivals' | 'places'
+let currentView = 'list';     // 'list' | 'map'
+let allFestivals = [];
+let allPlaces = [];
 
 const state = {
   month: null,
   region: null,
   category: null,
-  festival: null,
+  festival: null,        // 모달 열린 항목의 id
+  search: '',            // 검색어
+  favoritesOnly: false,  // 즐겨찾기 필터
+  userLocation: null,    // {lat, lng} — geolocation 활성 시
+  sort: 'default',       // 'default' | 'name' | 'date'
 };
+const NEARBY_RADIUS_KM = 50;
 
-let allFestivals = [];
-
-function formatRange(start, end) {
-  const fmt = (s) => {
-    const [, m, d] = s.split('-').map(Number);
-    return `${m}.${d}`;
-  };
-  return start === end ? fmt(start) : `${fmt(start)} — ${fmt(end)}`;
-}
-
+// ── 유틸 ──
 function escapeHtml(s) {
   return String(s)
     .replaceAll('&', '&amp;')
@@ -37,6 +52,14 @@ function escapeHtml(s) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;');
+}
+
+function formatRange(start, end) {
+  const fmt = (s) => {
+    const [, m, d] = s.split('-').map(Number);
+    return `${m}.${d}`;
+  };
+  return start === end ? fmt(start) : `${fmt(start)} — ${fmt(end)}`;
 }
 
 const MAX_DURATION_DAYS = 30;
@@ -49,44 +72,228 @@ function durationDays(f) {
   return Math.round((end - start) / 86400000) + 1;
 }
 
-function renderCards(festivals) {
-  cardsEl.innerHTML = festivals.map(f => {
-    const tagHtml = f.category
-      ? `<span class="tag" data-category="${escapeHtml(f.category)}">${escapeHtml(f.category)}</span>`
+// ── 데이터 헬퍼 ──
+function getCurrentDataset() {
+  return currentTab === 'festivals' ? allFestivals : allPlaces;
+}
+
+// 두 좌표 사이 거리 (km) — Haversine
+function haversineKm(a, b) {
+  if (a == null || b == null) return Infinity;
+  const R = 6371;
+  const toRad = (d) => (d * Math.PI) / 180;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const lat1 = toRad(a.lat);
+  const lat2 = toRad(b.lat);
+  const x =
+    Math.sin(dLat / 2) ** 2 +
+    Math.sin(dLng / 2) ** 2 * Math.cos(lat1) * Math.cos(lat2);
+  return 2 * R * Math.asin(Math.sqrt(x));
+}
+
+function matchesSearch(item, q) {
+  if (!q) return true;
+  const lower = q.toLowerCase();
+  const fields = [item.name, item.region, item.city, item.description, item.category];
+  return fields.some((f) => (f || '').toLowerCase().includes(lower));
+}
+
+function getFiltered() {
+  const ds = getCurrentDataset();
+  // 여행지 탭에선 month 필터 무시 (장소는 시기와 무관)
+  const baseFilterState = currentTab === 'festivals'
+    ? { month: state.month, region: state.region, category: state.category }
+    : { month: null, region: state.region, category: state.category };
+  let result = applyFilters(ds, baseFilterState);
+
+  // 검색
+  const q = state.search.trim();
+  if (q) result = result.filter((it) => matchesSearch(it, q));
+
+  // 즐겨찾기
+  if (state.favoritesOnly) {
+    const favs = getFavorites();
+    result = result.filter((it) => favs.has(it.id));
+  }
+
+  // 내 주변 (반경 NEARBY_RADIUS_KM 이내)
+  if (state.userLocation) {
+    result = result
+      .map((it) => ({ ...it, _dist: haversineKm(state.userLocation, it) }))
+      .filter((it) => it._dist <= NEARBY_RADIUS_KM)
+      .sort((a, b) => a._dist - b._dist);
+    return result;  // 거리순이면 다른 정렬 무시
+  }
+
+  // 사용자 정렬 옵션
+  if (state.sort === 'name') {
+    result = [...result].sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+  } else if (state.sort === 'date') {
+    result = [...result].sort((a, b) => {
+      if (a.startDate && b.startDate) return a.startDate.localeCompare(b.startDate);
+      if (a.startDate) return -1;
+      if (b.startDate) return 1;
+      return 0;
+    });
+  }
+  // default: applyFilters 결과 순서 유지 (festivals=시작일순, places=이름순)
+
+  return result;
+}
+
+// ── 카드 렌더 ──
+function renderCards(items) {
+  cardsEl.innerHTML = items.map((item) => {
+    const isFestival = currentTab === 'festivals';
+    const fav = isFavorite(item.id);
+    const tagHtml = item.category
+      ? `<span class="tag" data-category="${escapeHtml(item.category)}">${escapeHtml(item.category)}</span>`
+      : '';
+    const dateOrTag = isFestival
+      ? `<span>${escapeHtml(formatRange(item.startDate, item.endDate))}</span>`
+      : '';
+    const distHtml = item._dist != null
+      ? `<span class="distance-label">📍 ${item._dist.toFixed(1)} km</span>`
       : '';
     return `
-    <article class="card" data-festival-id="${escapeHtml(f.id)}">
+    <article class="card" data-item-id="${escapeHtml(item.id)}">
       <div class="card-image-wrap">
-        <img class="card-image" alt="${escapeHtml(f.name)}" src="${escapeHtml(f.image)}"
+        <img class="card-image" alt="${escapeHtml(item.name)}" src="${escapeHtml(item.image)}"
              onerror="this.src='images/placeholder.svg'" loading="lazy" />
+        <button type="button" class="fav-btn${fav ? ' is-active' : ''}"
+                data-fav-id="${escapeHtml(item.id)}"
+                aria-label="${fav ? '즐겨찾기 해제' : '즐겨찾기에 추가'}"
+                title="${fav ? '즐겨찾기 해제' : '즐겨찾기에 추가'}">${fav ? '♥' : '♡'}</button>
       </div>
       <div class="card-body">
         ${tagHtml}
-        <h2 class="card-title">${escapeHtml(f.name)}</h2>
+        <h2 class="card-title">${escapeHtml(item.name)}</h2>
         <div class="card-meta">
-          <span>${escapeHtml(formatRange(f.startDate, f.endDate))}</span>
-          <span>${escapeHtml(f.region)} ${escapeHtml(f.city)}</span>
+          ${dateOrTag}
+          <span>${escapeHtml(item.region)} ${escapeHtml(item.city)}</span>
+          ${distHtml}
         </div>
-        <p class="card-description">${escapeHtml(f.description)}</p>
+        <p class="card-description">${escapeHtml(item.description)}</p>
       </div>
     </article>
   `;
   }).join('');
 }
 
-function openFestivalById(id) {
-  const f = allFestivals.find((x) => x.id === id);
-  if (!f) return;
-  state.festival = f.id;
-  openModal(f);
+function openItemById(id) {
+  const item = getCurrentDataset().find((x) => x.id === id);
+  if (!item) return;
+  state.festival = item.id;
+  openModal(item);
   syncUrl();
 }
 
-function update() {
-  const filtered = applyFilters(allFestivals, state);
-  countEl.textContent = `총 ${filtered.length}개의 축제`;
+// ── "이번 주말" 추천 섹션 ──
+function nextWeekendDates() {
+  const today = new Date();
+  const dow = today.getDay(); // 0=일, 6=토
+  // 토요일까지 며칠? (오늘이 토요일이면 0, 일요일이면 6)
+  const daysToSat = (6 - dow + 7) % 7;
+  const sat = new Date(today);
+  sat.setDate(today.getDate() + daysToSat);
+  const sun = new Date(sat);
+  sun.setDate(sat.getDate() + 1);
+  const fmt = (d) =>
+    `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  return {
+    sat: fmt(sat),
+    sun: fmt(sun),
+    label: `${sat.getMonth() + 1}월 ${sat.getDate()}일·${sun.getDate()}일`,
+  };
+}
 
-  // 모든 뷰 컨테이너를 일단 숨기고 해당 뷰만 노출
+function dateRangesOverlap(aStart, aEnd, bStart, bEnd) {
+  return aStart <= bEnd && aEnd >= bStart;
+}
+
+function renderWeekendRow() {
+  if (!weekendSectionEl) return;
+  const { sat, sun, label } = nextWeekendDates();
+  let items;
+  if (currentTab === 'festivals') {
+    items = allFestivals.filter((f) =>
+      dateRangesOverlap(f.startDate, f.endDate, sat, sun)
+    );
+    // 이미지 있는 것 우선, 시작일 가까운 순
+    items.sort((a, b) => {
+      const aImg = a.image && a.image !== 'images/placeholder.svg' ? 0 : 1;
+      const bImg = b.image && b.image !== 'images/placeholder.svg' ? 0 : 1;
+      if (aImg !== bImg) return aImg - bImg;
+      return a.startDate.localeCompare(b.startDate);
+    });
+  } else {
+    // 여행지 탭: 큐레이션 중 이미지 있는 것 위주
+    items = allPlaces
+      .filter((p) => p.curated && p.image && p.image !== 'images/placeholder.svg');
+    // 약간 셔플 (매번 다른 추천)
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+  }
+  const top = items.slice(0, 10);
+  if (top.length === 0) {
+    weekendSectionEl.hidden = true;
+    return;
+  }
+  weekendSectionEl.hidden = false;
+  weekendTitleEl.innerHTML = `이번 주말 <small>${label}</small>`;
+  weekendCardsEl.innerHTML = top
+    .map(
+      (it) => `
+    <article class="weekend-card" data-item-id="${escapeHtml(it.id)}">
+      <img class="weekend-card-image" alt="${escapeHtml(it.name)}" src="${escapeHtml(it.image)}"
+           onerror="this.src='images/placeholder.svg'" loading="lazy" />
+      <div class="weekend-card-body">
+        <h3 class="weekend-card-title">${escapeHtml(it.name)}</h3>
+        <div class="weekend-card-meta">${
+          it.startDate
+            ? escapeHtml(formatRange(it.startDate, it.endDate)) + ' · '
+            : ''
+        }${escapeHtml(it.region)}</div>
+      </div>
+    </article>
+  `
+    )
+    .join('');
+}
+
+weekendCardsEl?.addEventListener('click', (e) => {
+  const card = e.target.closest('.weekend-card');
+  if (!card) return;
+  const id = card.dataset.itemId;
+  if (id) openItemById(id);
+});
+
+weekendLinkEl?.addEventListener('click', (e) => {
+  e.preventDefault();
+  // 축제 탭이면 이번 주말이 포함된 월을 자동 선택
+  if (currentTab === 'festivals') {
+    const { sat } = nextWeekendDates();
+    const month = Number(sat.split('-')[1]);
+    state.month = month;
+    syncFilterUI();
+    update();
+    syncUrl();
+  }
+  // 메인 영역으로 스크롤
+  document
+    .querySelector('.main')
+    ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+// ── 메인 갱신 ──
+function update() {
+  const filtered = getFiltered();
+  const noun = currentTab === 'festivals' ? '축제' : '여행지';
+  countEl.textContent = `총 ${filtered.length}개의 ${noun}`;
+
   cardsEl.hidden = true;
   mapEl.hidden = true;
   emptyEl.hidden = true;
@@ -99,13 +306,14 @@ function update() {
   if (currentView === 'map') {
     mapEl.hidden = false;
     invalidateSize();
-    renderMarkers(filtered, openFestivalById);
+    renderMarkers(filtered, openItemById);
   } else {
     cardsEl.hidden = false;
     renderCards(filtered);
   }
 }
 
+// ── 뷰(목록/지도) 토글 ──
 function setView(view) {
   if (view !== 'list' && view !== 'map') return;
   if (view === currentView) return;
@@ -117,26 +325,82 @@ function setView(view) {
   if (view === 'map') ensureMap();
   update();
 }
-
 viewListBtn.addEventListener('click', () => setView('list'));
 viewMapBtn.addEventListener('click', () => setView('map'));
 
+// ── 탭(축제/여행지) 전환 ──
+function setTab(tab) {
+  if (tab !== 'festivals' && tab !== 'places') return;
+  if (tab === currentTab) return;
+  currentTab = tab;
+  // 탭별 필터 가용성 조정
+  monthFilterGroup.hidden = tab === 'places';
+  categoryFilterGroup.hidden = tab === 'festivals';
+  // 탭별 카테고리 옵션이 다르므로 카테고리 상태 초기화
+  state.category = null;
+  // 모달 깊은 링크는 탭 간 의미 없으므로 닫기
+  state.festival = null;
+  closeModal();
+  // 탭 버튼 시각 갱신
+  tabFestivalsBtn.classList.toggle('is-active', tab === 'festivals');
+  tabPlacesBtn.classList.toggle('is-active', tab === 'places');
+  tabFestivalsBtn.setAttribute('aria-selected', tab === 'festivals' ? 'true' : 'false');
+  tabPlacesBtn.setAttribute('aria-selected', tab === 'places' ? 'true' : 'false');
+  syncSortOptionVisibility();
+  syncFilterUI();
+  renderWeekendRow();
+  update();
+  syncUrl();
+}
+tabFestivalsBtn.addEventListener('click', () => setTab('festivals'));
+tabPlacesBtn.addEventListener('click', () => setTab('places'));
+
+// ── URL 동기화 ──
 function syncUrl() {
-  const query = serializeState(state);
-  const newUrl = window.location.pathname + query;
+  const params = new URLSearchParams();
+  if (currentTab !== 'festivals') params.set('tab', currentTab);
+  const q = serializeState(state);
+  if (q) {
+    const inner = new URLSearchParams(q.startsWith('?') ? q.slice(1) : q);
+    inner.forEach((v, k) => params.set(k, v));
+  }
+  const s = params.toString();
+  const newUrl = window.location.pathname + (s ? '?' + s : '');
   window.history.replaceState(null, '', newUrl);
 }
 
+// ── 카드 클릭 → 상세 모달 (하트 버튼 클릭은 즐겨찾기 토글) ──
 cardsEl.addEventListener('click', (e) => {
+  const favBtn = e.target.closest('.fav-btn');
+  if (favBtn) {
+    e.stopPropagation();
+    const id = favBtn.dataset.favId;
+    const isFav = toggleFavorite(id);
+    favBtn.classList.toggle('is-active', isFav);
+    favBtn.textContent = isFav ? '♥' : '♡';
+    favBtn.setAttribute('aria-label', isFav ? '즐겨찾기 해제' : '즐겨찾기에 추가');
+    favBtn.setAttribute('title', isFav ? '즐겨찾기 해제' : '즐겨찾기에 추가');
+    showToast(isFav ? '즐겨찾기에 추가됨' : '즐겨찾기에서 해제됨');
+    // 즐겨찾기만 보기 활성 상태면 즉시 갱신
+    if (state.favoritesOnly) update();
+    return;
+  }
   const card = e.target.closest('.card');
   if (!card) return;
-  const id = card.dataset.festivalId;
-  const festival = allFestivals.find(f => f.id === id);
-  if (festival) {
-    state.festival = festival.id;
-    openModal(festival);
-    syncUrl();
+  const id = card.dataset.itemId;
+  if (id) openItemById(id);
+});
+
+// 모달 안 즐겨찾기 토글되면 카드 리스트도 갱신
+onFavToggle((id) => {
+  // 카드 영역의 해당 항목 하트 갱신
+  const isFav = isFavorite(id);
+  const btn = cardsEl.querySelector(`.fav-btn[data-fav-id="${CSS.escape(id)}"]`);
+  if (btn) {
+    btn.classList.toggle('is-active', isFav);
+    btn.textContent = isFav ? '♥' : '♡';
   }
+  if (state.favoritesOnly) update();
 });
 
 bindModalClose(() => {
@@ -145,39 +409,7 @@ bindModalClose(() => {
   syncUrl();
 });
 
-async function init() {
-  try {
-    const res = await fetch('data/festivals.json');
-    if (!res.ok) throw new Error('fetch failed');
-    const raw = await res.json();
-    // 30일 넘게 진행되는 장기 행사·전시는 제외 (축제로서 의미 약화)
-    allFestivals = raw.filter((f) => durationDays(f) <= MAX_DURATION_DAYS);
-    errorEl.hidden = true;
-
-    const initial = parseQuery(window.location.search);
-    state.month = initial.month;
-    state.region = initial.region;
-    state.category = initial.category;
-    state.festival = initial.festival;
-
-    syncFilterUI();
-    update();
-
-    if (state.festival) {
-      const f = allFestivals.find(x => x.id === state.festival);
-      if (f) openModal(f);
-      else state.festival = null;
-    }
-    syncUrl();
-  } catch (err) {
-    console.error(err);
-    cardsEl.hidden = true;
-    errorEl.hidden = false;
-  }
-}
-
-init();
-
+// ── 필터 UI ──
 const monthChipsEl = document.getElementById('month-chips');
 const categoryChipsEl = document.getElementById('category-chips');
 const regionSelectEl = document.getElementById('region-select');
@@ -185,7 +417,7 @@ const resetBtnEl = document.getElementById('reset-filters');
 const emptyResetBtnEl = emptyEl.querySelector('[data-reset]');
 
 function setActiveChip(groupEl, attr, value) {
-  groupEl.querySelectorAll('.chip').forEach(chip => {
+  groupEl.querySelectorAll('.chip').forEach((chip) => {
     chip.classList.toggle('is-active', chip.dataset[attr] === value);
   });
 }
@@ -194,7 +426,16 @@ function syncFilterUI() {
   setActiveChip(monthChipsEl, 'month', state.month == null ? 'all' : String(state.month));
   setActiveChip(categoryChipsEl, 'category', state.category == null ? 'all' : state.category);
   regionSelectEl.value = state.region == null ? 'all' : state.region;
-  const anyActive = state.month != null || state.region != null || state.category != null;
+  searchClearEl.hidden = !state.search;
+  favoritesToggleEl.setAttribute('aria-pressed', state.favoritesOnly ? 'true' : 'false');
+  nearbyToggleEl.setAttribute('aria-pressed', state.userLocation != null ? 'true' : 'false');
+  const anyActive =
+    (currentTab === 'festivals' && state.month != null) ||
+    state.region != null ||
+    (currentTab === 'places' && state.category != null) ||
+    !!state.search ||
+    state.favoritesOnly ||
+    state.userLocation != null;
   resetBtnEl.hidden = !anyActive;
 }
 
@@ -220,10 +461,96 @@ function resetAll() {
   state.month = null;
   state.region = null;
   state.category = null;
+  state.search = '';
+  state.favoritesOnly = false;
+  state.userLocation = null;
+  state.sort = 'default';
+  searchInputEl.value = '';
+  sortSelectEl.value = 'default';
   syncFilterUI();
   update();
   syncUrl();
 }
+
+// ── 검색 ──
+let searchDebounce = null;
+searchInputEl.addEventListener('input', (e) => {
+  clearTimeout(searchDebounce);
+  const v = e.target.value;
+  searchDebounce = setTimeout(() => {
+    state.search = v;
+    syncFilterUI();
+    update();
+  }, 150);
+});
+searchClearEl.addEventListener('click', () => {
+  searchInputEl.value = '';
+  state.search = '';
+  syncFilterUI();
+  update();
+  searchInputEl.focus();
+});
+
+// ── 정렬 ──
+sortSelectEl.addEventListener('change', (e) => {
+  state.sort = e.target.value;
+  update();
+});
+
+function syncSortOptionVisibility() {
+  // "시작일순" 옵션은 축제 탭에서만 의미 있음
+  const dateOpt = sortSelectEl.querySelector('option[value="date"]');
+  if (dateOpt) dateOpt.disabled = currentTab !== 'festivals';
+  // 여행지 탭에서 sort=date였으면 default로
+  if (currentTab !== 'festivals' && state.sort === 'date') {
+    state.sort = 'default';
+    sortSelectEl.value = 'default';
+  }
+}
+
+// ── 즐겨찾기만 보기 토글 ──
+favoritesToggleEl.addEventListener('click', () => {
+  state.favoritesOnly = !state.favoritesOnly;
+  syncFilterUI();
+  update();
+});
+
+// ── 내 주변 (geolocation) ──
+nearbyToggleEl.addEventListener('click', async () => {
+  if (state.userLocation) {
+    // 토글 끄기
+    state.userLocation = null;
+    syncFilterUI();
+    update();
+    return;
+  }
+  if (!navigator.geolocation) {
+    showToast('이 브라우저는 위치 정보를 지원하지 않습니다');
+    return;
+  }
+  nearbyToggleEl.classList.add('is-loading');
+  try {
+    const pos = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, {
+        timeout: 10000,
+        enableHighAccuracy: false,
+        maximumAge: 60000,
+      });
+    });
+    state.userLocation = {
+      lat: pos.coords.latitude,
+      lng: pos.coords.longitude,
+    };
+    syncFilterUI();
+    update();
+    showToast(`반경 ${NEARBY_RADIUS_KM}km 이내로 필터링했습니다`);
+  } catch (err) {
+    console.warn('geolocation 실패:', err);
+    showToast('위치를 가져올 수 없습니다. 권한을 확인해 주세요');
+  } finally {
+    nearbyToggleEl.classList.remove('is-loading');
+  }
+});
 
 monthChipsEl.addEventListener('click', (e) => {
   const chip = e.target.closest('.chip');
@@ -236,6 +563,100 @@ categoryChipsEl.addEventListener('click', (e) => {
 regionSelectEl.addEventListener('change', (e) => setRegion(e.target.value));
 resetBtnEl.addEventListener('click', resetAll);
 emptyResetBtnEl.addEventListener('click', resetAll);
+
+// ── 초기화 ──
+async function fetchJson(path) {
+  const res = await fetch(path);
+  if (!res.ok) throw new Error(`fetch ${path} failed: ${res.status}`);
+  return res.json();
+}
+
+// 두 좌표가 100m 이내면 같은 곳으로 간주 (큐레이션 ↔ TourAPI 중복 제거용)
+function isCloseLocation(a, b, kmThreshold = 0.1) {
+  if (a.lat == null || a.lng == null || b.lat == null || b.lng == null) return false;
+  const dLatKm = (a.lat - b.lat) * 111;
+  const dLngKm = (a.lng - b.lng) * 111 * Math.cos((a.lat * Math.PI) / 180);
+  return Math.sqrt(dLatKm * dLatKm + dLngKm * dLngKm) < kmThreshold;
+}
+
+async function init() {
+  try {
+    // 세 데이터셋 병렬 로드. 없으면 빈 배열로 폴백.
+    const [festRaw, placesRaw, curatedRaw] = await Promise.all([
+      fetchJson('data/festivals.json'),
+      fetchJson('data/places.json').catch(() => []),
+      fetchJson('data/places-curated.json').catch(() => []),
+    ]);
+    allFestivals = festRaw.filter((f) => durationDays(f) <= MAX_DURATION_DAYS);
+
+    // 큐레이션 + TourAPI 합치기
+    const curated = (Array.isArray(curatedRaw) ? curatedRaw : []).map((p) => ({
+      ...p, curated: true,
+    }));
+    const tourapiList = Array.isArray(placesRaw) ? placesRaw : [];
+
+    // 큐레이션 placeholder 이미지 → TourAPI에서 가까운 매칭 찾아 이미지 빌려오기
+    const enrichedCurated = curated.map((c) => {
+      const isPlaceholder = !c.image || c.image === 'images/placeholder.svg';
+      if (!isPlaceholder) return c;
+      const match = tourapiList.find(
+        (t) =>
+          isCloseLocation(c, t, 0.2) &&
+          t.image &&
+          t.image !== 'images/placeholder.svg'
+      );
+      return match ? { ...c, image: match.image } : c;
+    });
+
+    // TourAPI 중 큐레이션과 같은 위치(100m 이내) 항목 제거 (중복 방지)
+    const tourapiFiltered = tourapiList.filter(
+      (t) => !curated.some((c) => isCloseLocation(c, t))
+    );
+    allPlaces = [...enrichedCurated, ...tourapiFiltered];
+
+    errorEl.hidden = true;
+
+    // URL → 초기 탭/필터 상태
+    const url = new URL(window.location.href);
+    const tabParam = url.searchParams.get('tab');
+    if (tabParam === 'places') {
+      currentTab = 'places';
+      tabFestivalsBtn.classList.remove('is-active');
+      tabPlacesBtn.classList.add('is-active');
+      tabFestivalsBtn.setAttribute('aria-selected', 'false');
+      tabPlacesBtn.setAttribute('aria-selected', 'true');
+      monthFilterGroup.hidden = true;
+      categoryFilterGroup.hidden = false;
+    } else {
+      monthFilterGroup.hidden = false;
+      categoryFilterGroup.hidden = true;
+    }
+
+    const initial = parseQuery(window.location.search);
+    state.month = initial.month;
+    state.region = initial.region;
+    state.category = initial.category;
+    state.festival = initial.festival;
+
+    syncSortOptionVisibility();
+    syncFilterUI();
+    renderWeekendRow();
+    update();
+
+    if (state.festival) {
+      const f = getCurrentDataset().find((x) => x.id === state.festival);
+      if (f) openModal(f);
+      else state.festival = null;
+    }
+    syncUrl();
+  } catch (err) {
+    console.error(err);
+    cardsEl.hidden = true;
+    errorEl.hidden = false;
+  }
+}
+
+init();
 
 // PWA 서비스 워커 등록 — 오프라인 + 자동 업데이트
 if ('serviceWorker' in navigator) {

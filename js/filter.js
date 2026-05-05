@@ -31,5 +31,11 @@ export function applyFilters(festivals, { month, region, category }) {
     .filter(f => matchesRegion(f, region))
     .filter(f => matchesCategory(f, category))
     .slice()
-    .sort((a, b) => a.startDate.localeCompare(b.startDate));
+    .sort((a, b) => {
+      // 축제는 startDate 기준, 여행지(startDate 없음)는 이름 기준
+      if (a.startDate && b.startDate) return a.startDate.localeCompare(b.startDate);
+      if (a.startDate) return -1;
+      if (b.startDate) return 1;
+      return (a.name || '').localeCompare(b.name || '');
+    });
 }

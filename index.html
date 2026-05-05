@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>한국 축제 캘린더</title>
-  <meta name="description" content="월별·지역별로 떠나는 한국 축제" />
+  <title>한국 가볼 만한 곳</title>
+  <meta name="description" content="2026 한국의 월별 축제와 지역별 여행지를 한눈에" />
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.webmanifest" />
@@ -13,26 +13,52 @@
   <link rel="apple-touch-icon" href="icons/icon.svg" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="축제캘린더" />
+  <meta name="apple-mobile-web-app-title" content="한국여행" />
   <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Open Graph (카카오톡·페이스북·슬랙 등 공유 미리보기) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:title" content="한국 가볼 만한 곳" />
+  <meta property="og:description" content="2026 한국의 월별 축제와 지역별 여행지를 한눈에. 전국 700+ 큐레이션." />
+  <meta property="og:image" content="https://hhakimm.github.io/festivals-site/og-image.svg" />
+  <meta property="og:url" content="https://hhakimm.github.io/festivals-site/" />
+  <meta property="og:site_name" content="한국 가볼 만한 곳" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="한국 가볼 만한 곳" />
+  <meta name="twitter:description" content="2026 한국의 월별 축제와 지역별 여행지" />
+  <meta name="twitter:image" content="https://hhakimm.github.io/festivals-site/og-image.svg" />
 
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="vendor/leaflet/markercluster/MarkerCluster.css" />
+  <link rel="stylesheet" href="vendor/leaflet/markercluster/MarkerCluster.Default.css" />
   <script defer src="vendor/leaflet/leaflet.js"></script>
+  <script defer src="vendor/leaflet/markercluster/leaflet.markercluster.js"></script>
 </head>
 <body>
   <header class="site-header">
     <div class="container">
-      <h1 class="site-title">한국 축제 캘린더</h1>
-      <p class="site-subtitle">월별·지역별로 떠나는 한국 축제</p>
+      <h1 class="site-title">한국 가볼 만한 곳</h1>
+      <p class="site-subtitle">2026 월별 축제와 지역별 여행지를 한눈에</p>
+      <nav class="tabs" role="tablist" aria-label="콘텐츠 종류">
+        <button type="button" id="tab-festivals" class="tab is-active" role="tab" aria-selected="true" data-tab="festivals">2026 축제</button>
+        <button type="button" id="tab-places" class="tab" role="tab" aria-selected="false" data-tab="places">여행지</button>
+      </nav>
     </div>
   </header>
 
   <section class="filter-bar" aria-label="축제 필터">
     <div class="container">
-      <div class="filter-group" role="group" aria-label="월 선택">
+      <div class="filter-group filter-group-search">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="search-input" class="search-input"
+               placeholder="이름·지역으로 검색…" autocomplete="off" />
+        <button type="button" id="search-clear" class="search-clear" aria-label="검색 지우기" hidden>×</button>
+      </div>
+      <div class="filter-group" id="month-filter-group" role="group" aria-label="월 선택">
         <span class="filter-label">월</span>
         <div class="chip-group" id="month-chips">
           <button type="button" class="chip is-active" data-month="all">전체</button>
@@ -75,15 +101,33 @@
         </select>
       </div>
 
-      <div class="filter-group" role="group" aria-label="카테고리 선택" hidden>
-        <span class="filter-label">카테고리</span>
+      <div class="filter-group" id="category-filter-group" role="group" aria-label="카테고리 선택" hidden>
+        <span class="filter-label">테마</span>
         <div class="chip-group" id="category-chips">
           <button type="button" class="chip is-active" data-category="all">전체</button>
+          <button type="button" class="chip" data-category="자연">자연</button>
+          <button type="button" class="chip" data-category="역사">역사</button>
+          <button type="button" class="chip" data-category="휴양">휴양</button>
+          <button type="button" class="chip" data-category="체험">체험</button>
+          <button type="button" class="chip" data-category="건축">건축</button>
         </div>
       </div>
 
       <div class="filter-meta">
-        <span id="result-count" class="result-count">총 0개의 축제</span>
+        <div class="filter-meta-left">
+          <span id="result-count" class="result-count">총 0개의 축제</span>
+          <button type="button" id="favorites-toggle" class="meta-toggle" aria-pressed="false">
+            <span class="meta-toggle-icon">♡</span> 즐겨찾기
+          </button>
+          <button type="button" id="nearby-toggle" class="meta-toggle" aria-pressed="false">
+            <span class="meta-toggle-icon">📍</span> 내 주변
+          </button>
+          <select id="sort-select" class="sort-select" aria-label="정렬 기준">
+            <option value="default">기본순</option>
+            <option value="name">이름순</option>
+            <option value="date">시작일순</option>
+          </select>
+        </div>
         <div class="filter-meta-right">
           <div class="view-toggle" role="tablist" aria-label="보기 방식">
             <button type="button" id="view-list" class="view-btn is-active" role="tab" aria-selected="true">목록</button>
@@ -92,6 +136,16 @@
           <button type="button" id="reset-filters" class="reset-btn" hidden>필터 초기화</button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="weekend-recommend" id="weekend-recommend" hidden>
+    <div class="container">
+      <div class="weekend-header">
+        <h2 class="weekend-title" id="weekend-title">이번 주말</h2>
+        <a href="#" class="weekend-link" id="weekend-link">전체 보기 →</a>
+      </div>
+      <div class="weekend-row" id="weekend-cards"></div>
     </div>
   </section>
 
@@ -121,6 +175,8 @@
       <p class="footer-note"><em>일정은 변동될 수 있으니 공식사이트에서 확인해 주세요.</em></p>
     </div>
   </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
   <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
     <div class="modal-backdrop" data-modal-close></div>

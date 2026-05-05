@@ -45,7 +45,17 @@ export function ensureMap() {
     maxZoom: 19,
   }).addTo(mapInstance);
 
-  markersLayer = L.layerGroup().addTo(mapInstance);
+  // 마커가 많을 때 클러스터링 (leaflet.markercluster 플러그인 사용)
+  if (L.markerClusterGroup) {
+    markersLayer = L.markerClusterGroup({
+      maxClusterRadius: 60,
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      chunkedLoading: true,
+    }).addTo(mapInstance);
+  } else {
+    markersLayer = L.layerGroup().addTo(mapInstance);
+  }
 
   // 팝업 안의 "자세히 보기" 링크 클릭 위임
   document.addEventListener('click', (e) => {
@@ -78,9 +88,12 @@ export function renderMarkers(festivals, onDetailClick) {
       continue;
     }
     const marker = L.marker([f.lat, f.lng], { title: f.name });
+    const dateLine = (f.startDate && f.endDate)
+      ? `<small>${escapeHtml(formatRange(f.startDate, f.endDate))}</small>`
+      : '';
     const popupHtml = `
       <strong>${escapeHtml(f.name)}</strong>
-      <small>${escapeHtml(formatRange(f.startDate, f.endDate))}</small>
+      ${dateLine}
       <small>${escapeHtml(f.region)} ${escapeHtml(f.city)}</small>
       <a class="popup-detail" href="#" data-festival-id="${escapeHtml(f.id)}">자세히 보기</a>
     `;

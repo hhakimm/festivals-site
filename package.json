@@ -5,7 +5,10 @@
   "private": true,
   "scripts": {
     "test": "node --test \"tests/*.test.js\"",
-    "sync": "node --env-file=.env scripts/sync-festivals.js",
+    "sync": "npm run sync:festivals && npm run sync:places",
+    "sync:festivals": "node --env-file=.env scripts/sync-festivals.js",
+    "sync:places": "node --env-file=.env scripts/sync-places.js",
+    "enrich-images": "node --env-file=.env scripts/enrich-images.js",
     "diagnose": "node --env-file=.env scripts/test-detail.js"
   }
 }

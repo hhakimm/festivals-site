@@ -5,3 +5,6 @@ node_modules/
 .env
 .env.local
 data/.detail-cache.json
+data/.places-detail-cache.json
+data/.detail-cache-v2.json
+data/.places-detail-cache-v2.json

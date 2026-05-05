@@ -1,7 +1,7 @@
 {
-  "name": "한국 축제 캘린더",
-  "short_name": "축제캘린더",
-  "description": "월별·지역별로 떠나는 한국 축제",
+  "name": "한국 가볼 만한 곳",
+  "short_name": "한국여행",
+  "description": "월별 축제와 지역별 여행지를 한눈에",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

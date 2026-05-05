@@ -7,7 +7,8 @@
 
 import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 
-const CACHE_FILE = 'data/.detail-cache.json';
+// v2: detailCommon + detailIntro 통합 캐시 (이전 v1과 형식 다름)
+const CACHE_FILE = 'data/.detail-cache-v2.json';
 
 function loadCache() {
   if (!existsSync(CACHE_FILE)) return new Map();
@@ -32,6 +33,7 @@ if (!API_KEY) {
 
 const BASE = 'https://apis.data.go.kr/B551011/KorService2/searchFestival2';
 const DETAIL_BASE = 'https://apis.data.go.kr/B551011/KorService2/detailCommon2';
+const INTRO_BASE = 'https://apis.data.go.kr/B551011/KorService2/detailIntro2';
 // 기본: 2025년 12월 ~ 2027년 12월 (연도 걸치는 겨울 축제까지 포함)
 const EVENT_START_DATE = process.env.EVENT_START_DATE || '20251201';
 const EVENT_END_DATE = process.env.EVENT_END_DATE || '20271231';
@@ -160,6 +162,20 @@ function transform(item, detail) {
     officialUrl: homepage,
     lat: parseCoord(item.mapy),
     lng: parseCoord(item.mapx),
+    address: (item.addr1 || '').trim(),
+    info: {
+      place: stripHtml(detail?.eventplace || ''),
+      time: stripHtml(detail?.usetimefestival || ''),
+      fee: stripHtml(detail?.usefee || ''),
+      discount: stripHtml(detail?.discountinfofestival || ''),
+      parking: stripHtml(detail?.parking || ''),
+      duration: stripHtml(detail?.spendtimefestival || ''),
+      ageLimit: stripHtml(detail?.agelimit || ''),
+      sponsor: stripHtml(detail?.sponsor1 || ''),
+      tel: stripHtml(detail?.sponsor1tel || ''),
+      booking: stripHtml(detail?.bookingplace || ''),
+      subEvent: stripHtml(detail?.subevent || ''),
+    },
   };
 }
 
@@ -235,45 +251,63 @@ async function fetchAll() {
   return all;
 }
 
-async function fetchDetail(contentId, attempt = 1) {
+async function fetchEndpoint(baseUrl, contentId, extra = {}, attempt = 1) {
   const params = new URLSearchParams({
     serviceKey: API_KEY,
     MobileOS: 'ETC',
     MobileApp: 'festivals-site',
     contentId: String(contentId),
     _type: 'json',
+    ...extra,
   });
-  const url = `${DETAIL_BASE}?${params}`;
+  const url = `${baseUrl}?${params}`;
   let res;
   try {
     res = await fetch(url);
   } catch (e) {
     if (attempt < 4) {
       await sleep(500 * attempt);
-      return fetchDetail(contentId, attempt + 1);
+      return fetchEndpoint(baseUrl, contentId, extra, attempt + 1);
     }
     return null;
   }
   if (!res.ok) {
     if ((res.status === 403 || res.status === 429 || res.status >= 500) && attempt < 4) {
       await sleep(500 * attempt * attempt);
-      return fetchDetail(contentId, attempt + 1);
+      return fetchEndpoint(baseUrl, contentId, extra, attempt + 1);
     }
     return null;
   }
   const text = await res.text();
   let json;
-  try {
-    json = JSON.parse(text);
-  } catch {
-    return null;
-  }
+  try { json = JSON.parse(text); } catch { return null; }
   const itemRaw = json.response?.body?.items?.item;
   const item = Array.isArray(itemRaw) ? itemRaw[0] : itemRaw;
-  if (!item) return null;
+  return item || null;
+}
+
+async function fetchDetail(contentId) {
+  // detailCommon2 + detailIntro2 (축제 contentTypeId=15) 병렬 호출
+  const [common, intro] = await Promise.all([
+    fetchEndpoint(DETAIL_BASE, contentId),
+    fetchEndpoint(INTRO_BASE, contentId, { contentTypeId: '15' }),
+  ]);
+  if (!common && !intro) return null;
   return {
-    overview: item.overview || '',
-    homepage: item.homepage || '',
+    overview: common?.overview || '',
+    homepage: common?.homepage || '',
+    eventplace: intro?.eventplace || '',
+    usetimefestival: intro?.usetimefestival || '',
+    usefee: intro?.usefee || '',
+    discountinfofestival: intro?.discountinfofestival || '',
+    parking: intro?.parkingfestival || '',
+    placeinfo: intro?.placeinfo || '',
+    spendtimefestival: intro?.spendtimefestival || '',
+    agelimit: intro?.agelimit || '',
+    sponsor1: intro?.sponsor1 || '',
+    sponsor1tel: intro?.sponsor1tel || '',
+    bookingplace: intro?.bookingplace || '',
+    subevent: intro?.subevent || '',
   };
 }
 

@@ -9,7 +9,7 @@
 //   - skipWaiting + clients.claim 으로 즉시 활성화
 //   - 다음 페이지 로드부터 새 버전 사용
 
-const VERSION = 'v1.0.0';
+const VERSION = 'v1.2.0';
 const CACHE = `festivals-${VERSION}`;
 
 const SHELL = [
@@ -22,6 +22,7 @@ const SHELL = [
   './js/url-sync.js',
   './js/modal.js',
   './js/map.js',
+  './js/favorites.js',
   './vendor/leaflet/leaflet.css',
   './vendor/leaflet/leaflet.js',
   './vendor/leaflet/images/marker-icon.png',
@@ -29,9 +30,13 @@ const SHELL = [
   './vendor/leaflet/images/marker-shadow.png',
   './vendor/leaflet/images/layers.png',
   './vendor/leaflet/images/layers-2x.png',
+  './vendor/leaflet/markercluster/MarkerCluster.css',
+  './vendor/leaflet/markercluster/MarkerCluster.Default.css',
+  './vendor/leaflet/markercluster/leaflet.markercluster.js',
   './images/placeholder.svg',
   './icons/icon.svg',
   './icons/icon-maskable.svg',
+  './og-image.svg',
 ];
 
 self.addEventListener('install', (event) => {
@@ -67,8 +72,10 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 축제 데이터 — network-first
-  if (url.pathname.endsWith('/data/festivals.json')) {
+  // 데이터 파일 — network-first (festivals.json, places.json, places-curated.json)
+  if (url.pathname.endsWith('/data/festivals.json') ||
+      url.pathname.endsWith('/data/places.json') ||
+      url.pathname.endsWith('/data/places-curated.json')) {
     event.respondWith(networkFirst(req));
     return;
   }
