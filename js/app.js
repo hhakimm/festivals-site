@@ -39,6 +39,16 @@ function escapeHtml(s) {
     .replaceAll("'", '&#39;');
 }
 
+const MAX_DURATION_DAYS = 21;
+
+function durationDays(f) {
+  const [sy, sm, sd] = f.startDate.split('-').map(Number);
+  const [ey, em, ed] = f.endDate.split('-').map(Number);
+  const start = Date.UTC(sy, sm - 1, sd);
+  const end = Date.UTC(ey, em - 1, ed);
+  return Math.round((end - start) / 86400000) + 1;
+}
+
 function renderCards(festivals) {
   cardsEl.innerHTML = festivals.map(f => {
     const tagHtml = f.category
@@ -46,8 +56,10 @@ function renderCards(festivals) {
       : '';
     return `
     <article class="card" data-festival-id="${escapeHtml(f.id)}">
-      <img class="card-image" alt="${escapeHtml(f.name)}" src="${escapeHtml(f.image)}"
-           onerror="this.src='images/placeholder.svg'" loading="lazy" />
+      <div class="card-image-wrap">
+        <img class="card-image" alt="${escapeHtml(f.name)}" src="${escapeHtml(f.image)}"
+             onerror="this.src='images/placeholder.svg'" loading="lazy" />
+      </div>
       <div class="card-body">
         ${tagHtml}
         <h2 class="card-title">${escapeHtml(f.name)}</h2>
@@ -137,7 +149,9 @@ async function init() {
   try {
     const res = await fetch('data/festivals.json');
     if (!res.ok) throw new Error('fetch failed');
-    allFestivals = await res.json();
+    const raw = await res.json();
+    // 21일 넘게 진행되는 장기 행사·전시는 제외 (축제로서 의미 약화)
+    allFestivals = raw.filter((f) => durationDays(f) <= MAX_DURATION_DAYS);
     errorEl.hidden = true;
 
     const initial = parseQuery(window.location.search);

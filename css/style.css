@@ -325,6 +325,7 @@ a { color: inherit; }
   display: grid;
   gap: clamp(28px, 3.4vw, 44px) clamp(20px, 2.4vw, 32px);
   grid-template-columns: 1fr;
+  align-items: stretch;
 }
 @media (min-width: 720px) {
   .card-grid { grid-template-columns: repeat(2, 1fr); }
@@ -341,14 +342,28 @@ a { color: inherit; }
   flex-direction: column;
   gap: var(--s-4);
   text-align: left;
+  min-width: 0;            /* prevent grid blowout */
   transition: transform 0.3s cubic-bezier(.2, .7, .2, 1);
 }
 .card:hover {
   transform: translateY(-2px);
 }
 
+/* 이미지를 padding-bottom 트릭으로 고정 비율 (5:4 = 80%)로 강제.
+   브라우저별 aspect-ratio 동작 차이를 우회. */
+.card-image-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 80%;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--bg-soft);
+}
+/* 기본 이미지 스타일 — wrapper 없이 단독 렌더되는 경우에도 안전 */
 .card-image {
   width: 100%;
+  height: auto;
+  display: block;
   aspect-ratio: 5 / 4;
   object-fit: cover;
   border-radius: var(--r-md);
@@ -356,6 +371,15 @@ a { color: inherit; }
   filter: saturate(0.92) contrast(1.02);
   transition: filter 0.4s ease, transform 0.5s cubic-bezier(.2, .7, .2, 1);
   will-change: transform;
+}
+/* wrapper 안에 있을 때만 absolute로 채움 */
+.card-image-wrap > .card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
 }
 .card:hover .card-image {
   filter: saturate(1.05) contrast(1.04);
@@ -378,6 +402,12 @@ a { color: inherit; }
   letter-spacing: -0.012em;
   line-height: 1.28;
   color: var(--ink);
+  /* 제목을 2줄로 고정 → 카드 높이 일관성 확보 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(1.28em * 2);
 }
 
 /* meta — magazine byline */
