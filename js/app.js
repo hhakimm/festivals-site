@@ -302,30 +302,67 @@ function dateRangesOverlap(aStart, aEnd, bStart, bEnd) {
   return aStart <= bEnd && aEnd >= bStart;
 }
 
+function currentSeason() {
+  const m = new Date().getMonth() + 1;
+  if (m >= 3 && m <= 5) return 'spring';
+  if (m >= 6 && m <= 8) return 'summer';
+  if (m >= 9 && m <= 11) return 'autumn';
+  return 'winter';
+}
+
+// 축제 주말 뱃지: '🔥 이번 주말 마지막' / '✨ 이번 주말 시작' / null
+function festivalWeekendBadge(f, sat, sun) {
+  if (!f.startDate || !f.endDate) return null;
+  // 종료일이 이번 주말 안 → "마지막"
+  if (f.endDate >= sat && f.endDate <= sun) return { kind: 'last', text: '🔥 이번 주말 마지막' };
+  // 시작일이 이번 주말 안 → "시작"
+  if (f.startDate >= sat && f.startDate <= sun) return { kind: 'start', text: '✨ 이번 주말 시작' };
+  return null;
+}
+
 function renderWeekendRow() {
   if (!weekendSectionEl) return;
   const { sat, sun, label } = nextWeekendDates();
   let items;
   if (currentTab === 'festivals') {
-    items = allFestivals.filter((f) =>
-      dateRangesOverlap(f.startDate, f.endDate, sat, sun)
-    );
-    // 이미지 있는 것 우선, 시작일 가까운 순
+    items = allFestivals
+      .filter((f) => dateRangesOverlap(f.startDate, f.endDate, sat, sun))
+      .map((f) => ({ ...f, _badge: festivalWeekendBadge(f, sat, sun) }));
+    // 우선순위: 마지막 주말(2) > 시작 주말(1) > 진행중(0)
+    // 동일 우선순위 내: 이미지 있는 것 우선, 시작일 가까운 순
     items.sort((a, b) => {
+      const ar = a._badge?.kind === 'last' ? 2 : a._badge?.kind === 'start' ? 1 : 0;
+      const br = b._badge?.kind === 'last' ? 2 : b._badge?.kind === 'start' ? 1 : 0;
+      if (ar !== br) return br - ar;
       const aImg = a.image && a.image !== 'images/placeholder.svg' ? 0 : 1;
       const bImg = b.image && b.image !== 'images/placeholder.svg' ? 0 : 1;
       if (aImg !== bImg) return aImg - bImg;
       return a.startDate.localeCompare(b.startDate);
     });
   } else {
-    // 여행지 탭: 큐레이션 중 이미지 있는 것 위주
+    // 여행지 탭: 계절 가중치 + 이미지 우선 + 약간의 무작위
+    const season = currentSeason();
+    const seasonalCollections = allCollections.filter(
+      (c) => Array.isArray(c.season) && c.season.includes(season)
+    );
+    const scoreOf = (place) => {
+      let s = 0;
+      // 계절 컬렉션에 들어 있으면 큰 가중치
+      for (const c of seasonalCollections) {
+        if (c.ids?.includes(place.id)) s += 10;
+        if (c.namePatterns?.some((p) => (place.name || '').includes(p))) s += 5;
+      }
+      // 큐레이션 데이터 우선
+      if (place.curated) s += 2;
+      // 이미지 있으면 +1
+      if (place.image && place.image !== 'images/placeholder.svg') s += 1;
+      // 동률 셔플용 약한 노이즈
+      return s + Math.random() * 0.5;
+    };
     items = allPlaces
-      .filter((p) => p.curated && p.image && p.image !== 'images/placeholder.svg');
-    // 약간 셔플 (매번 다른 추천)
-    for (let i = items.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [items[i], items[j]] = [items[j], items[i]];
-    }
+      .filter((p) => p.curated && p.image && p.image !== 'images/placeholder.svg')
+      .map((p) => ({ ...p, _score: scoreOf(p) }));
+    items.sort((a, b) => b._score - a._score);
   }
   const top = items.slice(0, 10);
   if (top.length === 0) {
@@ -335,11 +372,17 @@ function renderWeekendRow() {
   weekendSectionEl.hidden = false;
   weekendTitleEl.innerHTML = `이번 주말 <small>${label}</small>`;
   weekendCardsEl.innerHTML = top
-    .map(
-      (it) => `
+    .map((it) => {
+      const badgeHtml = it._badge
+        ? `<span class="weekend-badge weekend-badge-${it._badge.kind}">${escapeHtml(it._badge.text)}</span>`
+        : '';
+      return `
     <article class="weekend-card" data-item-id="${escapeHtml(it.id)}">
-      <img class="weekend-card-image" alt="${escapeHtml(it.name)}" src="${escapeHtml(it.image)}"
-           onerror="this.src='images/placeholder.svg'" loading="lazy" />
+      <div class="weekend-card-image-wrap">
+        <img class="weekend-card-image" alt="${escapeHtml(it.name)}" src="${escapeHtml(it.image)}"
+             onerror="this.src='images/placeholder.svg'" loading="lazy" />
+        ${badgeHtml}
+      </div>
       <div class="weekend-card-body">
         <h3 class="weekend-card-title">${escapeHtml(it.name)}</h3>
         <div class="weekend-card-meta">${
@@ -349,8 +392,8 @@ function renderWeekendRow() {
         }${escapeHtml(it.region)}</div>
       </div>
     </article>
-  `
-    )
+  `;
+    })
     .join('');
 }
 

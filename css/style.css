@@ -577,12 +577,37 @@ a { color: inherit; }
   border-color: var(--border);
   box-shadow: 0 4px 10px var(--shadow-sm);
 }
+.weekend-card-image-wrap {
+  position: relative;
+}
 .weekend-card-image {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   background: var(--surface-3);
   display: block;
+}
+.weekend-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  padding: 4px 9px;
+  border-radius: var(--r-pill);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  white-space: nowrap;
+}
+.weekend-badge-last {
+  background: #d23f57;
+  color: #fff;
+}
+.weekend-badge-start {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--border);
 }
 .weekend-card-body {
   padding: 10px 12px 12px;
