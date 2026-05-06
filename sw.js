@@ -9,7 +9,7 @@
 //   - skipWaiting + clients.claim 으로 즉시 활성화
 //   - 다음 페이지 로드부터 새 버전 사용
 
-const VERSION = 'v1.2.0';
+const VERSION = 'v1.5.0';
 const CACHE = `festivals-${VERSION}`;
 
 const SHELL = [
@@ -23,6 +23,8 @@ const SHELL = [
   './js/modal.js',
   './js/map.js',
   './js/favorites.js',
+  './js/i18n.js',
+  './js/pull-refresh.js',
   './vendor/leaflet/leaflet.css',
   './vendor/leaflet/leaflet.js',
   './vendor/leaflet/images/marker-icon.png',
@@ -72,10 +74,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 데이터 파일 — network-first (festivals.json, places.json, places-curated.json)
+  // 데이터 파일 — network-first
   if (url.pathname.endsWith('/data/festivals.json') ||
       url.pathname.endsWith('/data/places.json') ||
-      url.pathname.endsWith('/data/places-curated.json')) {
+      url.pathname.endsWith('/data/places-curated.json') ||
+      url.pathname.endsWith('/data/collections.json')) {
     event.respondWith(networkFirst(req));
     return;
   }

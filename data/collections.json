@@ -1,0 +1,152 @@
+[
+  {
+    "id": "cherry-blossom",
+    "name": "벚꽃 명소",
+    "icon": "🌸",
+    "tagline": "4월 벚꽃 만개의 절정",
+    "season": ["spring"],
+    "namePatterns": ["벚꽃", "봄꽃", "진해 군항제", "여의도", "윤중로"],
+    "ids": [
+      "curated-namiseom", "curated-yangpyeong-dumulmeori", "curated-jeonju-hanok",
+      "curated-jeongdongjin", "curated-naksansa", "curated-yeoju-silleuksa",
+      "curated-buseoksa", "curated-yeongam-wangin-2026", "curated-gaeshimsa",
+      "curated-gyeongbokgung", "curated-changdeokgung"
+    ]
+  },
+  {
+    "id": "plum-blossom",
+    "name": "매화 명소",
+    "icon": "🤍",
+    "tagline": "이른 봄의 첫 꽃 — 2~3월",
+    "season": ["spring"],
+    "namePatterns": ["매화", "매실"],
+    "ids": ["curated-yangsan-tongdosa", "curated-gwangyang-maehwa-2026", "curated-gwangyang-maehwa-village"]
+  },
+  {
+    "id": "autumn-foliage",
+    "name": "단풍 명소",
+    "icon": "🍁",
+    "tagline": "가을 산을 붉게 물들이는 명산",
+    "season": ["autumn"],
+    "namePatterns": ["단풍"],
+    "ids": [
+      "curated-np-naejangsan", "curated-np-seoraksan", "curated-np-odaesan",
+      "curated-np-gayasan", "curated-np-songnisan", "curated-np-deogyusan",
+      "curated-np-chiaksan", "curated-pp-cheongnyangsan", "curated-baekyangsa",
+      "curated-pp-seonunsan", "curated-pp-jogyesan", "curated-namwon-gwanghallu",
+      "curated-hamyang-sangrim", "curated-pp-namhansanseong"
+    ]
+  },
+  {
+    "id": "sunrise",
+    "name": "일출 명소",
+    "icon": "🌅",
+    "tagline": "새해 첫 해를 만나는 곳",
+    "season": ["winter", "any"],
+    "namePatterns": ["일출"],
+    "ids": [
+      "curated-jeongdongjin", "curated-pohang-homigot", "curated-ulsan-ganjeolgot",
+      "curated-seongsan-sunrise", "curated-haedong-yonggungsa", "curated-np-taebaeksan",
+      "curated-munmu-royal-tomb", "curated-yangyang-hajodae", "curated-ulsan-daewangam"
+    ]
+  },
+  {
+    "id": "snow",
+    "name": "눈꽃 명소",
+    "icon": "❄️",
+    "tagline": "12월~2월의 새하얀 풍경",
+    "season": ["winter"],
+    "namePatterns": ["눈축제", "눈꽃", "얼음", "빙어", "산천어", "송어"],
+    "ids": ["curated-np-taebaeksan", "curated-np-deogyusan", "curated-inje-birch", "curated-darae-farm"]
+  },
+  {
+    "id": "lavender",
+    "name": "라벤더·수국",
+    "icon": "💜",
+    "tagline": "보랏빛으로 물드는 6월",
+    "season": ["summer"],
+    "namePatterns": ["라벤더", "수국", "퍼플"],
+    "ids": []
+  },
+  {
+    "id": "beach",
+    "name": "해변 명소",
+    "icon": "🏖️",
+    "tagline": "한국의 푸른 바다",
+    "season": ["summer"],
+    "namePatterns": ["해수욕장", "해변", "해변로"],
+    "ids": [
+      "curated-hyeopjae-beach", "curated-hamdeok-beach", "curated-yeonggwang-baeksu",
+      "curated-busan-oryukdo", "curated-taejongdae", "curated-amisan-view",
+      "curated-haedong-yonggungsa", "curated-ulsan-daewangam", "curated-yangyang-hajodae",
+      "curated-jindo-mysticalsea", "curated-haenam-ttangkkeut"
+    ]
+  },
+  {
+    "id": "silver-grass",
+    "name": "억새 명소",
+    "icon": "🌾",
+    "tagline": "은빛 물결의 가을 능선",
+    "season": ["autumn"],
+    "namePatterns": ["억새"],
+    "ids": ["curated-pp-cheongwansan", "curated-np-mudeungsan", "curated-pp-gajisan"]
+  },
+  {
+    "id": "unesco",
+    "name": "유네스코 유산",
+    "icon": "🏛️",
+    "tagline": "세계가 지켜야 할 한국의 보물",
+    "season": ["any"],
+    "namePatterns": ["유네스코"],
+    "ids": [
+      "curated-changdeokgung", "curated-jongmyo", "curated-suwon-hwaseong",
+      "curated-yangdong-village", "curated-tongdosa", "curated-beopjusa",
+      "curated-magoksa", "curated-buseoksa", "curated-bongjeongsa", "curated-seonamsa",
+      "curated-daeheungsa", "curated-manjanggul", "curated-gochang-dolmen",
+      "curated-hwasun-dolmen", "curated-ganghwa-dolmen", "curated-gwangneung",
+      "curated-oksan-seowon", "curated-donam-seowon", "curated-sosu-seowon",
+      "curated-dosan-seowon", "curated-byeongsan-seowon", "curated-cheongamjeong",
+      "curated-buyeo-busosanseong", "curated-muryongwangneung", "curated-gongsanseong",
+      "curated-pp-namhansanseong", "curated-hahoe-village", "curated-mireuksaji",
+      "curated-wanggungri-relic", "curated-pp-shinangaetbeol", "curated-pp-muangaetbeol",
+      "curated-np-jirisan", "curated-np-hallasan", "curated-np-bukhansan",
+      "curated-np-gyeongju"
+    ]
+  },
+  {
+    "id": "national-park",
+    "name": "국립공원",
+    "icon": "⛰️",
+    "tagline": "23개 국립공원 모두",
+    "season": ["any"],
+    "namePatterns": ["국립공원"],
+    "ids": []
+  },
+  {
+    "id": "fireworks",
+    "name": "불꽃·빛 축제",
+    "icon": "🎆",
+    "tagline": "밤하늘을 수놓는 빛의 축제",
+    "season": ["any"],
+    "namePatterns": ["불꽃", "불빛", "빛초롱", "빛축제", "빛페스타"],
+    "ids": []
+  },
+  {
+    "id": "temple",
+    "name": "천년 사찰",
+    "icon": "🛕",
+    "tagline": "고요한 산사의 시간",
+    "season": ["any"],
+    "namePatterns": [],
+    "ids": [
+      "curated-tongdosa", "curated-beopjusa", "curated-magoksa", "curated-buseoksa",
+      "curated-bongjeongsa", "curated-seonamsa", "curated-songgwangsa", "curated-daeheungsa",
+      "curated-naksansa", "curated-baekyangsa", "curated-seonunsa", "curated-haedong-yonggungsa",
+      "curated-cheongdo-unmunsa", "curated-ganghwa-bomunsa", "curated-muwisa",
+      "curated-borimsa", "curated-hwasun-unjusa", "curated-ssangbongsa",
+      "curated-daewonsa-boseong", "curated-ganwolam", "curated-saseongam",
+      "curated-yongamsa-okcheon", "curated-taegosa", "curated-baekcheonsa",
+      "curated-gakwonsa", "curated-yeongsanjeongsa", "curated-ilbungsa"
+    ]
+  }
+]

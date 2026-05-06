@@ -3,6 +3,7 @@ import { openModal, closeModal, bindModalClose, onFavToggle, showToast } from '.
 import { parseQuery, serializeState } from './url-sync.js';
 import { ensureMap, renderMarkers, invalidateSize } from './map.js';
 import { isFavorite, toggleFavorite, getFavorites } from './favorites.js';
+import { t, getLang, setLang, applyTranslations } from './i18n.js';
 
 // ── DOM 참조 ──
 const cardsEl = document.getElementById('cards');
@@ -25,6 +26,11 @@ const weekendSectionEl = document.getElementById('weekend-recommend');
 const weekendTitleEl = document.getElementById('weekend-title');
 const weekendCardsEl = document.getElementById('weekend-cards');
 const weekendLinkEl = document.getElementById('weekend-link');
+const collectionsRowEl = document.getElementById('collections-row');
+const acbEl = document.getElementById('active-collection-banner');
+const acbIconEl = document.getElementById('acb-icon');
+const acbNameEl = document.getElementById('acb-name');
+const acbClearEl = document.getElementById('acb-clear');
 
 // ── 상태 ──
 let currentTab = 'festivals'; // 'festivals' | 'places'
@@ -41,7 +47,10 @@ const state = {
   favoritesOnly: false,  // 즐겨찾기 필터
   userLocation: null,    // {lat, lng} — geolocation 활성 시
   sort: 'default',       // 'default' | 'name' | 'date'
+  collection: null,      // 활성 컬렉션 id (테마)
 };
+
+let allCollections = [];
 const NEARBY_RADIUS_KM = 50;
 
 // ── 유틸 ──
@@ -99,13 +108,37 @@ function matchesSearch(item, q) {
   return fields.some((f) => (f || '').toLowerCase().includes(lower));
 }
 
+function matchesCollection(item, collection) {
+  if (!collection) return true;
+  const idMatch = collection.ids?.includes(item.id);
+  const nameMatch = collection.namePatterns?.some((p) =>
+    (item.name || '').includes(p)
+  );
+  return idMatch || nameMatch;
+}
+
 function getFiltered() {
-  const ds = getCurrentDataset();
+  // 컬렉션 활성: festivals + places 합쳐서 검색
+  let ds = getCurrentDataset();
+  const collection = state.collection
+    ? allCollections.find((c) => c.id === state.collection)
+    : null;
+  if (collection) {
+    // 컬렉션은 두 데이터셋에서 모두 매칭 시도 — 더 풍부한 결과
+    ds = [...allFestivals, ...allPlaces].filter((it) =>
+      matchesCollection(it, collection)
+    );
+  }
+
   // 여행지 탭에선 month 필터 무시 (장소는 시기와 무관)
   const baseFilterState = currentTab === 'festivals'
     ? { month: state.month, region: state.region, category: state.category }
     : { month: null, region: state.region, category: state.category };
-  let result = applyFilters(ds, baseFilterState);
+  let result = collection ? ds : applyFilters(ds, baseFilterState);
+  // 컬렉션이 활성이면 카테고리/월 필터는 무시하고 region·검색만 적용
+  if (collection) {
+    if (state.region) result = result.filter((it) => it.region === state.region);
+  }
 
   // 검색
   const q = state.search.trim();
@@ -145,12 +178,13 @@ function getFiltered() {
 // ── 카드 렌더 ──
 function renderCards(items) {
   cardsEl.innerHTML = items.map((item) => {
-    const isFestival = currentTab === 'festivals';
+    // 컬렉션 모드에서는 혼합되므로 항목 자체로 판단
+    const hasDate = !!(item.startDate && item.endDate);
     const fav = isFavorite(item.id);
     const tagHtml = item.category
       ? `<span class="tag" data-category="${escapeHtml(item.category)}">${escapeHtml(item.category)}</span>`
       : '';
-    const dateOrTag = isFestival
+    const dateOrTag = hasDate
       ? `<span>${escapeHtml(formatRange(item.startDate, item.endDate))}</span>`
       : '';
     const distHtml = item._dist != null
@@ -188,6 +222,56 @@ function openItemById(id) {
   openModal(item);
   syncUrl();
 }
+
+// ── 테마 컬렉션 ──
+function countCollectionMatches(collection) {
+  return [...allFestivals, ...allPlaces].filter((it) =>
+    matchesCollection(it, collection)
+  ).length;
+}
+
+function renderCollections() {
+  if (!collectionsRowEl) return;
+  collectionsRowEl.innerHTML = allCollections
+    .map((c) => {
+      const count = countCollectionMatches(c);
+      if (count === 0) return '';
+      const active = state.collection === c.id ? ' is-active' : '';
+      return `
+      <button type="button" class="collection-card${active}" data-collection-id="${escapeHtml(c.id)}">
+        <span class="collection-icon" aria-hidden="true">${c.icon || '✦'}</span>
+        <h3 class="collection-name">${escapeHtml(c.name)}</h3>
+        <p class="collection-tagline">${escapeHtml(c.tagline || '')}</p>
+        <span class="collection-count">${count}곳</span>
+      </button>
+    `;
+    })
+    .join('');
+}
+
+collectionsRowEl?.addEventListener('click', (e) => {
+  const card = e.target.closest('.collection-card');
+  if (!card) return;
+  const id = card.dataset.collectionId;
+  // 토글: 같은 거 클릭하면 해제
+  state.collection = state.collection === id ? null : id;
+  // 컬렉션 활성 시 month·category 필터는 효과 없음
+  renderCollections();
+  syncFilterUI();
+  update();
+  syncUrl();
+  if (state.collection) {
+    document.querySelector('.main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});
+
+acbClearEl?.addEventListener('click', () => {
+  state.collection = null;
+  renderCollections();
+  syncFilterUI();
+  update();
+  syncUrl();
+});
 
 // ── "이번 주말" 추천 섹션 ──
 function nextWeekendDates() {
@@ -289,10 +373,27 @@ weekendLinkEl?.addEventListener('click', (e) => {
 });
 
 // ── 메인 갱신 ──
+function syncCollectionBanner() {
+  if (!acbEl) return;
+  const collection = state.collection
+    ? allCollections.find((c) => c.id === state.collection)
+    : null;
+  if (collection) {
+    acbEl.hidden = false;
+    acbIconEl.textContent = collection.icon || '✦';
+    acbNameEl.textContent = `${collection.name} — ${collection.tagline || ''}`;
+  } else {
+    acbEl.hidden = true;
+  }
+}
+
 function update() {
+  syncCollectionBanner();
   const filtered = getFiltered();
-  const noun = currentTab === 'festivals' ? '축제' : '여행지';
-  countEl.textContent = `총 ${filtered.length}개의 ${noun}`;
+  const key = (currentTab === 'festivals' && !state.collection)
+    ? 'count.festivals'
+    : 'count.places';
+  countEl.textContent = t(key, { n: filtered.length });
 
   cardsEl.hidden = true;
   mapEl.hidden = true;
@@ -354,6 +455,37 @@ function setTab(tab) {
 }
 tabFestivalsBtn.addEventListener('click', () => setTab('festivals'));
 tabPlacesBtn.addEventListener('click', () => setTab('places'));
+
+// ── 모바일 하단 네비게이션 ──
+const bottomNavEl = document.querySelector('.bottom-nav');
+if (bottomNavEl) {
+  bottomNavEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.bn-item');
+    if (!btn) return;
+    const action = btn.dataset.bn;
+    if (action === 'festivals') setTab('festivals');
+    else if (action === 'places') setTab('places');
+    else if (action === 'favorites') favoritesToggleEl.click();
+    else if (action === 'nearby') nearbyToggleEl.click();
+    // 클릭 후 페이지 맨 위로 살짝 스크롤 (탭 전환 시 결과 보이게)
+    if (action === 'festivals' || action === 'places') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+}
+
+function syncBottomNav() {
+  if (!bottomNavEl) return;
+  bottomNavEl.querySelectorAll('.bn-item').forEach((btn) => {
+    const action = btn.dataset.bn;
+    let active = false;
+    if (action === 'festivals') active = currentTab === 'festivals';
+    else if (action === 'places') active = currentTab === 'places';
+    else if (action === 'favorites') active = state.favoritesOnly === true;
+    else if (action === 'nearby') active = state.userLocation != null;
+    btn.classList.toggle('is-active', active);
+  });
+}
 
 // ── URL 동기화 ──
 function syncUrl() {
@@ -435,8 +567,10 @@ function syncFilterUI() {
     (currentTab === 'places' && state.category != null) ||
     !!state.search ||
     state.favoritesOnly ||
-    state.userLocation != null;
+    state.userLocation != null ||
+    state.collection != null;
   resetBtnEl.hidden = !anyActive;
+  syncBottomNav();
 }
 
 function setMonth(value) {
@@ -465,8 +599,10 @@ function resetAll() {
   state.favoritesOnly = false;
   state.userLocation = null;
   state.sort = 'default';
+  state.collection = null;
   searchInputEl.value = '';
   sortSelectEl.value = 'default';
+  renderCollections();
   syncFilterUI();
   update();
   syncUrl();
@@ -581,12 +717,14 @@ function isCloseLocation(a, b, kmThreshold = 0.1) {
 
 async function init() {
   try {
-    // 세 데이터셋 병렬 로드. 없으면 빈 배열로 폴백.
-    const [festRaw, placesRaw, curatedRaw] = await Promise.all([
+    // 데이터셋 병렬 로드. 없으면 빈 배열로 폴백.
+    const [festRaw, placesRaw, curatedRaw, collectionsRaw] = await Promise.all([
       fetchJson('data/festivals.json'),
       fetchJson('data/places.json').catch(() => []),
       fetchJson('data/places-curated.json').catch(() => []),
+      fetchJson('data/collections.json').catch(() => []),
     ]);
+    allCollections = Array.isArray(collectionsRaw) ? collectionsRaw : [];
     allFestivals = festRaw.filter((f) => durationDays(f) <= MAX_DURATION_DAYS);
 
     // 큐레이션 + TourAPI 합치기
@@ -641,6 +779,10 @@ async function init() {
     syncSortOptionVisibility();
     syncFilterUI();
     renderWeekendRow();
+    renderCollections();
+    syncLangButtons();
+    document.documentElement.lang = getLang();
+    applyTranslations();
     update();
 
     if (state.festival) {
@@ -655,6 +797,24 @@ async function init() {
     errorEl.hidden = false;
   }
 }
+
+// ── 언어 switcher ──
+function syncLangButtons() {
+  const lang = getLang();
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.classList.toggle('is-active', btn.dataset.lang === lang);
+  });
+}
+document.querySelectorAll('.lang-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    setLang(btn.dataset.lang);
+    syncLangButtons();
+    // 동적으로 생성되는 카운트·컬렉션 라벨 등은 update로 재렌더
+    renderCollections();
+    renderWeekendRow();
+    update();
+  });
+});
 
 init();
 

@@ -39,27 +39,40 @@
   <script defer src="vendor/leaflet/markercluster/leaflet.markercluster.js"></script>
 </head>
 <body>
+  <div id="pull-refresh" class="pull-refresh" aria-hidden="true">
+    <div class="pull-refresh-icon">↻</div>
+  </div>
+
   <header class="site-header">
     <div class="container">
+      <div class="lang-switcher" role="group" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="ko">한국어</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="ja">日本語</button>
+        <button type="button" class="lang-btn" data-lang="zh">中文</button>
+      </div>
       <h1 class="site-title">한국 가볼 만한 곳</h1>
-      <p class="site-subtitle">2026 월별 축제와 지역별 여행지를 한눈에</p>
+      <p class="site-subtitle" data-i18n="site.subtitle">2026 월별 축제와 지역별 여행지를 한눈에</p>
       <nav class="tabs" role="tablist" aria-label="콘텐츠 종류">
-        <button type="button" id="tab-festivals" class="tab is-active" role="tab" aria-selected="true" data-tab="festivals">2026 축제</button>
-        <button type="button" id="tab-places" class="tab" role="tab" aria-selected="false" data-tab="places">여행지</button>
+        <button type="button" id="tab-festivals" class="tab is-active" role="tab" aria-selected="true" data-tab="festivals" data-i18n="tab.festivals">2026 축제</button>
+        <button type="button" id="tab-places" class="tab" role="tab" aria-selected="false" data-tab="places" data-i18n="tab.places">여행지</button>
       </nav>
     </div>
   </header>
 
+  <div class="content-layout">
+  <aside class="filter-sidebar">
   <section class="filter-bar" aria-label="축제 필터">
     <div class="container">
       <div class="filter-group filter-group-search">
         <span class="search-icon" aria-hidden="true">🔍</span>
         <input type="search" id="search-input" class="search-input"
-               placeholder="이름·지역으로 검색…" autocomplete="off" />
+               placeholder="이름·지역으로 검색…" autocomplete="off"
+               data-i18n-attr="placeholder:filter.search.placeholder" />
         <button type="button" id="search-clear" class="search-clear" aria-label="검색 지우기" hidden>×</button>
       </div>
       <div class="filter-group" id="month-filter-group" role="group" aria-label="월 선택">
-        <span class="filter-label">월</span>
+        <span class="filter-label" data-i18n="filter.month">월</span>
         <div class="chip-group" id="month-chips">
           <button type="button" class="chip is-active" data-month="all">전체</button>
           <button type="button" class="chip" data-month="1">1월</button>
@@ -78,7 +91,7 @@
       </div>
 
       <div class="filter-group">
-        <label class="filter-label" for="region-select">지역</label>
+        <label class="filter-label" for="region-select" data-i18n="filter.region">지역</label>
         <select id="region-select" class="select">
           <option value="all">전체</option>
           <option value="서울특별시">서울특별시</option>
@@ -102,7 +115,7 @@
       </div>
 
       <div class="filter-group" id="category-filter-group" role="group" aria-label="카테고리 선택" hidden>
-        <span class="filter-label">테마</span>
+        <span class="filter-label" data-i18n="filter.theme">테마</span>
         <div class="chip-group" id="category-chips">
           <button type="button" class="chip is-active" data-category="all">전체</button>
           <button type="button" class="chip" data-category="자연">자연</button>
@@ -117,51 +130,67 @@
         <div class="filter-meta-left">
           <span id="result-count" class="result-count">총 0개의 축제</span>
           <button type="button" id="favorites-toggle" class="meta-toggle" aria-pressed="false">
-            <span class="meta-toggle-icon">♡</span> 즐겨찾기
+            <span class="meta-toggle-icon">♡</span> <span data-i18n="meta.favorites">즐겨찾기</span>
           </button>
           <button type="button" id="nearby-toggle" class="meta-toggle" aria-pressed="false">
-            <span class="meta-toggle-icon">📍</span> 내 주변
+            <span class="meta-toggle-icon">📍</span> <span data-i18n="meta.nearby">내 주변</span>
           </button>
           <select id="sort-select" class="sort-select" aria-label="정렬 기준">
-            <option value="default">기본순</option>
-            <option value="name">이름순</option>
-            <option value="date">시작일순</option>
+            <option value="default" data-i18n="sort.default">기본순</option>
+            <option value="name" data-i18n="sort.name">이름순</option>
+            <option value="date" data-i18n="sort.date">시작일순</option>
           </select>
         </div>
         <div class="filter-meta-right">
           <div class="view-toggle" role="tablist" aria-label="보기 방식">
-            <button type="button" id="view-list" class="view-btn is-active" role="tab" aria-selected="true">목록</button>
-            <button type="button" id="view-map" class="view-btn" role="tab" aria-selected="false">지도</button>
+            <button type="button" id="view-list" class="view-btn is-active" role="tab" aria-selected="true" data-i18n="view.list">목록</button>
+            <button type="button" id="view-map" class="view-btn" role="tab" aria-selected="false" data-i18n="view.map">지도</button>
           </div>
-          <button type="button" id="reset-filters" class="reset-btn" hidden>필터 초기화</button>
+          <button type="button" id="reset-filters" class="reset-btn" hidden data-i18n="filter.reset">필터 초기화</button>
         </div>
       </div>
     </div>
   </section>
+  </aside>
 
+  <div class="content-main">
   <section class="weekend-recommend" id="weekend-recommend" hidden>
     <div class="container">
       <div class="weekend-header">
-        <h2 class="weekend-title" id="weekend-title">이번 주말</h2>
-        <a href="#" class="weekend-link" id="weekend-link">전체 보기 →</a>
+        <h2 class="weekend-title" id="weekend-title" data-i18n="weekend.title">이번 주말</h2>
+        <a href="#" class="weekend-link" id="weekend-link" data-i18n="weekend.viewAll">전체 보기 →</a>
       </div>
       <div class="weekend-row" id="weekend-cards"></div>
     </div>
   </section>
 
+  <section class="collections-section" id="collections-section">
+    <div class="container">
+      <h2 class="collections-title" data-i18n="collections.title">테마 컬렉션</h2>
+      <div class="collections-row" id="collections-row"></div>
+    </div>
+  </section>
+
   <main class="main">
     <div class="container">
+      <div id="active-collection-banner" class="active-collection-banner" hidden>
+        <span class="acb-icon" id="acb-icon"></span>
+        <span class="acb-name" id="acb-name"></span>
+        <button type="button" class="active-collection-banner-clear" id="acb-clear" aria-label="컬렉션 해제">×</button>
+      </div>
       <div id="cards" class="card-grid" aria-live="polite"></div>
       <div id="map" class="map-view" hidden></div>
       <div id="empty-state" class="empty-state" hidden>
-        <p class="empty-state-text">선택한 조건에 맞는 축제가 없습니다.</p>
-        <button type="button" class="reset-btn" data-reset>필터 초기화</button>
+        <p class="empty-state-text" data-i18n="empty.text">선택한 조건에 맞는 축제가 없습니다.</p>
+        <button type="button" class="reset-btn" data-reset data-i18n="filter.reset">필터 초기화</button>
       </div>
       <div id="error-state" class="error-state" hidden>
-        <p>데이터를 불러오지 못했습니다. 새로고침해 주세요.</p>
+        <p data-i18n="error.text">데이터를 불러오지 못했습니다. 새로고침해 주세요.</p>
       </div>
     </div>
   </main>
+  </div><!-- /.content-main -->
+  </div><!-- /.content-layout -->
 
   <footer class="site-footer">
     <div class="container">
@@ -176,6 +205,26 @@
     </div>
   </footer>
 
+  <!-- 모바일 하단 네비게이션 (PC에선 CSS로 숨김) -->
+  <nav class="bottom-nav" aria-label="하단 네비게이션">
+    <button type="button" class="bn-item is-active" data-bn="festivals">
+      <span class="bn-icon" aria-hidden="true">🎆</span>
+      <span class="bn-label" data-i18n="bn.festivals">축제</span>
+    </button>
+    <button type="button" class="bn-item" data-bn="places">
+      <span class="bn-icon" aria-hidden="true">🗺️</span>
+      <span class="bn-label" data-i18n="bn.places">여행지</span>
+    </button>
+    <button type="button" class="bn-item" data-bn="favorites">
+      <span class="bn-icon" aria-hidden="true">♡</span>
+      <span class="bn-label" data-i18n="bn.favorites">즐겨찾기</span>
+    </button>
+    <button type="button" class="bn-item" data-bn="nearby">
+      <span class="bn-icon" aria-hidden="true">📍</span>
+      <span class="bn-label" data-i18n="bn.nearby">내 주변</span>
+    </button>
+  </nav>
+
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
   <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
@@ -187,5 +236,6 @@
   </div>
 
   <script type="module" src="js/app.js"></script>
+  <script src="js/pull-refresh.js"></script>
 </body>
 </html>
