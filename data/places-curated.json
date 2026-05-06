@@ -462,7 +462,7 @@
     "city": "무안군",
     "category": "자연",
     "description": "한국 최대 갯벌이자 람사르 습지. 황토색 갯벌과 철새 도래지로 생태 가치가 높다.",
-    "image": "images/placeholder.svg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Ramsar_logo.svg/960px-Ramsar_logo.svg.png",
     "officialUrl": "https://www.muan.go.kr/tour",
     "lat": 34.9722,
     "lng": 126.4033
@@ -3298,5 +3298,89 @@
     "officialUrl": "https://cablecar.ttdc.kr/",
     "lat": 34.8347,
     "lng": 128.4271
+  },
+  {
+    "id": "curated-goseong-lavender-farm",
+    "name": "고성 하늬라벤더팜",
+    "region": "강원특별자치도",
+    "city": "고성군",
+    "category": "자연",
+    "description": "국내 최대 라벤더 농장. 매년 6월 중순~7월 초 보랏빛 라벤더 5만 평이 만개. 라벤더 축제와 사진존, 라벤더 차·아이스크림이 인기.",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/78/2747978_image2_1.jpg",
+    "officialUrl": "https://lavenderfarm.co.kr/",
+    "lat": 38.2944,
+    "lng": 128.4647
+  },
+  {
+    "id": "curated-pyeongchang-herbnara",
+    "name": "평창 허브나라농원",
+    "region": "강원특별자치도",
+    "city": "평창군",
+    "category": "자연",
+    "description": "국내 최초 허브 테마 정원. 라벤더·로즈마리 등 수백 종의 허브가 계절별로 향기를 내뿜는다. 6~7월 라벤더 절정.",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/37/3535037_image2_1.jpg",
+    "officialUrl": "https://www.herbnara.com/",
+    "lat": 37.6478,
+    "lng": 128.6717
+  },
+  {
+    "id": "curated-yugu-saekdong-hydrangea",
+    "name": "공주 유구색동수국정원",
+    "region": "충청남도",
+    "city": "공주시",
+    "category": "자연",
+    "description": "한국 최대급 수국 군락지. 매년 6월 말~7월 초 형형색색 수국이 9,000평 정원에 가득 핀다. 수국 축제 기간 야간 조명도 운영.",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/99/3560499_image2_1.jpg",
+    "officialUrl": "",
+    "lat": 36.5172,
+    "lng": 126.9128
+  },
+  {
+    "id": "curated-hueree",
+    "name": "휴애리 자연생활공원",
+    "region": "제주특별자치도",
+    "city": "서귀포시",
+    "category": "자연",
+    "description": "사계절 꽃축제로 유명한 자연생태공원. 6~7월 수국, 봄 매화·유채, 가을 핑크뮬리·동백 등 시즌마다 다른 풍경. 흑돼지 먹이주기 체험도 인기.",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/08/3424708_image2_1.jpg",
+    "officialUrl": "https://hueree.com/",
+    "lat": 33.3478,
+    "lng": 126.7236
+  },
+  {
+    "id": "curated-docho-hydrangea",
+    "name": "신안 도초도 수국공원",
+    "region": "전라남도",
+    "city": "신안군",
+    "category": "자연",
+    "description": "\"수국 섬\" 도초도의 핵심 명소. 7만 그루 수국이 산책로 양쪽으로 끝없이 이어져 보랏빛 터널을 이룬다. 6월 말~7월 초 절정.",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/28/3558428_image2_1.jpg",
+    "officialUrl": "",
+    "lat": 34.6989,
+    "lng": 125.9711
+  },
+  {
+    "id": "curated-cheollipo-arboretum",
+    "name": "태안 천리포수목원",
+    "region": "충청남도",
+    "city": "태안군",
+    "category": "자연",
+    "description": "국제수목학회 인증 \"세계의 아름다운 수목원\" 12호. 1만 5천여 종의 식물 중 수국·동백·목련 컬렉션이 특히 유명. 6월 수국 시즌 절경.",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/44/2639444_image2_1.jpg",
+    "officialUrl": "https://www.chollipo.org/",
+    "lat": 36.8081,
+    "lng": 126.1481
+  },
+  {
+    "id": "curated-yangpyeong-deulkkot",
+    "name": "양평 들꽃수목원",
+    "region": "경기도",
+    "city": "양평군",
+    "category": "자연",
+    "description": "남한강변에 자리한 야생화·들꽃 전문 수목원. 6월 수국·연꽃, 봄 야생화, 가을 단풍이 시즌별 볼거리. 가족 나들이·산책 코스로 인기.",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/26/3588926_image2_1.png",
+    "officialUrl": "https://www.nemunimo.co.kr/",
+    "lat": 37.4922,
+    "lng": 127.4906
   }
 ]

@@ -134,7 +134,18 @@
       "수국",
       "퍼플"
     ],
-    "ids": []
+    "ids": [
+      "curated-goseong-lavender-farm",
+      "curated-pyeongchang-herbnara",
+      "curated-yugu-saekdong-hydrangea",
+      "curated-hueree",
+      "curated-docho-hydrangea",
+      "curated-cheollipo-arboretum",
+      "curated-yangpyeong-deulkkot",
+      "curated-camellia-hill",
+      "curated-anseong-farmland",
+      "curated-oedo-botania"
+    ]
   },
   {
     "id": "beach",
@@ -241,14 +252,29 @@
       "국립공원"
     ],
     "ids": [
-      "curated-np-jirisan", "curated-np-gyeongju", "curated-np-gyeryongsan",
-      "curated-np-hallyeohaesang", "curated-np-seoraksan", "curated-np-songnisan",
-      "curated-np-hallasan", "curated-np-naejangsan", "curated-np-gayasan",
-      "curated-np-deogyusan", "curated-np-odaesan", "curated-np-juwangsan",
-      "curated-np-taeanhaean", "curated-np-dadohaehaesang", "curated-np-bukhansan",
-      "curated-np-chiaksan", "curated-np-woraksan", "curated-np-sobaeksan",
-      "curated-np-byeonsanbando", "curated-np-wolchulsan", "curated-np-mudeungsan",
-      "curated-np-taebaeksan", "curated-np-palgongsan"
+      "curated-np-jirisan",
+      "curated-np-gyeongju",
+      "curated-np-gyeryongsan",
+      "curated-np-hallyeohaesang",
+      "curated-np-seoraksan",
+      "curated-np-songnisan",
+      "curated-np-hallasan",
+      "curated-np-naejangsan",
+      "curated-np-gayasan",
+      "curated-np-deogyusan",
+      "curated-np-odaesan",
+      "curated-np-juwangsan",
+      "curated-np-taeanhaean",
+      "curated-np-dadohaehaesang",
+      "curated-np-bukhansan",
+      "curated-np-chiaksan",
+      "curated-np-woraksan",
+      "curated-np-sobaeksan",
+      "curated-np-byeonsanbando",
+      "curated-np-wolchulsan",
+      "curated-np-mudeungsan",
+      "curated-np-taebaeksan",
+      "curated-np-palgongsan"
     ]
   },
   {
@@ -268,10 +294,15 @@
       "야경"
     ],
     "ids": [
-      "curated-namsan-tower", "curated-lotteworld-tower", "curated-ddp",
-      "curated-busan-tower", "curated-songdo-cablecar",
-      "curated-hangang-banpo", "curated-gwangalli-beach",
-      "curated-songdo-central-park", "curated-saeyeongyo",
+      "curated-namsan-tower",
+      "curated-lotteworld-tower",
+      "curated-ddp",
+      "curated-busan-tower",
+      "curated-songdo-cablecar",
+      "curated-hangang-banpo",
+      "curated-gwangalli-beach",
+      "curated-songdo-central-park",
+      "curated-saeyeongyo",
       "curated-tongyeong-cablecar"
     ]
   },
