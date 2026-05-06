@@ -6,7 +6,7 @@
     "city": "통영시",
     "category": "체험",
     "description": "통영의 항구가 한눈에 내려다보이는 언덕 마을. 골목마다 화가들이 그린 벽화와 작은 카페·공방이 있어 천천히 걸으며 사진 찍기 좋다. 강구안 야경이 아름다운 저녁 시간 추천.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/47/2731147_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/55/4041955_image2_1.jpg",
     "officialUrl": "https://www.utour.go.kr/",
     "lat": 34.8455,
     "lng": 128.4286
@@ -18,7 +18,7 @@
     "city": "군산시",
     "category": "체험",
     "description": "옛 신문용지 공장으로 가던 좁은 철길과 그 옆에 다닥다닥 붙은 옛 집들이 그대로 남아있는 마을. 7080년대 감성의 사진 명소로 떠오르며 추억의 간식·문구점이 늘어섰다.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/82/2670582_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/16/4059016_image2_1.jpg",
     "officialUrl": "https://www.gunsan.go.kr/tour",
     "lat": 35.9831,
     "lng": 126.7202
@@ -30,7 +30,7 @@
     "city": "구례군",
     "category": "자연",
     "description": "한국 최초의 국립공원(1967). 천왕봉(1915m)의 일출과 노고단의 운해, 5개 시·군에 걸친 광활한 산세. 종주 코스로 유명.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Korea-Mountain-Jirisan-15.jpg/960px-Korea-Mountain-Jirisan-15.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/51/4008951_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020084",
     "lat": 35.3372,
     "lng": 127.7308
@@ -42,7 +42,7 @@
     "city": "경주시",
     "category": "역사",
     "description": "도시 전체가 박물관인 한국 유일의 사적형 국립공원. 토함산·남산의 마애불과 신라 천년의 불교 문화 유적.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/1/19/%EA%B2%BD%EC%A3%BC%EA%B5%AD%EB%A6%BD%EA%B3%B5%EC%9B%90.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/29/3535529_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020019",
     "lat": 35.8347,
     "lng": 129.2189
@@ -54,7 +54,7 @@
     "city": "공주시",
     "category": "자연",
     "description": "충남의 영산. 천황봉·연천봉의 부드러운 능선과 동학사·갑사 같은 고찰이 어우러진다. 대전·공주 도심에서 가까움.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Mount_Gyeryong_from_Jang-gun_peak.jpg/960px-Mount_Gyeryong_from_Jang-gun_peak.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/73/3509273_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020018",
     "lat": 36.3454,
     "lng": 127.2128
@@ -78,7 +78,7 @@
     "city": "속초시",
     "category": "자연",
     "description": "남한 3대 명산. 공룡능선·천불동 계곡·대청봉(1708m)의 사계절 절경. 가을 단풍과 겨울 설경이 특히 유명.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Korea_Seoraksan.jpg/960px-Korea_Seoraksan.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/45/3505945_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020087",
     "lat": 38.1196,
     "lng": 128.4654
@@ -90,7 +90,7 @@
     "city": "보은군",
     "category": "자연",
     "description": "법주사를 품은 충북의 명산. 문장대·천황봉의 기암 능선과 정이품송, 가을 단풍이 일품.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/46/4010546_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/27/3574227_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020014",
     "lat": 36.5359,
     "lng": 127.8732
@@ -102,7 +102,7 @@
     "city": "서귀포시",
     "category": "자연",
     "description": "남한 최고봉(1947m). 백록담 분화구와 한라산 고유 식생, 사라지지 않은 화산섬의 심장. 사계절 모두 다른 풍경.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/KOCIS_Halla_Mountain_in_Jeju-do_%286387785543%29.jpg/960px-KOCIS_Halla_Mountain_in_Jeju-do_%286387785543%29.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/32/3034532_image2_1.jpg",
     "officialUrl": "https://www.jeju.go.kr/hallasan",
     "lat": 33.3617,
     "lng": 126.5292
@@ -126,7 +126,7 @@
     "city": "합천군",
     "category": "자연",
     "description": "팔만대장경의 해인사를 품은 영산. 상왕봉·우두봉의 화강암 봉우리와 홍류동 계곡.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/41/4010241_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/53/2748053_image2_1.JPG",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020017",
     "lat": 35.8217,
     "lng": 128.1185
@@ -138,7 +138,7 @@
     "city": "무주군",
     "category": "자연",
     "description": "주능선 산행과 무주리조트 곤돌라가 결합된 가족 친화 명산. 향적봉(1614m) 정상의 운해와 봄 야생화·겨울 상고대.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/88/3040088_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/71/1604171_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020042",
     "lat": 35.8624,
     "lng": 127.7458
@@ -150,7 +150,7 @@
     "city": "평창군",
     "category": "자연",
     "description": "노송과 전나무 숲의 영산. 월정사 전나무길과 상원사·비로봉(1563m)의 야생화. 영동·영서를 잇는 깊은 산세.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/82/3549482_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/80/3534880_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020082",
     "lat": 37.7944,
     "lng": 128.5435
@@ -222,7 +222,7 @@
     "city": "제천시",
     "category": "자연",
     "description": "충주호 위로 솟은 영봉(1097m). 단양팔경과 어우러진 산수, 송계계곡·미륵리 사지가 함께 있는 깊은 충북 산세.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/17/3494917_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/14/2798514_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020015",
     "lat": 36.883,
     "lng": 128.1131
@@ -234,7 +234,7 @@
     "city": "단양군",
     "category": "자연",
     "description": "비로봉(1439m)의 철쭉과 일출. 영주 부석사·풍기 인삼과 함께 코스를 짜기 좋은 백두대간의 명산.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/08/3571608_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/07/1560707_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020013",
     "lat": 36.9583,
     "lng": 128.4844
@@ -258,7 +258,7 @@
     "city": "영암군",
     "category": "자연",
     "description": "남도의 호남 알프스. 천황봉·구정봉의 화강암 봉우리와 구름다리·도갑사. 월출산 일출이 일품.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/37/3587037_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/98/1009498_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020056",
     "lat": 34.7733,
     "lng": 126.6917
@@ -282,7 +282,7 @@
     "city": "태백시",
     "category": "자연",
     "description": "백두대간의 정점. 천제단의 새해 일출과 주목 군락지·당골계곡. 겨울철 눈꽃 산행으로 유명.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Taebaeksan_2016_12_30_winter.jpg/960px-Taebaeksan_2016_12_30_winter.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/73/4039473_image2_1.jpg",
     "officialUrl": "https://www.knps.or.kr/portal/main/contents.do?menuNo=7020091",
     "lat": 37.0972,
     "lng": 128.9156
@@ -378,7 +378,7 @@
     "city": "진안군",
     "category": "자연",
     "description": "두 봉우리가 말 귀 모양인 진안의 명물. 탑사의 기묘한 돌탑들과 봄 벚꽃.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/66/3540866_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/60/1605760_image2_1.jpg",
     "officialUrl": "https://maisan.jinan.go.kr/",
     "lat": 35.7625,
     "lng": 127.4192
@@ -426,7 +426,7 @@
     "city": "고창군",
     "category": "자연",
     "description": "고창의 명산. 도솔암 마애불과 늦가을 꽃무릇 군락지가 절경. 봄 동백숲도 유명.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/%EC%84%A0%EC%9A%B4%EC%82%B0.jpg/960px-%EC%84%A0%EC%9A%B4%EC%82%B0.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/98/3018298_image2_1.jpg",
     "officialUrl": "https://www.gochang.go.kr/tour",
     "lat": 35.4956,
     "lng": 126.5675
@@ -438,7 +438,7 @@
     "city": "장흥군",
     "category": "자연",
     "description": "장흥의 호남 5대 명산. 가을 억새 능선과 봄 동백 명소로 유명. 정상에서 다도해 조망이 압도적.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/42/2704942_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/74/3351074_image2_1.jpg",
     "officialUrl": "https://www.jangheung.go.kr/tour",
     "lat": 34.5697,
     "lng": 126.9647
@@ -450,7 +450,7 @@
     "city": "가평군",
     "category": "자연",
     "description": "가평의 깊은 숲. 산행·캠핑·계곡이 어우러져 수도권 자연인들의 안식처로 사랑받음.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/74/1591274_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/82/3475682_image2_1.JPG",
     "officialUrl": "https://www.gp.go.kr/tour",
     "lat": 37.8861,
     "lng": 127.4828
@@ -546,7 +546,7 @@
     "city": "동해시",
     "category": "자연",
     "description": "두타산의 거대 화강암 절벽. 베틀바위 산성길과 무릉계곡의 짧은 트레킹 코스.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/99/3555099_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/59/2676059_image2_1.jpg",
     "officialUrl": "",
     "lat": 37.4583,
     "lng": 129.0658
@@ -558,7 +558,7 @@
     "city": "속초시",
     "category": "자연",
     "description": "설악산의 거대 화강암 봉우리. 흔들바위에서 시작해 808계단을 올라 만나는 절경.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/53/2792353_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/91/3494891_image2_1.jpg",
     "officialUrl": "",
     "lat": 38.1683,
     "lng": 128.4831
@@ -582,7 +582,7 @@
     "city": "중구",
     "category": "역사",
     "description": "조선 말기 황궁. 한국 전통 건축과 서양식 석조전이 공존하는 도심 궁궐. 가을 단풍 명소.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/44/3584644_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/04/2991504_image2_1.jpg",
     "officialUrl": "https://www.deoksugung.go.kr/",
     "lat": 37.5658,
     "lng": 126.9751
@@ -594,7 +594,7 @@
     "city": "종로구",
     "category": "역사",
     "description": "조선 왕실 신주를 모신 사당. 유네스코 세계유산. 단아한 정전 건축미.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/15/3535215_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/58/4057758_image2_1.jpg",
     "officialUrl": "https://jm.cha.go.kr/",
     "lat": 37.5747,
     "lng": 126.9942
@@ -618,7 +618,7 @@
     "city": "용산구",
     "category": "건축",
     "description": "남산 정상의 전망탑. 360도 서울 야경 명소. 케이블카와 산책로 모두 인기.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/09/3506309_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/25/3539625_image2_1.jpg",
     "officialUrl": "https://www.seoultower.co.kr/",
     "lat": 37.5512,
     "lng": 126.9882
@@ -642,7 +642,7 @@
     "city": "송파구",
     "category": "휴양",
     "description": "1988 올림픽 부지의 광활한 공원. 평화의 문·외로운 나무·들꽃마루가 사진 명소.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/59/3527359_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/78/3029078_image2_1.jpg",
     "officialUrl": "https://www.olympicpark.co.kr/",
     "lat": 37.5202,
     "lng": 127.1217
@@ -678,7 +678,7 @@
     "city": "원주시",
     "category": "역사",
     "description": "원주 부론면 옛 법천사 터. 고려 석탑의 최고 걸작 지광국사현묘탑이 본래 자리에 있다.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/96/3375196_image2_1.JPG",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/87/3045487_image2_1.jpg",
     "officialUrl": "",
     "lat": 37.2767,
     "lng": 127.8533
@@ -690,7 +690,7 @@
     "city": "원주시",
     "category": "역사",
     "description": "원주 부론면의 신라·고려 폐사지. 단정한 삼층석탑과 평화로운 옛 절터의 정취.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/18/3375218_image2_1.JPG",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/87/3045487_image2_1.jpg",
     "officialUrl": "",
     "lat": 37.29,
     "lng": 127.8417
@@ -714,7 +714,7 @@
     "city": "안성시",
     "category": "체험",
     "description": "유럽풍 목장 테마파크. 양·말·소를 만나는 가족 체험 공간과 광활한 호밀밭.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/44/4056644_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/46/3512146_image2_1.jpg",
     "officialUrl": "https://nhasfarmland.com/",
     "lat": 37.0167,
     "lng": 127.2419
@@ -786,7 +786,7 @@
     "city": "제천시",
     "category": "체험",
     "description": "청풍호와 비봉산 정상을 잇는 케이블카(2.3km). 충주호의 푸른 물결을 한눈에.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/88/2793788_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/46/3356546_image2_1.jpg",
     "officialUrl": "https://cheongpungcablecar.com/",
     "lat": 37.0064,
     "lng": 128.1947
@@ -822,7 +822,7 @@
     "city": "천안시",
     "category": "역사",
     "description": "한국 독립운동사를 한눈에 보는 기념관. 7개 전시관과 광활한 야외 부지.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/21/3450021_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/23/3577223_image2_1.jpg",
     "officialUrl": "https://www.i815.or.kr/",
     "lat": 36.7708,
     "lng": 127.2031
@@ -858,7 +858,7 @@
     "city": "청주시",
     "category": "역사",
     "description": "청주의 백제·삼국시대 산성. 4.2km 성곽 둘레길과 도심 야경.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/74/3071074_image2_1.JPG",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/74/2793374_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.6386,
     "lng": 127.5333
@@ -894,7 +894,7 @@
     "city": "서산시",
     "category": "역사",
     "description": "서산의 전통 한옥. 봄에 노란 수선화 군락이 마당을 가득 채우는 사진 명소.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/37/2648837_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/09/4042109_image2_1.jpeg",
     "officialUrl": "",
     "lat": 36.7472,
     "lng": 126.4633
@@ -918,7 +918,7 @@
     "city": "서산시",
     "category": "역사",
     "description": "백제의 미소로 불리는 국보. 절벽에 새겨진 부드러운 미소의 삼존 불상.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/92/3055092_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/11/3560111_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.7647,
     "lng": 126.5847
@@ -942,7 +942,7 @@
     "city": "서산시",
     "category": "역사",
     "description": "왕벚꽃 명소 천년 사찰. 굽은 기둥의 심검당과 봄꽃이 어우러진 경관.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/70/3560170_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/46/3560046_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.7414,
     "lng": 126.5942
@@ -966,7 +966,7 @@
     "city": "공주시",
     "category": "역사",
     "description": "백제 무령왕릉. 유네스코 세계유산 백제역사유적지구의 핵심 사적.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/99/3560499_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/38/3534838_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.4642,
     "lng": 127.1117
@@ -978,7 +978,7 @@
     "city": "공주시",
     "category": "역사",
     "description": "백제 도읍지를 둘러싼 산성. 금강을 내려다보는 성곽길과 야간 조명.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/74/3038474_image2_1.JPG",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/32/2929432_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.4644,
     "lng": 127.1239
@@ -1014,7 +1014,7 @@
     "city": "유성구",
     "category": "자연",
     "description": "계룡산 자락의 계곡. 수통골탐방지원센터에서 시작하는 가족 트레킹 코스.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/50/2661850_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/56/2914356_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.3306,
     "lng": 127.3392
@@ -1038,7 +1038,7 @@
     "city": "중구",
     "category": "체험",
     "description": "동물원·놀이공원·식물원이 한자리에. 가족 체험과 야경.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/00/4044500_image2_1.JPG",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/84/3513184_image2_1.jpg",
     "officialUrl": "https://www.oworld.kr/",
     "lat": 36.29,
     "lng": 127.3833
@@ -1086,7 +1086,7 @@
     "city": "서구",
     "category": "자연",
     "description": "메타세쿼이아 숲의 자연휴양림. 스카이워크와 출렁다리로 숲을 산책.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/42/3569842_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/49/2777049_image2_1.jpg",
     "officialUrl": "https://www.daejeon.go.kr/forest",
     "lat": 36.2533,
     "lng": 127.3014
@@ -1134,7 +1134,7 @@
     "city": "논산시",
     "category": "체험",
     "description": "탑정호를 가로지르는 600m 출렁다리. 한국 최장급, 호수 한가운데서의 산책.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/20/3339320_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/81/2749981_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.1422,
     "lng": 127.1306
@@ -1146,7 +1146,7 @@
     "city": "익산시",
     "category": "역사",
     "description": "백제 무왕 때 창건한 거대 사찰의 폐사지. 동탑·서탑(국보)과 광활한 절터.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/57/3533757_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/79/3361079_image2_1.JPG",
     "officialUrl": "",
     "lat": 36.0114,
     "lng": 127.0303
@@ -1170,7 +1170,7 @@
     "city": "익산시",
     "category": "역사",
     "description": "백제 무왕의 궁궐터. 5층석탑(국보)과 광활한 사지.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/90/2514990_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/13/3564113_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.9775,
     "lng": 127.0467
@@ -1194,7 +1194,7 @@
     "city": "서천군",
     "category": "체험",
     "description": "한국 생태계를 한자리에. 5대 기후 식생과 동물을 모은 거대 박물관 에코리움.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/34/3536334_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/06/3483706_image2_1.jpg",
     "officialUrl": "https://www.nie.re.kr/",
     "lat": 36.0489,
     "lng": 126.6925
@@ -1206,7 +1206,7 @@
     "city": "진안군",
     "category": "자연",
     "description": "진안 부귀면의 메타세쿼이아 가로수길. 영화 같은 직선 도로의 인생샷.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/66/3520666_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/16/2776416_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.7892,
     "lng": 127.4072
@@ -1266,7 +1266,7 @@
     "city": "해남군",
     "category": "역사",
     "description": "두륜산 천년 고찰. 일주문에서 경내까지 길게 이어지는 숲길과 다실 명소.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/62/3526462_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/24/1564424_image2_1.jpg",
     "officialUrl": "https://www.daeheungsa.co.kr/",
     "lat": 34.4775,
     "lng": 126.6219
@@ -1278,7 +1278,7 @@
     "city": "강진군",
     "category": "역사",
     "description": "정약용이 18년 유배 동안 머문 초당. 동백숲과 약천이 함께 있는 사색의 공간.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Dasanchodang_%28%E8%8C%B6%E5%B1%B1%E8%8D%89%E5%A0%82%29_-_panoramio.jpg/960px-Dasanchodang_%28%E8%8C%B6%E5%B1%B1%E8%8D%89%E5%A0%82%29_-_panoramio.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/63/3537763_image2_1.jpg",
     "officialUrl": "",
     "lat": 34.5547,
     "lng": 126.7886
@@ -1290,7 +1290,7 @@
     "city": "완도군",
     "category": "역사",
     "description": "고산 윤선도가 13년 머문 보길도 부용동. 세연정·곡수당의 정원 절경.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/73/4001873_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/56/214556_image2_1.jpg",
     "officialUrl": "",
     "lat": 34.1419,
     "lng": 126.5919
@@ -1326,7 +1326,7 @@
     "city": "강진군",
     "category": "역사",
     "description": "시인 김영랑의 생가. 모란꽃 시비와 한옥 정원의 단아함.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Replace_this_image_male-ko.svg/960px-Replace_this_image_male-ko.svg.png",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/12/3558412_image2_1.jpg",
     "officialUrl": "",
     "lat": 34.6406,
     "lng": 126.7672
@@ -1386,7 +1386,7 @@
     "city": "순천시",
     "category": "역사",
     "description": "조계산 천년 고찰. 한국 3대 사찰 중 승보종찰. 16국사의 본찰.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/55/3452455_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/58/4002258_image2_1.jpg",
     "officialUrl": "https://www.songgwangsa.org/",
     "lat": 34.9928,
     "lng": 127.2997
@@ -1410,7 +1410,7 @@
     "city": "순천시",
     "category": "역사",
     "description": "순천 송광면의 옛 정자. 계곡과 어우러진 단아한 풍경의 명승.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/92/3545492_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/24/2795924_image2_1.jpg",
     "officialUrl": "",
     "lat": 34.9853,
     "lng": 127.4442
@@ -1434,7 +1434,7 @@
     "city": "하동군",
     "category": "체험",
     "description": "지리산 산기슭의 한민족 신화 테마 공간. 태초 한민족의 영적 공간을 재현한 야외 박물관.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/25/3535225_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/12/2790812_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.2883,
     "lng": 127.7067
@@ -1470,7 +1470,7 @@
     "city": "안동시",
     "category": "역사",
     "description": "유네스코 세계유산. 낙동강이 한눈에 들어오는 만대루의 단정한 정원.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/37/3585437_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/02/2654202_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.5394,
     "lng": 128.5283
@@ -1482,7 +1482,7 @@
     "city": "안동시",
     "category": "역사",
     "description": "유네스코 세계유산. 낙동강이 휘감는 전통 한옥마을. 하회별신굿과 부용대.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/33/3542033_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/67/3585467_image2_1.jpg",
     "officialUrl": "https://www.hahoe.or.kr/",
     "lat": 36.5394,
     "lng": 128.517
@@ -1674,7 +1674,7 @@
     "city": "합천군",
     "category": "자연",
     "description": "5월 철쭉으로 산자락을 분홍빛으로 물들이는 영남의 명산. 일출과 운해 명소.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/32/3525632_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/96/2910196_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.5278,
     "lng": 128.0094
@@ -1698,7 +1698,7 @@
     "city": "경주시",
     "category": "역사",
     "description": "감은사 절터에 남은 동·서 삼층석탑(국보). 통일신라 석탑의 정수.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/%EA%B0%90%EC%9D%80%EC%82%AC%EC%A7%80_blue_sky.jpg/960px-%EA%B0%90%EC%9D%80%EC%82%AC%EC%A7%80_blue_sky.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/34/3542534_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.7672,
     "lng": 129.4806
@@ -1746,7 +1746,7 @@
     "city": "남구",
     "category": "자연",
     "description": "부산 야경 1번지. 광안대교·해운대를 한눈에 보는 정상 봉수대.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Landscape_of_Busan_from_Hwangryeongsan.jpg/960px-Landscape_of_Busan_from_Hwangryeongsan.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/50/2732750_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.1411,
     "lng": 129.0894
@@ -1794,7 +1794,7 @@
     "city": "거제시",
     "category": "자연",
     "description": "거제 남쪽 해상의 두 봉우리 섬. 십자동굴·사자바위 같은 기암 절경.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/KOCIS_Korea_Haegeumgang_08_%2810011695603%29.jpg/960px-KOCIS_Korea_Haegeumgang_08_%2810011695603%29.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/48/1981448_image2_1.jpg",
     "officialUrl": "",
     "lat": 34.7244,
     "lng": 128.6822
@@ -1818,7 +1818,7 @@
     "city": "남해군",
     "category": "자연",
     "description": "가천마을의 가파른 비탈에 층층이 쌓은 다랑이논. 한국 농촌 풍경의 정수.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/38/3501238_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/25/2819525_image2_1.jpg",
     "officialUrl": "",
     "lat": 34.7081,
     "lng": 127.9053
@@ -1854,7 +1854,7 @@
     "city": "종로구",
     "category": "역사",
     "description": "유네스코 세계유산. 조선 왕실의 별궁이자 가장 자연 친화적인 궁궐. 후원(비원) 산책이 백미.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/85/1568385_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/47/2031847_image2_1.jpg",
     "officialUrl": "https://www.cdg.go.kr/",
     "lat": 37.5825,
     "lng": 126.9912
@@ -1866,7 +1866,7 @@
     "city": "수원시",
     "category": "역사",
     "description": "유네스코 세계유산. 정조의 효심으로 축조된 5.7km 성곽. 야간 조명과 화성행궁 함께 코스.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/36/3500936_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/87/4060887_image2_1.jpg",
     "officialUrl": "https://www.swcf.or.kr/",
     "lat": 37.288,
     "lng": 127.0136
@@ -1890,7 +1890,7 @@
     "city": "양산시",
     "category": "역사",
     "description": "유네스코 세계유산 산사. 한국 3대 사찰 중 불보종찰. 부처님 진신사리를 모신 적멸보궁.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/85/3538985_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/25/3589825_image2_1.jpg",
     "officialUrl": "https://www.tongdosa.or.kr/",
     "lat": 35.4878,
     "lng": 129.0639
@@ -1950,7 +1950,7 @@
     "city": "화순군",
     "category": "역사",
     "description": "유네스코 세계유산. 596기의 거대 고인돌 밀집지. 채석장 흔적까지 함께 남아 있다.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Korea-Ganghwado-Dolmen-01.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/35/3534435_image2_1.jpg",
     "officialUrl": "",
     "lat": 34.9869,
     "lng": 126.9619
@@ -1962,7 +1962,7 @@
     "city": "남양주시",
     "category": "역사",
     "description": "유네스코 세계유산 조선왕릉. 세조와 정희왕후의 능. 광릉숲은 유네스코 생물권보전지역.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/%EA%B5%AC%EB%A6%AC_%EB%8F%99%EA%B5%AC%EB%A6%89_%ED%98%84%EB%A6%89_%EC%A0%84%EA%B2%BD%28%ED%95%AD%EA%B3%B5%29.jpg/960px-%EA%B5%AC%EB%A6%AC_%EB%8F%99%EA%B5%AC%EB%A6%89_%ED%98%84%EB%A6%89_%EC%A0%84%EA%B2%BD%28%ED%95%AD%EA%B3%B5%29.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/73/3466173_image2_1.JPG",
     "officialUrl": "https://royaltombs.cha.go.kr/",
     "lat": 37.7497,
     "lng": 127.1597
@@ -2022,7 +2022,7 @@
     "city": "영도구",
     "category": "체험",
     "description": "절벽 위 골목 마을. 영화 '변호인' 촬영지. 송도가 한눈에 보이는 해안 산책로.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Huinnyeoul_culture_village%2C_Busan_on_October_25th%2C_2019.jpg/960px-Huinnyeoul_culture_village%2C_Busan_on_October_25th%2C_2019.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/77/4018677_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.0867,
     "lng": 129.0461
@@ -2046,7 +2046,7 @@
     "city": "거제시",
     "category": "자연",
     "description": "거제 도장포의 푸른 언덕. 풍차와 푸른 바다의 인생샷 명소. 신선대와 함께.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/2014%EB%85%84_5%EC%9B%94_25%EC%9D%BC_%EA%B2%BD%EC%83%81%EB%82%A8%EB%8F%84_%EA%B1%B0%EC%A0%9C%EC%8B%9C_%EB%B0%94%EB%9E%8C%EC%9D%98%EC%96%B8%EB%8D%9517.jpg/960px-2014%EB%85%84_5%EC%9B%94_25%EC%9D%BC_%EA%B2%BD%EC%83%81%EB%82%A8%EB%8F%84_%EA%B1%B0%EC%A0%9C%EC%8B%9C_%EB%B0%94%EB%9E%8C%EC%9D%98%EC%96%B8%EB%8D%9517.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/38/3521038_image2_1.jpg",
     "officialUrl": "",
     "lat": 34.7806,
     "lng": 128.6975
@@ -2070,7 +2070,7 @@
     "city": "함양군",
     "category": "자연",
     "description": "한국에서 가장 오래된 인공 숲. 신라 말 최치원이 조성한 천년 숲. 가을 단풍 절경.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamyang_Sangrim.JPG/960px-Hamyang_Sangrim.JPG",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/28/3590228_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.5167,
     "lng": 127.7281
@@ -2082,7 +2082,7 @@
     "city": "산청군",
     "category": "체험",
     "description": "허준과 동의보감의 발상지를 테마로 한 한방 체험촌. 한방 박물관과 약초 정원.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/46/3458946_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/53/1929553_image2_1.jpg",
     "officialUrl": "https://www.donguibogamvill.com/",
     "lat": 35.4239,
     "lng": 127.7444
@@ -2094,7 +2094,7 @@
     "city": "남해군",
     "category": "체험",
     "description": "1960년대 독일 파견 광부·간호사들이 귀국 후 정착한 마을. 독일풍 가옥과 옥토버페스트.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/38/3501238_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/99/2484899_image2_1.jpg",
     "officialUrl": "",
     "lat": 34.7975,
     "lng": 127.9447
@@ -2106,7 +2106,7 @@
     "city": "통영시",
     "category": "자연",
     "description": "한려해상의 461m 미륵산을 잇는 1.97km 케이블카. 정상에서 다도해의 절경.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/37/1899737_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/55/4041955_image2_1.jpg",
     "officialUrl": "https://www.ttdc.kr/",
     "lat": 34.8419,
     "lng": 128.4189
@@ -2118,7 +2118,7 @@
     "city": "동구",
     "category": "자연",
     "description": "신라 문무왕비의 전설이 깃든 해안 공원. 100년 송림과 출렁다리·등대.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/15/3057715_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/39/4042839_image2_1.png",
     "officialUrl": "",
     "lat": 35.4961,
     "lng": 129.4322
@@ -2142,7 +2142,7 @@
     "city": "영주시",
     "category": "역사",
     "description": "내성천이 마을을 휘감아 섬처럼 떠 있는 전통 한옥마을. 외나무다리가 명물.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/55/3563955_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/49/2534049_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.7775,
     "lng": 128.6461
@@ -2154,7 +2154,7 @@
     "city": "영덕군",
     "category": "자연",
     "description": "강구항부터 고래불해변까지 64km 동해안 도보 코스. 등대·해안 절벽·솔숲.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/07/3042707_image2_1.JPG",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/41/3576441_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.4031,
     "lng": 129.4128
@@ -2166,7 +2166,7 @@
     "city": "포항시",
     "category": "자연",
     "description": "한반도에서 가장 동쪽. 새천년 일출 명소이자 '상생의 손' 조형물.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/98/3410998_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/41/682341_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.0772,
     "lng": 129.565
@@ -2190,7 +2190,7 @@
     "city": "영양군",
     "category": "역사",
     "description": "조선 시대 한옥 집성촌. 음식디미방으로 알려진 옛 양반가의 음식 문화 체험.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/24/3531124_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/27/3531127_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.6647,
     "lng": 129.1219
@@ -2202,7 +2202,7 @@
     "city": "중구",
     "category": "체험",
     "description": "한국 최초의 차이나타운. 짜장면의 발상지. 동화마을·자유공원과 함께 산책 코스.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/76/2848776_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/25/3530025_image2_1.jpg",
     "officialUrl": "https://www.ichinatown.or.kr/",
     "lat": 37.4744,
     "lng": 126.6206
@@ -2214,7 +2214,7 @@
     "city": "강화군",
     "category": "역사",
     "description": "석모도의 천년 사찰. 눈썹바위 마애석불좌상과 서해 일몰 절경.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/77/3523577_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/51/3351651_image2_1.jpg",
     "officialUrl": "https://www.bomunsa.me/",
     "lat": 37.6633,
     "lng": 126.3567
@@ -2226,7 +2226,7 @@
     "city": "춘천시",
     "category": "자연",
     "description": "북한강의 작은 섬. 메타세쿼이아 길과 자작나무 숲. 사계절 인생샷 명소.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/51/4031651_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/52/3561552_image2_1.jpg",
     "officialUrl": "https://namisum.com/",
     "lat": 37.7906,
     "lng": 127.5253
@@ -2262,7 +2262,7 @@
     "city": "광명시",
     "category": "체험",
     "description": "옛 광산을 문화관광지로 재탄생. 와인동굴·황금길·미디어아트가 어우러진 체험 공간.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/73/2649973_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/96/3551196_image2_1.png",
     "officialUrl": "https://www.gm.go.kr/cv/",
     "lat": 37.4503,
     "lng": 126.8631
@@ -2286,7 +2286,7 @@
     "city": "인제군",
     "category": "자연",
     "description": "원대리의 70만 그루 자작나무 숲. 하얀 줄기가 빼곡한 이국적 풍경. 겨울 설경 일품.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/70/2743770_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/43/3340443_image2_1.jpg",
     "officialUrl": "",
     "lat": 38.1242,
     "lng": 128.2486
@@ -2298,7 +2298,7 @@
     "city": "양양군",
     "category": "자연",
     "description": "명승. 동해의 절벽 위 정자. 일출과 등대·푸른 바다가 한 폭의 그림.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/02/3518302_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/49/3518249_image2_1.jpg",
     "officialUrl": "",
     "lat": 38.0533,
     "lng": 128.7222
@@ -2310,7 +2310,7 @@
     "city": "삼척시",
     "category": "자연",
     "description": "동양 최대급 석회 동굴. 6.5km 길이 중 1.6km 공개. 거대 종유석과 돌기둥.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/67/4045567_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/80/3394080_image2_1.JPG",
     "officialUrl": "",
     "lat": 37.2756,
     "lng": 129.0531
@@ -2322,7 +2322,7 @@
     "city": "단양군",
     "category": "자연",
     "description": "명승. 남한강 위에 솟은 세 봉우리. 정도전이 사랑한 단양 8경의 으뜸.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/72/3536072_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/81/3544781_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.9842,
     "lng": 128.3625
@@ -2334,7 +2334,7 @@
     "city": "단양군",
     "category": "자연",
     "description": "명승. 단양 8경 중 하나. 깎아지른 절벽이 그림 같은 단양천 풍경.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/43/2032243_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/68/3081068_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.9408,
     "lng": 128.3956
@@ -2346,7 +2346,7 @@
     "city": "청주시",
     "category": "역사",
     "description": "옛 대통령 별장. 대청호 옆 수려한 자연과 역사 전시. 역대 대통령 동상길.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/44/3502344_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/56/3552356_image2_1.JPG",
     "officialUrl": "https://chnam.chungbuk.go.kr/",
     "lat": 36.4778,
     "lng": 127.4692
@@ -2358,7 +2358,7 @@
     "city": "진천군",
     "category": "역사",
     "description": "고려시대 28칸 돌다리. 한국에서 가장 오래된 돌다리. 초평호 출렁다리와 함께 코스.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/38/3535438_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/26/4053626_image2_1.JPG",
     "officialUrl": "",
     "lat": 36.8347,
     "lng": 127.4583
@@ -2370,7 +2370,7 @@
     "city": "부여군",
     "category": "역사",
     "description": "유네스코 세계유산 백제역사유적지구. 백제 멸망의 전설 낙화암과 백마강의 비경.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/57/4023257_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/27/3563827_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.2767,
     "lng": 126.9117
@@ -2382,7 +2382,7 @@
     "city": "남원시",
     "category": "역사",
     "description": "춘향전의 무대. 조선 시대 누각과 정원의 정수. 명승으로 지정.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/19/3364019_image2_1.JPG",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/00/3517100_image2_1.jpg",
     "officialUrl": "https://www.gwanghallu.or.kr/",
     "lat": 35.4119,
     "lng": 127.3756
@@ -2394,7 +2394,7 @@
     "city": "부안군",
     "category": "자연",
     "description": "명승. 수만 권의 책을 쌓은 듯한 층암절벽. 변산반도의 대표 절경.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/83/2870383_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/86/3519886_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.6356,
     "lng": 126.4661
@@ -2418,7 +2418,7 @@
     "city": "보성군",
     "category": "자연",
     "description": "한국 최대 녹차밭. 계단식 녹차 능선과 삼나무 가로수길. 사계절 푸름.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/85/1936485_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/67/3553867_image2_1.jpg",
     "officialUrl": "https://www.dhdawon.com/",
     "lat": 34.7375,
     "lng": 127.0744
@@ -2430,7 +2430,7 @@
     "city": "해남군",
     "category": "자연",
     "description": "한반도 육지의 최남단. 땅끝탑·전망대와 다도해 일몰. 모노레일로 정상까지.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/62/3526462_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/06/3591506_image2_1.jpg",
     "officialUrl": "",
     "lat": 34.3022,
     "lng": 126.5617
@@ -2466,7 +2466,7 @@
     "city": "곡성군",
     "category": "체험",
     "description": "옛 전라선 폐선을 활용한 증기기관차 체험과 장미공원. 섬진강 자전거길도 함께.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/59/3550659_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/43/3026943_image2_1.jpg",
     "officialUrl": "https://www.gstrain.co.kr/",
     "lat": 35.2806,
     "lng": 127.2939
@@ -2490,7 +2490,7 @@
     "city": "담양군",
     "category": "역사",
     "description": "명승. 조선 최고의 민간 정원. 양산보가 조성한 자연과 어우러진 사색의 공간.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/74/3532174_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/13/3533213_image2_1.jpg",
     "officialUrl": "https://soswaewon.co.kr/",
     "lat": 35.2192,
     "lng": 126.9692
@@ -2502,7 +2502,7 @@
     "city": "순천시",
     "category": "자연",
     "description": "명승. 세계 5대 연안습지. 광활한 갈대밭과 흑두루미 도래지. 용산전망대 일몰.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/96/3573796_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/87/2798887_image2_1.JPG",
     "officialUrl": "https://www.suncheonbay.go.kr/",
     "lat": 34.8889,
     "lng": 127.5147
@@ -2514,7 +2514,7 @@
     "city": "남구",
     "category": "체험",
     "description": "광주의 근대 역사 골목. 100년 된 펭귄마을·양림교회·이장우 가옥의 벽화와 카페.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/42/3527342_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/37/3366737_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.1419,
     "lng": 126.9156
@@ -2526,7 +2526,7 @@
     "city": "영광군",
     "category": "자연",
     "description": "한국 최고의 일몰 드라이브 코스. 17km 해안도로와 노을전시관·칠산정.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/08/2877508_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/88/2716488_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.3236,
     "lng": 126.4119
@@ -2550,7 +2550,7 @@
     "city": "제주시",
     "category": "자연",
     "description": "성산항에서 배로 15분. 소가 누운 모양의 섬. 산호 모래 해변과 우도봉 트레킹.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/92/3527092_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/47/2870647_image2_1.jpg",
     "officialUrl": "",
     "lat": 33.5061,
     "lng": 126.9528
@@ -2610,7 +2610,7 @@
     "city": "서귀포시",
     "category": "자연",
     "description": "동양 유일의 바다로 직접 떨어지는 폭포. 23m 절벽에서 곧장 바다로.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/77/3384477_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/78/2665278_image2_1.jpg",
     "officialUrl": "",
     "lat": 33.2453,
     "lng": 126.5742
@@ -2634,7 +2634,7 @@
     "city": "예천군",
     "category": "자연",
     "description": "명승. 내성천이 350도 휘감아 도는 물돌이 마을. 비룡산 전망대에서 내려다보는 절경.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/47/3542647_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/71/3035971_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.6453,
     "lng": 128.3094
@@ -2646,7 +2646,7 @@
     "city": "종로구",
     "category": "체험",
     "description": "한국 전통 문화의 거리. 갤러리·전통찻집·공방과 쌈지길의 골목 즐기기.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/94/3540794_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/16/4043416_image2_1.jpg",
     "officialUrl": "",
     "lat": 37.5728,
     "lng": 126.9856
@@ -2670,7 +2670,7 @@
     "city": "종로구",
     "category": "휴양",
     "description": "도심 속 복원된 시내. 광화문에서 동대문까지 5.8km 산책로. 야경과 사계절.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/80/3083780_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/40/1570340_image2_1.jpg",
     "officialUrl": "",
     "lat": 37.5694,
     "lng": 126.9786
@@ -2682,7 +2682,7 @@
     "city": "거창군",
     "category": "자연",
     "description": "명승. 위천변의 거대 거북바위와 정자들. 사계절 계곡 산책 명소.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/04/3020304_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/18/2720618_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.6919,
     "lng": 127.8628
@@ -2694,7 +2694,7 @@
     "city": "서초구",
     "category": "자연",
     "description": "서울을 가로지르는 한강 변의 공원. 반포지구는 달빛무지개분수와 세빛섬 야경이 유명하다. 자전거·돗자리·치맥의 성지.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/91/3509791_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/53/3515053_image2_1.jpg",
     "officialUrl": "https://hangang.seoul.go.kr/",
     "lat": 37.5113,
     "lng": 126.9956
@@ -2706,7 +2706,7 @@
     "city": "성동구",
     "category": "자연",
     "description": "도심 속 거대한 도시공원. 사슴이 사는 생태숲, 곤충식물원, 가족 단위 산책 코스가 인기. 주변 성수동 카페거리와 함께 즐기기 좋다.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/17/3442117_image2_1.JPG",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/33/3444633_image2_1.jpg",
     "officialUrl": "https://parks.seoul.go.kr/seoulforest",
     "lat": 37.5443,
     "lng": 127.0376
@@ -2742,7 +2742,7 @@
     "city": "중구",
     "category": "체험",
     "description": "서울의 대표 쇼핑·먹거리 거리. 명동성당, 백화점, 길거리 음식, K-뷰티 브랜드 본점이 모여 있는 외국인 관광객 1번지.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/09/4024409_image2_1.jpeg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/28/4043328_image2_1.jpg",
     "officialUrl": "",
     "lat": 37.5636,
     "lng": 126.9849
@@ -2766,7 +2766,7 @@
     "city": "종로구",
     "category": "체험",
     "description": "1920년대 한옥촌이 카페·식당·공방으로 재탄생한 골목. 좁은 골목과 한옥의 정취, 트렌디한 가게가 어우러진 핫플.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/54/3497254_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/22/2947522_image2_1.jpg",
     "officialUrl": "",
     "lat": 37.5731,
     "lng": 126.9907
@@ -2802,7 +2802,7 @@
     "city": "송파구",
     "category": "휴양",
     "description": "실내·실외 종합 테마파크. 자이로드롭·아트란티스·매직아일랜드와 사계절 운영. 도심 속 가장 큰 놀이공원.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/00/3304300_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/35/4019235_image2_1.jpg",
     "officialUrl": "https://adventure.lotteworld.com/",
     "lat": 37.5111,
     "lng": 127.0982
@@ -2826,7 +2826,7 @@
     "city": "해운대구",
     "category": "휴양",
     "description": "한국에서 가장 유명한 도심 해수욕장. 1.5km의 백사장과 동백섬·달맞이길이 이어진다. 여름엔 부산바다축제, 겨울엔 북극곰 수영대회.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/52/4044052_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/16/4019316_image2_1.jpg",
     "officialUrl": "https://www.haeundae.go.kr/tour/",
     "lat": 35.1587,
     "lng": 129.1604
@@ -2838,7 +2838,7 @@
     "city": "수영구",
     "category": "휴양",
     "description": "광안대교 야경과 드론라이트쇼로 유명한 해변. 카페·바·맛집이 해변선을 따라 늘어서 있어 저녁이 더 빛나는 곳.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/12/3518612_image2_1.jpeg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/95/3485995_image2_1.jpg",
     "officialUrl": "https://www.suyeong.go.kr/tour/",
     "lat": 35.1531,
     "lng": 129.1186
@@ -2862,7 +2862,7 @@
     "city": "서구",
     "category": "체험",
     "description": "바다 위를 가로지르는 1.62km 해상케이블카. 송도해수욕장과 암남공원을 잇는다. 크리스털 캐빈은 발 아래 바다가 그대로 보임.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/11/3413711_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/86/2504686_image2_1.jpg",
     "officialUrl": "https://www.busanaircruise.co.kr/",
     "lat": 35.0741,
     "lng": 129.0205
@@ -2874,7 +2874,7 @@
     "city": "해운대구",
     "category": "휴양",
     "description": "해운대 옆 한적한 서퍼들의 해변. 잔잔한 파도로 서핑 입문자에게 인기. 해변 끝 죽도공원에서 바다를 한눈에 볼 수 있다.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/07/3083407_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/94/4016994_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.1786,
     "lng": 129.1996
@@ -2898,7 +2898,7 @@
     "city": "중구",
     "category": "체험",
     "description": "6·25 피난민들이 만든 부산의 전통시장. 영화 \"국제시장\" 배경. 옷·잡화·먹거리가 빼곡하고 BIFF광장과 깡통야시장이 가깝다.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/30/3476830_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/49/3498549_image2_1.jpg",
     "officialUrl": "",
     "lat": 35.1023,
     "lng": 129.0263
@@ -2910,7 +2910,7 @@
     "city": "사하구",
     "category": "휴양",
     "description": "낙동강이 바다와 만나는 곳에 형성된 백사장. 낙동강 하구의 갈대·습지·일몰이 아름다워 사진 명소로 통한다. 꿈의 낙조분수도 유명.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/08/3506208_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/94/3027194_image2_1.JPG",
     "officialUrl": "",
     "lat": 35.0454,
     "lng": 128.9667
@@ -2946,7 +2946,7 @@
     "city": "서귀포시",
     "category": "자연",
     "description": "제주 서남부의 종형 화산체. 산방굴사·용머리해안·황우치해변과 묶어 둘러볼 수 있다. 산방산 탄산온천도 인기.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/02/2847802_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/83/2784583_image2_1.jpg",
     "officialUrl": "",
     "lat": 33.2376,
     "lng": 126.3142
@@ -2958,7 +2958,7 @@
     "city": "서귀포시",
     "category": "자연",
     "description": "\"옥황상제 일곱 선녀가 내려와 목욕하던 곳\"이라는 전설의 3단 폭포. 무지개 다리 선임교에서 폭포 전경을 한눈에.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/28/401528_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/56/3552156_image2_1.jpg",
     "officialUrl": "",
     "lat": 33.2461,
     "lng": 126.4116
@@ -2994,7 +2994,7 @@
     "city": "제주시",
     "category": "체험",
     "description": "제주의 대표 전통시장. 갈치·옥돔·한라봉 등 제주 식자재가 한자리에. 야시장은 흑돼지·딱새우·전복까지 길거리 음식 천국.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/19/4024819_image2_1.jpeg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/51/4043151_image2_1.jpg",
     "officialUrl": "https://www.jejudongmun.com/",
     "lat": 33.5117,
     "lng": 126.5292
@@ -3018,7 +3018,7 @@
     "city": "서귀포시",
     "category": "휴양",
     "description": "썰물 때 광활한 백사장이 드러나는 원형 해변. 수심이 얕아 가족 물놀이에 최적. 옆에 제주민속촌이 있어 함께 둘러보기 좋다.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/63/3024863_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/86/3077586_image2_1.jpg",
     "officialUrl": "",
     "lat": 33.3257,
     "lng": 126.8332
@@ -3066,7 +3066,7 @@
     "city": "강화군",
     "category": "역사",
     "description": "한국 최초의 사찰 중 하나로 전해지는 천년 사찰. 정족산성 안에 자리한 대웅보전(보물)과 4구의 익살스러운 나녀상이 유명.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/77/3523577_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/43/3532443_image2_1.jpg",
     "officialUrl": "https://www.jeondeungsa.org/",
     "lat": 37.6336,
     "lng": 126.4889
@@ -3078,7 +3078,7 @@
     "city": "중구",
     "category": "체험",
     "description": "대구 최대 번화가. 패션·뷰티·먹거리·공연이 모이는 영남권 쇼핑 중심지. 대구만의 활기와 문화가 살아 있는 거리.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/77/3349377_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/81/4044181_image2_1.JPG",
     "officialUrl": "",
     "lat": 35.8693,
     "lng": 128.5961
@@ -3126,7 +3126,7 @@
     "city": "가평군",
     "category": "자연",
     "description": "북한강 위 4개의 섬으로 이루어진 캠핑·재즈페스티벌의 성지. 가을 핑크뮬리·은행나무 길, 봄 꽃축제로 유명.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/17/2909617_image2_1.JPG",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/45/3096245_image2_1.jpg",
     "officialUrl": "https://jara.gp.go.kr/",
     "lat": 37.8275,
     "lng": 127.5147
@@ -3138,7 +3138,7 @@
     "city": "파주시",
     "category": "체험",
     "description": "예술가·건축가 380여 명이 자리 잡은 문화예술 마을. 갤러리·박물관·카페·공방이 한자리에. 독창적 건축물 자체가 볼거리.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/55/4023655_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/45/3505445_image2_1.jpg",
     "officialUrl": "https://www.heyri.net/",
     "lat": 37.7783,
     "lng": 126.6907
@@ -3162,7 +3162,7 @@
     "city": "고양시",
     "category": "자연",
     "description": "국내 최대 인공 호수공원. 5km 산책로·자전거길·꽃축제장. 봄 꽃박람회, 가을 단풍과 분수쇼가 시즌별로 장관.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/13/2891913_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/90/4044690_image2_1.jpg",
     "officialUrl": "",
     "lat": 37.6693,
     "lng": 126.7642
@@ -3186,7 +3186,7 @@
     "city": "광주시",
     "category": "체험",
     "description": "한국관광공사 인증 열린관광지. 도자 박물관·체험관·야외 조각공원이 평지로 이어져 휠체어·유모차 진입 OK. 가족 나들이로 인기.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/70/1956870_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/70/4045570_image2_1.jpg",
     "officialUrl": "https://www.kocef.org/",
     "lat": 37.3439,
     "lng": 127.2647
@@ -3210,7 +3210,7 @@
     "city": "태안군",
     "category": "자연",
     "description": "국내 유일의 안면송 자연림. 무장애 데크길과 산림체험관으로 휠체어·유모차 산책 가능. 인근 꽃지해수욕장과 함께 코스로 추천.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/01/2770701_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/51/2850951_image2_1.jpg",
     "officialUrl": "https://www.foresttrip.go.kr/",
     "lat": 36.507,
     "lng": 126.354
@@ -3222,7 +3222,7 @@
     "city": "강화군",
     "category": "자연",
     "description": "람사르 습지로 등록된 강화남단 갯벌의 생태탐방 공간. 데크 산책로로 휠체어 진입 가능. 저어새 서식지로 유명한 철새 관찰 명소.",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/77/3523577_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/33/3383833_image2_1.JPG",
     "officialUrl": "",
     "lat": 37.6306,
     "lng": 126.4111
@@ -3234,7 +3234,7 @@
     "city": "양양군",
     "category": "휴양",
     "description": "한국관광공사 열린관광지 인증 해수욕장. 백사장 진입용 매트와 수상 휠체어 운영. 옆에 낙산사가 있어 함께 둘러보기 좋다.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/52/3427952_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/30/2919830_image2_1.jpg",
     "officialUrl": "",
     "lat": 38.1216,
     "lng": 128.6309
@@ -3306,7 +3306,7 @@
     "city": "고성군",
     "category": "자연",
     "description": "국내 최대 라벤더 농장. 매년 6월 중순~7월 초 보랏빛 라벤더 5만 평이 만개. 라벤더 축제와 사진존, 라벤더 차·아이스크림이 인기.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/78/2747978_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/56/3378456_image2_1.JPG",
     "officialUrl": "https://lavenderfarm.co.kr/",
     "lat": 38.2944,
     "lng": 128.4647
@@ -3318,7 +3318,7 @@
     "city": "평창군",
     "category": "자연",
     "description": "국내 최초 허브 테마 정원. 라벤더·로즈마리 등 수백 종의 허브가 계절별로 향기를 내뿜는다. 6~7월 라벤더 절정.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/37/3535037_image2_1.jpg",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/00/3588500_image2_1.jpg",
     "officialUrl": "https://www.herbnara.com/",
     "lat": 37.6478,
     "lng": 128.6717
@@ -3330,7 +3330,7 @@
     "city": "공주시",
     "category": "자연",
     "description": "한국 최대급 수국 군락지. 매년 6월 말~7월 초 형형색색 수국이 9,000평 정원에 가득 핀다. 수국 축제 기간 야간 조명도 운영.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/99/3560499_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/85/3534885_image2_1.jpg",
     "officialUrl": "",
     "lat": 36.5172,
     "lng": 126.9128
@@ -3366,7 +3366,7 @@
     "city": "태안군",
     "category": "자연",
     "description": "국제수목학회 인증 \"세계의 아름다운 수목원\" 12호. 1만 5천여 종의 식물 중 수국·동백·목련 컬렉션이 특히 유명. 6월 수국 시즌 절경.",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/44/2639444_image2_1.jpg",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/86/217786_image2_1.jpg",
     "officialUrl": "https://www.chollipo.org/",
     "lat": 36.8081,
     "lng": 126.1481
