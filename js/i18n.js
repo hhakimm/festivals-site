@@ -34,7 +34,7 @@ const STRINGS = {
     'modal.share': '↗ 공유',
     'modal.fav.add': '즐겨찾기',
     'modal.fav.remove': '즐겨찾기 해제',
-    'empty.text': '선택한 조건에 맞는 축제가 없습니다.',
+    'empty.text': '선택한 조건에 맞는 결과가 없습니다.',
     'error.text': '데이터를 불러오지 못했습니다. 새로고침해 주세요.',
     'toast.shareCopied': '링크가 복사되었습니다',
     'toast.favAdded': '즐겨찾기에 추가됨',

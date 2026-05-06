@@ -33,7 +33,7 @@ const acbNameEl = document.getElementById('acb-name');
 const acbClearEl = document.getElementById('acb-clear');
 
 // ── 상태 ──
-let currentTab = 'festivals'; // 'festivals' | 'places'
+let currentTab = 'places'; // 'festivals' | 'places' — 기본값을 여행지로
 let currentView = 'list';     // 'list' | 'map'
 let allFestivals = [];
 let allPlaces = [];
@@ -592,7 +592,8 @@ if (scrollTopBtnEl) {
 // ── URL 동기화 ──
 function syncUrl() {
   const params = new URLSearchParams();
-  if (currentTab !== 'festivals') params.set('tab', currentTab);
+  // 기본 탭이 'places' 이므로, 'festivals' 일 때만 URL 에 표기
+  if (currentTab === 'festivals') params.set('tab', 'festivals');
   const q = serializeState(state);
   if (q) {
     const inner = new URLSearchParams(q.startsWith('?') ? q.slice(1) : q);
@@ -857,20 +858,21 @@ async function init() {
 
     errorEl.hidden = true;
 
-    // URL → 초기 탭/필터 상태
+    // URL → 초기 탭/필터 상태 (기본 'places', 'festivals'은 URL ?tab=festivals로 진입)
     const url = new URL(window.location.href);
     const tabParam = url.searchParams.get('tab');
-    if (tabParam === 'places') {
-      currentTab = 'places';
-      tabFestivalsBtn.classList.remove('is-active');
-      tabPlacesBtn.classList.add('is-active');
-      tabFestivalsBtn.setAttribute('aria-selected', 'false');
-      tabPlacesBtn.setAttribute('aria-selected', 'true');
-      monthFilterGroup.hidden = true;
-      categoryFilterGroup.hidden = false;
-    } else {
+    if (tabParam === 'festivals') {
+      currentTab = 'festivals';
+      tabFestivalsBtn.classList.add('is-active');
+      tabPlacesBtn.classList.remove('is-active');
+      tabFestivalsBtn.setAttribute('aria-selected', 'true');
+      tabPlacesBtn.setAttribute('aria-selected', 'false');
       monthFilterGroup.hidden = false;
       categoryFilterGroup.hidden = true;
+    } else {
+      // 기본 places
+      monthFilterGroup.hidden = true;
+      categoryFilterGroup.hidden = false;
     }
 
     const initial = parseQuery(window.location.search);

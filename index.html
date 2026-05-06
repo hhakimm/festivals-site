@@ -54,16 +54,16 @@
       <h1 class="site-title">한국 가볼 만한 곳</h1>
       <p class="site-subtitle" data-i18n="site.subtitle">2026 월별 축제와 지역별 여행지를 한눈에</p>
       <nav class="tabs" role="tablist" aria-label="콘텐츠 종류">
-        <button type="button" id="tab-places" class="tab" role="tab" aria-selected="false" data-tab="places" data-i18n="tab.places">여행지</button>
-        <button type="button" id="tab-festivals" class="tab is-active" role="tab" aria-selected="true" data-tab="festivals" data-i18n="tab.festivals">2026 축제</button>
+        <button type="button" id="tab-places" class="tab is-active" role="tab" aria-selected="true" data-tab="places" data-i18n="tab.places">여행지</button>
+        <button type="button" id="tab-festivals" class="tab" role="tab" aria-selected="false" data-tab="festivals" data-i18n="tab.festivals">2026 축제</button>
       </nav>
       <!-- 모바일 전용 4-버튼 네비 (PC에선 위 .tabs 사용, CSS로 분리) -->
       <nav class="bottom-nav" aria-label="섹션 네비게이션">
-        <button type="button" class="bn-item" data-bn="places">
+        <button type="button" class="bn-item is-active" data-bn="places">
           <span class="bn-icon" aria-hidden="true">🗺️</span>
           <span class="bn-label" data-i18n="bn.places">여행지</span>
         </button>
-        <button type="button" class="bn-item is-active" data-bn="festivals">
+        <button type="button" class="bn-item" data-bn="festivals">
           <span class="bn-icon" aria-hidden="true">🎆</span>
           <span class="bn-label" data-i18n="bn.festivals">축제</span>
         </button>
@@ -99,7 +99,7 @@
         </button>
       </div>
       <div class="mobile-filter-panel" id="mobile-filter-panel">
-      <div class="filter-group" id="month-filter-group" role="group" aria-label="월 선택">
+      <div class="filter-group" id="month-filter-group" role="group" aria-label="월 선택" hidden>
         <span class="filter-label" data-i18n="filter.month">월</span>
         <div class="chip-group" id="month-chips">
           <button type="button" class="chip is-active" data-month="all">전체</button>
@@ -142,7 +142,7 @@
         </select>
       </div>
 
-      <div class="filter-group" id="category-filter-group" role="group" aria-label="카테고리 선택" hidden>
+      <div class="filter-group" id="category-filter-group" role="group" aria-label="카테고리 선택">
         <span class="filter-label" data-i18n="filter.theme">테마</span>
         <div class="chip-group" id="category-chips">
           <button type="button" class="chip is-active" data-category="all">전체</button>
@@ -158,7 +158,7 @@
 
       <div class="filter-meta">
         <div class="filter-meta-left">
-          <span id="result-count" class="result-count">총 0개의 축제</span>
+          <span id="result-count" class="result-count">총 0개의 여행지</span>
           <button type="button" id="favorites-toggle" class="meta-toggle" aria-pressed="false">
             <span class="meta-toggle-icon">♡</span> <span data-i18n="meta.favorites">즐겨찾기</span>
           </button>
@@ -211,7 +211,7 @@
       <div id="cards" class="card-grid" aria-live="polite"></div>
       <div id="map" class="map-view" hidden></div>
       <div id="empty-state" class="empty-state" hidden>
-        <p class="empty-state-text" data-i18n="empty.text">선택한 조건에 맞는 축제가 없습니다.</p>
+        <p class="empty-state-text" data-i18n="empty.text">선택한 조건에 맞는 결과가 없습니다.</p>
         <button type="button" class="reset-btn" data-reset data-i18n="filter.reset">필터 초기화</button>
       </div>
       <div id="error-state" class="error-state" hidden>
