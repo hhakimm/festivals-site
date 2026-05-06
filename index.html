@@ -57,6 +57,25 @@
         <button type="button" id="tab-festivals" class="tab is-active" role="tab" aria-selected="true" data-tab="festivals" data-i18n="tab.festivals">2026 축제</button>
         <button type="button" id="tab-places" class="tab" role="tab" aria-selected="false" data-tab="places" data-i18n="tab.places">여행지</button>
       </nav>
+      <!-- 모바일 전용 4-버튼 네비 (PC에선 위 .tabs 사용, CSS로 분리) -->
+      <nav class="bottom-nav" aria-label="섹션 네비게이션">
+        <button type="button" class="bn-item is-active" data-bn="festivals">
+          <span class="bn-icon" aria-hidden="true">🎆</span>
+          <span class="bn-label" data-i18n="bn.festivals">축제</span>
+        </button>
+        <button type="button" class="bn-item" data-bn="places">
+          <span class="bn-icon" aria-hidden="true">🗺️</span>
+          <span class="bn-label" data-i18n="bn.places">여행지</span>
+        </button>
+        <button type="button" class="bn-item" data-bn="favorites">
+          <span class="bn-icon" aria-hidden="true">♡</span>
+          <span class="bn-label" data-i18n="bn.favorites">즐겨찾기</span>
+        </button>
+        <button type="button" class="bn-item" data-bn="nearby">
+          <span class="bn-icon" aria-hidden="true">📍</span>
+          <span class="bn-label" data-i18n="bn.nearby">내 주변</span>
+        </button>
+      </nav>
     </div>
   </header>
 
@@ -221,26 +240,6 @@
     <span class="stb-icon" aria-hidden="true">↑</span>
     <span class="stb-label" data-i18n="scrollTop.label">필터</span>
   </button>
-
-  <!-- 모바일 하단 네비게이션 (PC에선 CSS로 숨김) -->
-  <nav class="bottom-nav" aria-label="하단 네비게이션">
-    <button type="button" class="bn-item is-active" data-bn="festivals">
-      <span class="bn-icon" aria-hidden="true">🎆</span>
-      <span class="bn-label" data-i18n="bn.festivals">축제</span>
-    </button>
-    <button type="button" class="bn-item" data-bn="places">
-      <span class="bn-icon" aria-hidden="true">🗺️</span>
-      <span class="bn-label" data-i18n="bn.places">여행지</span>
-    </button>
-    <button type="button" class="bn-item" data-bn="favorites">
-      <span class="bn-icon" aria-hidden="true">♡</span>
-      <span class="bn-label" data-i18n="bn.favorites">즐겨찾기</span>
-    </button>
-    <button type="button" class="bn-item" data-bn="nearby">
-      <span class="bn-icon" aria-hidden="true">📍</span>
-      <span class="bn-label" data-i18n="bn.nearby">내 주변</span>
-    </button>
-  </nav>
 
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
