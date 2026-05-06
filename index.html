@@ -102,6 +102,14 @@
         </button>
       </div>
       <div class="mobile-filter-panel" id="mobile-filter-panel">
+      <div class="filter-group" id="quick-date-group" role="group" aria-label="빠른 날짜 선택" hidden>
+        <span class="filter-label" data-i18n="filter.quick">빠른</span>
+        <div class="chip-group" id="quick-date-chips">
+          <button type="button" class="chip" data-quick="this-weekend" data-i18n="quick.thisWeekend">이번 주말</button>
+          <button type="button" class="chip" data-quick="this-week" data-i18n="quick.thisWeek">이번 주</button>
+          <button type="button" class="chip" data-quick="next-month" data-i18n="quick.nextMonth">다음 달</button>
+        </div>
+      </div>
       <div class="filter-group" id="month-filter-group" role="group" aria-label="월 선택" hidden>
         <span class="filter-label" data-i18n="filter.month">월</span>
         <div class="chip-group" id="month-chips">
@@ -172,6 +180,7 @@
             <option value="default" data-i18n="sort.default">기본순</option>
             <option value="name" data-i18n="sort.name">이름순</option>
             <option value="date" data-i18n="sort.date">시작일순</option>
+            <option value="distance" data-i18n="sort.distance" disabled>거리순</option>
           </select>
         </div>
         <div class="filter-meta-right">

@@ -66,8 +66,58 @@ export function ensureMap() {
     if (id && pendingClickHandler) pendingClickHandler(id);
   });
 
+  // "내 위치" 컨트롤 — 지도 우상단에 GPS 버튼
+  const LocateControl = L.Control.extend({
+    options: { position: 'topright' },
+    onAdd() {
+      const btn = L.DomUtil.create('button', 'leaflet-bar leaflet-control map-locate-btn');
+      btn.type = 'button';
+      btn.title = '내 위치';
+      btn.setAttribute('aria-label', '내 위치');
+      btn.innerHTML = '📍';
+      L.DomEvent.disableClickPropagation(btn);
+      L.DomEvent.on(btn, 'click', () => {
+        btn.classList.add('is-loading');
+        if (!navigator.geolocation) {
+          alert('이 브라우저는 위치 정보를 지원하지 않습니다');
+          btn.classList.remove('is-loading');
+          return;
+        }
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const { latitude: lat, longitude: lng } = pos.coords;
+            mapInstance.setView([lat, lng], 12, { animate: true });
+            // 사용자 위치 마커 (있으면 갱신, 없으면 생성)
+            if (userLocationMarker) {
+              userLocationMarker.setLatLng([lat, lng]);
+            } else {
+              const icon = L.divIcon({
+                className: 'user-location-marker',
+                html: '<div class="user-location-pulse"></div><div class="user-location-dot"></div>',
+                iconSize: [22, 22],
+                iconAnchor: [11, 11],
+              });
+              userLocationMarker = L.marker([lat, lng], { icon, interactive: false, keyboard: false }).addTo(mapInstance);
+            }
+            btn.classList.remove('is-loading');
+          },
+          (err) => {
+            console.warn('Geolocation error:', err);
+            alert('위치를 가져올 수 없습니다. 권한을 확인해 주세요.');
+            btn.classList.remove('is-loading');
+          },
+          { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+        );
+      });
+      return btn;
+    },
+  });
+  new LocateControl().addTo(mapInstance);
+
   return mapInstance;
 }
+
+let userLocationMarker = null;
 
 export function renderMarkers(festivals, onDetailClick) {
   const map = ensureMap();

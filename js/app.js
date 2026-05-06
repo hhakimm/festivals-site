@@ -46,8 +46,9 @@ const state = {
   search: '',            // 검색어
   favoritesOnly: false,  // 즐겨찾기 필터
   userLocation: null,    // {lat, lng} — geolocation 활성 시
-  sort: 'default',       // 'default' | 'name' | 'date'
+  sort: 'default',       // 'default' | 'name' | 'date' | 'distance'
   collection: null,      // 활성 컬렉션 id (테마)
+  quickDate: null,       // 'this-weekend' | 'this-week' | 'next-month' | null (축제 탭 전용)
 };
 
 let allCollections = [];
@@ -101,6 +102,30 @@ function haversineKm(a, b) {
   return 2 * R * Math.asin(Math.sqrt(x));
 }
 
+// 주요 도시 좌표 — 카드의 "○○시에서 N km" 표시용
+const MAJOR_CITIES = [
+  { name: '서울', lat: 37.5665, lng: 126.9780 },
+  { name: '부산', lat: 35.1796, lng: 129.0756 },
+  { name: '대구', lat: 35.8714, lng: 128.6014 },
+  { name: '광주', lat: 35.1595, lng: 126.8526 },
+  { name: '대전', lat: 36.3504, lng: 127.3845 },
+  { name: '인천', lat: 37.4563, lng: 126.7052 },
+  { name: '제주', lat: 33.4996, lng: 126.5312 },
+];
+// 항목과 가장 가까운 주요 도시 + 거리(km, 정수)
+function nearestMajorCity(item) {
+  if (item.lat == null || item.lng == null) return null;
+  let best = null;
+  for (const city of MAJOR_CITIES) {
+    const d = haversineKm({ lat: item.lat, lng: item.lng }, city);
+    if (!best || d < best.dist) best = { city: city.name, dist: d };
+  }
+  if (!best) return null;
+  // 5km 이내면 그 도시 안 (예: '서울 시내')으로 간주, 표시 생략
+  if (best.dist < 5) return { city: best.city, dist: 0 };
+  return { city: best.city, dist: Math.round(best.dist) };
+}
+
 function matchesSearch(item, q) {
   if (!q) return true;
   const lower = q.toLowerCase();
@@ -140,6 +165,17 @@ function getFiltered() {
     if (state.region) result = result.filter((it) => it.region === state.region);
   }
 
+  // 빠른 날짜 (축제 탭 전용) — 이번 주말 / 이번 주 / 다음 달
+  if (currentTab === 'festivals' && state.quickDate && !collection) {
+    const range = computeQuickDateRange(state.quickDate);
+    if (range) {
+      result = result.filter((f) =>
+        f.startDate && f.endDate &&
+        f.startDate <= range.end && f.endDate >= range.start
+      );
+    }
+  }
+
   // 검색
   const q = state.search.trim();
   if (q) result = result.filter((it) => matchesSearch(it, q));
@@ -169,6 +205,13 @@ function getFiltered() {
       if (b.startDate) return 1;
       return 0;
     });
+  } else if (state.sort === 'distance' && state.userLocation) {
+    // 거리순 — _dist는 '내 주변' 활성 시 미리 계산됨, 없으면 그때그때 계산
+    result = [...result].sort((a, b) => {
+      const da = a._dist != null ? a._dist : Infinity;
+      const db = b._dist != null ? b._dist : Infinity;
+      return da - db;
+    });
   }
   // default: applyFilters 결과 순서 유지 (festivals=시작일순, places=이름순)
 
@@ -192,6 +235,14 @@ function renderCards(items) {
     const distHtml = item._dist != null
       ? `<span class="distance-label">📍 ${item._dist.toFixed(1)} km</span>`
       : '';
+    // 주요 도시 거리 — 내 주변 모드(_dist 있음)가 아닐 때만 표시 (중복 방지)
+    let cityDistHtml = '';
+    if (item._dist == null) {
+      const nm = nearestMajorCity(item);
+      if (nm && nm.dist > 0) {
+        cityDistHtml = `<span class="city-dist-label">🚗 ${escapeHtml(nm.city)} ${nm.dist}km</span>`;
+      }
+    }
     const typeBadgeHtml = showTypeBadge
       ? `<span class="card-type-badge ${hasDate ? 'is-festival' : 'is-place'}">${hasDate ? '🎆 ' + t('tab.festivals').replace('2026 ', '') : '🗺️ ' + t('tab.places')}</span>`
       : '';
@@ -213,6 +264,7 @@ function renderCards(items) {
           ${dateOrTag}
           <span>${escapeHtml(item.region)} ${escapeHtml(item.city)}</span>
           ${distHtml}
+          ${cityDistHtml}
         </div>
         <p class="card-description">${escapeHtml(item.description)}</p>
       </div>
@@ -300,6 +352,34 @@ function nextWeekendDates() {
 
 function dateRangesOverlap(aStart, aEnd, bStart, bEnd) {
   return aStart <= bEnd && aEnd >= bStart;
+}
+
+// 빠른 날짜 — quickDate 키워드를 {start, end} ISO 문자열로 변환
+function computeQuickDateRange(key) {
+  const fmt = (d) =>
+    `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const today = new Date();
+  if (key === 'this-weekend') {
+    const dow = today.getDay();
+    const daysToSat = (6 - dow + 7) % 7;
+    const sat = new Date(today); sat.setDate(today.getDate() + daysToSat);
+    const sun = new Date(sat); sun.setDate(sat.getDate() + 1);
+    return { start: fmt(sat), end: fmt(sun) };
+  }
+  if (key === 'this-week') {
+    // 월요일~일요일 (한국 기준)
+    const dow = today.getDay(); // 0=일 ... 6=토
+    const daysSinceMon = (dow + 6) % 7; // 월요일까지 며칠 전
+    const mon = new Date(today); mon.setDate(today.getDate() - daysSinceMon);
+    const sun = new Date(mon); sun.setDate(mon.getDate() + 6);
+    return { start: fmt(mon), end: fmt(sun) };
+  }
+  if (key === 'next-month') {
+    const first = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+    const last = new Date(today.getFullYear(), today.getMonth() + 2, 0); // 다음 달 마지막 날
+    return { start: fmt(first), end: fmt(last) };
+  }
+  return null;
 }
 
 function currentSeason() {
@@ -501,8 +581,9 @@ function setTab(tab) {
   // 탭별 필터 가용성 조정
   monthFilterGroup.hidden = tab === 'places';
   categoryFilterGroup.hidden = tab === 'festivals';
-  // 탭별 카테고리 옵션이 다르므로 카테고리 상태 초기화
+  // 탭별 카테고리 옵션이 다르므로 카테고리·빠른날짜 상태 초기화
   state.category = null;
+  if (tab !== 'festivals') state.quickDate = null;
   // 모달 깊은 링크는 탭 간 의미 없으므로 닫기
   state.festival = null;
   closeModal();
@@ -565,6 +646,7 @@ function syncMobileFilterBadge() {
   if (!mobileFilterBadgeEl) return;
   let count = 0;
   if (currentTab === 'festivals' && state.month != null) count++;
+  if (currentTab === 'festivals' && state.quickDate != null) count++;
   if (state.region != null) count++;
   if (currentTab === 'places' && state.category != null) count++;
   if (state.collection != null) count++;
@@ -679,8 +761,18 @@ function syncFilterUI() {
   searchClearEl.hidden = !state.search;
   favoritesToggleEl.setAttribute('aria-pressed', state.favoritesOnly ? 'true' : 'false');
   nearbyToggleEl.setAttribute('aria-pressed', state.userLocation != null ? 'true' : 'false');
+  // 빠른 날짜 그룹: 축제 탭에서만 보이고, 활성 칩 갱신
+  if (quickDateGroupEl) {
+    quickDateGroupEl.hidden = currentTab !== 'festivals';
+  }
+  if (quickDateChipsEl) {
+    quickDateChipsEl.querySelectorAll('.chip').forEach((c) => {
+      c.classList.toggle('is-active', c.dataset.quick === state.quickDate);
+    });
+  }
   const anyActive =
     (currentTab === 'festivals' && state.month != null) ||
+    (currentTab === 'festivals' && state.quickDate != null) ||
     state.region != null ||
     (currentTab === 'places' && state.category != null) ||
     !!state.search ||
@@ -690,6 +782,7 @@ function syncFilterUI() {
   resetBtnEl.hidden = !anyActive;
   syncBottomNav();
   syncMobileFilterBadge();
+  syncSortOptionVisibility();
   // 검색어 있으면 검색창 펼친 상태 유지
   if (state.search && searchWrapEl) searchWrapEl.classList.add('is-open');
 }
@@ -721,6 +814,7 @@ function resetAll() {
   state.userLocation = null;
   state.sort = 'default';
   state.collection = null;
+  state.quickDate = null;
   searchInputEl.value = '';
   sortSelectEl.value = 'default';
   renderCollections();
@@ -780,6 +874,14 @@ function syncSortOptionVisibility() {
   // "시작일순" 옵션은 축제 탭에서만 의미 있음
   const dateOpt = sortSelectEl.querySelector('option[value="date"]');
   if (dateOpt) dateOpt.disabled = currentTab !== 'festivals';
+  // "거리순" 옵션은 내 주변(userLocation) 활성 시에만 의미 있음
+  const distOpt = sortSelectEl.querySelector('option[value="distance"]');
+  if (distOpt) distOpt.disabled = state.userLocation == null;
+  // 활성화 안 됐는데 sort가 distance면 default로
+  if (state.userLocation == null && state.sort === 'distance') {
+    state.sort = 'default';
+    sortSelectEl.value = 'default';
+  }
   // 여행지 탭에서 sort=date였으면 default로
   if (currentTab !== 'festivals' && state.sort === 'date') {
     state.sort = 'default';
@@ -833,11 +935,30 @@ nearbyToggleEl.addEventListener('click', async () => {
 
 monthChipsEl.addEventListener('click', (e) => {
   const chip = e.target.closest('.chip');
-  if (chip) setMonth(chip.dataset.month);
+  if (chip) {
+    state.quickDate = null; // 월 선택 시 빠른날짜 해제
+    setMonth(chip.dataset.month);
+  }
 });
 categoryChipsEl.addEventListener('click', (e) => {
   const chip = e.target.closest('.chip');
   if (chip) setCategory(chip.dataset.category);
+});
+
+// 빠른 날짜 칩 — 이번 주말 / 이번 주 / 다음 달
+const quickDateGroupEl = document.getElementById('quick-date-group');
+const quickDateChipsEl = document.getElementById('quick-date-chips');
+quickDateChipsEl?.addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  const key = chip.dataset.quick;
+  // 토글: 같은 거 누르면 해제
+  state.quickDate = state.quickDate === key ? null : key;
+  // 빠른 날짜 활성 시 month 필터는 해제 (둘 중 하나만)
+  if (state.quickDate) state.month = null;
+  syncFilterUI();
+  update();
+  syncUrl();
 });
 regionSelectEl.addEventListener('change', (e) => setRegion(e.target.value));
 resetBtnEl.addEventListener('click', resetAll);

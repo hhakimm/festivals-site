@@ -1001,6 +1001,17 @@ a { color: inherit; }
   font-weight: 600;
   font-feature-settings: "tnum";
 }
+/* 주요 도시 거리 — 더 옅은 톤 (보조 정보) */
+.city-dist-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.74rem;
+  color: var(--ink-3);
+  font-feature-settings: "tnum";
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
 .card-image {
   width: 100%;
   height: auto;
@@ -1537,6 +1548,62 @@ body.modal-open { overflow: hidden; }
 }
 
 /* Marker cluster — 톤 맞춰 커스터마이즈 */
+/* 지도 "내 위치" 버튼 */
+.map-locate-btn {
+  width: 34px;
+  height: 34px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: #fff !important;
+  border: 0 !important;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+  transition: background 0.15s ease;
+}
+.map-locate-btn:hover { background: #f4f4f5 !important; }
+.map-locate-btn.is-loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+.map-locate-btn.is-loading::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--ink);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spinner-rot 0.7s linear infinite;
+}
+
+/* 사용자 위치 마커 — 파란 점 + 펄스 */
+.user-location-marker {
+  position: relative;
+  pointer-events: none;
+}
+.user-location-dot {
+  position: absolute;
+  inset: 6px;
+  background: #2563eb;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.5);
+}
+.user-location-pulse {
+  position: absolute;
+  inset: 0;
+  background: rgba(37, 99, 235, 0.3);
+  border-radius: 50%;
+  animation: user-loc-pulse 2s ease-out infinite;
+}
+@keyframes user-loc-pulse {
+  0%   { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
 .marker-cluster {
   background-clip: padding-box;
   border-radius: 50%;
