@@ -148,5 +148,31 @@
       "curated-yongamsa-okcheon", "curated-taegosa", "curated-baekcheonsa",
       "curated-gakwonsa", "curated-yeongsanjeongsa", "curated-ilbungsa"
     ]
+  },
+  {
+    "id": "barrier-free",
+    "name": "무장애 탐방",
+    "icon": "♿",
+    "tagline": "유모차·휠체어도 갈 수 있는 평지·데크 코스",
+    "season": ["any"],
+    "namePatterns": [],
+    "ids": [
+      "curated-hangang-banpo", "curated-seoul-forest", "curated-ddp",
+      "curated-lotteworld-tower", "curated-gwanghwamun-square",
+      "curated-cheonggyecheon", "curated-seokchon-lake", "curated-olympic-park",
+      "curated-seongsu-dong", "curated-songdo-cablecar", "curated-dadaepo-beach",
+      "curated-gwangalli-beach", "curated-handam-coast", "curated-osulloc",
+      "curated-pyoseon-beach", "curated-jeju-dongmun-market",
+      "curated-songdo-central-park", "curated-dongseong-ro",
+      "curated-kim-gwangseok-road", "curated-taehwagang-garden",
+      "curated-acc-gwangju", "curated-jaraseom", "curated-imjingak",
+      "curated-ilsan-lake-park", "curated-yangpyeong-dumulmeori",
+      "curated-siheung-gaetgol", "curated-gwangmyeong-cave",
+      "curated-hanbat-arboretum", "curated-meditation-garden-daejeon",
+      "curated-jangtaesan-forest", "curated-ppuri-park",
+      "curated-bear-tree-park", "curated-midongsan-arboretum",
+      "curated-baekdudaegan-arboretum", "curated-damyang-soswaewon",
+      "curated-suncheonman"
+    ]
   }
 ]
