@@ -177,6 +177,8 @@ function getFiltered() {
 
 // ── 카드 렌더 ──
 function renderCards(items) {
+  // 컬렉션 활성화 중이면 카드에 타입(축제/여행지) 배지 표시
+  const showTypeBadge = state.collection != null;
   cardsEl.innerHTML = items.map((item) => {
     // 컬렉션 모드에서는 혼합되므로 항목 자체로 판단
     const hasDate = !!(item.startDate && item.endDate);
@@ -190,11 +192,15 @@ function renderCards(items) {
     const distHtml = item._dist != null
       ? `<span class="distance-label">📍 ${item._dist.toFixed(1)} km</span>`
       : '';
+    const typeBadgeHtml = showTypeBadge
+      ? `<span class="card-type-badge ${hasDate ? 'is-festival' : 'is-place'}">${hasDate ? '🎆 ' + t('tab.festivals').replace('2026 ', '') : '🗺️ ' + t('tab.places')}</span>`
+      : '';
     return `
     <article class="card" data-item-id="${escapeHtml(item.id)}">
       <div class="card-image-wrap">
         <img class="card-image" alt="${escapeHtml(item.name)}" src="${escapeHtml(item.image)}"
              onerror="this.src='images/placeholder.svg'" loading="lazy" />
+        ${typeBadgeHtml}
         <button type="button" class="fav-btn${fav ? ' is-active' : ''}"
                 data-fav-id="${escapeHtml(item.id)}"
                 aria-label="${fav ? '즐겨찾기 해제' : '즐겨찾기에 추가'}"

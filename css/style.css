@@ -836,6 +836,35 @@ a { color: inherit; }
 }
 
 /* 하트 버튼 — 카드 이미지 우상단 */
+/* 카드 타입 배지 — 컬렉션 모드에서만 표시 */
+.card-type-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.card-type-badge.is-festival {
+  background: rgba(17, 17, 17, 0.92);
+  color: #fff;
+}
+.card-type-badge.is-place {
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+}
+
 .fav-btn {
   position: absolute;
   top: 10px;
@@ -1647,6 +1676,13 @@ body.modal-open { overflow: hidden; }
   .card-category-badge {
     font-size: 0.65rem;
     padding: 2px 6px;
+  }
+  .card-type-badge {
+    font-size: 0.62rem;
+    padding: 2px 7px;
+    top: 6px;
+    left: 6px;
+    gap: 2px;
   }
 
   /* 지도/모달 */
