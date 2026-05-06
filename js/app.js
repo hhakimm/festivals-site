@@ -427,12 +427,27 @@ function syncCollectionBanner() {
   const collection = state.collection
     ? allCollections.find((c) => c.id === state.collection)
     : null;
+  const acbInfoEl = document.getElementById('active-collection-info');
   if (collection) {
     acbEl.hidden = false;
     acbIconEl.textContent = collection.icon || '✦';
     acbNameEl.textContent = `${collection.name} — ${collection.tagline || ''}`;
+    // 부연 설명 (info)이 있을 때만 표시 — 무장애 같은 용어 안내용
+    if (acbInfoEl) {
+      if (collection.info) {
+        acbInfoEl.hidden = false;
+        acbInfoEl.textContent = collection.info;
+      } else {
+        acbInfoEl.hidden = true;
+        acbInfoEl.textContent = '';
+      }
+    }
   } else {
     acbEl.hidden = true;
+    if (acbInfoEl) {
+      acbInfoEl.hidden = true;
+      acbInfoEl.textContent = '';
+    }
   }
 }
 
