@@ -50,6 +50,10 @@
 * { box-sizing: border-box; }
 *, *::before, *::after { -webkit-font-smoothing: antialiased; }
 html, body { margin: 0; padding: 0; }
+/* 가로 스크롤 차단 — 안쪽 요소가 viewport 넘어가도 페이지가 가로로 밀리지 않게.
+   overflow-x: clip 은 hidden 과 달리 새 scroll container 를 만들지 않아 sticky 가 유지됨. */
+html { overflow-x: clip; }
+body { overflow-x: clip; }
 [hidden] { display: none !important; }
 
 body {
@@ -1574,25 +1578,17 @@ body.modal-open { overflow: hidden; }
     font-size: 0.78rem;
   }
 
-  /* 월 / 테마 chip-group — 가로 스크롤 (한 줄) */
+  /* 월 / 테마 chip-group — 2줄 wrap (가로 스크롤 X, 한 화면에 다 보임) */
   .chip-group {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 2px;
-    /* 컨테이너 가장자리까지 스크롤 영역 확장 */
-    margin: 0 calc(-1 * var(--content-pad));
-    padding-left: var(--content-pad);
-    padding-right: var(--content-pad);
-    scroll-snap-type: x proximity;
+    flex-wrap: wrap;
+    overflow: visible;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
   }
-  .chip-group::-webkit-scrollbar { display: none; }
   .chip {
     flex-shrink: 0;
-    scroll-snap-align: start;
-    padding: 6px 12px;
+    padding: 5px 10px;
     font-size: 0.82rem;
   }
 
