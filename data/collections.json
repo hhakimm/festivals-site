@@ -153,7 +153,7 @@
     "id": "barrier-free",
     "name": "무장애 탐방",
     "icon": "♿",
-    "tagline": "유모차·휠체어도 갈 수 있는 평지·데크 코스",
+    "tagline": "유모차·휠체어가 가능한 평지·데크·무장애 인증 코스",
     "season": ["any"],
     "namePatterns": [],
     "ids": [
@@ -172,7 +172,12 @@
       "curated-jangtaesan-forest", "curated-ppuri-park",
       "curated-bear-tree-park", "curated-midongsan-arboretum",
       "curated-baekdudaegan-arboretum", "curated-damyang-soswaewon",
-      "curated-suncheonman"
+      "curated-suncheonman",
+      "curated-np-odaesan", "curated-np-songnisan", "curated-np-hallasan",
+      "curated-np-deogyusan", "curated-np-naejangsan", "curated-np-jirisan",
+      "curated-np-seoraksan", "curated-np-mudeungsan", "curated-np-bukhansan",
+      "curated-np-juwangsan", "curated-np-byeonsanbando", "curated-np-taeanhaean",
+      "curated-pp-mungyeongsaejae", "curated-pp-maisan"
     ]
   }
 ]
