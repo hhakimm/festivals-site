@@ -56,6 +56,48 @@ html { overflow-x: clip; }
 body { overflow-x: clip; }
 [hidden] { display: none !important; }
 
+/* ──────────────────────────────────────────────
+   A11Y — 키보드/스크린리더 접근성
+   ────────────────────────────────────────────── */
+/* 본문 바로가기 — Tab 키로 첫 포커스 시 좌상단에 등장 */
+.skip-to-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 0 0 var(--r-md) 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: -0.005em;
+  z-index: 1000;
+  transform: translateY(-100%);
+  transition: transform 0.18s ease;
+}
+.skip-to-content:focus {
+  transform: translateY(0);
+  outline: 3px solid #fff;
+  outline-offset: -3px;
+}
+
+/* 키보드 포커스 시 모든 인터랙티브 요소에 명확한 포커스 링 (마우스는 :focus:not(:focus-visible)) */
+*:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* 어두운 배경 위에선 흰색 포커스 */
+.bottom-nav .bn-item:focus-visible,
+.scroll-top-btn:focus-visible {
+  outline-color: #fff;
+}
+/* 마우스 클릭 시 포커스 링 깜빡임 방지 (이미 키보드 포커스 시만 보임) */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 body {
   background: var(--bg);
   color: var(--ink);
@@ -1042,7 +1084,7 @@ a { color: inherit; }
 }
 
 /* ── empty / error ── */
-.empty-state, .error-state {
+.empty-state, .error-state, .loading-state {
   text-align: center;
   padding: var(--s-9) var(--s-4);
   display: flex;
@@ -1050,14 +1092,45 @@ a { color: inherit; }
   align-items: center;
   gap: var(--s-3);
 }
+.empty-state-icon {
+  font-size: 3rem;
+  line-height: 1;
+  opacity: 0.5;
+}
 .empty-state-text {
   margin: 0;
+  color: var(--ink-2);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.empty-state-hint {
+  margin: 0;
   color: var(--ink-3);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
+  letter-spacing: -0.005em;
 }
 .error-state {
   color: var(--ink-3);
   font-size: 0.95rem;
+}
+
+/* 로딩 스피너 */
+.loading-state .spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--surface-3);
+  border-top-color: var(--ink);
+  border-radius: 50%;
+  animation: spinner-rot 0.7s linear infinite;
+}
+.loading-text {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 0.9rem;
+}
+@keyframes spinner-rot {
+  to { transform: rotate(360deg); }
 }
 
 /* ──────────────────────────────────────────────
@@ -1519,16 +1592,54 @@ body.modal-open { overflow: hidden; }
    RESPONSIVE — 모바일 최적화
    ────────────────────────────────────────────── */
 /* ──────────────────────────────────────────────
-   FILTER ROW TOP — (검색 + 토글 제거됨, 자취만 남김)
+   FILTER ROW TOP — 검색 (수축형, 기본 닫힘)
    ────────────────────────────────────────────── */
 .filter-row-top {
-  display: contents; /* wrapper 무력화 — 자식이 그대로 부모 흐름에 합류 */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
 }
-/* 검색창 전체 숨김 */
-.filter-group-search { display: none !important; }
+/* 검색 영역 — 평소 아이콘만, 클릭 시 입력창 펼쳐짐 */
+.filter-group-search {
+  position: relative;
+  margin-left: auto; /* 우측 정렬 */
+  flex: 0 0 auto;
+  width: 38px;
+  max-width: 38px;
+  transition: width 0.22s ease, max-width 0.22s ease;
+  overflow: hidden;
+}
+.filter-group-search.is-open {
+  width: 100%;
+  max-width: 380px;
+}
+.filter-group-search .search-icon {
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 2;
+}
+.filter-group-search .search-input {
+  width: 100%;
+  height: 38px;
+  padding-left: 36px;
+  padding-right: 32px;
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  border-radius: var(--r-pill);
+  font-size: 0.9rem;
+}
+.filter-group-search:not(.is-open) .search-input {
+  background: var(--surface-3);
+  border-color: transparent;
+  cursor: pointer;
+}
+.filter-group-search:not(.is-open) .search-input::placeholder {
+  color: transparent; /* 닫힘 상태에선 placeholder 숨김 */
+}
 /* 모바일 필터 토글 버튼 제거 */
 .mobile-filter-toggle { display: none !important; }
-/* 필터 패널은 항상 펼친 상태 — 모바일 토글 의존성 제거 */
+/* 필터 패널은 항상 펼친 상태 */
 .mobile-filter-panel {
   display: flex;
   flex-direction: column;

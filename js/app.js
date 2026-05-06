@@ -690,6 +690,8 @@ function syncFilterUI() {
   resetBtnEl.hidden = !anyActive;
   syncBottomNav();
   syncMobileFilterBadge();
+  // 검색어 있으면 검색창 펼친 상태 유지
+  if (state.search && searchWrapEl) searchWrapEl.classList.add('is-open');
 }
 
 function setMonth(value) {
@@ -727,7 +729,29 @@ function resetAll() {
   syncUrl();
 }
 
-// ── 검색 ──
+// ── 검색 (수축형 토글) ──
+const searchWrapEl = searchInputEl?.closest('.filter-group-search');
+function openSearch() {
+  searchWrapEl?.classList.add('is-open');
+  searchInputEl?.focus();
+}
+function closeSearch() {
+  searchWrapEl?.classList.remove('is-open');
+}
+// 닫힘 상태에서 입력창 또는 아이콘 누르면 펼침
+searchInputEl?.addEventListener('focus', openSearch);
+searchInputEl?.addEventListener('click', openSearch);
+const searchIconEl = searchWrapEl?.querySelector('.search-icon');
+searchIconEl?.addEventListener('click', openSearch);
+// blur 시 입력값이 비어있으면 자동 수축
+searchInputEl?.addEventListener('blur', () => {
+  setTimeout(() => {
+    // clear 버튼 클릭 직후엔 닫지 않음
+    if (document.activeElement?.id === 'search-clear') return;
+    if (!searchInputEl.value) closeSearch();
+  }, 150);
+});
+
 let searchDebounce = null;
 searchInputEl.addEventListener('input', (e) => {
   clearTimeout(searchDebounce);
@@ -835,6 +859,12 @@ function isCloseLocation(a, b, kmThreshold = 0.1) {
 }
 
 async function init() {
+  // 로딩 스피너 표시
+  const loadingEl = document.getElementById('loading-state');
+  if (loadingEl) {
+    loadingEl.hidden = false;
+    cardsEl.hidden = true;
+  }
   try {
     // 데이터셋 병렬 로드. 없으면 빈 배열로 폴백.
     const [festRaw, placesRaw, curatedRaw, collectionsRaw] = await Promise.all([
@@ -915,6 +945,10 @@ async function init() {
     console.error(err);
     cardsEl.hidden = true;
     errorEl.hidden = false;
+  } finally {
+    // 로딩 스피너 항상 숨기기 (성공/실패 무관)
+    const loadingEl = document.getElementById('loading-state');
+    if (loadingEl) loadingEl.hidden = true;
   }
 }
 

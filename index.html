@@ -39,6 +39,9 @@
   <script defer src="vendor/leaflet/markercluster/leaflet.markercluster.js"></script>
 </head>
 <body>
+  <!-- 스크린리더·키보드 사용자용 본문 바로가기 링크 (Tab 첫 포커스) -->
+  <a class="skip-to-content" href="#cards">본문 바로가기</a>
+
   <div id="pull-refresh" class="pull-refresh" aria-hidden="true">
     <div class="pull-refresh-icon">↻</div>
   </div>
@@ -212,8 +215,14 @@
       <div id="cards" class="card-grid" aria-live="polite"></div>
       <div id="map" class="map-view" hidden></div>
       <div id="empty-state" class="empty-state" hidden>
+        <div class="empty-state-icon" aria-hidden="true">🔍</div>
         <p class="empty-state-text" data-i18n="empty.text">선택한 조건에 맞는 결과가 없습니다.</p>
+        <p class="empty-state-hint" data-i18n="empty.hint">필터를 줄이거나 다른 지역·테마를 선택해 보세요.</p>
         <button type="button" class="reset-btn" data-reset data-i18n="filter.reset">필터 초기화</button>
+      </div>
+      <div id="loading-state" class="loading-state" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <p class="loading-text" data-i18n="loading.text">불러오는 중…</p>
       </div>
       <div id="error-state" class="error-state" hidden>
         <p data-i18n="error.text">데이터를 불러오지 못했습니다. 새로고침해 주세요.</p>

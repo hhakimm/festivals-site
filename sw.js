@@ -9,7 +9,7 @@
 //   - skipWaiting + clients.claim 으로 즉시 활성화
 //   - 다음 페이지 로드부터 새 버전 사용
 
-const VERSION = 'v2.7.0';
+const VERSION = 'v2.8.0';
 const CACHE = `festivals-${VERSION}`;
 
 const SHELL = [

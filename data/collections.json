@@ -240,13 +240,22 @@
     "namePatterns": [
       "국립공원"
     ],
-    "ids": []
+    "ids": [
+      "curated-np-jirisan", "curated-np-gyeongju", "curated-np-gyeryongsan",
+      "curated-np-hallyeohaesang", "curated-np-seoraksan", "curated-np-songnisan",
+      "curated-np-hallasan", "curated-np-naejangsan", "curated-np-gayasan",
+      "curated-np-deogyusan", "curated-np-odaesan", "curated-np-juwangsan",
+      "curated-np-taeanhaean", "curated-np-dadohaehaesang", "curated-np-bukhansan",
+      "curated-np-chiaksan", "curated-np-woraksan", "curated-np-sobaeksan",
+      "curated-np-byeonsanbando", "curated-np-wolchulsan", "curated-np-mudeungsan",
+      "curated-np-taebaeksan", "curated-np-palgongsan"
+    ]
   },
   {
     "id": "fireworks",
-    "name": "불꽃·빛 축제",
+    "name": "불꽃·빛·야경",
     "icon": "🎆",
-    "tagline": "밤하늘을 수놓는 빛의 축제",
+    "tagline": "밤하늘을 수놓는 빛의 명소",
     "season": [
       "any"
     ],
@@ -255,9 +264,16 @@
       "불빛",
       "빛초롱",
       "빛축제",
-      "빛페스타"
+      "빛페스타",
+      "야경"
     ],
-    "ids": []
+    "ids": [
+      "curated-namsan-tower", "curated-lotteworld-tower", "curated-ddp",
+      "curated-busan-tower", "curated-songdo-cablecar",
+      "curated-hangang-banpo", "curated-gwangalli-beach",
+      "curated-songdo-central-park", "curated-saeyeongyo",
+      "curated-tongyeong-cablecar"
+    ]
   },
   {
     "id": "temple",
