@@ -177,7 +177,13 @@
       "curated-np-deogyusan", "curated-np-naejangsan", "curated-np-jirisan",
       "curated-np-seoraksan", "curated-np-mudeungsan", "curated-np-bukhansan",
       "curated-np-juwangsan", "curated-np-byeonsanbando", "curated-np-taeanhaean",
-      "curated-pp-mungyeongsaejae", "curated-pp-maisan"
+      "curated-pp-mungyeongsaejae", "curated-pp-maisan",
+      "curated-gyeongbokgung", "curated-changdeokgung", "curated-deoksugung",
+      "curated-jongmyo", "curated-ikseon-dong", "curated-namsan-tower",
+      "curated-gwangneung", "curated-heyri", "curated-jeonju-hanok",
+      "curated-mireuksaji", "curated-donggung-wolji", "curated-cheomseongdae",
+      "curated-hahoe-village", "curated-yangdong-village",
+      "curated-boseong-greentea", "curated-ulsan-daewangam", "curated-cheongnamdae"
     ]
   }
 ]
