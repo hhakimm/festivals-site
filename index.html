@@ -64,13 +64,22 @@
   <aside class="filter-sidebar">
   <section class="filter-bar" aria-label="축제 필터">
     <div class="container">
-      <div class="filter-group filter-group-search">
-        <span class="search-icon" aria-hidden="true">🔍</span>
-        <input type="search" id="search-input" class="search-input"
-               placeholder="이름·지역으로 검색…" autocomplete="off"
-               data-i18n-attr="placeholder:filter.search.placeholder" />
-        <button type="button" id="search-clear" class="search-clear" aria-label="검색 지우기" hidden>×</button>
+      <div class="filter-row-top">
+        <div class="filter-group filter-group-search">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input type="search" id="search-input" class="search-input"
+                 placeholder="이름·지역으로 검색…" autocomplete="off"
+                 data-i18n-attr="placeholder:filter.search.placeholder" />
+          <button type="button" id="search-clear" class="search-clear" aria-label="검색 지우기" hidden>×</button>
+        </div>
+        <!-- 모바일 전용: 필터 접기 토글 -->
+        <button type="button" id="mobile-filter-toggle" class="mobile-filter-toggle" aria-expanded="false" aria-controls="mobile-filter-panel">
+          <span class="mft-label" data-i18n="filter.filters">필터</span>
+          <span class="mft-badge" id="mobile-filter-badge" hidden>0</span>
+          <span class="mft-caret" aria-hidden="true">▾</span>
+        </button>
       </div>
+      <div class="mobile-filter-panel" id="mobile-filter-panel">
       <div class="filter-group" id="month-filter-group" role="group" aria-label="월 선택">
         <span class="filter-label" data-i18n="filter.month">월</span>
         <div class="chip-group" id="month-chips">
@@ -125,6 +134,8 @@
           <button type="button" class="chip" data-category="건축">건축</button>
         </div>
       </div>
+
+      </div><!-- /.mobile-filter-panel -->
 
       <div class="filter-meta">
         <div class="filter-meta-left">

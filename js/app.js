@@ -487,6 +487,31 @@ function syncBottomNav() {
   });
 }
 
+// ── 모바일 필터 토글 ──
+const mobileFilterToggleEl = document.getElementById('mobile-filter-toggle');
+const mobileFilterBadgeEl = document.getElementById('mobile-filter-badge');
+if (mobileFilterToggleEl) {
+  mobileFilterToggleEl.addEventListener('click', () => {
+    const open = document.body.classList.toggle('filters-open');
+    mobileFilterToggleEl.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+}
+
+function syncMobileFilterBadge() {
+  if (!mobileFilterBadgeEl) return;
+  let count = 0;
+  if (currentTab === 'festivals' && state.month != null) count++;
+  if (state.region != null) count++;
+  if (currentTab === 'places' && state.category != null) count++;
+  if (state.collection != null) count++;
+  if (count > 0) {
+    mobileFilterBadgeEl.hidden = false;
+    mobileFilterBadgeEl.textContent = String(count);
+  } else {
+    mobileFilterBadgeEl.hidden = true;
+  }
+}
+
 // ── URL 동기화 ──
 function syncUrl() {
   const params = new URLSearchParams();
@@ -571,6 +596,7 @@ function syncFilterUI() {
     state.collection != null;
   resetBtnEl.hidden = !anyActive;
   syncBottomNav();
+  syncMobileFilterBadge();
 }
 
 function setMonth(value) {
