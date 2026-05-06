@@ -1318,15 +1318,9 @@ body.modal-open { overflow: hidden; }
   transform: translateY(0) scale(0.9);
 }
 .stb-icon {
-  font-size: 1.15rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
-}
-.stb-label {
-  font-size: 0.6rem;
-  font-weight: 600;
-  margin-top: 1px;
-  white-space: nowrap;
 }
 
 /* ──────────────────────────────────────────────
