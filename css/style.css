@@ -1279,6 +1279,57 @@ body.modal-open { overflow: hidden; }
 }
 
 /* ──────────────────────────────────────────────
+   SCROLL TOP BTN — 모바일 우하단 플로팅 "맨 위로" 버튼
+   ────────────────────────────────────────────── */
+.scroll-top-btn {
+  display: none; /* PC 기본 숨김 */
+  position: fixed;
+  right: 14px;
+  /* bottom-nav(검정) 위로 띄움. body padding-bottom과 별개로 fixed 기준. */
+  bottom: calc(86px + env(safe-area-inset-bottom, 0));
+  z-index: 60; /* bottom-nav(50)보다 위 */
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  font-family: inherit;
+  letter-spacing: -0.005em;
+  /* 등장 애니메이션 */
+  opacity: 0;
+  transform: translateY(8px) scale(0.92);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+.scroll-top-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.scroll-top-btn:active {
+  transform: translateY(0) scale(0.9);
+}
+.stb-icon {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.stb-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+/* ──────────────────────────────────────────────
    BOTTOM NAV — 모바일 전용 하단 고정 탭 (검정 배경으로 시인성 강화)
    ────────────────────────────────────────────── */
 .bottom-nav {
@@ -1487,12 +1538,23 @@ body.modal-open { overflow: hidden; }
     padding: 36px 0 16px;
   }
 
+  /* 모바일: 필터바 sticky 해제 — 스크롤 내릴 때 콘텐츠 가리지 않음.
+     맨 위로 가려면 우하단 ↑ 버튼 사용. */
+  .filter-bar {
+    position: static;
+    background: var(--surface-1);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
   /* 모바일에선 헤더 탭 숨기고 하단 탭바 사용 */
   .site-header .tabs { display: none; }
   .bottom-nav {
     display: flex;
     align-items: stretch;
   }
+  /* 모바일에서만 ↑ 플로팅 버튼 표시 (visibility는 JS가 .is-visible로 토글) */
+  .scroll-top-btn { display: flex; }
 
   /* 본문이 하단 탭바에 가려지지 않도록 padding 추가 — 검정 nav 두꺼워졌으니 여유 ↑ */
   body {

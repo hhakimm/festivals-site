@@ -561,6 +561,34 @@ function syncMobileFilterBadge() {
   }
 }
 
+// ── 모바일 우하단 "맨 위로" 플로팅 버튼 ──
+const scrollTopBtnEl = document.getElementById('scroll-top-btn');
+if (scrollTopBtnEl) {
+  const SCROLL_THRESHOLD = 300; // 이 만큼 내려야 버튼 등장
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      const visible = y > SCROLL_THRESHOLD;
+      scrollTopBtnEl.classList.toggle('is-visible', visible);
+      // hidden 속성 토글 — 처음 등장 시 transition 살아나도록 약간 지연
+      if (visible && scrollTopBtnEl.hasAttribute('hidden')) {
+        scrollTopBtnEl.removeAttribute('hidden');
+      }
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  // 초기 상태 한 번 체크
+  onScroll();
+
+  scrollTopBtnEl.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
 // ── URL 동기화 ──
 function syncUrl() {
   const params = new URLSearchParams();
