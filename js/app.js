@@ -894,10 +894,23 @@ document.querySelectorAll('.lang-btn').forEach((btn) => {
 init();
 
 // PWA 서비스 워커 등록 — 오프라인 + 자동 업데이트
+// 새 SW가 활성화되면 즉시 페이지 자동 새로고침 (사용자가 캐시 비울 필요 없음)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('./sw.js')
+      .register('./sw.js', { updateViaCache: 'none' })
+      .then((reg) => {
+        // 주기적으로 업데이트 체크 (페이지 열려있는 동안 새 버전 감지)
+        setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000); // 1시간마다
+      })
       .catch((err) => console.warn('Service Worker 등록 실패:', err));
+
+    // 새 SW가 페이지 컨트롤 가져오면 자동 새로고침 — 1번만
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
+    });
   });
 }
