@@ -593,9 +593,17 @@ export async function initExplorer(rootEl: HTMLElement) {
       result = result.filter((it) => it.r === state.region);
     }
 
-    // 테마
+    // 테마 (분류)
     if (state.theme !== 'all' && !state.collection) {
-      result = result.filter((it) => it.th === state.theme);
+      if (state.theme === '_hanok') {
+        // 데이터에 '건축' 테마가 없으므로 이름·주소 키워드로 매칭
+        const HANOK_KEYWORDS = ['궁', '한옥', '서원', '향교', '성', '탑', '루', '정', '문', '대왕릉', '왕릉', '종묘'];
+        result = result.filter((it) =>
+          HANOK_KEYWORDS.some((k) => it.n.includes(k) || it.a.includes(k)),
+        );
+      } else {
+        result = result.filter((it) => it.th === state.theme);
+      }
     }
 
     // 검색 — 원본 한국어 + 외국어 지역명 별칭 매칭

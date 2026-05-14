@@ -248,7 +248,7 @@ export const t = {
   themeHistory: { ko: '🏛️ 역사', en: '🏛️ History', ja: '🏛️ 歴史', zh: '🏛️ 历史' },
   themeRelax: { ko: '♨️ 휴양', en: '♨️ Relaxation', ja: '♨️ 休養', zh: '♨️ 休闲' },
   themeExperience: { ko: '🎢 체험', en: '🎢 Experience', ja: '🎢 体験', zh: '🎢 体验' },
-  themeArchitecture: { ko: '🏗️ 건축', en: '🏗️ Architecture', ja: '🏗️ 建築', zh: '🏗️ 建筑' },
+  themeArchitecture: { ko: '🏯 궁궐·한옥', en: '🏯 Palaces & Hanok', ja: '🏯 宮殿·韓屋', zh: '🏯 宫殿·韩屋' },
   sortDefault: { ko: '기본순', en: 'Default', ja: 'おすすめ', zh: '默认' },
   sortName: { ko: '이름순', en: 'Name', ja: '名前順', zh: '名称' },
   sortDate: { ko: '시작일순', en: 'Start date', ja: '開始日順', zh: '开始日期' },
