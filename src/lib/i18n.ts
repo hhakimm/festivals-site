@@ -211,6 +211,18 @@ export const t = {
     ja: 'クイック',
     zh: '快速',
   },
+  filterMonth: {
+    ko: '월',
+    en: 'Month',
+    ja: '月',
+    zh: '月份',
+  },
+  monthShort: {
+    ko: '{n}월',
+    en: '{n}',
+    ja: '{n}月',
+    zh: '{n}月',
+  },
   quickThisWeekend: {
     ko: '이번 주말',
     en: 'This weekend',
@@ -239,7 +251,7 @@ export const t = {
   bnAttractions: { ko: '여행지', en: 'Trips', ja: '観光地', zh: '景点' },
   bnFestivals: { ko: '축제', en: 'Festivals', ja: 'お祭り', zh: '节庆' },
   bnQuiz: { ko: '테스트', en: 'Quiz', ja: 'テスト', zh: '测试' },
-  navQuizShort: { ko: '🎒 테스트', en: '🎒 Quiz', ja: '🎒 テスト', zh: '🎒 测试' },
+  navQuizShort: { ko: '성향 테스트', en: 'Travel Quiz', ja: '性向テスト', zh: '性格测试' },
   // 카테고리 / 테마 / 정렬 옵션 라벨
   catAll: { ko: '전체', en: 'All', ja: 'すべて', zh: '全部' },
   catAttraction: { ko: '🗺️ 여행지', en: '🗺️ Attractions', ja: '🗺️ 観光地', zh: '🗺️ 景点' },

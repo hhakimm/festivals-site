@@ -125,7 +125,7 @@ const localeMap: Record<Lang, string> = {
             class="quiz-link"
             aria-label={tr('navQuizShort', lang)}
             title={tr('navQuizShort', lang)}
-          >{tr('navQuizShort', lang)}</a>
+          ><span aria-hidden="true">🎒</span> <span class="quiz-link-label">{tr('navQuizShort', lang)}</span></a>
           <a
             href={lang === 'ko' ? `${base}/favorites/` : `${base}/${lang}/favorites/`}
             class="favorites-link"

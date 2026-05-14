@@ -68,6 +68,17 @@ const categories = [
       </div>
     </div>
 
+    <!-- 월 선택 (카테고리=festival 일 때만 표시) -->
+    <div class="filter-row" id="month-row" hidden>
+      <span class="filter-label">{tr('filterMonth', lang)}</span>
+      <div class="chip-group" id="month-chips" role="group" aria-label={tr('filterMonth', lang)}>
+        <button type="button" class="chip chip-active" data-month="all">{tr('all', lang)}</button>
+        {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+          <button type="button" class="chip" data-month={String(m)}>{tr('monthShort', lang).replace('{n}', String(m))}</button>
+        ))}
+      </div>
+    </div>
+
     <div class="filter-row">
       <span class="filter-label">{tr('region', lang)}</span>
       <select id="explore-region" class="filter-select" aria-label={tr('region', lang)}>

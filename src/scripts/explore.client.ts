@@ -40,6 +40,8 @@ interface ExploreState {
   visible: number;
   /** 빠른 날짜 (festival 카테고리에서만 활성). null이면 미선택 */
   quickDate: 'this-weekend' | 'this-week' | 'next-month' | null;
+  /** 월 선택 (festival 카테고리에서만, 1~12 또는 'all') */
+  month: string;
 }
 
 interface Collection {
@@ -515,6 +517,7 @@ export async function initExplorer(rootEl: HTMLElement) {
     collection: url.searchParams.get('collection') || null,
     visible: INITIAL_VISIBLE,
     quickDate: (url.searchParams.get('when') as ExploreState['quickDate']) || null,
+    month: url.searchParams.get('month') || 'all',
   };
 
   // 데이터 로드
@@ -585,6 +588,23 @@ export async function initExplorer(rootEl: HTMLElement) {
         result = result.filter(
           (it) => it.sd != null && it.ed != null && it.sd <= range.end && it.ed >= range.start,
         );
+      }
+    }
+
+    // 월 필터 (festival 카테고리, state.month='1'~'12')
+    if (state.category === 'festival' && state.month !== 'all') {
+      const m = parseInt(state.month, 10);
+      if (m >= 1 && m <= 12) {
+        const mPad = String(m).padStart(2, '0');
+        result = result.filter((it) => {
+          if (!it.sd || !it.ed) return false;
+          // 축제 기간(YYYYMMDD)이 해당 월과 겹치면 매치
+          const sMonth = parseInt(it.sd.slice(4, 6), 10);
+          const eMonth = parseInt(it.ed.slice(4, 6), 10);
+          // 같은 해 가정: sMonth <= m <= eMonth, 또는 연말~연초 걸치는 케이스 처리
+          if (sMonth <= eMonth) return m >= sMonth && m <= eMonth;
+          return m >= sMonth || m <= eMonth;
+        });
       }
     }
 
@@ -676,6 +696,7 @@ export async function initExplorer(rootEl: HTMLElement) {
     if (state.favoritesOnly) params.set('fav', '1');
     if (state.collection) params.set('collection', state.collection);
     if (state.quickDate) params.set('when', state.quickDate);
+    if (state.month !== 'all') params.set('month', state.month);
     const s = params.toString();
     const newUrl = window.location.pathname + (s ? '?' + s : '');
     window.history.replaceState(null, '', newUrl);
@@ -713,6 +734,13 @@ export async function initExplorer(rootEl: HTMLElement) {
     const quickRow = rootEl.querySelector<HTMLElement>('#quick-date-row');
     const quickChips = rootEl.querySelector<HTMLElement>('#quick-date-chips');
     if (quickRow) quickRow.hidden = state.category !== 'festival';
+    // 월 row: category가 festival일 때만 보임 + 활성 칩 동기화
+    const monthRow = rootEl.querySelector<HTMLElement>('#month-row');
+    const monthChips = rootEl.querySelector<HTMLElement>('#month-chips');
+    if (monthRow) monthRow.hidden = state.category !== 'festival';
+    monthChips?.querySelectorAll('.chip').forEach((c) => {
+      c.classList.toggle('chip-active', (c as HTMLElement).dataset.month === state.month);
+    });
     quickChips?.querySelectorAll('.chip').forEach((c) => {
       c.classList.toggle(
         'chip-active',
@@ -844,8 +872,11 @@ export async function initExplorer(rootEl: HTMLElement) {
     const chip = (e.target as HTMLElement).closest<HTMLElement>('.chip');
     if (!chip || !chip.dataset.category) return;
     state.category = chip.dataset.category as ExploreState['category'];
-    // festival 이 아닐 때 quickDate는 의미 없음 → 정리
-    if (state.category !== 'festival') state.quickDate = null;
+    // festival 이 아닐 때 quickDate·month는 의미 없음 → 정리
+    if (state.category !== 'festival') {
+      state.quickDate = null;
+      state.month = 'all';
+    }
     state.visible = INITIAL_VISIBLE;
     update();
   });
@@ -858,8 +889,22 @@ export async function initExplorer(rootEl: HTMLElement) {
     const key = chip.dataset.quick as NonNullable<ExploreState['quickDate']>;
     // 같은 거 누르면 해제
     state.quickDate = state.quickDate === key ? null : key;
+    // 빠른 날짜와 월은 상호 배타 — 둘 중 하나만
+    if (state.quickDate) state.month = 'all';
     // festival 카테고리로 자동 전환 (사용 편의)
     if (state.quickDate && state.category !== 'festival') state.category = 'festival';
+    state.visible = INITIAL_VISIBLE;
+    update();
+  });
+
+  // 월 칩
+  const monthChipsEl = rootEl.querySelector<HTMLElement>('#month-chips');
+  monthChipsEl?.addEventListener('click', (e) => {
+    const chip = (e.target as HTMLElement).closest<HTMLElement>('.chip');
+    if (!chip || chip.dataset.month == null) return;
+    state.month = chip.dataset.month;
+    // 월 선택 시 빠른 날짜 해제 (상호 배타)
+    if (state.month !== 'all') state.quickDate = null;
     state.visible = INITIAL_VISIBLE;
     update();
   });
@@ -928,6 +973,7 @@ export async function initExplorer(rootEl: HTMLElement) {
     state.userLocation = null;
     state.collection = null;
     state.quickDate = null;
+    state.month = 'all';
     state.visible = INITIAL_VISIBLE;
     if (searchInput) searchInput.value = '';
     update();
