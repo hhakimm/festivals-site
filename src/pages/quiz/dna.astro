@@ -72,33 +72,29 @@ const desc = dnaT('pageDesc', lang);
 
           <p class="dna-desc">{p.description[lang]}</p>
 
-          <!-- 🎯 4축 레이더 차트 (SVG) — JS가 실제 점수로 폴리곤 그림 -->
+          <!-- 🎯 성향 분석 차트 — 4축 다이아몬드 레이더 -->
           <section class="dna-radar-section">
             <h2 class="dna-h">{dnaT('hRadar', lang)}</h2>
             <div class="dna-radar-wrap">
-              <svg class="dna-radar" viewBox="-110 -110 220 220" data-radar role="img" aria-label="4-axis radar">
-                {/* 격자 — 4개 동심원 */}
+              <svg class="dna-radar" viewBox="-160 -135 320 270" data-radar role="img" aria-label="trait analysis">
                 {[0.25, 0.5, 0.75, 1].map((r) => (
                   <polygon points={`0,${-100*r} ${100*r},0 0,${100*r} ${-100*r},0`}
                     fill="none" stroke="#e5e5e5" stroke-width="1" />
                 ))}
-                {/* 축 라인 */}
                 <line x1="0" y1="-100" x2="0" y2="100" stroke="#e5e5e5" stroke-width="1" />
                 <line x1="-100" y1="0" x2="100" y2="0" stroke="#e5e5e5" stroke-width="1" />
-                {/* 사용자 점수 폴리곤 — 50% 기본, JS가 갱신 */}
                 <polygon data-radar-shape
                   points="0,-50 50,0 0,50 -50,0"
                   fill={`${p.gradient.from}33`} stroke={p.gradient.from} stroke-width="2.5" />
-                {/* 4축 꼭지점 점 */}
-                <circle data-radar-dot="0" cx="0" cy="-50" r="3" fill={p.gradient.from} />
-                <circle data-radar-dot="1" cx="50" cy="0" r="3" fill={p.gradient.from} />
-                <circle data-radar-dot="2" cx="0" cy="50" r="3" fill={p.gradient.from} />
-                <circle data-radar-dot="3" cx="-50" cy="0" r="3" fill={p.gradient.from} />
-                {/* 축 라벨 */}
-                <text x="0" y="-105" text-anchor="middle" font-size="11" fill="#525252" font-weight="700">{AXES[0].highName[lang]}</text>
-                <text x="0" y="118" text-anchor="middle" font-size="11" fill="#525252" font-weight="700">{AXES[0].lowName[lang]}</text>
-                <text x="108" y="4" text-anchor="start" font-size="11" fill="#525252" font-weight="700">{AXES[1].highName[lang].slice(0,3)}</text>
-                <text x="-108" y="4" text-anchor="end" font-size="11" fill="#525252" font-weight="700">{AXES[1].lowName[lang].slice(0,3)}</text>
+                <circle data-radar-dot="0" cx="0" cy="-50" r="3.5" fill={p.gradient.from} />
+                <circle data-radar-dot="1" cx="50" cy="0" r="3.5" fill={p.gradient.from} />
+                <circle data-radar-dot="2" cx="0" cy="50" r="3.5" fill={p.gradient.from} />
+                <circle data-radar-dot="3" cx="-50" cy="0" r="3.5" fill={p.gradient.from} />
+                {/* 4축 라벨 — viewBox 확장으로 모두 표시 */}
+                <text x="0" y="-115" text-anchor="middle" font-size="12" fill="#171717" font-weight="800">{AXES[0].highName[lang]}</text>
+                <text x="115" y="3" text-anchor="start" font-size="12" fill="#171717" font-weight="800">{AXES[1].highName[lang]}</text>
+                <text x="0" y="125" text-anchor="middle" font-size="12" fill="#171717" font-weight="800">{AXES[2].highName[lang]}</text>
+                <text x="-115" y="3" text-anchor="end" font-size="12" fill="#171717" font-weight="800">{AXES[3].highName[lang]}</text>
               </svg>
             </div>
             {/* 4축 막대 (보조) */}
@@ -317,8 +313,26 @@ const desc = dnaT('pageDesc', lang);
     .dna-axis-end { font-weight: 500; }
     .dna-axis-end.is-on { color: #171717; font-weight: 800; }
     .dna-axis-pct { font-feature-settings: "tnum"; font-weight: 700; color: #171717; font-size: 0.88rem; }
-    .dna-axis-bar { height: 8px; background: #e5e5e5; border-radius: 999px; overflow: hidden; position: relative; }
-    .dna-axis-fill { display: block; height: 100%; background: linear-gradient(90deg, #facc15, #f59e0b); border-radius: 999px; transition: width 0.6s ease; }
+    /* 양방향 막대 — 50% 중앙 기준으로 좌/우 차오름 */
+    .dna-axis-bar {
+      height: 10px; background: #f0f0f0; border-radius: 999px;
+      position: relative; overflow: hidden;
+    }
+    .dna-axis-bar::before {
+      /* 중앙 분기선 */
+      content: ''; position: absolute; left: 50%; top: 0;
+      width: 1px; height: 100%; background: #a3a3a3; z-index: 1;
+    }
+    .dna-axis-fill {
+      display: block; height: 100%; border-radius: 999px;
+      position: absolute; top: 0;
+      transition: width 0.6s ease, left 0.6s ease, background 0.3s ease;
+      /* 기본 50%(균형) — JS가 갱신 */
+      left: 50%; width: 0%;
+      background: #facc15;
+    }
+    .dna-axis-fill.is-high { background: #facc15; }
+    .dna-axis-fill.is-low { background: #0891b2; }
 
     .dna-desc { color: #525252; line-height: 1.65; margin: 0 0 24px; font-size: 0.95rem; text-align: center; max-width: 620px; margin-left: auto; margin-right: auto; }
 

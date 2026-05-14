@@ -767,7 +767,8 @@ export const DNA_LABELS = {
   hCompat: { ko: '🤝 여행 호환성', en: '🤝 Travel compatibility', ja: '🤝 旅行相性', zh: '🤝 旅行兼容性' },
   cBest: { ko: '잘 맞는 동행', en: 'Best match', ja: '相性◎', zh: '最佳搭档' },
   cWorst: { ko: '주의할 동행', en: 'Caution', ja: '相性△', zh: '需注意' },
-  hRadar: { ko: '🎯 4축 레이더', en: '🎯 4-axis radar', ja: '🎯 4軸レーダー', zh: '🎯 4轴雷达' },
+  hRadar: { ko: '🎯 성향 분석 차트', en: '🎯 Trait analysis', ja: '🎯 性向分析チャート', zh: '🎯 性格分析图' },
+  balanced: { ko: '균형', en: 'Balanced', ja: 'バランス', zh: '均衡' },
   storyShare: {
     ko: '📱 스토리에 공유하기',
     en: '📱 Share to story',

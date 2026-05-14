@@ -54,17 +54,17 @@ const radarPts = `0,${-top} ${right},0 0,${bottom} ${-left},0`;
 
     <section class="psn-radar">
       <h2 class="psn-h">{dnaT('hRadar', lang)}</h2>
-      <svg viewBox="-110 -110 220 220" class="psn-radar-svg">
+      <svg viewBox="-160 -135 320 270" class="psn-radar-svg">
         {[0.25, 0.5, 0.75, 1].map((r) => (
           <polygon points={`0,${-100*r} ${100*r},0 0,${100*r} ${-100*r},0`} fill="none" stroke="#e5e5e5" />
         ))}
         <line x1="0" y1="-100" x2="0" y2="100" stroke="#e5e5e5" />
         <line x1="-100" y1="0" x2="100" y2="0" stroke="#e5e5e5" />
         <polygon points={radarPts} fill={`${p.gradient.from}33`} stroke={p.gradient.from} stroke-width="2.5" />
-        <text x="0" y="-105" text-anchor="middle" font-size="11" fill="#525252" font-weight="700">{AXES[0].highName[lang]}</text>
-        <text x="0" y="118" text-anchor="middle" font-size="11" fill="#525252" font-weight="700">{AXES[0].lowName[lang]}</text>
-        <text x="108" y="4" text-anchor="start" font-size="11" fill="#525252" font-weight="700">{AXES[1].highName[lang].slice(0,3)}</text>
-        <text x="-108" y="4" text-anchor="end" font-size="11" fill="#525252" font-weight="700">{AXES[1].lowName[lang].slice(0,3)}</text>
+        <text x="0" y="-115" text-anchor="middle" font-size="12" fill="#171717" font-weight="800">{AXES[0].highName[lang]}</text>
+        <text x="115" y="3" text-anchor="start" font-size="12" fill="#171717" font-weight="800">{AXES[1].highName[lang]}</text>
+        <text x="0" y="125" text-anchor="middle" font-size="12" fill="#171717" font-weight="800">{AXES[2].highName[lang]}</text>
+        <text x="-115" y="3" text-anchor="end" font-size="12" fill="#171717" font-weight="800">{AXES[3].highName[lang]}</text>
       </svg>
     </section>
 

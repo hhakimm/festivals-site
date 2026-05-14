@@ -120,17 +120,46 @@ export function initDna(root: HTMLElement) {
     showScreen('result', code);
     const resultEl = Array.from(resultEls).find((el) => el.dataset.code === code);
     if (!resultEl) return;
-    // 4축 막대 채우기
+    // 4축 양방향 막대 + 라벨
+    const BALANCED_LABEL = ({ ko: '균형', en: 'Balanced', ja: 'バランス', zh: '均衡' } as Record<string, string>)[lang] || '균형';
     for (const a of AXES) {
-      const pct = percent[a];
+      const pct = percent[a]; // 0~100, 50=중립, 높을수록 high쪽
       const fill = resultEl.querySelector<HTMLElement>(`[data-axis-fill="${a}"]`);
       const pctEl = resultEl.querySelector<HTMLElement>(`[data-axis="${a}"] .dna-axis-pct`);
-      if (fill) fill.style.width = `${pct}%`;
+      if (fill) {
+        // 50% 중앙 기준 양방향
+        if (Math.abs(pct - 50) <= 5) {
+          // 거의 균형
+          fill.style.left = '49%';
+          fill.style.width = '2%';
+          fill.classList.remove('is-high', 'is-low');
+        } else if (pct >= 50) {
+          // 오른쪽으로 차오름 (high쪽 = right end... 우리 시각화는 좌→우)
+          // 라벨 순서: high(좌측)-pct-low(우측). high가 우세면 막대를 50%→pct로 (우측 방향)
+          // 하지만 보기에 high가 좌측에 있으니 high 우세는 막대가 좌측으로 차오르는 게 직관적.
+          // 그래서 high 우세 시 좌측에서 50%까지, low 우세 시 50%에서 우측으로.
+          // pct >= 50 (high 우세): width = pct - 50, left = 100 - pct (오른쪽 끝에서 좌측 50%까지)
+          // 실은 더 직관적인 표시: left = 50 - (pct - 50), width = pct - 50 → left가 50 이하부터 50까지
+          fill.style.left = `${100 - pct}%`;
+          fill.style.width = `${pct - 50}%`;
+          fill.classList.add('is-high');
+          fill.classList.remove('is-low');
+        } else {
+          // low 우세 (pct < 50): 50% → (50 + (50-pct)) = (50 + 50-pct) = 100-pct? 우측 방향
+          // left=50, width=50-pct
+          fill.style.left = '50%';
+          fill.style.width = `${50 - pct}%`;
+          fill.classList.add('is-low');
+          fill.classList.remove('is-high');
+        }
+      }
       if (pctEl) {
-        const isHigh = pct >= 50;
-        const dom = isHigh ? pct : 100 - pct;
-        const sideCode = isHigh ? HIGH[a] : LOW[a];
-        pctEl.textContent = `${dom}% ${sideCode}`;
+        if (Math.abs(pct - 50) <= 5) {
+          pctEl.textContent = BALANCED_LABEL;
+        } else {
+          const dom = pct >= 50 ? pct : 100 - pct;
+          pctEl.textContent = `${dom}%`;
+        }
         pctEl.dataset.pct = String(pct);
       }
     }
