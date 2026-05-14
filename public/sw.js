@@ -4,7 +4,7 @@
  * - 정적 자산(이미지·폰트·JS·CSS): cache-first (재방문 빠르게)
  */
 
-const CACHE_VERSION = 'v2-astro'; /* 옛 vanilla 사이트 캐시 무효화 */
+const CACHE_VERSION = 'v3-brand'; /* 브랜딩 리뉴얼 — 로고/OG/CSS 갱신 */
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const DATA_CACHE = `data-${CACHE_VERSION}`;
 const BASE = '/festivals-site';

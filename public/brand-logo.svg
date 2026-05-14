@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet" aria-label="brand mark">
+  <rect width="32" height="32" rx="7" fill="#171717"/>
+  <circle cx="23" cy="10" r="3" fill="#facc15"/>
+  <path d="M4 26 L10 14 L15 21 L20 11 L28 26 Z" fill="#fff"/>
+</svg>

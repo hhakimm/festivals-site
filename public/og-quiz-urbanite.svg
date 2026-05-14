@@ -7,10 +7,14 @@
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#g)"/>
-  <circle cx="1080" cy="100" r="48" fill="#facc15" opacity="0.9"/>
 
-  <rect x="60" y="56" width="240" height="44" rx="22" fill="#facc15"/>
-  <text x="180" y="86" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#171717">여행 성향 테스트</text>
+  <!-- 브랜드 마크 (좌상단) — 모든 OG에 일관 -->
+  <g transform="translate(60 56)">
+    <rect width="56" height="56" rx="12" fill="#fff" opacity="0.95"/>
+    <circle cx="40" cy="17" r="5" fill="#facc15"/>
+    <path d="M7 46 L18 24 L27 36 L35 19 L50 46 Z" fill="#171717"/>
+  </g>
+  <text x="130" y="92" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#fff" letter-spacing="-0.3">한국 가볼 만한 곳 · 여행 성향 테스트</text>
 
   <text x="600" y="260" text-anchor="middle" font-size="170">🏙️</text>
 

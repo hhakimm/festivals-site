@@ -58,10 +58,29 @@ img { max-width: 100%; height: auto; display: block; }
   justify-content: space-between;
   padding: 12px 16px;
 }
+/* 브랜드 마크 + 워드마크 (헤더 좌측) */
 .brand {
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+.brand:hover { transform: translateY(-1px); text-decoration: none; }
+.brand-mark { display: inline-flex; flex-shrink: 0; }
+.brand-mark svg { display: block; }
+.brand-name {
+  font-weight: 800;
   font-size: 17px;
   color: var(--c-text);
+  letter-spacing: -0.02em;
+}
+@media (max-width: 480px) {
+  /* 모바일에서는 워드마크 짧게 처리 */
+  .brand-name { font-size: 15px; }
+}
+@media (max-width: 380px) {
+  .brand-name { font-size: 14px; }
 }
 .header-right {
   display: flex;
@@ -252,6 +271,56 @@ img { max-width: 100%; height: auto; display: block; }
   line-height: 1;
   cursor: pointer;
   padding: 4px 6px;
+}
+
+/* About 페이지 브랜드 헤더 — 큰 마크 + 태그라인 */
+.about-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0 24px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--c-border);
+}
+.about-brand-mark { flex-shrink: 0; }
+.about-brand-mark svg { display: block; border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.about-tag {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--c-text);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+@media (max-width: 480px) {
+  .about-brand { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .about-tag { font-size: 1rem; }
+}
+
+/* 푸터 브랜드 시그니처 (모든 페이지 하단 동일) */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--c-border);
+}
+.footer-brand-mark { display: inline-flex; flex-shrink: 0; }
+.footer-brand-mark svg { display: block; }
+.footer-brand-name {
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--c-text);
+  letter-spacing: -0.015em;
+}
+.footer-brand-tag {
+  color: var(--c-muted);
+  font-size: 12px;
+  letter-spacing: -0.005em;
+}
+@media (max-width: 480px) {
+  .footer-brand-tag { width: 100%; font-size: 11px; }
 }
 
 .footer-coffee {

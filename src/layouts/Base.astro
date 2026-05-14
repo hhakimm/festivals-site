@@ -118,7 +118,12 @@ const localeMap: Record<Lang, string> = {
     <a href="#main" class="skip-link">본문 바로가기</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a href={lang === 'ko' ? `${base}/` : `${base}/${lang}/`} class="brand">{siteName}</a>
+        <a href={lang === 'ko' ? `${base}/` : `${base}/${lang}/`} class="brand" aria-label={siteName}>
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="28" height="28" focusable="false"><rect width="32" height="32" rx="7" fill="#171717"/><circle cx="23" cy="10" r="3" fill="#facc15"/><path d="M4 26 L10 14 L15 21 L20 11 L28 26 Z" fill="#fff"/></svg>
+          </span>
+          <span class="brand-name">{siteName}</span>
+        </a>
         <div class="header-right">
           <a
             href={lang === 'ko' ? `${base}/quiz/` : `${base}/${lang}/quiz/`}
@@ -154,6 +159,13 @@ const localeMap: Record<Lang, string> = {
 
     <footer class="site-footer">
       <div class="container">
+        <div class="footer-brand">
+          <span class="footer-brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="24" height="24" focusable="false"><rect width="32" height="32" rx="7" fill="#171717"/><circle cx="23" cy="10" r="3" fill="#facc15"/><path d="M4 26 L10 14 L15 21 L20 11 L28 26 Z" fill="#fff"/></svg>
+          </span>
+          <span class="footer-brand-name">{siteName}</span>
+          <span class="footer-brand-tag">{tr('brandTag', lang)}</span>
+        </div>
         <nav class="footer-nav" aria-label="footer">
           <a href={lang === 'ko' ? `${base}/about/` : `${base}/${lang}/about/`}>{tr('navAbout', lang)}</a>
           <a href={lang === 'ko' ? `${base}/privacy/` : `${base}/${lang}/privacy/`}>{tr('navPrivacy', lang)}</a>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" preserveAspectRatio="xMidYMid meet" aria-label="한국 가볼 만한 곳 로고 마크">
+  <!-- 라운드 검정 배경 -->
+  <rect width="64" height="64" rx="14" fill="#171717"/>
+  <!-- 해 (노란 점) — 좌상단 -->
+  <circle cx="46" cy="20" r="6" fill="#facc15"/>
+  <!-- 두 개의 산봉우리 (흰색) — 한반도 산악 + 일출 모티프 -->
+  <path d="M8 52 L20 28 L30 42 L40 22 L56 52 Z" fill="#fff"/>
+  <!-- 산 그림자 (디테일) -->
+  <path d="M20 28 L24 34 L20 36 Z" fill="#a3a3a3" opacity="0.4"/>
+  <path d="M40 22 L46 30 L40 32 Z" fill="#a3a3a3" opacity="0.4"/>
+</svg>

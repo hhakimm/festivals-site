@@ -1,1 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#111"/><text x="600" y="290" font-size="72" font-weight="700" text-anchor="middle" fill="#fff" font-family="-apple-system, sans-serif">한국 가볼 만한 곳</text><text x="600" y="370" font-size="32" text-anchor="middle" fill="#a1a1aa" font-family="-apple-system, sans-serif">2026 월별 축제와 지역별 여행지를 한눈에</text><text x="600" y="450" font-size="24" text-anchor="middle" fill="#60a5fa">KO · EN · JA · ZH</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid slice">
+  <rect width="1200" height="630" fill="#171717"/>
+  <!-- 그라데이션 글로우 -->
+  <radialGradient id="g" cx="0.85" cy="0.2" r="0.6">
+    <stop offset="0" stop-color="#facc15" stop-opacity="0.22"/>
+    <stop offset="1" stop-color="#facc15" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1200" height="630" fill="url(#g)"/>
+
+  <!-- 브랜드 마크 (좌상단) — 산 + 해 -->
+  <g transform="translate(60 60)">
+    <rect width="84" height="84" rx="18" fill="#fff"/>
+    <circle cx="60" cy="26" r="8" fill="#facc15"/>
+    <path d="M10 68 L26 36 L40 54 L52 28 L74 68 Z" fill="#171717"/>
+  </g>
+  <text x="166" y="100" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="#facc15" letter-spacing="-0.5">한국 가볼 만한 곳 · TravelKorea</text>
+
+  <!-- 메인 카피 -->
+  <text x="600" y="310" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="86" font-weight="800" text-anchor="middle" fill="#fff" letter-spacing="-3">한국, 너에게</text>
+  <text x="600" y="408" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="86" font-weight="800" text-anchor="middle" fill="#facc15" letter-spacing="-3">어울리는 곳을 찾다</text>
+
+  <!-- 서브 -->
+  <text x="600" y="478" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="28" font-weight="500" text-anchor="middle" fill="#a3a3a3" letter-spacing="-0.5">13,000+ 큐레이션 · 여행 성향 테스트 · 4개 언어</text>
+
+  <!-- 하단 알약 -->
+  <rect x="436" y="528" width="328" height="48" rx="24" fill="#facc15"/>
+  <text x="600" y="560" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="22" font-weight="800" text-anchor="middle" fill="#171717">🎒 여행 DNA 분석 시작 →</text>
+</svg>
