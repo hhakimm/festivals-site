@@ -1,0 +1,150 @@
+---
+/**
+ * 페르소나별 정적 DNA 결과 페이지 (16개 × 4 lang).
+ * OG 메타가 페르소나 그라데이션 SVG를 가리켜 공유 시 매력적.
+ */
+import Base from '@/layouts/Base.astro';
+import ItemCard from '@/components/ItemCard.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import {
+  DNA_PERSONAS, DNA_CODES, AXES,
+  getAllDnaRecommendations, dnaT,
+} from '@/lib/quiz-dna';
+import { tr } from '@/lib/i18n';
+
+export function getStaticPaths() {
+  return DNA_CODES.map((code) => ({ params: { code }, props: { code } }));
+}
+const { code } = Astro.props as { code: string };
+const p = DNA_PERSONAS[code];
+const lang = 'ko' as const;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const items = getAllDnaRecommendations()[code];
+
+const title = `${p.name[lang]} (${code}) — ${dnaT('pageTitle', lang)} | ${tr('siteName', lang)}`;
+const description = `${p.tagline[lang]} — ${p.description[lang].slice(0, 90)}…`;
+
+// 코드 → 가상 백분율 (high=80, low=20)
+const HIGH_CH = ['A', 'N', 'P', 'B'];
+const pct = AXES.map((_, i) => HIGH_CH.includes(code[i]) ? 80 : 20);
+// 레이더 폴리곤 포인트
+const [top, right, bottom, left] = pct;
+const radarPts = `0,${-top} ${right},0 0,${bottom} ${-left},0`;
+---
+
+<Base
+  title={title}
+  description={description}
+  lang={lang}
+  canonicalPath={`/quiz/dna/r/${code}/`}
+  ogImage="/og-quiz.svg"
+>
+  <section class="psn-page">
+    <a href={`${base}/quiz/dna/`} class="psn-back">← {dnaT('retake', lang)}</a>
+
+    <div class="psn-hero" style={`background: linear-gradient(135deg, ${p.gradient.from}, ${p.gradient.to});`}>
+      <p class="psn-eyebrow">{dnaT('yourCode', lang)}</p>
+      <div class="psn-code">{code.split('').map((c) => <span class="psn-char">{c}</span>)}</div>
+      <div class="psn-emoji">{p.emoji}</div>
+      <h1 class="psn-name">{p.name[lang]}</h1>
+      <p class="psn-tag">"{p.tagline[lang]}"</p>
+    </div>
+
+    <p class="psn-desc">{p.description[lang]}</p>
+
+    <section class="psn-radar">
+      <h2 class="psn-h">{dnaT('hRadar', lang)}</h2>
+      <svg viewBox="-110 -110 220 220" class="psn-radar-svg">
+        {[0.25, 0.5, 0.75, 1].map((r) => (
+          <polygon points={`0,${-100*r} ${100*r},0 0,${100*r} ${-100*r},0`} fill="none" stroke="#e5e5e5" />
+        ))}
+        <line x1="0" y1="-100" x2="0" y2="100" stroke="#e5e5e5" />
+        <line x1="-100" y1="0" x2="100" y2="0" stroke="#e5e5e5" />
+        <polygon points={radarPts} fill={`${p.gradient.from}33`} stroke={p.gradient.from} stroke-width="2.5" />
+        <text x="0" y="-105" text-anchor="middle" font-size="11" fill="#525252" font-weight="700">{AXES[0].highName[lang]}</text>
+        <text x="0" y="118" text-anchor="middle" font-size="11" fill="#525252" font-weight="700">{AXES[0].lowName[lang]}</text>
+        <text x="108" y="4" text-anchor="start" font-size="11" fill="#525252" font-weight="700">{AXES[1].highName[lang].slice(0,3)}</text>
+        <text x="-108" y="4" text-anchor="end" font-size="11" fill="#525252" font-weight="700">{AXES[1].lowName[lang].slice(0,3)}</text>
+      </svg>
+    </section>
+
+    <section class="psn-block">
+      <h2 class="psn-h">{dnaT('hStrengths', lang)}</h2>
+      <ul class="psn-list psn-list-pos">{p.strengths[lang].map((t) => <li>{t}</li>)}</ul>
+    </section>
+
+    <div class="psn-two">
+      <section class="psn-block">
+        <h2 class="psn-h">{dnaT('hCautions', lang)}</h2>
+        <ul class="psn-list psn-list-warn">{p.cautions[lang].map((t) => <li>{t}</li>)}</ul>
+      </section>
+      <section class="psn-block">
+        <h2 class="psn-h">{dnaT('hTips', lang)}</h2>
+        <ul class="psn-list psn-list-tip">{p.tips[lang].map((t) => <li>{t}</li>)}</ul>
+      </section>
+    </div>
+
+    <div class="psn-two">
+      <section class="psn-mentor">
+        <p class="psn-mentor-eb">{dnaT('hMentor', lang)}</p>
+        <p class="psn-mentor-n">{p.mentor[lang]}</p>
+      </section>
+      <section class="psn-rare">
+        <p class="psn-rare-eb">{dnaT('hRarity', lang)}</p>
+        <p class="psn-rare-pct">{p.rarity}%</p>
+        <p class="psn-rare-lb">{p.rarity <= 5 ? dnaT('rarityRare', lang) : p.rarity >= 9 ? dnaT('rarityCommon', lang) : dnaT('rarityAvg', lang)}</p>
+      </section>
+    </div>
+
+    <AdSlot lang={lang} layout="horizontal" />
+
+    <section class="psn-recs">
+      <h2 class="section-title">{dnaT('recommendations', lang)}</h2>
+      <div class="grid">{items.map((it) => <ItemCard item={it} lang={lang} base={base} />)}</div>
+    </section>
+
+    <AdSlot lang={lang} layout="rectangle" />
+
+    <div class="psn-cta">
+      <a href={`${base}/quiz/dna/`} class="psn-btn psn-btn-primary">↻ {dnaT('retake', lang)}</a>
+      <a href={`${base}/quiz/`} class="psn-btn psn-btn-secondary">🎒 {tr('navQuizShort', lang)}</a>
+    </div>
+  </section>
+
+  <style>
+    .psn-page { max-width: 880px; margin: 0 auto; padding: 16px 16px 80px; }
+    .psn-back { display: inline-block; color: #525252; text-decoration: none; font-size: 0.88rem; margin-bottom: 12px; }
+    .psn-hero { text-align: center; padding: 36px 24px; border-radius: 24px; color: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.18); margin-bottom: 20px; }
+    .psn-eyebrow { color: rgba(255,255,255,0.78); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin: 0 0 8px; }
+    .psn-code { font-size: clamp(2.6rem, 7vw, 4rem); font-weight: 900; letter-spacing: 0.08em; margin: 0 0 12px; line-height: 1; }
+    .psn-char { display: inline-block; padding: 2px 8px; margin: 0 1px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+    .psn-emoji { font-size: 56px; line-height: 1; margin: 12px 0 8px; }
+    .psn-name { font-size: clamp(1.5rem, 4vw, 2rem); margin: 0 0 6px; font-weight: 800; }
+    .psn-tag { font-size: 1rem; font-style: italic; color: rgba(255,255,255,0.95); margin: 0; }
+    .psn-desc { color: #525252; line-height: 1.65; text-align: center; max-width: 620px; margin: 0 auto 20px; font-size: 0.95rem; }
+    .psn-radar { background: #fafafa; border: 1px solid #f0f0f0; border-radius: 14px; padding: 16px; margin-bottom: 16px; text-align: center; }
+    .psn-radar-svg { width: 100%; max-width: 280px; height: auto; }
+    .psn-h { font-size: 1rem; margin: 0 0 12px; font-weight: 700; }
+    .psn-block { background: #fff; border: 1px solid #f0f0f0; border-radius: 14px; padding: 16px; margin-bottom: 16px; }
+    .psn-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .psn-list li { padding: 10px 12px; border-radius: 10px; font-size: 0.9rem; line-height: 1.4; }
+    .psn-list-pos li { background: #f0fdf4; border-left: 3px solid #16a34a; }
+    .psn-list-warn li { background: #fef2f2; border-left: 3px solid #dc2626; }
+    .psn-list-tip li { background: #fefce8; border-left: 3px solid #facc15; }
+    .psn-two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    @media (max-width: 640px) { .psn-two { grid-template-columns: 1fr; } }
+    .psn-mentor { background: #171717; color: #fff; padding: 18px; border-radius: 14px; }
+    .psn-mentor-eb { color: #facc15; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 6px; }
+    .psn-mentor-n { font-size: 1.1rem; font-weight: 700; margin: 0; }
+    .psn-rare { background: #fff; border: 1px solid #f0f0f0; padding: 18px; border-radius: 14px; }
+    .psn-rare-eb { font-size: 0.78rem; font-weight: 700; color: #737373; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 6px; }
+    .psn-rare-pct { font-size: 2.2rem; font-weight: 900; margin: 0 0 4px; line-height: 1; }
+    .psn-rare-lb { font-size: 0.82rem; color: #525252; margin: 0; font-weight: 600; }
+    .psn-recs { margin: 16px 0; }
+    .section-title { font-size: 1.25rem; margin: 0 0 12px; }
+    .psn-cta { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+    .psn-btn { padding: 12px 24px; border-radius: 999px; font-weight: 700; text-decoration: none; }
+    .psn-btn-primary { background: #171717; color: #fff; }
+    .psn-btn-secondary { background: #facc15; color: #171717; }
+  </style>
+</Base>

@@ -118,9 +118,9 @@ export function initDna(root: HTMLElement) {
   }
   function showResult(code: string, percent: { AC: number; NU: number; PS: number; BL: number }) {
     showScreen('result', code);
-    // 4축 막대 채우기
     const resultEl = Array.from(resultEls).find((el) => el.dataset.code === code);
     if (!resultEl) return;
+    // 4축 막대 채우기
     for (const a of AXES) {
       const pct = percent[a];
       const fill = resultEl.querySelector<HTMLElement>(`[data-axis-fill="${a}"]`);
@@ -133,6 +133,27 @@ export function initDna(root: HTMLElement) {
         pctEl.textContent = `${dom}% ${sideCode}`;
         pctEl.dataset.pct = String(pct);
       }
+    }
+    // 레이더 차트 폴리곤 — 4축을 십자가 4꼭지점에 매핑
+    // 꼭지점: 위(AC), 우(NU), 아래(AC inverted), 좌(NU inverted)? 다이아몬드는 4 꼭지점만 → 4축 매핑
+    // AC=위, NU=우, PS=아래, BL=좌 (값 0~100을 0~100 거리로)
+    const r = (v: number) => Math.max(8, v); // 최소 반경 8 (시각화)
+    const top = r(percent.AC);
+    const right = r(percent.NU);
+    const bottom = r(percent.PS);
+    const left = r(percent.BL);
+    const points = `0,${-top} ${right},0 0,${bottom} ${-left},0`;
+    const shape = resultEl.querySelector<SVGPolygonElement>('[data-radar-shape]');
+    if (shape) shape.setAttribute('points', points);
+    const dots = [
+      { sel: 'data-radar-dot="0"', x: 0, y: -top },
+      { sel: 'data-radar-dot="1"', x: right, y: 0 },
+      { sel: 'data-radar-dot="2"', x: 0, y: bottom },
+      { sel: 'data-radar-dot="3"', x: -left, y: 0 },
+    ];
+    for (const d of dots) {
+      const el = resultEl.querySelector<SVGCircleElement>(`[${d.sel}]`);
+      if (el) { el.setAttribute('cx', String(d.x)); el.setAttribute('cy', String(d.y)); }
     }
     window.scrollTo({ top: 0, behavior: 'auto' });
   }

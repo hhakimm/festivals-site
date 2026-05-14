@@ -70,27 +70,134 @@ const desc = dnaT('pageDesc', lang);
             <p class="dna-result-tagline">"{p.tagline[lang]}"</p>
           </div>
 
-          <!-- 4축 막대 차트 — JS가 실제 백분율로 채움 (정적 마크업은 0%) -->
-          <section class="dna-axes">
-            <h2 class="dna-h">{dnaT('axisBreakdown', lang)}</h2>
-            {AXES.map((a) => {
-              const isHigh = code[AXES.indexOf(a)] === a.highCode;
-              return (
-                <div class="dna-axis-row" data-axis={a.key}>
-                  <div class="dna-axis-labels">
-                    <span class={`dna-axis-end ${isHigh ? 'is-on' : ''}`}>{a.highName[lang]}</span>
-                    <span class="dna-axis-pct" data-pct="0">—</span>
-                    <span class={`dna-axis-end ${!isHigh ? 'is-on' : ''}`}>{a.lowName[lang]}</span>
+          <p class="dna-desc">{p.description[lang]}</p>
+
+          <!-- 🎯 4축 레이더 차트 (SVG) — JS가 실제 점수로 폴리곤 그림 -->
+          <section class="dna-radar-section">
+            <h2 class="dna-h">{dnaT('hRadar', lang)}</h2>
+            <div class="dna-radar-wrap">
+              <svg class="dna-radar" viewBox="-110 -110 220 220" data-radar role="img" aria-label="4-axis radar">
+                {/* 격자 — 4개 동심원 */}
+                {[0.25, 0.5, 0.75, 1].map((r) => (
+                  <polygon points={`0,${-100*r} ${100*r},0 0,${100*r} ${-100*r},0`}
+                    fill="none" stroke="#e5e5e5" stroke-width="1" />
+                ))}
+                {/* 축 라인 */}
+                <line x1="0" y1="-100" x2="0" y2="100" stroke="#e5e5e5" stroke-width="1" />
+                <line x1="-100" y1="0" x2="100" y2="0" stroke="#e5e5e5" stroke-width="1" />
+                {/* 사용자 점수 폴리곤 — 50% 기본, JS가 갱신 */}
+                <polygon data-radar-shape
+                  points="0,-50 50,0 0,50 -50,0"
+                  fill={`${p.gradient.from}33`} stroke={p.gradient.from} stroke-width="2.5" />
+                {/* 4축 꼭지점 점 */}
+                <circle data-radar-dot="0" cx="0" cy="-50" r="3" fill={p.gradient.from} />
+                <circle data-radar-dot="1" cx="50" cy="0" r="3" fill={p.gradient.from} />
+                <circle data-radar-dot="2" cx="0" cy="50" r="3" fill={p.gradient.from} />
+                <circle data-radar-dot="3" cx="-50" cy="0" r="3" fill={p.gradient.from} />
+                {/* 축 라벨 */}
+                <text x="0" y="-105" text-anchor="middle" font-size="11" fill="#525252" font-weight="700">{AXES[0].highName[lang]}</text>
+                <text x="0" y="118" text-anchor="middle" font-size="11" fill="#525252" font-weight="700">{AXES[0].lowName[lang]}</text>
+                <text x="108" y="4" text-anchor="start" font-size="11" fill="#525252" font-weight="700">{AXES[1].highName[lang].slice(0,3)}</text>
+                <text x="-108" y="4" text-anchor="end" font-size="11" fill="#525252" font-weight="700">{AXES[1].lowName[lang].slice(0,3)}</text>
+              </svg>
+            </div>
+            {/* 4축 막대 (보조) */}
+            <div class="dna-axes-bars">
+              {AXES.map((a) => {
+                const isHigh = code[AXES.indexOf(a)] === a.highCode;
+                return (
+                  <div class="dna-axis-row" data-axis={a.key}>
+                    <div class="dna-axis-labels">
+                      <span class={`dna-axis-end ${isHigh ? 'is-on' : ''}`}>{a.highCode} {a.highName[lang]}</span>
+                      <span class="dna-axis-pct" data-pct="0">—</span>
+                      <span class={`dna-axis-end ${!isHigh ? 'is-on' : ''}`}>{a.lowCode} {a.lowName[lang]}</span>
+                    </div>
+                    <div class="dna-axis-bar">
+                      <div class="dna-axis-fill" data-axis-fill={a.key} style="width: 50%"></div>
+                    </div>
                   </div>
-                  <div class="dna-axis-bar">
-                    <div class="dna-axis-fill" data-axis-fill={a.key} style="width: 50%"></div>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </section>
 
-          <p class="dna-desc">{p.description[lang]}</p>
+          <!-- 💪 강점 -->
+          <section class="dna-block">
+            <h2 class="dna-h">{dnaT('hStrengths', lang)}</h2>
+            <ul class="dna-list dna-list-pos">
+              {p.strengths[lang].map((t) => <li>{t}</li>)}
+            </ul>
+          </section>
+
+          <!-- ⚠️ 주의점 + 💡 팁 (2열) -->
+          <div class="dna-two-col">
+            <section class="dna-block">
+              <h2 class="dna-h">{dnaT('hCautions', lang)}</h2>
+              <ul class="dna-list dna-list-warn">
+                {p.cautions[lang].map((t) => <li>{t}</li>)}
+              </ul>
+            </section>
+            <section class="dna-block">
+              <h2 class="dna-h">{dnaT('hTips', lang)}</h2>
+              <ul class="dna-list dna-list-tip">
+                {p.tips[lang].map((t) => <li>{t}</li>)}
+              </ul>
+            </section>
+          </div>
+
+          <!-- 🧑‍🏫 멘토 + 📊 희귀도 (2열) -->
+          <div class="dna-two-col">
+            <section class="dna-mentor-card">
+              <p class="dna-mentor-eyebrow">{dnaT('hMentor', lang)}</p>
+              <p class="dna-mentor-name">{p.mentor[lang]}</p>
+            </section>
+            <section class="dna-rarity-card">
+              <p class="dna-rarity-eyebrow">{dnaT('hRarity', lang)}</p>
+              <p class="dna-rarity-pct">{p.rarity}%</p>
+              <div class="dna-rarity-bar"><div class="dna-rarity-fill" style={`width: ${Math.min(100, p.rarity * 8)}%; background: ${p.gradient.from};`}></div></div>
+              <p class="dna-rarity-label">
+                {p.rarity <= 5 ? dnaT('rarityRare', lang) : p.rarity >= 9 ? dnaT('rarityCommon', lang) : dnaT('rarityAvg', lang)}
+              </p>
+            </section>
+          </div>
+
+          <!-- 🤝 호환성 -->
+          <section class="dna-compat">
+            <h2 class="dna-h">{dnaT('hCompat', lang)}</h2>
+            <div class="dna-compat-row">
+              <div class="dna-compat-side dna-compat-best">
+                <p class="dna-compat-label">{dnaT('cBest', lang)}</p>
+                <div class="dna-compat-cards">
+                  {p.bestMatches.map((bc) => {
+                    const bp = DNA_PERSONAS[bc];
+                    if (!bp) return null;
+                    return (
+                      <a href={`?code=${bc}`} class="dna-compat-card" style={`background: linear-gradient(135deg, ${bp.gradient.from}22, ${bp.gradient.to}22); border-color: ${bp.gradient.from};`}>
+                        <span class="dna-compat-emoji">{bp.emoji}</span>
+                        <span class="dna-compat-code">{bc}</span>
+                        <span class="dna-compat-name">{bp.name[lang]}</span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+              <div class="dna-compat-side dna-compat-worst">
+                <p class="dna-compat-label">{dnaT('cWorst', lang)}</p>
+                <div class="dna-compat-cards">
+                  {(() => {
+                    const wp = DNA_PERSONAS[p.worstMatch];
+                    return wp ? (
+                      <a href={`?code=${p.worstMatch}`} class="dna-compat-card dna-compat-card-warn">
+                        <span class="dna-compat-emoji">{wp.emoji}</span>
+                        <span class="dna-compat-code">{p.worstMatch}</span>
+                        <span class="dna-compat-name">{wp.name[lang]}</span>
+                      </a>
+                    ) : null;
+                  })()}
+                </div>
+              </div>
+            </div>
+          </section>
 
           <div class="dna-actions">
             <button type="button" class="btn-share dna-share-btn" data-share-action="native">↗ {dnaT('share', lang)}</button>
@@ -159,7 +266,51 @@ const desc = dnaT('pageDesc', lang);
     .dna-result-tagline { font-size: 1rem; color: rgba(255,255,255,0.95); font-style: italic; margin: 0; }
 
     .dna-h { font-size: 1rem; margin: 0 0 12px; font-weight: 700; letter-spacing: -0.01em; }
+
+    /* 레이더 차트 섹션 */
+    .dna-radar-section { background: #fafafa; border: 1px solid #f0f0f0; border-radius: 14px; padding: 18px; margin-bottom: 24px; }
+    .dna-radar-wrap { display: flex; justify-content: center; margin-bottom: 8px; }
+    .dna-radar { width: 100%; max-width: 320px; height: auto; }
+    .dna-axes-bars { margin-top: 8px; }
     .dna-axes { background: #fafafa; border: 1px solid #f0f0f0; border-radius: 14px; padding: 16px 18px; margin-bottom: 24px; }
+    /* 새 섹션 — 블록 카드 */
+    .dna-block { background: #fff; border: 1px solid #f0f0f0; border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; }
+    .dna-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .dna-list li { padding: 10px 12px; border-radius: 10px; font-size: 0.9rem; line-height: 1.4; }
+    .dna-list-pos li { background: #f0fdf4; border-left: 3px solid #16a34a; }
+    .dna-list-warn li { background: #fef2f2; border-left: 3px solid #dc2626; }
+    .dna-list-tip li { background: #fefce8; border-left: 3px solid #facc15; }
+    .dna-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    @media (max-width: 640px) { .dna-two-col { grid-template-columns: 1fr; } }
+    /* 멘토 카드 */
+    .dna-mentor-card { background: #171717; color: #fff; padding: 18px; border-radius: 14px; }
+    .dna-mentor-eyebrow { color: #facc15; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 6px; }
+    .dna-mentor-name { font-size: 1.1rem; font-weight: 700; margin: 0; line-height: 1.35; }
+    /* 희귀도 */
+    .dna-rarity-card { background: #fff; border: 1px solid #f0f0f0; padding: 18px; border-radius: 14px; }
+    .dna-rarity-eyebrow { font-size: 0.78rem; font-weight: 700; color: #737373; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 6px; }
+    .dna-rarity-pct { font-size: 2.2rem; font-weight: 900; margin: 0 0 8px; line-height: 1; font-feature-settings: "tnum"; }
+    .dna-rarity-bar { height: 8px; background: #f0f0f0; border-radius: 999px; overflow: hidden; margin-bottom: 6px; }
+    .dna-rarity-fill { display: block; height: 100%; border-radius: 999px; transition: width 0.6s ease; }
+    .dna-rarity-label { font-size: 0.82rem; color: #525252; margin: 0; font-weight: 600; }
+    /* 호환성 */
+    .dna-compat { background: #fafafa; border: 1px solid #f0f0f0; border-radius: 14px; padding: 18px; margin-bottom: 24px; }
+    .dna-compat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .dna-compat-row { grid-template-columns: 1fr; } }
+    .dna-compat-label { font-size: 0.85rem; font-weight: 700; color: #525252; margin: 0 0 10px; }
+    .dna-compat-best .dna-compat-label::before { content: '◎ '; color: #16a34a; }
+    .dna-compat-worst .dna-compat-label::before { content: '△ '; color: #dc2626; }
+    .dna-compat-cards { display: flex; flex-direction: column; gap: 8px; }
+    .dna-compat-card {
+      display: grid; grid-template-columns: 36px 1fr 56px; align-items: center; gap: 10px;
+      padding: 10px 14px; background: #fff; border: 1px solid #e5e5e5;
+      border-radius: 10px; text-decoration: none; color: #171717; transition: transform 0.1s ease;
+    }
+    .dna-compat-card:hover { transform: translateY(-1px); }
+    .dna-compat-card-warn { background: #fef2f2; border-color: #fecaca; }
+    .dna-compat-emoji { font-size: 1.6rem; line-height: 1; }
+    .dna-compat-code { font-weight: 800; letter-spacing: 0.08em; font-size: 0.85rem; }
+    .dna-compat-name { font-size: 0.82rem; color: #525252; text-align: right; }
     .dna-axis-row { padding: 8px 0; }
     .dna-axis-row + .dna-axis-row { border-top: 1px solid #f0f0f0; }
     .dna-axis-labels { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 0.85rem; color: #737373; }
