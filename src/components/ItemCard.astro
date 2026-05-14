@@ -1,6 +1,6 @@
 ---
 import type { Item } from '@/lib/data';
-import { AREA_CODE, formatDate } from '@/lib/data';
+import { AREA_CODE, formatDate, localizedTitle, localizedAddress, hasLocalized } from '@/lib/data';
 import type { Lang } from '@/lib/i18n';
 import { autoDescribe, nameSuffix, shortAddress } from '@/lib/describe';
 
@@ -58,9 +58,16 @@ const phEmoji = phEmojiPool[phHash % phEmojiPool.length];
   </div>
   <div class="card-body">
     <span class="card-region">{region}</span>
-    <h3 class="card-title">{item.title}{nameSuffix(item.title, lang)}</h3>
+    {lang !== 'ko' && hasLocalized(item.id, lang as 'en'|'ja'|'zh') ? (
+      <>
+        <h3 class="card-title">{localizedTitle(item.id, item.title, lang)}</h3>
+        <p class="card-title-orig">{item.title}</p>
+      </>
+    ) : (
+      <h3 class="card-title">{item.title}{nameSuffix(item.title, lang)}</h3>
+    )}
     {dates && <p class="card-dates">{dates}</p>}
     <p class="card-desc">{autoDescribe(item, lang)}</p>
-    <p class="card-addr">{lang === 'ko' ? item.address : shortAddress(item, lang)}</p>
+    <p class="card-addr">{lang === 'ko' ? item.address : (hasLocalized(item.id, lang as 'en'|'ja'|'zh') ? localizedAddress(item.id, item.address, lang) : shortAddress(item, lang))}</p>
   </div>
 </a>

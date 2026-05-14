@@ -1,5 +1,27 @@
 import festivalsData from '../content/data/festivals.json';
 import attractionsData from '../content/data/attractions.json';
+import i18nTitlesData from '../content/data/i18n-titles.json';
+
+// 다국어 title/address 매핑 (fetch-i18n-titles.ts로 생성/보강)
+type I18nMap = Record<string, Partial<Record<'en' | 'ja' | 'zh', { title: string; address: string }>>>;
+const i18nTitles = i18nTitlesData as I18nMap;
+
+/** 다국어 title — 없으면 한국어 원본 fallback */
+export function localizedTitle(itemId: string, originalTitle: string, lang: 'ko' | 'en' | 'ja' | 'zh'): string {
+  if (lang === 'ko') return originalTitle;
+  return i18nTitles[itemId]?.[lang]?.title || originalTitle;
+}
+
+/** 다국어 address — 없으면 한국어 원본 fallback */
+export function localizedAddress(itemId: string, originalAddress: string, lang: 'ko' | 'en' | 'ja' | 'zh'): string {
+  if (lang === 'ko') return originalAddress;
+  return i18nTitles[itemId]?.[lang]?.address || originalAddress;
+}
+
+/** 번역 보유 여부 (있으면 원어 병기 등 UI 분기에 사용) */
+export function hasLocalized(itemId: string, lang: 'en' | 'ja' | 'zh'): boolean {
+  return !!i18nTitles[itemId]?.[lang]?.title;
+}
 
 export interface Item {
   id: string;

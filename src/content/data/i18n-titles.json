@@ -1,0 +1,18 @@
+{
+  "128019":{"en":{"title":"Namiseom Island","address":"1, Namiseom-gil, Chuncheon-si, Gangwon-do"},"ja":{"title":"南怡島","address":"江原道 春川市 南怡島"},"zh":{"title":"南怡岛","address":"江原道 春川市 南怡岛"}},
+  "126508":{"en":{"title":"Gyeongbokgung Palace","address":"161, Sajik-ro, Jongno-gu, Seoul"},"ja":{"title":"景福宮","address":"ソウル特別市 鍾路区 社稷路 161"},"zh":{"title":"景福宫","address":"首尔特别市 钟路区 社稷路 161"}},
+  "126510":{"en":{"title":"Jongmyo Shrine (UNESCO)","address":"157, Jong-ro, Jongno-gu, Seoul"},"ja":{"title":"宗廟 (ユネスコ世界遺産)","address":"ソウル特別市 鍾路区 鍾路 157"},"zh":{"title":"宗庙 (UNESCO世界遗产)","address":"首尔特别市 钟路区 钟路 157"}},
+  "127220":{"en":{"title":"Bukhansan National Park (Seoul)","address":"262, Bogungmun-ro, Seongbuk-gu, Seoul"},"ja":{"title":"北漢山国立公園(ソウル)","address":"ソウル特別市 城北区 報国門路 262"},"zh":{"title":"北汉山国立公园(首尔)","address":"首尔特别市 城北区 报国门路 262"}},
+  "126674":{"en":{"title":"Haeundae Dalmaji-gil","address":"190, Dalmaji-gil, Haeundae-gu, Busan"},"ja":{"title":"海雲台 月見の道","address":"釜山広域市 海雲台区 月見路 190"},"zh":{"title":"海云台月光路","address":"釜山广域市 海云台区 月光路 190"}},
+  "127925":{"en":{"title":"Gwangalli Beach Theme Street","address":"Millak-dong, Suyeong-gu, Busan"},"ja":{"title":"広安里ビーチテーマ通り","address":"釜山広域市 水営区 民楽洞"},"zh":{"title":"广安里海滩主题街","address":"釜山广域市 水营区 民乐洞"}},
+  "2649975":{"en":{"title":"Gwangmyeong Cave","address":"142, Gahak-ro 85beon-gil, Gwangmyeong-si, Gyeonggi-do"},"ja":{"title":"光明洞窟","address":"京畿道 光明市 加鶴路85番ギル 142"},"zh":{"title":"光明洞窟","address":"京畿道 光明市 加鹤路85街 142"}},
+  "2492348":{"en":{"title":"Lotte World Tower SEOUL SKY","address":"300, Olympic-ro, Songpa-gu, Seoul (Floors 117–123)"},"ja":{"title":"ロッテワールドタワー SEOUL SKY","address":"ソウル特別市 松坡区 オリンピック路 300 (117〜123階)"},"zh":{"title":"乐天世界塔 SEOUL SKY","address":"首尔特别市 松坡区 奥林匹克路 300 (117~123层)"}},
+  "128611":{"en":{"title":"Seoul Forest","address":"273, Ttukseom-ro, Seongdong-gu, Seoul"},"ja":{"title":"ソウルの森","address":"ソウル特別市 城東区 纛島路 273"},"zh":{"title":"首尔林","address":"首尔特别市 城东区 纛岛路 273"}},
+  "264353":{"en":{"title":"Insa-dong","address":"62, Insadong-gil, Jongno-gu, Seoul"},"ja":{"title":"仁寺洞","address":"ソウル特別市 鍾路区 仁寺洞ギル 62"},"zh":{"title":"仁寺洞","address":"首尔特别市 钟路区 仁寺洞街 62"}},
+  "264284":{"en":{"title":"Jeonju Hanok Village (Slow City)","address":"99, Girin-daero, Wansan-gu, Jeonju-si, Jeollabuk-do"},"ja":{"title":"全州韓屋村 (スローシティ)","address":"全北特別自治道 全州市 完山区 麒麟大路 99"},"zh":{"title":"全州韩屋村 (慢城)","address":"全北特别自治道 全州市 完山区 麒麟大路 99"}},
+  "894027":{"en":{"title":"Andong Hahoe Folk Village (UNESCO)","address":"186-8, Jeonseo-ro, Pungcheon-myeon, Andong-si, Gyeongsangbuk-do"},"ja":{"title":"安東 河回村 (ユネスコ世界遺産)","address":"慶尚北道 安東市 豊川面 全西路 186-8"},"zh":{"title":"安东河回村 (UNESCO世界遗产)","address":"庆尚北道 安东市 豊川面 全西路 186-8"}},
+  "1492402":{"en":{"title":"Gyeongju Daereungwon (Tumuli Park)","address":"31-1, Hwangnam-dong, Gyeongju-si, Gyeongsangbuk-do"},"ja":{"title":"慶州 大陵苑","address":"慶尚北道 慶州市 皇南洞 31-1"},"zh":{"title":"庆州大陵苑","address":"庆尚北道 庆州市 皇南洞 31-1"}},
+  "126207":{"en":{"title":"Gyeongju Cheomseongdae","address":"140-25, Cheomseong-ro, Gyeongju-si, Gyeongsangbuk-do"},"ja":{"title":"慶州 瞻星台","address":"慶尚北道 慶州市 瞻星路 140-25"},"zh":{"title":"庆州瞻星台","address":"庆尚北道 庆州市 瞻星路 140-25"}},
+  "126216":{"en":{"title":"Gyeongju Seokguram Grotto (UNESCO)","address":"238, Seokgul-ro, Gyeongju-si, Gyeongsangbuk-do"},"ja":{"title":"慶州 石窟庵 (ユネスコ世界遺産)","address":"慶尚北道 慶州市 石窟路 238"},"zh":{"title":"庆州石窟庵 (UNESCO世界遗产)","address":"庆尚北道 庆州市 石窟路 238"}},
+  "125586":{"en":{"title":"Seoraksan National Park (South)","address":"801, Seorak-ro, Seo-myeon, Yangyang-gun, Gangwon-do"},"ja":{"title":"雪岳山国立公園(南雪岳)","address":"江原道 襄陽郡 西面 雪岳路 801"},"zh":{"title":"雪岳山国立公园(南雪岳)","address":"江原道 襄阳郡 西面 雪岳路 801"}}
+}

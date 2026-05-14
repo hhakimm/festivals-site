@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "scripts": {
     "fetch": "tsx --env-file=.env scripts/fetch-tourapi.ts",
+    "fetch:i18n": "tsx --env-file=.env scripts/fetch-i18n-titles.ts",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "npm run fetch && astro build",

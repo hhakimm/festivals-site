@@ -5,7 +5,7 @@ import { autoDescribe, nameSuffix } from '@/lib/describe';
 import WeatherWidget from '@/components/WeatherWidget.astro';
 import RelatedItems from '@/components/RelatedItems.astro';
 import AdSlot from '@/components/AdSlot.astro';
-import { festivals, AREA_CODE, formatDate } from '@/lib/data';
+import { festivals, AREA_CODE, formatDate, localizedTitle, localizedAddress, hasLocalized } from '@/lib/data';
 import { tr, type Lang } from '@/lib/i18n';
 import { buildEventSchema, buildBreadcrumb } from '@/lib/schema';
 
@@ -60,7 +60,8 @@ const jsonLd = [
 
     <header class="detail-header">
       <span class="badge">🎆 {region}</span>
-      <h1>{item.title}{nameSuffix(item.title, lang)}</h1>
+      <h1>{localizedTitle(item.id, item.title, lang)}</h1>
+      {hasLocalized(item.id, lang) && <p class="detail-title-orig">{item.title}</p>}
       <p class="detail-desc">{autoDescribe(item, lang)}</p>
     </header>
 
@@ -72,7 +73,7 @@ const jsonLd = [
         </>
       )}
       <dt>📍 {tr('address', lang)}</dt>
-      <dd>{item.address}</dd>
+      <dd>{localizedAddress(item.id, item.address, lang)}</dd>
       {item.tel && (
         <>
           <dt>📞 {tr('contact', lang)}</dt>

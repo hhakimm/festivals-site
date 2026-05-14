@@ -40,6 +40,14 @@ jobs:
         continue-on-error: true
         run: npm run fetch
 
+      - name: Fetch i18n titles (en/ja/zh)
+        env:
+          TOURAPI_KEY: ${{ secrets.TOURAPI_KEY }}
+        # 다국어 fetch는 시간이 길 수 있으니 best-effort
+        continue-on-error: true
+        timeout-minutes: 30
+        run: npm run fetch:i18n
+
       - name: Build site
         env:
           PUBLIC_ADSENSE_CLIENT: ${{ secrets.PUBLIC_ADSENSE_CLIENT }}
