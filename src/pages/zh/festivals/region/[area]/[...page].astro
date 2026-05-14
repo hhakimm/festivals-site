@@ -1,0 +1,51 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '@/layouts/Base.astro';
+import Listing from '@/components/Listing.astro';
+import { AREA_CODE } from '@/lib/data';
+import { tr, type Lang } from '@/lib/i18n';
+import { itemsByType, regionsWithCounts, pageUrl, PAGE_SIZE } from '@/lib/listing';
+
+export const getStaticPaths = (({ paginate }) => {
+  return Object.keys(AREA_CODE).flatMap((area) => {
+    const filtered = itemsByType('festival').filter((it) => it.areacode === area);
+    if (filtered.length === 0) return [];
+    return paginate(filtered, { pageSize: PAGE_SIZE, params: { area } });
+  });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const { area } = Astro.params;
+const lang: Lang = 'zh';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const regionName = AREA_CODE[area!]?.[lang] ?? area!;
+const basePath = `/zh/festivals/region/${area}`;
+const path = page.currentPage <= 1 ? `${basePath}/` : `${basePath}/${page.currentPage}/`;
+const regions = regionsWithCounts('festival', lang);
+
+const title = `${regionName} ${tr('festivals', lang)} | ${tr('siteName', lang)}`;
+const desc = `${regionName} ${tr('festivals', lang)} - ${tr('total', lang)} ${page.total}${tr('items', lang)}`;
+const prev = page.currentPage > 1 ? pageUrl(base, basePath, page.currentPage - 1) : undefined;
+const next = page.currentPage < page.lastPage ? pageUrl(base, basePath, page.currentPage + 1) : undefined;
+---
+
+<Base title={title} description={desc} lang={lang} canonicalPath={path}>
+  <section class="hero hero-compact">
+    <h1>🎆 {regionName} {tr('festivals', lang)}</h1>
+    <p class="hero-stats">{tr('total', lang)} <strong>{page.total}</strong>{tr('items', lang)}</p>
+  </section>
+
+  <Listing
+    lang={lang}
+    base={base}
+    type="festival"
+    items={page.data}
+    regions={regions}
+    currentArea={area!}
+    currentPage={page.currentPage}
+    lastPage={page.lastPage}
+    prevUrl={prev}
+    nextUrl={next}
+    basePath="/zh/festivals"
+  />
+</Base>

@@ -1,0 +1,137 @@
+---
+/**
+ * 통합 탐색 컴포넌트 — 홈 페이지의 인터랙티브 영역.
+ * 5개 기능 통합: 필터바, 즐겨찾기, 내 주변, 지도, 컬렉션.
+ *
+ * SSR로 정적 마크업 + i18n 라벨 렌더, 클라이언트 JS는 data-lang 속성으로 lang 식별.
+ */
+import { AREA_CODE } from '@/lib/data';
+import { tr, type Lang } from '@/lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const themes = [
+  { value: 'all', label: tr('catAll', lang) },
+  { value: '자연', label: tr('themeNature', lang) },
+  { value: '역사', label: tr('themeHistory', lang) },
+  { value: '휴양', label: tr('themeRelax', lang) },
+  { value: '체험', label: tr('themeExperience', lang) },
+  { value: '건축', label: tr('themeArchitecture', lang) },
+];
+
+const categories = [
+  { value: 'all', label: tr('catAll', lang) },
+  { value: 'attraction', label: tr('catAttraction', lang) },
+  { value: 'festival', label: tr('catFestival', lang) },
+];
+---
+
+<section class="explorer" id="explorer" data-lang={lang}>
+  <!-- 이번 주말 추천 row (클라이언트 JS가 채움, 비어있으면 자동 숨김) -->
+  <div class="weekend-row-section" id="weekend-row-section" hidden>
+    <div class="weekend-header">
+      <h2 class="section-title" id="weekend-title">{tr('weekendTitle', lang)}</h2>
+    </div>
+    <div class="weekend-row" id="weekend-row"></div>
+  </div>
+
+  <!-- 컬렉션 섹션 -->
+  <div class="explorer-collections">
+    <h2 class="section-title">{tr('exploreCollections', lang)}</h2>
+    <div class="collections" id="collections-row" role="list">
+      <!-- 클라이언트 JS가 채움 -->
+    </div>
+  </div>
+
+  <!-- 통합 필터바 -->
+  <div class="filter-bar" id="explore-filter-bar">
+    <div class="filter-row">
+      <!-- 검색 입력 제거 — 이 사이트는 '발견' 컨셉. 카테고리·지역·분류 필터로 충분. -->
+      <div class="chip-group" id="explore-category-chips" role="group" aria-label={tr('exploreCategory', lang)}>
+        {categories.map((c) => (
+          <button type="button" class={`chip chip-cat${c.value === 'all' ? ' chip-active' : ''}`} data-category={c.value}>{c.label}</button>
+        ))}
+      </div>
+    </div>
+
+    <!-- 빠른 날짜 칩 (카테고리=festival 일 때만 클라이언트 JS가 표시) -->
+    <div class="filter-row" id="quick-date-row" hidden>
+      <span class="filter-label">{tr('exploreQuick', lang)}</span>
+      <div class="chip-group" id="quick-date-chips" role="group" aria-label={tr('exploreQuick', lang)}>
+        <button type="button" class="chip" data-quick="this-weekend">{tr('quickThisWeekend', lang)}</button>
+        <button type="button" class="chip" data-quick="this-week">{tr('quickThisWeek', lang)}</button>
+        <button type="button" class="chip" data-quick="next-month">{tr('quickNextMonth', lang)}</button>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <span class="filter-label">{tr('region', lang)}</span>
+      <select id="explore-region" class="filter-select" aria-label={tr('region', lang)}>
+        <option value="all">{tr('all', lang)}</option>
+        {Object.entries(AREA_CODE).map(([code, names]) => (
+          <option value={code}>{names[lang]}</option>
+        ))}
+      </select>
+
+      <span class="filter-label">{tr('exploreTheme', lang)}</span>
+      <div class="chip-group" id="explore-theme-chips" role="group" aria-label={tr('exploreTheme', lang)}>
+        {themes.map((t) => (
+          <button type="button" class={`chip${t.value === 'all' ? ' chip-active' : ''}`} data-theme={t.value}>{t.label}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="filter-meta">
+      <span id="result-count" class="result-count">{tr('total', lang)} 0 {tr('items', lang)}</span>
+      <div class="filter-meta-actions">
+        <button type="button" id="explore-fav-toggle" class="toggle-btn" aria-pressed="false">
+          ♡ {tr('favoritesShort', lang)}
+        </button>
+        <button type="button" id="explore-nearby-toggle" class="toggle-btn" aria-pressed="false">
+          📍 {tr('nearby', lang)}
+        </button>
+        <select id="explore-sort" class="filter-select" aria-label={tr('exploreSort', lang)}>
+          <option value="default">{tr('sortDefault', lang)}</option>
+          <option value="name">{tr('sortName', lang)}</option>
+          <option value="date">{tr('sortDate', lang)}</option>
+          <option value="distance" disabled>{tr('sortDistance', lang)}</option>
+        </select>
+        <div class="view-toggle" role="tablist" aria-label={tr('exploreView', lang)}>
+          <button type="button" id="view-list-btn" role="tab" aria-selected="true">{tr('viewList', lang)}</button>
+          <button type="button" id="view-map-btn" role="tab" aria-selected="false">{tr('viewMap', lang)}</button>
+        </div>
+        <button type="button" id="explore-reset" class="reset-btn" hidden>{tr('exploreReset', lang)}</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 컬렉션 활성 배너 -->
+  <div class="active-collection-banner" id="active-collection-banner" hidden>
+    <span class="acb-icon" id="acb-icon"></span>
+    <span class="acb-name" id="acb-name"></span>
+    <button type="button" class="acb-clear" id="acb-clear" aria-label={tr('collectionRelease', lang)}>×</button>
+  </div>
+
+  <!-- 결과: 카드 그리드 / 지도 -->
+  <div class="grid" id="explore-cards" aria-live="polite"></div>
+  <div class="map-view is-hidden" id="explore-map"></div>
+
+  <button type="button" id="load-more-btn" class="load-more" hidden>{tr('exploreLoadMore', lang)}</button>
+
+  <div class="explore-empty" id="explore-empty" hidden>
+    <div class="empty-icon" aria-hidden="true">🔍</div>
+    <p>{tr('exploreEmpty', lang)}</p>
+    <p class="muted">{tr('exploreEmptyHint', lang)}</p>
+    <button type="button" class="reset-btn" onclick="document.getElementById('explore-reset')?.click()">{tr('exploreReset', lang)}</button>
+  </div>
+</section>
+
+<script>
+  import { initExplorer } from '@/scripts/explore.client';
+  const root = document.getElementById('explorer');
+  if (root) initExplorer(root);
+</script>

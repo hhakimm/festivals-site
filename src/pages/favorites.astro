@@ -1,0 +1,44 @@
+---
+/**
+ * 즐겨찾기 페이지 (한국어) — 클라이언트 렌더링.
+ * SEO 노출 불필요 (개인 데이터) → noindex.
+ */
+import Base from '@/layouts/Base.astro';
+import { tr, type Lang } from '@/lib/i18n';
+
+const lang: Lang = 'ko';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Base
+  title={`${tr('favoritesPageTitle', lang)} — ${tr('siteName', lang)}`}
+  description={tr('favoritesPageEmpty', lang)}
+  lang={lang}
+  canonicalPath="/favorites/"
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, follow" />
+  </Fragment>
+
+  <section id="favorites-page" data-lang={lang}>
+    <div class="favorites-page-header">
+      <h1>♥ {tr('favoritesPageTitle', lang)}</h1>
+      <p>{tr('favoritesPageSaved', lang)} <span id="favorites-count">0</span></p>
+    </div>
+
+    <div class="grid" id="favorites-grid" hidden></div>
+
+    <div class="explore-empty" id="favorites-empty">
+      <div class="empty-icon" aria-hidden="true">♡</div>
+      <p>{tr('favoritesPageEmpty', lang)}</p>
+      <p class="muted">{tr('favoritesPageEmptyHint', lang)}</p>
+      <a class="btn btn-primary" href={`${base}/`}>{tr('favoritesPageBrowse', lang)}</a>
+    </div>
+  </section>
+
+  <script>
+    import { initFavoritesPage } from '@/scripts/explore.client';
+    const root = document.getElementById('favorites-page');
+    if (root) initFavoritesPage(root);
+  </script>
+</Base>

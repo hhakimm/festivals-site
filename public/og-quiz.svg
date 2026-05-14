@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid slice">
+  <!-- 검정 배경 -->
+  <rect width="1200" height="630" fill="#171717"/>
+  <!-- 우상단 노란 원 (디자인 포인트) -->
+  <circle cx="1080" cy="100" r="48" fill="#facc15"/>
+  <!-- 좌상단 작은 배지 -->
+  <rect x="60" y="56" width="200" height="44" rx="22" fill="#facc15"/>
+  <text x="160" y="86" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#171717">한국 가볼 만한 곳</text>
+
+  <!-- 큰 이모지 -->
+  <text x="600" y="280" text-anchor="middle" font-size="140">🎒</text>
+
+  <!-- 메인 타이틀 -->
+  <text x="600" y="400" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="76" font-weight="800" fill="#fff" letter-spacing="-2">여행 성향 테스트</text>
+  <text x="600" y="450" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="34" font-weight="500" fill="#facc15" letter-spacing="-1">Travel Personality Quiz · 旅行性向テスト</text>
+
+  <!-- 서브 -->
+  <text x="600" y="530" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="28" font-weight="500" fill="#a3a3a3">6개 질문으로 알아보는 나만의 여행 스타일</text>
+
+  <!-- 하단 CTA -->
+  <rect x="460" y="558" width="280" height="44" rx="22" fill="#facc15"/>
+  <text x="600" y="588" text-anchor="middle" font-family="Pretendard, system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#171717">시작하기 →</text>
+</svg>

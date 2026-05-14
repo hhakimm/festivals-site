@@ -1,0 +1,62 @@
+---
+/**
+ * 단순 정책/소개 페이지 셸 — i18n 라벨 키 받아서 마크업 렌더.
+ * About/Privacy/Terms 모두 이 컴포넌트 재사용.
+ */
+import Base from '@/layouts/Base.astro';
+import { tr, type Lang } from '@/lib/i18n';
+import type { t as translations } from '@/lib/i18n';
+
+interface Props {
+  lang: Lang;
+  canonicalPath: string;
+  titleKey: keyof typeof translations;
+  bodyKey: keyof typeof translations;
+}
+const { lang, canonicalPath, titleKey, bodyKey } = Astro.props;
+const title = tr(titleKey, lang);
+const desc = tr(titleKey, lang);
+---
+
+<Base
+  title={`${title} — ${tr('siteName', lang)}`}
+  description={desc}
+  lang={lang}
+  canonicalPath={canonicalPath}
+>
+  <article class="policy-page">
+    <h1>{title}</h1>
+    <div class="policy-body" set:html={tr(bodyKey, lang)} />
+    <p class="muted policy-contact">{tr('contactInfo', lang)}</p>
+  </article>
+</Base>
+
+<style>
+  .policy-page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 0 64px;
+  }
+  .policy-page h1 {
+    font-size: 28px;
+    margin: 0 0 24px;
+  }
+  .policy-body :global(h2) {
+    font-size: 18px;
+    margin: 28px 0 8px;
+  }
+  .policy-body :global(p) {
+    line-height: 1.7;
+    margin: 0 0 12px;
+  }
+  .policy-body :global(a) {
+    color: var(--c-accent);
+    word-break: break-all;
+  }
+  .policy-contact {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--c-border);
+    font-size: 13px;
+  }
+</style>

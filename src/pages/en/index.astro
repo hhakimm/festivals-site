@@ -1,0 +1,54 @@
+---
+import Base from '@/layouts/Base.astro';
+import Explorer from '@/components/Explorer.astro';
+import HomeHero from '@/components/HomeHero.astro';
+import PickOfDay from '@/components/PickOfDay.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import WeatherSection from '@/components/WeatherSection.astro';
+import { festivals, attractions } from '@/lib/data';
+import { tr } from '@/lib/i18n';
+
+const lang = 'en' as const;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const allCount = festivals.length + attractions.length;
+
+const title = tr('siteName', lang);
+const desc = tr('siteDesc', lang);
+---
+
+<Base
+  title={title}
+  description={desc}
+  lang={lang}
+  canonicalPath="/en/"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: title,
+    description: desc,
+    url: Astro.site?.toString() || '',
+    inLanguage: 'en-US',
+  }}
+>
+  <HomeHero lang={lang} base={base} />
+
+  <PickOfDay lang={lang} base={base} />
+
+  <WeatherSection lang={lang} />
+
+  <Explorer lang={lang} />
+
+  <AdSlot lang={lang} layout="horizontal" />
+
+  <section class="section" style="margin-top: 32px;">
+    <p class="muted" style="text-align: center; font-size: 13px;">
+      {tr('exploreFooterNote', lang)}
+    </p>
+    <div class="section-cta" style="margin-top: 16px;">
+      <a href={`${base}/en/festivals/`} class="btn">{tr('goAllFestivals', lang)}</a>
+      &nbsp;
+      <a href={`${base}/en/attractions/`} class="btn">{tr('goAllAttractions', lang)}</a>
+    </div>
+  </section>
+</Base>

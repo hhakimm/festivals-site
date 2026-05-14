@@ -1,0 +1,52 @@
+---
+/**
+ * "비슷한 명소" — 현재 detail 항목과 같은 region + theme 의 다른 항목 4개.
+ * 빌드 타임에 결정 (정적 SEO 친화). 체류 시간 ↑ + 내부 링크 ↑.
+ */
+import type { Lang } from '@/lib/i18n';
+import type { Item } from '@/lib/data';
+import { all as allItems } from '@/lib/data';
+import ItemCard from './ItemCard.astro';
+
+interface Props { item: Item; lang: Lang; base: string; }
+const { item, lang, base } = Astro.props;
+
+// 1) 같은 지역 + 같은 테마 (테마 없으면 같은 type) + 이미지 있음
+// 2) 자기 자신 제외
+// 3) 4개 선택 (이름 가나다순으로 안정)
+const sameTheme = allItems
+  .filter((it) =>
+    it.id !== item.id &&
+    it.image &&
+    it.areacode === item.areacode &&
+    (item.theme ? it.theme === item.theme : it.type === item.type)
+  )
+  .slice(0, 12);
+// 다양화 — 매번 같으면 지루하니까 id 기반 안정 해시로 셔플
+function hashStr(s: string): number {
+  let h = 0; for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+const sorted = [...sameTheme].sort((a, b) => hashStr(a.id + item.id) - hashStr(b.id + item.id));
+const picks = sorted.slice(0, 4);
+
+const L = {
+  title: { ko: '👀 비슷한 명소', en: '👀 Similar spots', ja: '👀 似たスポット', zh: '👀 相似景点' },
+  empty: { ko: '비슷한 명소를 찾지 못했어요', en: 'No similar spots', ja: '似たスポットなし', zh: '没有相似景点' },
+} as const;
+---
+
+{picks.length > 0 && (
+  <section class="related-items">
+    <h2 class="related-h">{L.title[lang]}</h2>
+    <div class="grid related-grid">
+      {picks.map((it) => <ItemCard item={it} lang={lang} base={base} />)}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-items { margin: 32px 0 24px; }
+  .related-h { font-size: 1.15rem; margin: 0 0 14px; font-weight: 700; letter-spacing: -0.015em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+</style>

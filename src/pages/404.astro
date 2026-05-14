@@ -1,0 +1,35 @@
+---
+import Base from '@/layouts/Base.astro';
+import { tr } from '@/lib/i18n';
+
+const lang = 'ko' as const;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const title = `${tr('notFoundTitle', lang)} | ${tr('siteName', lang)}`;
+---
+
+<Base title={title} description={tr('notFoundDesc', lang)} lang={lang} canonicalPath="/404/">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, follow" />
+  </Fragment>
+  <section class="notfound">
+    <div class="notfound-emoji" aria-hidden="true">🧭</div>
+    <h1 class="notfound-title">{tr('notFoundTitle', lang)}</h1>
+    <p class="notfound-desc">{tr('notFoundDesc', lang)}</p>
+    <div class="notfound-actions">
+      <a href={`${base}/`} class="nf-btn nf-btn-primary">🏠 {tr('notFoundHome', lang)}</a>
+      <a href={`${base}/quiz/`} class="nf-btn nf-btn-secondary">🎒 {tr('navQuizShort', lang).replace('🎒 ', '')}</a>
+      <a href={`${base}/attractions/`} class="nf-btn nf-btn-secondary">🗺️ {tr('attractions', lang)}</a>
+    </div>
+  </section>
+
+  <style>
+    .notfound { max-width: 560px; margin: 0 auto; padding: 64px 24px; text-align: center; }
+    .notfound-emoji { font-size: 90px; line-height: 1; margin-bottom: 16px; }
+    .notfound-title { font-size: clamp(1.5rem, 4vw, 2rem); margin: 0 0 12px; letter-spacing: -0.02em; }
+    .notfound-desc { color: #525252; margin: 0 0 28px; line-height: 1.55; }
+    .notfound-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .nf-btn { padding: 12px 22px; border-radius: 999px; font-weight: 700; text-decoration: none; }
+    .nf-btn-primary { background: #171717; color: #fff; }
+    .nf-btn-secondary { background: #facc15; color: #171717; }
+  </style>
+</Base>

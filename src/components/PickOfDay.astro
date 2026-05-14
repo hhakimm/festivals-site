@@ -1,0 +1,107 @@
+---
+/**
+ * "오늘의 명소" — 날짜 시드 기반으로 매일 자동으로 바뀌는 1개 추천.
+ * 빌드 타임에 결정 → 정적 HTML (SEO 무영향).
+ * 사용자는 매일 다른 카드를 보게 됨 (날짜가 바뀌면 빌드 재실행 시 갱신).
+ */
+import type { Lang } from '@/lib/i18n';
+import { all as allItems, AREA_CODE, type Item } from '@/lib/data';
+
+interface Props { lang: Lang; base: string; }
+const { lang, base } = Astro.props;
+const prefix = lang === 'ko' ? '' : `/${lang}`;
+
+// 1) 후보 — 이미지 있고 좌표 있고 큐레이션 가능한 항목
+const candidates = allItems.filter(
+  (it) => it.image && it.lat && it.lng && (it.theme === '자연' || it.theme === '역사' || it.theme === '휴양')
+);
+
+// 2) 날짜 시드 (YYYYMMDD 정수)
+const now = new Date();
+const seed = parseInt(
+  `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`,
+  10,
+);
+const pick: Item | undefined = candidates[seed % candidates.length];
+
+const region = pick ? (AREA_CODE[pick.areacode]?.[lang] || '') : '';
+const href = pick ? `${base}${prefix}/${pick.type}/${pick.slug}/` : `${base}${prefix}/`;
+
+const L = {
+  pickTitle: { ko: '✨ 오늘의 명소', en: '✨ Pick of the day', ja: '✨ 今日のおすすめ', zh: '✨ 今日推荐' },
+  pickSub: {
+    ko: '매일 다른 곳을 만나보세요',
+    en: 'A different spot every day',
+    ja: '毎日違うスポットを発見',
+    zh: '每天发现不同的地方',
+  },
+  pickCta: { ko: '자세히 보기 →', en: 'See more →', ja: '詳しく見る →', zh: '查看详情 →' },
+} as const;
+---
+
+{pick && (
+  <section class="pick-of-day">
+    <div class="pod-inner">
+      <div class="pod-meta">
+        <p class="pod-label">{L.pickTitle[lang]}</p>
+        <p class="pod-sub">{L.pickSub[lang]}</p>
+      </div>
+      <a class="pod-card" href={href}>
+        {pick.image && (
+          <div class="pod-image">
+            <img src={pick.image} alt={pick.title} loading="lazy" />
+          </div>
+        )}
+        <div class="pod-body">
+          <span class="pod-region">📍 {region}</span>
+          <h3 class="pod-title">{pick.title}</h3>
+          <p class="pod-addr">{pick.address}</p>
+          <span class="pod-link">{L.pickCta[lang]}</span>
+        </div>
+      </a>
+    </div>
+  </section>
+)}
+
+<style>
+  .pick-of-day {
+    margin: 24px 0 8px;
+    padding: 0 4px;
+  }
+  .pod-inner {
+    background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+    border: 1px solid #fde68a;
+    border-radius: 18px;
+    padding: 16px;
+    overflow: hidden;
+  }
+  .pod-meta { padding: 0 4px 12px; }
+  .pod-label { margin: 0 0 4px; font-size: 1rem; font-weight: 800; color: #171717; letter-spacing: -0.015em; }
+  .pod-sub { margin: 0; color: #92400e; font-size: 0.82rem; }
+  .pod-card {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 14px;
+    background: #fff;
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .pod-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+  .pod-image { aspect-ratio: 1/1; background: #f4f4f5; overflow: hidden; }
+  .pod-image img { width: 100%; height: 100%; object-fit: cover; }
+  .pod-body { padding: 12px 14px 14px 4px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .pod-region { font-size: 11px; color: #737373; font-weight: 600; }
+  .pod-title { font-size: 1.05rem; font-weight: 700; margin: 2px 0 4px; line-height: 1.3; letter-spacing: -0.015em;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .pod-addr { font-size: 0.78rem; color: #737373; margin: 0 0 6px;
+    display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .pod-link { color: #171717; font-weight: 700; font-size: 0.85rem; margin-top: auto; }
+
+  @media (max-width: 480px) {
+    .pod-card { grid-template-columns: 110px 1fr; gap: 10px; }
+    .pod-title { font-size: 0.98rem; -webkit-line-clamp: 2; }
+  }
+</style>

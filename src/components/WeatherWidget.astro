@@ -1,0 +1,91 @@
+---
+/**
+ * 상세 페이지 날씨 위젯 — 7일 예보.
+ * SSR로 스켈레톤만 렌더, 클라이언트(weather.client.ts)가 fetch + 채움.
+ */
+import type { Lang } from '@/lib/i18n';
+import { weatherT } from '@/lib/weather';
+
+interface Props {
+  lat: number;
+  lng: number;
+  lang: Lang;
+}
+
+const { lat, lng, lang } = Astro.props;
+---
+
+<section
+  class="weather-widget"
+  data-weather-widget
+  data-lat={lat.toString()}
+  data-lng={lng.toString()}
+  data-lang={lang}
+  aria-label={weatherT('forecast7', lang)}
+>
+  <h2 class="weather-title">🌤️ {weatherT('forecast7', lang)}</h2>
+  <div class="weather-content" data-weather-content>
+    <p class="weather-status" data-weather-status>{weatherT('loading', lang)}</p>
+  </div>
+  <p class="weather-source">{weatherT('weatherSourceNote', lang)}</p>
+</section>
+
+<script>
+  import { initWeatherWidget } from '@/scripts/weather.client';
+  document.querySelectorAll<HTMLElement>('[data-weather-widget]').forEach(initWeatherWidget);
+</script>
+
+<style>
+  .weather-widget {
+    margin: 32px 0;
+    padding: 20px;
+    background: #fafafa;
+    border-radius: 14px;
+    border: 1px solid #f0f0f0;
+  }
+  .weather-title {
+    font-size: 1.15rem;
+    margin: 0 0 16px;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+  }
+  .weather-status {
+    color: #737373;
+    font-size: 0.9rem;
+    margin: 0;
+    padding: 12px 0;
+    text-align: center;
+  }
+  .weather-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin: 0;
+  }
+  .weather-day {
+    text-align: center;
+    padding: 12px 4px;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 0.78rem;
+    color: #525252;
+  }
+  .weather-day.is-today { background: #fefce8; border: 1px solid #facc15; }
+  .weather-day-name { font-weight: 700; color: #171717; margin-bottom: 6px; font-size: 0.82rem; }
+  .weather-day-icon { font-size: 1.6rem; line-height: 1; margin-bottom: 6px; display: block; }
+  .weather-day-temp { font-feature-settings: "tnum"; line-height: 1.3; }
+  .weather-day-temp .hi { color: #dc2626; font-weight: 600; }
+  .weather-day-temp .lo { color: #2563eb; }
+  .weather-day-precip { color: #2563eb; font-size: 0.7rem; margin-top: 4px; }
+  .weather-source { color: #a3a3a3; font-size: 0.72rem; margin: 12px 0 0; text-align: right; }
+
+  @media (max-width: 640px) {
+    .weather-grid { grid-template-columns: repeat(4, 1fr); gap: 4px; }
+    /* 모바일에선 7일 모두 보여주되 2줄로 wrap */
+    .weather-day { padding: 10px 2px; font-size: 0.72rem; }
+    .weather-day-icon { font-size: 1.35rem; }
+  }
+  @media (max-width: 380px) {
+    .weather-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

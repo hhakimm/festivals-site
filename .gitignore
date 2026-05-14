@@ -1,10 +1,24 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
 node_modules/
-.DS_Store
-*.log
-.vscode/
+
+# Environment
 .env
 .env.local
-data/.detail-cache.json
-data/.places-detail-cache.json
-data/.detail-cache-v2.json
-data/.places-detail-cache-v2.json
+.env.production
+
+# Generated data — 첫 배포 시엔 commit에 포함 (TOURAPI_KEY 설정 전이라도 배포 가능)
+# Secrets 설정 후 매일 자동 갱신 — 그땐 아래 주석 해제 가능
+# src/content/data/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*

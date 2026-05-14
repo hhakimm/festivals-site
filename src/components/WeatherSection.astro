@@ -1,0 +1,86 @@
+---
+/**
+ * 홈 페이지 "오늘의 추천 — 날씨 좋은 곳" 섹션.
+ * 5개 주요 도시 비교, 야외 활동 점수 정렬.
+ */
+import type { Lang } from '@/lib/i18n';
+import { weatherT, MAJOR_CITIES } from '@/lib/weather';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<section class="weather-section" data-weather-section data-lang={lang} aria-label={weatherT('homeTitle', lang)}>
+  <div class="weather-section-header">
+    <h2 class="section-title">{weatherT('homeTitle', lang)}</h2>
+    <p class="weather-section-sub muted">{weatherT('homeSubtitle', lang)}</p>
+  </div>
+  <div class="weather-cities" data-weather-cities>
+    {MAJOR_CITIES.map((city) => (
+      <div
+        class="weather-city skeleton"
+        data-city-id={city.id}
+        data-lat={city.lat.toString()}
+        data-lng={city.lng.toString()}
+      >
+        <div class="weather-city-name">{city.name[lang]}</div>
+        <div class="weather-city-body">
+          <span class="weather-city-icon" aria-hidden="true">…</span>
+          <div class="weather-city-info">
+            <div class="weather-city-temp">—</div>
+            <div class="weather-city-label muted">{weatherT('loading', lang)}</div>
+          </div>
+        </div>
+        <div class="weather-city-score">
+          <span class="muted">{weatherT('outdoorScore', lang)}</span>
+          <span class="weather-city-score-bar"><span class="weather-city-score-fill"></span></span>
+          <span class="weather-city-score-pct">—</span>
+        </div>
+      </div>
+    ))}
+  </div>
+  <p class="weather-source-line">{weatherT('weatherSourceNote', lang)}</p>
+</section>
+
+<script>
+  import { initWeatherHome } from '@/scripts/weather-home.client';
+  const el = document.querySelector<HTMLElement>('[data-weather-section]');
+  if (el) initWeatherHome(el);
+</script>
+
+<style>
+  .weather-section { margin: 32px 0; }
+  .weather-section-header { margin-bottom: 12px; }
+  .weather-section-header .section-title { font-size: 1.25rem; margin: 0 0 4px; letter-spacing: -0.015em; }
+  .weather-section-sub { font-size: 0.85rem; margin: 0; color: #737373; }
+
+  .weather-cities {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .weather-city {
+    background: #fafafa;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 14px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .weather-city.is-top { border-color: #facc15; background: #fefce8; }
+  .weather-city-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; color: #171717; }
+  .weather-city-body { display: flex; align-items: center; gap: 12px; }
+  .weather-city-icon { font-size: 2.2rem; line-height: 1; }
+  .weather-city-info { flex: 1; min-width: 0; }
+  .weather-city-temp { font-size: 1.25rem; font-weight: 700; font-feature-settings: "tnum"; color: #171717; line-height: 1.2; }
+  .weather-city-label { font-size: 0.8rem; margin-top: 2px; }
+
+  .weather-city-score { margin-top: 12px; display: flex; align-items: center; gap: 8px; font-size: 0.75rem; }
+  .weather-city-score-bar { flex: 1; height: 5px; background: #e5e5e5; border-radius: 999px; overflow: hidden; }
+  .weather-city-score-fill { display: block; height: 100%; background: #facc15; width: 0%; transition: width 0.4s ease; }
+  .weather-city-score-pct { font-feature-settings: "tnum"; font-weight: 600; min-width: 30px; text-align: right; }
+
+  .weather-source-line { color: #a3a3a3; font-size: 0.72rem; margin: 12px 0 0; text-align: right; }
+  .muted { color: #737373; }
+</style>

@@ -1,14 +1,22 @@
 {
-  "name": "festivals-site",
-  "version": "0.1.0",
+  "name": "festivals-site-astro",
   "type": "module",
-  "private": true,
+  "version": "0.1.0",
   "scripts": {
-    "test": "node --test \"tests/*.test.js\"",
-    "sync": "npm run sync:festivals && npm run sync:places",
-    "sync:festivals": "node --env-file=.env scripts/sync-festivals.js",
-    "sync:places": "node --env-file=.env scripts/sync-places.js",
-    "enrich-images": "node --env-file=.env scripts/enrich-images.js",
-    "diagnose": "node --env-file=.env scripts/test-detail.js"
+    "fetch": "tsx --env-file=.env scripts/fetch-tourapi.ts",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "npm run fetch && astro build",
+    "build:nofetch": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
   }
 }

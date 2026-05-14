@@ -1,0 +1,45 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '@/layouts/Base.astro';
+import Listing from '@/components/Listing.astro';
+import { tr, type Lang } from '@/lib/i18n';
+import { itemsByType, regionsWithCounts, pageUrl, PAGE_SIZE } from '@/lib/listing';
+
+export const getStaticPaths = (({ paginate }) => {
+  return paginate(itemsByType('festival'), { pageSize: PAGE_SIZE });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const lang: Lang = 'ja';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const basePath = '/ja/festivals';
+const path = page.currentPage <= 1 ? `${basePath}/` : `${basePath}/${page.currentPage}/`;
+const regions = regionsWithCounts('festival', lang);
+
+const title = `${tr('allFestivalsTitle', lang)} | ${tr('siteName', lang)}`;
+const desc = `${tr('allFestivalsTitle', lang)} - ${tr('total', lang)} ${page.total}${tr('items', lang)}`;
+const prev = page.currentPage > 1 ? pageUrl(base, basePath, page.currentPage - 1) : undefined;
+const next = page.currentPage < page.lastPage ? pageUrl(base, basePath, page.currentPage + 1) : undefined;
+---
+
+<Base title={title} description={desc} lang={lang} canonicalPath={path}>
+  <section class="hero hero-compact">
+    <h1>🎆 {tr('allFestivalsTitle', lang)}</h1>
+    <p class="hero-stats">{tr('total', lang)} <strong>{page.total}</strong>{tr('items', lang)}</p>
+    <p class="hero-list-desc">{tr('listingFestivalsDesc', lang)}</p>
+  </section>
+
+  <Listing
+    lang={lang}
+    base={base}
+    type="festival"
+    items={page.data}
+    regions={regions}
+    currentArea={null}
+    currentPage={page.currentPage}
+    lastPage={page.lastPage}
+    prevUrl={prev}
+    nextUrl={next}
+    basePath={basePath}
+  />
+</Base>

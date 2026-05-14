@@ -1,0 +1,22 @@
+---
+import Base from '@/layouts/Base.astro';
+import QuizApp from '@/components/QuizApp.astro';
+import { quizT } from '@/lib/quiz';
+import { tr } from '@/lib/i18n';
+
+const lang = 'zh' as const;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const title = `${quizT('pageTitle', lang)} — ${tr('siteName', lang)}`;
+const desc = quizT('pageDesc', lang);
+---
+
+<Base
+  title={title}
+  description={desc}
+  lang={lang}
+  canonicalPath="/zh/quiz/"
+  ogImage="/og-quiz.svg"
+>
+  <QuizApp lang={lang} base={base} />
+</Base>

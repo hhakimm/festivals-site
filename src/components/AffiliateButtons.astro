@@ -1,0 +1,122 @@
+---
+import type { Item } from '@/lib/data';
+import { AREA_CODE } from '@/lib/data';
+import type { Lang } from '@/lib/i18n';
+import { tr } from '@/lib/i18n';
+import { agodaUrl, yanoljaUrl, bookingUrl, kkdayUrl, skyscannerUrl } from '@/lib/affiliate';
+
+interface Props {
+  item: Item;
+  lang: Lang;
+}
+
+const { item, lang } = Astro.props;
+const region = AREA_CODE[item.areacode]?.[lang] ?? '';
+
+const nearbyText: Record<Lang, string> = {
+  ko: `${region} 인근 숙소를 찾아보세요.`,
+  en: `Find stays near ${region}.`,
+  ja: `${region}周辺の宿を探す。`,
+  zh: `查找${region}附近的住宿。`,
+};
+
+const agodaLabel: Record<Lang, string> = {
+  ko: 'Agoda 호텔 보기 →',
+  en: 'View hotels on Agoda →',
+  ja: 'Agodaでホテルを見る →',
+  zh: '在Agoda查看酒店 →',
+};
+
+const secondaryLabel: Record<Lang, string> = {
+  ko: '야놀자에서 검색 →',
+  en: 'Search on Booking.com →',
+  ja: 'Booking.comで検索 →',
+  zh: '在Booking.com搜索 →',
+};
+
+const disclosure: Record<Lang, string> = {
+  ko: '※ 위 링크로 예약 시 일정 수수료가 사이트 운영에 사용됩니다.',
+  en: '※ This site earns a commission from qualifying bookings.',
+  ja: '※ リンク経由のご予約には所定の手数料が含まれます。',
+  zh: '※ 通过此链接预订会产生少量佣金,用于网站运营。',
+};
+
+const kkdayLabel: Record<Lang, string> = {
+  ko: '🎫 투어·액티비티 (KKday)',
+  en: '🎫 Tours & activities (KKday)',
+  ja: '🎫 ツアー·体験 (KKday)',
+  zh: '🎫 行程·体验 (KKday)',
+};
+const skyLabel: Record<Lang, string> = {
+  ko: '✈️ 항공권 검색 (Skyscanner)',
+  en: '✈️ Find flights (Skyscanner)',
+  ja: '✈️ 航空券検索 (Skyscanner)',
+  zh: '✈️ 机票搜索 (Skyscanner)',
+};
+const moreTitle: Record<Lang, string> = {
+  ko: '🧳 여행 준비',
+  en: '🧳 Trip planning',
+  ja: '🧳 旅行の準備',
+  zh: '🧳 行程准备',
+};
+
+const secondaryHref = lang === 'ko' ? yanoljaUrl(item) : bookingUrl(item);
+---
+
+<section class="detail-affiliate">
+  <h2>🏨 {tr('nearbyStay', lang)}</h2>
+  <p class="muted">{nearbyText[lang]}</p>
+  <div class="affiliate-buttons">
+    <a
+      href={agodaUrl(item, lang)}
+      target="_blank"
+      rel="noopener nofollow sponsored"
+      class="btn btn-affiliate"
+      data-affiliate="agoda"
+      data-item-id={item.id}
+    >{agodaLabel[lang]}</a>
+    <a
+      href={secondaryHref}
+      target="_blank"
+      rel="noopener nofollow sponsored"
+      class="btn btn-affiliate"
+      data-affiliate={lang === 'ko' ? 'yanolja' : 'booking'}
+      data-item-id={item.id}
+    >{secondaryLabel[lang]}</a>
+  </div>
+
+  <h3 class="detail-affiliate-sub">{moreTitle[lang]}</h3>
+  <div class="affiliate-buttons">
+    <a
+      href={kkdayUrl(item, lang)}
+      target="_blank"
+      rel="noopener nofollow sponsored"
+      class="btn btn-affiliate btn-affiliate-secondary"
+      data-affiliate="kkday"
+      data-item-id={item.id}
+    >{kkdayLabel[lang]}</a>
+    <a
+      href={skyscannerUrl(item, lang)}
+      target="_blank"
+      rel="noopener nofollow sponsored"
+      class="btn btn-affiliate btn-affiliate-secondary"
+      data-affiliate="skyscanner"
+      data-item-id={item.id}
+    >{skyLabel[lang]}</a>
+  </div>
+  <p class="affiliate-disclosure">{disclosure[lang]}</p>
+</section>
+
+<script is:inline>
+  // 어필리에이트 클릭 추적 (GA4 event) — gtag 없으면 무시
+  document.querySelectorAll('a[data-affiliate]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      if (typeof window.gtag !== 'function') return;
+      window.gtag('event', 'affiliate_click', {
+        provider: a.dataset.affiliate,
+        item_id: a.dataset.itemId || '',
+        page_path: window.location.pathname,
+      });
+    });
+  });
+</script>

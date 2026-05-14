@@ -1,0 +1,295 @@
+---
+import { LANGS, type Lang, tr } from '@/lib/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  canonicalPath: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const { title, description, lang, canonicalPath, ogImage, jsonLd } = Astro.props;
+const site = Astro.site?.toString().replace(/\/$/, '') || '';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// 수익화 환경변수 (없으면 스크립트 자체를 출력하지 않음 → 안전한 0 영향)
+const GA_ID = import.meta.env.PUBLIC_GA_ID;
+const ADSENSE_CLIENT = import.meta.env.PUBLIC_ADSENSE_CLIENT;
+const fullUrl = `${site}${base}${canonicalPath}`;
+const fullOg = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : `${site}${base}${ogImage}`)
+  : `${site}${base}/og-image.svg`;
+
+const siteName = tr('siteName', lang);
+const localeMap: Record<Lang, string> = {
+  ko: 'ko_KR',
+  en: 'en_US',
+  ja: 'ja_JP',
+  zh: 'zh_CN',
+};
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={fullUrl} />
+
+    {LANGS.map((l) => {
+      const langPath = l === 'ko' ? canonicalPath : `/${l}${canonicalPath === '/' ? '' : canonicalPath}`;
+      return (
+        <link rel="alternate" hreflang={l} href={`${site}${base}${langPath}`} />
+      );
+    })}
+    <link rel="alternate" hreflang="x-default" href={`${site}${base}${canonicalPath}`} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOg} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content={localeMap[lang]} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOg} />
+
+    <meta name="theme-color" content="#111111" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+
+    <!-- PWA -->
+    <link rel="manifest" href={`${base}/manifest.webmanifest`} />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="한국여행" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href={`${base}/favicon.svg`} />
+
+    <!-- Pretendard 폰트 (한국어 가독성) — 가변 폰트 -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+
+    <link rel="stylesheet" href={`${base}/styles.css`} />
+
+    {/* Google Analytics 4 — env에 PUBLIC_GA_ID 있을 때만 */}
+    {GA_ID && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+        <script is:inline define:vars={{ GA_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', GA_ID, { anonymize_ip: true });
+        </script>
+      </>
+    )}
+
+    {/* Google AdSense — env에 PUBLIC_ADSENSE_CLIENT 있을 때만 */}
+    {ADSENSE_CLIENT && (
+      <>
+        {/* site verification meta (사이트 소유권 확인용) */}
+        <meta name="google-adsense-account" content={ADSENSE_CLIENT} />
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+          crossorigin="anonymous"
+        ></script>
+      </>
+    )}
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">본문 바로가기</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href={lang === 'ko' ? `${base}/` : `${base}/${lang}/`} class="brand">{siteName}</a>
+        <div class="header-right">
+          <a
+            href={lang === 'ko' ? `${base}/quiz/` : `${base}/${lang}/quiz/`}
+            class="quiz-link"
+            aria-label={tr('navQuizShort', lang)}
+            title={tr('navQuizShort', lang)}
+          >{tr('navQuizShort', lang)}</a>
+          <a
+            href={lang === 'ko' ? `${base}/favorites/` : `${base}/${lang}/favorites/`}
+            class="favorites-link"
+            aria-label={tr('favoritesPageTitle', lang)}
+            title={tr('favoritesPageTitle', lang)}
+          >♥ <span class="favorites-link-label">{tr('favoritesShort', lang)}</span></a>
+          <nav class="lang-nav" aria-label="언어 선택">
+            {LANGS.map((l) => {
+              const path = l === 'ko' ? `${base}/` : `${base}/${l}/`;
+              return (
+                <a
+                  href={path}
+                  class={l === lang ? 'lang-link active' : 'lang-link'}
+                  hreflang={l}
+                >{l.toUpperCase()}</a>
+              );
+            })}
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="container">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <nav class="footer-nav" aria-label="footer">
+          <a href={lang === 'ko' ? `${base}/about/` : `${base}/${lang}/about/`}>{tr('navAbout', lang)}</a>
+          <a href={lang === 'ko' ? `${base}/privacy/` : `${base}/${lang}/privacy/`}>{tr('navPrivacy', lang)}</a>
+          <a href={lang === 'ko' ? `${base}/terms/` : `${base}/${lang}/terms/`}>{tr('navTerms', lang)}</a>
+          <a href="https://github.com/hhakimm/festivals-site" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://buymeacoffee.com/hhakimm" target="_blank" rel="noopener nofollow" class="footer-coffee">☕ {tr('supportCoffee', lang)}</a>
+        </nav>
+        <p>
+          자료 © <a href="https://api.visitkorea.or.kr/" rel="noopener">한국관광공사 TourAPI</a> ·
+          지도 © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a>
+        </p>
+        <p class="muted">{tr('adDisclaimerShort', lang)}</p>
+        <p class="muted">* 일정은 변동될 수 있으니 공식사이트에서 확인해 주세요.</p>
+      </div>
+    </footer>
+
+    <!-- "맨 위로" 플로팅 버튼 (모바일 우하단) -->
+    <button
+      type="button"
+      id="scroll-top-btn"
+      class="scroll-top-btn"
+      aria-label={tr('scrollTop', lang)}
+      title={tr('scrollTop', lang)}
+      hidden
+    >↑</button>
+
+    <!-- 쿠키 동의 배너 (GDPR/EEA) — 첫 방문 시 표시, 결정 후 1년 안 보임 -->
+    <div id="cookie-banner" class="cookie-banner" hidden role="dialog" aria-labelledby="cookie-banner-text">
+      <p id="cookie-banner-text" class="cookie-banner-text">
+        {tr('cookieConsentText', lang)}
+        <a href={lang === 'ko' ? `${base}/privacy/` : `${base}/${lang}/privacy/`} class="cookie-banner-link">{tr('cookieConsentMore', lang)}</a>
+      </p>
+      <div class="cookie-banner-actions">
+        <button type="button" id="cookie-reject" class="cookie-btn cookie-btn-reject">{tr('cookieConsentReject', lang)}</button>
+        <button type="button" id="cookie-accept" class="cookie-btn cookie-btn-accept">{tr('cookieConsentAccept', lang)}</button>
+      </div>
+    </div>
+    <script>
+      import '@/scripts/cookie-consent.client';
+    </script>
+
+    <!-- PWA 설치 유도 배너 (모바일, JS가 조건부 표시) -->
+    <div id="pwa-banner" class="pwa-banner" hidden>
+      <span class="pwa-banner-icon" aria-hidden="true">📲</span>
+      <span class="pwa-banner-text">{tr('pwaInstallText', lang)}</span>
+      <button type="button" id="pwa-install-btn" class="pwa-install-btn">{tr('pwaInstallBtn', lang)}</button>
+      <button type="button" id="pwa-dismiss-btn" class="pwa-dismiss-btn" aria-label="dismiss">×</button>
+    </div>
+    <script>
+      import '@/scripts/pwa-prompt.client';
+    </script>
+
+    <!-- 모바일 bottom navigation (1024px 이하에서만 표시) -->
+    <nav class="bottom-nav" aria-label="모바일 네비게이션">
+      <a class="bn-item" href={lang === 'ko' ? `${base}/attractions/` : `${base}/${lang}/attractions/`}>
+        <span class="bn-icon" aria-hidden="true">🗺️</span>
+        <span class="bn-label">{tr('bnAttractions', lang)}</span>
+      </a>
+      <a class="bn-item" href={lang === 'ko' ? `${base}/festivals/` : `${base}/${lang}/festivals/`}>
+        <span class="bn-icon" aria-hidden="true">🎆</span>
+        <span class="bn-label">{tr('bnFestivals', lang)}</span>
+      </a>
+      <a class="bn-item bn-item-quiz" href={lang === 'ko' ? `${base}/quiz/` : `${base}/${lang}/quiz/`}>
+        <span class="bn-icon" aria-hidden="true">🎒</span>
+        <span class="bn-label">{tr('bnQuiz', lang)}</span>
+      </a>
+      <a class="bn-item" href={lang === 'ko' ? `${base}/favorites/` : `${base}/${lang}/favorites/`}>
+        <span class="bn-icon" aria-hidden="true">♥</span>
+        <span class="bn-label">{tr('favoritesShort', lang)}</span>
+      </a>
+      <a class="bn-item" href={lang === 'ko' ? `${base}/?nearby=1` : `${base}/${lang}/?nearby=1`}>
+        <span class="bn-icon" aria-hidden="true">📍</span>
+        <span class="bn-label">{tr('nearby', lang)}</span>
+      </a>
+    </nav>
+
+    <script is:inline define:vars={{ base }}>
+      // PWA 서비스 워커 등록 — 오프라인 + 자동 업데이트
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker
+            .register(base + '/sw.js', { updateViaCache: 'none' })
+            .then(function (reg) {
+              setInterval(function () { reg.update().catch(function(){}); }, 60 * 60 * 1000);
+            })
+            .catch(function () {});
+          var refreshing = false;
+          navigator.serviceWorker.addEventListener('controllerchange', function () {
+            if (refreshing) return;
+            refreshing = true;
+            window.location.reload();
+          });
+        });
+      }
+    </script>
+
+    <script is:inline>
+      // 스크롤 시 "맨 위로" 버튼 토글 — 인라인 (가장 빠른 인터랙션)
+      (function () {
+        var btn = document.getElementById('scroll-top-btn');
+        if (!btn) return;
+        var ticking = false;
+        function check() {
+          var y = window.scrollY || document.documentElement.scrollTop;
+          if (y > 300) {
+            btn.hidden = false;
+            btn.classList.add('is-visible');
+          } else {
+            btn.classList.remove('is-visible');
+          }
+          ticking = false;
+        }
+        window.addEventListener('scroll', function () {
+          if (!ticking) {
+            requestAnimationFrame(check);
+            ticking = true;
+          }
+        }, { passive: true });
+        btn.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        // 현재 페이지 경로에 따라 bottom-nav 활성 표시
+        var path = window.location.pathname;
+        document.querySelectorAll('.bn-item').forEach(function (a) {
+          var href = a.getAttribute('href') || '';
+          // 정확 매칭 or favorites/attractions/festivals 경로 부분 매칭
+          if (
+            path === href ||
+            (href.indexOf('/favorites/') >= 0 && path.indexOf('/favorites/') >= 0) ||
+            (href.indexOf('/attractions/') >= 0 && path.indexOf('/attractions/') >= 0) ||
+            (href.indexOf('/festivals/') >= 0 && path.indexOf('/festivals/') >= 0)
+          ) {
+            a.classList.add('is-active');
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

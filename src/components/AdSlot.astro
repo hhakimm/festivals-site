@@ -1,0 +1,54 @@
+---
+/**
+ * Google AdSense 광고 슬롯.
+ *
+ * env에 PUBLIC_ADSENSE_CLIENT가 없으면 비어있는 자리표시(placeholder)만 렌더되어
+ * 레이아웃이 무너지지 않으면서도 광고 코드는 출력되지 않음 — 안전한 0 영향.
+ *
+ * 사용 예:
+ *   <AdSlot slot="1234567890" />
+ *   <AdSlot slot="..." format="auto" lang={lang} />
+ */
+import { tr, type Lang } from '@/lib/i18n';
+
+interface Props {
+  /** AdSense 광고 단위(슬롯) ID. 없으면 PUBLIC_ADSENSE_SLOT_DEFAULT 사용 */
+  slot?: string;
+  /** AdSense 포맷: 'auto'면 반응형 */
+  format?: string;
+  /** 라벨 다국어 표시용 (선택) */
+  lang?: Lang;
+  /** 카드보다 약간 다른 스타일이 필요할 때 */
+  layout?: 'horizontal' | 'rectangle' | 'auto';
+}
+
+const {
+  slot,
+  format = 'auto',
+  lang = 'ko',
+  layout = 'auto',
+} = Astro.props;
+
+const ADSENSE_CLIENT = import.meta.env.PUBLIC_ADSENSE_CLIENT;
+const finalSlot = slot || import.meta.env.PUBLIC_ADSENSE_SLOT_DEFAULT;
+const enabled = !!(ADSENSE_CLIENT && finalSlot);
+---
+
+{enabled ? (
+  <aside class={`ad-slot ad-slot-${layout}`} aria-label={tr('adLabel', lang)}>
+    <span class="ad-slot-label">{tr('adLabel', lang)}</span>
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={ADSENSE_CLIENT}
+      data-ad-slot={finalSlot}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+    ></ins>
+    <script is:inline>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
+) : (
+  <!-- AdSense disabled (no env) -->
+)}

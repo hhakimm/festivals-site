@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hhakimm.github.io/festivals-site/sitemap.xml

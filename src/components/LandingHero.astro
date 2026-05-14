@@ -1,0 +1,425 @@
+---
+/**
+ * 랜딩 페이지 통합 컴포넌트.
+ * Hero + 가치 + 인기 미리보기 + 퀴즈 유도 + 뉴스레터 + SNS.
+ *
+ * brief_economy 톤: 검정 배경 + 노랑 포인트.
+ */
+import type { Lang } from '@/lib/i18n';
+import { tr } from '@/lib/i18n';
+import { quizT, PERSONAS } from '@/lib/quiz';
+import ItemCard from './ItemCard.astro';
+import AdSlot from './AdSlot.astro';
+import { all as allItems, attractions, festivals } from '@/lib/data';
+
+interface Props { lang: Lang; base: string; }
+const { lang, base } = Astro.props;
+const prefix = lang === 'ko' ? '' : `/${lang}`;
+
+// 빌드 타임 인기 미리보기 — 이미지 있는 큐레이션 중 도시 다양성
+const popular = (() => {
+  const seenArea: Record<string, number> = {};
+  const withImg = allItems.filter((it) => it.image && it.lat && it.lng);
+  // 도시 다양성 가산
+  return withImg
+    .map((it) => {
+      const areaSeen = seenArea[it.areacode || ''] || 0;
+      const diversityBonus = 8 - areaSeen * 2; // 같은 지역 두번째부터 패널티
+      seenArea[it.areacode || ''] = areaSeen + 1;
+      // 휴양·자연·역사 우선
+      const themeBonus = ({ '자연': 3, '휴양': 3, '역사': 3, '체험': 2, '건축': 2 } as Record<string, number>)[it.theme || ''] || 0;
+      return { item: it, s: diversityBonus + themeBonus + Math.random() * 2 };
+    })
+    .sort((a, b) => b.s - a.s)
+    .slice(0, 8)
+    .map((x) => x.item);
+})();
+
+// 라벨
+const L = {
+  heroTitle: {
+    ko: '한국 가볼 만한 곳, 한눈에', en: 'Discover Korea, all in one place',
+    ja: '韓国の見どころ、ひと目で', zh: '韩国值得一去的地方,一目了然',
+  },
+  heroSub: {
+    ko: '13,000개 큐레이션 · 4개 언어 · 실시간 날씨',
+    en: '13,000 curated picks · 4 languages · live weather',
+    ja: '13,000のキュレーション · 4言語 · リアルタイム天気',
+    zh: '13,000个精选 · 4种语言 · 实时天气',
+  },
+  ctaQuiz: { ko: '여행 성향 테스트', en: 'Travel Quiz', ja: '旅行性向テスト', zh: '旅行性格测试' },
+  ctaExplore: { ko: '지역별 둘러보기', en: 'Browse by region', ja: '地域別に見る', zh: '按地区浏览' },
+
+  valueTitle: { ko: '왜 이 사이트?', en: 'Why this site?', ja: 'なぜこのサイト?', zh: '为什么选这里?' },
+  value1Title: { ko: '13,000개 큐레이션', en: '13,000 picks', ja: '13,000のセレクション', zh: '13,000个精选' },
+  value1Desc: {
+    ko: 'TourAPI · 한국관광공사 인증 데이터 + 직접 큐레이션한 명소·축제',
+    en: 'TourAPI + Korea Tourism Org. data + hand-curated highlights',
+    ja: 'TourAPI · 韓国観光公社の認証データ + 厳選名所',
+    zh: 'TourAPI · 韩国旅游局认证数据 + 精选景点',
+  },
+  value2Title: { ko: '4개 언어 동시 지원', en: '4 languages', ja: '4言語対応', zh: '支持4种语言' },
+  value2Desc: {
+    ko: '한국어 · 영어 · 일본어 · 중국어 — 외국인 친구에게도 공유 가능',
+    en: 'Korean · English · Japanese · Chinese — share with friends abroad',
+    ja: '韓国語 · 英語 · 日本語 · 中国語 — 外国の友達ともシェア可能',
+    zh: '韩 · 英 · 日 · 中四语言 — 可分享给外国朋友',
+  },
+  value3Title: { ko: '실시간 날씨', en: 'Live weather', ja: 'リアルタイム天気', zh: '实时天气' },
+  value3Desc: {
+    ko: '여행 전 7일 예보 확인. 날씨 좋은 도시 비교까지.',
+    en: 'Check 7-day forecasts before traveling. Compare cities by weather.',
+    ja: '出発前に7日間の予報を確認。都市別の天気比較も。',
+    zh: '出发前查看7日预报。比较各城市天气。',
+  },
+
+  popularTitle: { ko: '인기 여행지·축제', en: 'Popular picks', ja: '人気の観光地・フェスティバル', zh: '热门景点·节庆' },
+  popularMore: { ko: '더 둘러보기 →', en: 'See more →', ja: 'もっと見る →', zh: '更多 →' },
+
+  quizCardTitle: { ko: '나는 어떤 여행자일까?', en: 'What kind of traveler are you?', ja: 'あなたはどんな旅人?', zh: '你是什么样的旅行者?' },
+  quizCardDesc: {
+    ko: '6개 질문, 1분이면 끝. 당신만의 여행 페르소나와 맞춤 추천을 받아보세요.',
+    en: '6 questions, 1 minute. Get your travel persona and personalized picks.',
+    ja: '6つの質問、1分で完了。あなただけの旅人タイプとおすすめを。',
+    zh: '6道题,1分钟搞定。获取专属旅行性格与推荐。',
+  },
+  quizCardCta: { ko: '테스트 시작 →', en: 'Start test →', ja: 'テストを始める →', zh: '开始测试 →' },
+
+  newsletterTitle: { ko: '주말 추천을 이메일로', en: 'Weekend picks by email', ja: '週末おすすめをメールで', zh: '邮件接收周末推荐' },
+  newsletterDesc: {
+    ko: '매주 금요일, 다음 주말 가볼 만한 곳을 큐레이션해서 보내드려요.',
+    en: 'Every Friday, curated picks for the upcoming weekend.',
+    ja: '毎週金曜日、翌週末のおすすめをキュレーション。',
+    zh: '每周五,精选下个周末的推荐发送。',
+  },
+  newsletterPlaceholder: { ko: '이메일 주소', en: 'Email address', ja: 'メールアドレス', zh: '邮箱地址' },
+  newsletterSubmit: { ko: '구독하기', en: 'Subscribe', ja: '購読', zh: '订阅' },
+  newsletterSuccess: {
+    ko: '구독 신청이 접수됐어요. 곧 정식 발송을 시작합니다.',
+    en: 'Subscription received. Newsletter will start soon.',
+    ja: '購読を受け付けました。まもなく配信を開始します。',
+    zh: '订阅已受理。即将开始正式发送。',
+  },
+  newsletterAlready: {
+    ko: '이미 구독하신 이메일이에요',
+    en: 'Already subscribed',
+    ja: 'すでに登録されています',
+    zh: '已订阅过',
+  },
+  newsletterInvalid: {
+    ko: '올바른 이메일 주소를 입력해 주세요',
+    en: 'Please enter a valid email',
+    ja: '正しいメールアドレスを入力してください',
+    zh: '请输入正确的邮箱',
+  },
+
+  followTitle: { ko: '팔로우', en: 'Follow', ja: 'フォロー', zh: '关注' },
+  followSub: { ko: '인스타에서 더 많은 콘텐츠를 만나보세요', en: 'More on Instagram', ja: 'もっとInstagramで', zh: '更多Instagram内容' },
+} as const;
+
+function L_(key: keyof typeof L): string { return L[key][lang]; }
+---
+
+<div class="landing">
+
+  <!-- Hero -->
+  <section class="landing-hero">
+    <div class="landing-hero-bg" aria-hidden="true"></div>
+    <div class="landing-hero-inner">
+      <div class="landing-badge">🇰🇷 {tr('siteName', lang)}</div>
+      <h1 class="landing-hero-title">{L_('heroTitle')}</h1>
+      <p class="landing-hero-sub">{L_('heroSub')}</p>
+      <div class="landing-cta-row">
+        <a href={`${base}${prefix}/quiz/`} class="btn-cta btn-cta-primary">
+          🎒 {L_('ctaQuiz')} →
+        </a>
+        <a href={`${base}${prefix}/`} class="btn-cta btn-cta-secondary">
+          🗺️ {L_('ctaExplore')}
+        </a>
+      </div>
+      <p class="landing-stats">
+        <strong>{attractions.length.toLocaleString(lang)}</strong> {tr('attractions', lang)} ·
+        <strong>{festivals.length.toLocaleString(lang)}</strong> {tr('festivals', lang)}
+      </p>
+    </div>
+  </section>
+
+  <!-- 핵심 가치 3가지 -->
+  <section class="landing-section">
+    <h2 class="landing-section-title">{L_('valueTitle')}</h2>
+    <div class="landing-values">
+      <div class="landing-value">
+        <div class="landing-value-icon" aria-hidden="true">📚</div>
+        <h3 class="landing-value-title">{L_('value1Title')}</h3>
+        <p class="landing-value-desc">{L_('value1Desc')}</p>
+      </div>
+      <div class="landing-value">
+        <div class="landing-value-icon" aria-hidden="true">🌐</div>
+        <h3 class="landing-value-title">{L_('value2Title')}</h3>
+        <p class="landing-value-desc">{L_('value2Desc')}</p>
+      </div>
+      <div class="landing-value">
+        <div class="landing-value-icon" aria-hidden="true">🌤️</div>
+        <h3 class="landing-value-title">{L_('value3Title')}</h3>
+        <p class="landing-value-desc">{L_('value3Desc')}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 퀴즈 유도 -->
+  <section class="landing-section landing-quiz-cta">
+    <div class="landing-quiz-grid">
+      <div class="landing-quiz-personas" aria-hidden="true">
+        <span>🌿</span><span>🏛️</span><span>🏖️</span><span>⛷️</span><span>👨‍👩‍👧</span><span>🏙️</span>
+      </div>
+      <div>
+        <h2 class="landing-quiz-title">{L_('quizCardTitle')}</h2>
+        <p class="landing-quiz-desc">{L_('quizCardDesc')}</p>
+        <a href={`${base}${prefix}/quiz/`} class="btn-cta btn-cta-primary">{L_('quizCardCta')}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 인기 미리보기 -->
+  <section class="landing-section">
+    <div class="landing-section-head">
+      <h2 class="landing-section-title">{L_('popularTitle')}</h2>
+      <a href={`${base}${prefix}/`} class="landing-section-more">{L_('popularMore')}</a>
+    </div>
+    <div class="grid landing-popular">
+      {popular.map((item) => <ItemCard item={item} lang={lang} base={base} />)}
+    </div>
+  </section>
+
+  <!-- 인기 미리보기 다음 광고 -->
+  <AdSlot lang={lang} layout="horizontal" />
+
+  <!-- 뉴스레터 -->
+  <section class="landing-section landing-newsletter">
+    <h2 class="landing-newsletter-title">{L_('newsletterTitle')}</h2>
+    <p class="landing-newsletter-desc">{L_('newsletterDesc')}</p>
+    <form
+      class="landing-newsletter-form"
+      data-newsletter-form
+      data-success={L_('newsletterSuccess')}
+      data-already={L_('newsletterAlready')}
+      data-invalid={L_('newsletterInvalid')}
+    >
+      <input
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+        placeholder={L_('newsletterPlaceholder')}
+        aria-label={L_('newsletterPlaceholder')}
+        class="landing-newsletter-input"
+      />
+      <button type="submit" class="landing-newsletter-submit">{L_('newsletterSubmit')}</button>
+    </form>
+    <p class="landing-newsletter-status" data-newsletter-status></p>
+  </section>
+
+  <!-- 팔로우 (SNS) -->
+  <section class="landing-section landing-follow">
+    <h2 class="landing-follow-title">{L_('followTitle')}</h2>
+    <p class="landing-follow-sub">{L_('followSub')}</p>
+    <div class="landing-social-row">
+      <a href="https://www.instagram.com/brief_economy" target="_blank" rel="noopener noreferrer" class="landing-social-btn landing-social-ig">
+        📷 @brief_economy
+      </a>
+      <a href="https://github.com/hhakimm/festivals-site" target="_blank" rel="noopener noreferrer" class="landing-social-btn landing-social-gh">
+        💻 GitHub
+      </a>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { initNewsletter } from '@/scripts/landing.client';
+  document.querySelectorAll<HTMLElement>('[data-newsletter-form]').forEach(initNewsletter);
+</script>
+
+<style>
+  .landing { max-width: 1080px; margin: 0 auto; padding: 0 16px 80px; }
+
+  /* Hero */
+  .landing-hero {
+    position: relative;
+    margin: 0 -16px 40px;
+    padding: 64px 24px 56px;
+    background: #171717;
+    color: #fff;
+    text-align: center;
+    border-radius: 0 0 24px 24px;
+    overflow: hidden;
+  }
+  .landing-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(800px 400px at 90% 20%, rgba(250, 204, 21, 0.18), transparent 60%),
+      radial-gradient(600px 300px at 10% 90%, rgba(250, 204, 21, 0.10), transparent 60%);
+    pointer-events: none;
+  }
+  .landing-hero-inner { position: relative; max-width: 720px; margin: 0 auto; }
+  .landing-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #facc15;
+    color: #171717;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: -0.005em;
+  }
+  .landing-hero-title {
+    font-size: clamp(1.9rem, 5.5vw, 3rem);
+    margin: 0 0 16px;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    font-weight: 800;
+  }
+  .landing-hero-sub {
+    color: #d4d4d4;
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    margin: 0 0 28px;
+    line-height: 1.5;
+  }
+  .landing-cta-row {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center; margin-bottom: 24px;
+  }
+  .btn-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 14px 26px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s ease;
+    letter-spacing: -0.005em;
+  }
+  .btn-cta:active { transform: scale(0.97); }
+  .btn-cta-primary { background: #facc15; color: #171717; }
+  .btn-cta-primary:hover { background: #fde047; }
+  .btn-cta-secondary { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+  .btn-cta-secondary:hover { background: rgba(255,255,255,0.18); }
+  .landing-stats { color: #a3a3a3; font-size: 0.88rem; margin: 0; font-feature-settings: "tnum"; }
+  .landing-stats strong { color: #fff; font-weight: 700; }
+
+  /* Sections */
+  .landing-section { margin: 48px 0; }
+  .landing-section-title { font-size: clamp(1.3rem, 3vw, 1.7rem); margin: 0 0 20px; letter-spacing: -0.02em; font-weight: 700; }
+  .landing-section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; gap: 12px; flex-wrap: wrap; }
+  .landing-section-head .landing-section-title { margin: 0; }
+  .landing-section-more { color: #737373; text-decoration: none; font-size: 0.92rem; font-weight: 500; }
+  .landing-section-more:hover { color: #171717; }
+
+  /* Values */
+  .landing-values { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .landing-value {
+    padding: 24px;
+    background: #fafafa;
+    border: 1px solid #f0f0f0;
+    border-radius: 16px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .landing-value:hover { border-color: #facc15; transform: translateY(-2px); }
+  .landing-value-icon { font-size: 36px; line-height: 1; margin-bottom: 12px; }
+  .landing-value-title { font-size: 1.05rem; margin: 0 0 6px; font-weight: 700; letter-spacing: -0.015em; }
+  .landing-value-desc { color: #525252; margin: 0; font-size: 0.9rem; line-height: 1.55; }
+
+  /* Quiz CTA */
+  .landing-quiz-cta { padding: 32px; background: #171717; color: #fff; border-radius: 20px; }
+  .landing-quiz-grid {
+    display: grid;
+    grid-template-columns: minmax(120px, 200px) 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+  .landing-quiz-personas {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+    font-size: 2rem; text-align: center;
+  }
+  .landing-quiz-personas span { aspect-ratio: 1; display: grid; place-items: center; background: rgba(250, 204, 21, 0.12); border-radius: 12px; }
+  .landing-quiz-title { font-size: clamp(1.2rem, 3vw, 1.6rem); margin: 0 0 8px; letter-spacing: -0.02em; }
+  .landing-quiz-desc { color: #d4d4d4; margin: 0 0 16px; line-height: 1.5; font-size: 0.95rem; }
+
+  @media (max-width: 640px) {
+    .landing-quiz-grid { grid-template-columns: 1fr; gap: 16px; }
+    .landing-quiz-personas { max-width: 200px; margin: 0 auto; }
+  }
+
+  /* Popular */
+  .landing-popular { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+
+  /* Newsletter */
+  .landing-newsletter {
+    padding: 32px 24px;
+    background: #fefce8;
+    border: 1px solid #facc15;
+    border-radius: 20px;
+    text-align: center;
+  }
+  .landing-newsletter-title { font-size: 1.3rem; margin: 0 0 8px; letter-spacing: -0.015em; }
+  .landing-newsletter-desc { color: #525252; margin: 0 0 20px; font-size: 0.95rem; line-height: 1.5; }
+  .landing-newsletter-form {
+    display: flex; gap: 8px; max-width: 480px; margin: 0 auto; flex-wrap: wrap;
+  }
+  .landing-newsletter-input {
+    flex: 1; min-width: 0;
+    padding: 12px 16px;
+    border: 1px solid #d4d4d4;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    background: #fff;
+  }
+  .landing-newsletter-input:focus { outline: 2px solid #171717; outline-offset: 1px; }
+  .landing-newsletter-submit {
+    padding: 12px 24px;
+    background: #171717;
+    color: #fff;
+    border: 0;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .landing-newsletter-submit:hover { background: #000; }
+  .landing-newsletter-status {
+    margin: 12px 0 0;
+    font-size: 0.88rem;
+    font-weight: 600;
+    min-height: 1.2em;
+  }
+  .landing-newsletter-status.is-success { color: #15803d; }
+  .landing-newsletter-status.is-error { color: #dc2626; }
+
+  /* Follow */
+  .landing-follow { text-align: center; padding: 24px 16px; }
+  .landing-follow-title { font-size: 1.2rem; margin: 0 0 6px; }
+  .landing-follow-sub { color: #737373; margin: 0 0 18px; font-size: 0.9rem; }
+  .landing-social-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .landing-social-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 20px;
+    background: #171717;
+    color: #fff;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: background 0.15s ease;
+  }
+  .landing-social-btn:hover { background: #000; }
+  .landing-social-ig { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+
+  /* 모바일 */
+  @media (max-width: 640px) {
+    .landing-hero { padding: 48px 16px 40px; }
+    .landing-newsletter-form { flex-direction: column; }
+    .landing-newsletter-submit { width: 100%; }
+  }
+</style>

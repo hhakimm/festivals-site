@@ -1,0 +1,69 @@
+---
+import Base from '@/layouts/Base.astro';
+import ItemCard from '@/components/ItemCard.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import { PERSONAS, PERSONA_IDS, PERSONA_DISTRIBUTION, quizT, getAllRecommendations, type PersonaId } from '@/lib/quiz';
+import { tr } from '@/lib/i18n';
+
+export function getStaticPaths() {
+  return PERSONA_IDS.map((id) => ({ params: { type: id }, props: { personaId: id } }));
+}
+const { personaId } = Astro.props as { personaId: PersonaId };
+const persona = PERSONAS[personaId];
+const lang = 'ja' as const;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const recommendations = getAllRecommendations()[personaId];
+const dist = PERSONA_DISTRIBUTION[personaId];
+
+const title = `${persona.name[lang]} — ${quizT('pageTitle', lang)} | ${tr('siteName', lang)}`;
+const description = `${persona.tagline[lang]} — ${persona.description[lang].slice(0, 90)}…`;
+---
+<Base title={title} description={description} lang={lang} canonicalPath={`/ja/quiz/r/${personaId}/`} ogImage={`/og-quiz-${personaId}.svg`}>
+  <section class="persona-result">
+    <a href={`${base}/ja/quiz/`} class="persona-back">← {quizT('retake', lang)}</a>
+    <div class="persona-hero" style={`background: linear-gradient(135deg, ${persona.gradient.from}, ${persona.gradient.to});`}>
+      <p class="persona-label">{quizT('yourType', lang)}</p>
+      <div class="persona-emoji" aria-hidden="true">{persona.emoji}</div>
+      <h1 class="persona-name">{persona.name[lang]}</h1>
+      <p class="persona-tagline">"{persona.tagline[lang]}"</p>
+    </div>
+    <p class="persona-desc">{persona.description[lang]}</p>
+    <section class="persona-traits"><h2 class="psn-h">{quizT('traitsHeading', lang)}</h2>
+      <ul class="psn-traits-list">{persona.traits[lang].map((t) => <li class="psn-trait">{t}</li>)}</ul></section>
+    <section class="persona-stat"><h2 class="psn-h">{quizT('statHeading', lang)}</h2>
+      <p class="psn-stat-line"><strong style={`color: ${persona.gradient.from};`}>{dist}%</strong>
+        <span>{persona.name[lang]} (~{Math.round(1000 * dist / 100)} of 1,000)</span></p></section>
+    <AdSlot lang={lang} layout="horizontal" />
+    <section class="persona-recs"><h2 class="section-title">{quizT('recommendations', lang)}</h2>
+      <p class="psn-why">{quizT('whyHeading', lang)} — {persona.whyRecommend[lang]}</p>
+      <div class="grid">{recommendations.map((item) => <ItemCard item={item} lang={lang} base={base} />)}</div></section>
+    <AdSlot lang={lang} layout="rectangle" />
+    <div class="persona-cta-row">
+      <a href={`${base}/ja/quiz/`} class="psn-btn psn-btn-primary">{quizT('retake', lang)} ↻</a>
+      <a href={`${base}/ja/`} class="psn-btn psn-btn-secondary">{tr('attractions', lang)} →</a>
+    </div>
+  </section>
+  <style>
+    .persona-result { max-width: 880px; margin: 0 auto; padding: 16px 16px 80px; }
+    .persona-back { display: inline-block; color: #525252; text-decoration: none; font-size: 0.88rem; margin-bottom: 12px; }
+    .persona-hero { text-align: center; padding: 40px 24px; border-radius: 24px; color: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.18); margin-bottom: 24px; }
+    .persona-label { color: rgba(255,255,255,0.78); font-size: 0.92rem; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+    .persona-emoji { font-size: 96px; line-height: 1; margin: 8px 0 12px; }
+    .persona-name { font-size: clamp(2rem, 6vw, 3rem); margin: 0 0 10px; letter-spacing: -0.03em; font-weight: 800; }
+    .persona-tagline { font-size: 1.1rem; color: rgba(255,255,255,0.95); font-weight: 500; margin: 0; font-style: italic; }
+    .persona-desc { color: #525252; line-height: 1.7; max-width: 620px; margin: 0 auto 24px; font-size: 0.95rem; text-align: center; }
+    .psn-h { font-size: 1rem; margin: 0 0 12px; font-weight: 700; }
+    .persona-traits, .persona-stat { margin: 0 0 24px; }
+    .psn-traits-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+    .psn-trait { background: #fafafa; border: 1px solid #f0f0f0; border-radius: 12px; padding: 12px 14px; font-size: 0.92rem; text-align: center; }
+    .persona-stat { background: #fafafa; border: 1px solid #f0f0f0; border-radius: 12px; padding: 14px 16px; }
+    .psn-stat-line { display: flex; align-items: baseline; gap: 8px; margin: 0; }
+    .psn-stat-line strong { font-size: 1.7rem; font-weight: 800; }
+    .psn-why { background: #fefce8; border-left: 3px solid #facc15; padding: 10px 14px; margin: 0 0 16px; border-radius: 8px; color: #525252; font-size: 0.88rem; line-height: 1.6; }
+    .section-title { font-size: 1.25rem; margin: 0 0 12px; letter-spacing: -0.015em; }
+    .persona-cta-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+    .psn-btn { padding: 12px 24px; border-radius: 999px; font-weight: 700; text-decoration: none; }
+    .psn-btn-primary { background: #171717; color: #fff; }
+    .psn-btn-secondary { background: #facc15; color: #171717; }
+  </style>
+</Base>

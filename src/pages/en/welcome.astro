@@ -1,0 +1,14 @@
+---
+import Base from '@/layouts/Base.astro';
+import LandingHero from '@/components/LandingHero.astro';
+import { tr } from '@/lib/i18n';
+
+const lang = 'en' as const;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const title = `${tr('siteName', lang)} — Korea Travel at a Glance`;
+const desc = "13,000 curated picks, 4 languages, live weather — your guide to traveling Korea";
+---
+
+<Base title={title} description={desc} lang={lang} canonicalPath="/en/welcome/" ogImage="/og-image.svg">
+  <LandingHero lang={lang} base={base} />
+</Base>

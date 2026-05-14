@@ -1,0 +1,70 @@
+---
+import type { Item } from '@/lib/data';
+import type { Lang } from '@/lib/i18n';
+import { tr } from '@/lib/i18n';
+import type { ListingType, RegionStat } from '@/lib/listing';
+import ItemCard from './ItemCard.astro';
+
+interface Props {
+  lang: Lang;
+  base: string;
+  type: ListingType;
+  items: Item[];
+  regions: RegionStat[];
+  currentArea: string | null;
+  currentPage: number;
+  lastPage: number;
+  prevUrl?: string;
+  nextUrl?: string;
+  basePath: string;
+}
+
+const {
+  lang,
+  base,
+  items,
+  regions,
+  currentArea,
+  currentPage,
+  lastPage,
+  prevUrl,
+  nextUrl,
+  basePath,
+} = Astro.props;
+
+const allHref = `${base}${basePath}/`;
+---
+
+<nav class="listing-filter" aria-label={tr('region', lang)}>
+  <a href={allHref} class={!currentArea ? 'chip chip-active' : 'chip'}>{tr('all', lang)}</a>
+  {regions.map((r) => (
+    <a
+      href={`${base}${basePath}/region/${r.code}/`}
+      class={currentArea === r.code ? 'chip chip-active' : 'chip'}
+    >{r.name} <span class="chip-count">{r.count}</span></a>
+  ))}
+</nav>
+
+{items.length === 0 ? (
+  <p class="muted listing-empty">{tr('noResults', lang)}</p>
+) : (
+  <div class="grid">
+    {items.map((it) => <ItemCard item={it} lang={lang} base={base} />)}
+  </div>
+)}
+
+{lastPage > 1 && (
+  <nav class="pagination" aria-label="pagination">
+    {prevUrl ? (
+      <a href={prevUrl} class="page-link" rel="prev">← {tr('prev', lang)}</a>
+    ) : (
+      <span class="page-link page-link-disabled">← {tr('prev', lang)}</span>
+    )}
+    <span class="page-info">{currentPage} / {lastPage}</span>
+    {nextUrl ? (
+      <a href={nextUrl} class="page-link" rel="next">{tr('next', lang)} →</a>
+    ) : (
+      <span class="page-link page-link-disabled">{tr('next', lang)} →</span>
+    )}
+  </nav>
+)}

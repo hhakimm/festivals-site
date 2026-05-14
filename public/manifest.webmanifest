@@ -1,0 +1,21 @@
+{
+  "name": "한국 가볼 만한 곳 — Travel Korea",
+  "short_name": "한국여행",
+  "description": "2026 한국의 월별 축제와 지역별 여행지를 한눈에",
+  "start_url": "/festivals-site/",
+  "scope": "/festivals-site/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fafafa",
+  "theme_color": "#111111",
+  "lang": "ko",
+  "categories": ["travel", "lifestyle"],
+  "icons": [
+    {
+      "src": "/festivals-site/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+name: Deploy Astro site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    # 매일 새벽 4시(KST 13시)에 TourAPI 최신 데이터로 리빌드
+    - cron: '0 19 * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch TourAPI data
+        env:
+          TOURAPI_KEY: ${{ secrets.TOURAPI_KEY }}
+        # Secret 미설정·API 일시 장애에도 빌드는 계속 (기존 data JSON 사용)
+        continue-on-error: true
+        run: npm run fetch
+
+      - name: Build site
+        env:
+          PUBLIC_ADSENSE_CLIENT: ${{ secrets.PUBLIC_ADSENSE_CLIENT }}
+          PUBLIC_ADSENSE_SLOT_DEFAULT: ${{ secrets.PUBLIC_ADSENSE_SLOT_DEFAULT }}
+          PUBLIC_GA_ID: ${{ secrets.PUBLIC_GA_ID }}
+        run: npm run build:nofetch
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

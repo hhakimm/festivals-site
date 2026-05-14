@@ -1,0 +1,113 @@
+---
+import Base from '@/layouts/Base.astro';
+import AffiliateButtons from '@/components/AffiliateButtons.astro';
+import WeatherWidget from '@/components/WeatherWidget.astro';
+import RelatedItems from '@/components/RelatedItems.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import { attractions, AREA_CODE, formatDate } from '@/lib/data';
+import { tr, type Lang } from '@/lib/i18n';
+import { buildAttractionSchema, buildBreadcrumb } from '@/lib/schema';
+
+export function getStaticPaths() {
+  return attractions.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const lang: Lang = 'zh';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const region = AREA_CODE[item.areacode]?.en || '';
+const dates = item.startDate
+  ? `${formatDate(item.startDate)} ~ ${formatDate(item.endDate || item.startDate)}`
+  : '';
+
+const site = Astro.site?.toString().replace(/\/$/, '') || '';
+const path = `/zh/attraction/${item.slug}/`;
+const url = `${site}${base}${path}`;
+
+const title = `${item.title} | ${region} TouristAttraction in Korea`;
+const description = `${item.title} schedule, location, info. ${item.address}. ${dates}`;
+
+const jsonLd = [
+  buildAttractionSchema(item, url),
+  buildBreadcrumb([
+    { name: tr('siteName', lang), url: `${site}${base}/zh/` },
+    { name: tr('attractions', lang), url: `${site}${base}/zh/` },
+    { name: item.title, url },
+  ]),
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  lang={lang}
+  canonicalPath={path}
+  ogImage={item.image || undefined}
+  jsonLd={jsonLd}
+>
+  <nav class="crumbs"><a href={`${base}/zh/`}>{tr('backToList', lang)}</a></nav>
+
+  <article class="detail">
+    {item.image && (
+      <div class="detail-hero">
+        <img src={item.image} alt={item.title} loading="eager" />
+      </div>
+    )}
+
+    <header class="detail-header">
+      <span class="badge">🎆 {region}</span>
+      <h1>{item.title}</h1>
+    </header>
+
+    <dl class="detail-meta">
+      {dates && (
+        <>
+          <dt>📅 {tr('schedule', lang)}</dt>
+          <dd>{dates}</dd>
+        </>
+      )}
+      <dt>📍 {tr('address', lang)}</dt>
+      <dd>{item.address}</dd>
+      {item.tel && (
+        <>
+          <dt>📞 {tr('contact', lang)}</dt>
+          <dd><a href={`tel:${item.tel}`}>{item.tel}</a></dd>
+        </>
+      )}
+    </dl>
+
+    {item.lat && item.lng && (
+      <section class="detail-map">
+        <h2>🗺️ {tr('map', lang)}</h2>
+        <div id="map" data-lat={item.lat} data-lng={item.lng} data-title={item.title}></div>
+      </section>
+    )}
+
+    {item.lat && item.lng && <WeatherWidget lat={item.lat} lng={item.lng} lang={lang} />}
+    <AdSlot lang={lang} />
+    <AffiliateButtons item={item} lang={lang} />
+    <RelatedItems item={item} lang={lang} base={base} />
+  </article>
+</Base>
+
+{item.lat && item.lng && (
+  <>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script>
+      import('https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js').then((L) => {
+        const el = document.getElementById('map');
+        if (!el) return;
+        const lat = parseFloat(el.dataset.lat || '0');
+        const lng = parseFloat(el.dataset.lng || '0');
+        const map = L.map(el).setView([lat, lng], 14);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap',
+        }).addTo(map);
+        L.marker([lat, lng]).addTo(map).bindPopup(el.dataset.title || '').openPopup();
+      });
+    </script>
+  </>
+)}

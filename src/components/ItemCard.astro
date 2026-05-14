@@ -1,0 +1,64 @@
+---
+import type { Item } from '@/lib/data';
+import { AREA_CODE, formatDate } from '@/lib/data';
+import type { Lang } from '@/lib/i18n';
+
+interface Props {
+  item: Item;
+  lang: Lang;
+  base: string;
+}
+
+const { item, lang, base } = Astro.props;
+const prefix = lang === 'ko' ? '' : `/${lang}`;
+const href = `${base}${prefix}/${item.type}/${item.slug}/`;
+const region = AREA_CODE[item.areacode]?.[lang] || '';
+const dates = item.startDate
+  ? `${formatDate(item.startDate)} – ${formatDate(item.endDate || item.startDate)}`
+  : '';
+
+// 이미지 없을 때 placeholder 다양화 — id 해시로 안정적 분배
+function hashStr(s: string): number {
+  let h = 0; for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+const PLACEHOLDER_EMOJIS_FEST = ['🎆', '🎇', '🎊', '🎉', '🪅', '✨'];
+const PLACEHOLDER_EMOJIS_ATTR_NAT = ['🏔️', '🌲', '🌊', '🌅', '🌄', '🏞️'];
+const PLACEHOLDER_EMOJIS_ATTR_HIS = ['🏛️', '⛩️', '🏯', '🗿', '📜', '🎎'];
+const PLACEHOLDER_EMOJIS_ATTR_OTH = ['🗺️', '📍', '🧳', '🎒', '🚶', '📷'];
+const PLACEHOLDER_BG = [
+  'linear-gradient(135deg,#fef3c7,#fde68a)',
+  'linear-gradient(135deg,#dbeafe,#bfdbfe)',
+  'linear-gradient(135deg,#fce7f3,#fbcfe8)',
+  'linear-gradient(135deg,#dcfce7,#bbf7d0)',
+  'linear-gradient(135deg,#ede9fe,#ddd6fe)',
+  'linear-gradient(135deg,#fed7aa,#fdba74)',
+];
+const phHash = hashStr(item.id || item.slug || item.title);
+const phBg = PLACEHOLDER_BG[phHash % PLACEHOLDER_BG.length];
+let phEmojiPool: string[];
+if (item.type === 'festival') phEmojiPool = PLACEHOLDER_EMOJIS_FEST;
+else if (item.theme === '자연' || item.theme === '휴양') phEmojiPool = PLACEHOLDER_EMOJIS_ATTR_NAT;
+else if (item.theme === '역사' || item.theme === '건축') phEmojiPool = PLACEHOLDER_EMOJIS_ATTR_HIS;
+else phEmojiPool = PLACEHOLDER_EMOJIS_ATTR_OTH;
+const phEmoji = phEmojiPool[phHash % phEmojiPool.length];
+---
+
+<a href={href} class="card">
+  <div class="card-image">
+    {item.imageThumb ? (
+      <img src={item.imageThumb} alt={item.title} loading="lazy" width="320" height="200" />
+    ) : (
+      <div class="card-image-placeholder" aria-hidden="true" style={`background: ${phBg};`}>
+        <span class="card-image-placeholder-emoji">{phEmoji}</span>
+        <span class="card-image-placeholder-region">{region}</span>
+      </div>
+    )}
+  </div>
+  <div class="card-body">
+    <span class="card-region">{region}</span>
+    <h3 class="card-title">{item.title}</h3>
+    {dates && <p class="card-dates">{dates}</p>}
+    <p class="card-addr">{item.address}</p>
+  </div>
+</a>
