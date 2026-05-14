@@ -4,7 +4,7 @@
  * - 정적 자산(이미지·폰트·JS·CSS): cache-first (재방문 빠르게)
  */
 
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2-astro'; /* 옛 vanilla 사이트 캐시 무효화 */
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const DATA_CACHE = `data-${CACHE_VERSION}`;
 const BASE = '/festivals-site';
@@ -55,18 +55,19 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 정적 자산(.js .css .svg .png .jpg 등): cache-first
+  // 정적 자산(.js .css .svg .png .jpg 등): stale-while-revalidate
+  // — 캐시 있으면 즉시 반환 + 백그라운드에서 갱신 → 다음 방문 시 최신
   if (/\.(js|css|svg|png|jpg|jpeg|webp|woff2?)$/.test(url.pathname)) {
     event.respondWith(
       caches.match(req).then((cached) => {
-        if (cached) return cached;
-        return fetch(req).then((res) => {
+        const networkFetch = fetch(req).then((res) => {
           if (res.ok) {
             const copy = res.clone();
             caches.open(STATIC_CACHE).then((c) => c.put(req, copy));
           }
           return res;
         });
+        return cached || networkFetch;
       }),
     );
     return;
