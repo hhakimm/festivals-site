@@ -30,6 +30,10 @@ jobs:
           node-version: 20
           cache: npm
 
+      # OG PNG 변환(resvg)에 필요한 한글(CJK) + 컬러 이모지 폰트
+      - name: Install fonts for OG image rendering
+        run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk fonts-noto-color-emoji
+
       - name: Install dependencies
         run: npm ci
 
@@ -53,6 +57,10 @@ jobs:
           PUBLIC_ADSENSE_CLIENT: ${{ secrets.PUBLIC_ADSENSE_CLIENT }}
           PUBLIC_ADSENSE_SLOT_DEFAULT: ${{ secrets.PUBLIC_ADSENSE_SLOT_DEFAULT }}
           PUBLIC_GA_ID: ${{ secrets.PUBLIC_GA_ID }}
+          # 검색엔진 소유권 인증 — Secrets 설정 시에만 meta 출력 (미설정이면 무시)
+          PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ secrets.PUBLIC_GOOGLE_SITE_VERIFICATION }}
+          PUBLIC_NAVER_SITE_VERIFICATION: ${{ secrets.PUBLIC_NAVER_SITE_VERIFICATION }}
+          PUBLIC_BING_SITE_VERIFICATION: ${{ secrets.PUBLIC_BING_SITE_VERIFICATION }}
         run: npm run build:nofetch
 
       - name: Upload artifact

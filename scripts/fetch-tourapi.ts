@@ -31,6 +31,10 @@ const EVENT_END_DATE = process.env.EVENT_END_DATE || '20271231';
 // 축제 최대 기간 (일) — 그보다 긴 건 사실상 상시 행사로 보고 제외
 const MAX_FESTIVAL_DURATION_DAYS = 30;
 
+// firstimage 없는 항목을 detailImage2로 보강할 때, 타입별 최대 호출 수.
+// (API 사용량·빌드 시간 보호 — 0이면 보강 비활성)
+const IMAGE_ENRICH_LIMIT = Number(process.env.IMAGE_ENRICH_LIMIT ?? '600');
+
 // TourAPI contentTypeId — 여행지(12) 만 areaBasedList2로 받음 (축제는 searchFestival2)
 const CONTENT_TYPE = {
   ATTRACTION: 12,
@@ -246,6 +250,68 @@ async function fetchAll(
   return collected;
 }
 
+/**
+ * detailImage2 — contentId 하나의 상세 이미지 목록을 받아 첫 이미지를 반환.
+ * firstimage가 비어 있는 항목 보강용. 실패/없음이면 null.
+ */
+async function fetchDetailImage(
+  contentId: string,
+): Promise<{ origin: string; small: string | null } | null> {
+  const url = new URL(`${TOURAPI_BASE}/detailImage2`);
+  url.searchParams.set('serviceKey', TOURAPI_KEY);
+  url.searchParams.set('MobileOS', 'ETC');
+  url.searchParams.set('MobileApp', 'festivals-site');
+  url.searchParams.set('_type', 'json');
+  url.searchParams.set('contentId', contentId);
+  url.searchParams.set('imageYN', 'Y');
+  url.searchParams.set('numOfRows', '5');
+  url.searchParams.set('pageNo', '1');
+
+  const res = await fetch(url.toString());
+  if (!res.ok) return null;
+  const data = await res.json();
+  const items = data?.response?.body?.items?.item;
+  if (!items) return null;
+  const list = Array.isArray(items) ? items : [items];
+  for (const img of list) {
+    const origin = (img?.originimgurl || '').trim();
+    if (origin) return { origin, small: (img?.smallimageurl || '').trim() || null };
+  }
+  return null;
+}
+
+/**
+ * firstimage 없는 항목들을 detailImage2로 보강 (in-place).
+ * 호출 수는 IMAGE_ENRICH_LIMIT로 제한 — best-effort, 실패는 조용히 건너뜀.
+ */
+async function enrichMissingImages(items: NormalizedItem[], label: string): Promise<void> {
+  if (IMAGE_ENRICH_LIMIT <= 0) return;
+  const missing = items.filter((it) => !it.image);
+  if (missing.length === 0) {
+    console.log(`  [${label}] 이미지 누락 0개 — 보강 생략`);
+    return;
+  }
+  const target = missing.slice(0, IMAGE_ENRICH_LIMIT);
+  console.log(
+    `  [${label}] 이미지 누락 ${missing.length}개 중 ${target.length}개 detailImage2 보강 시도...`,
+  );
+  let filled = 0;
+  for (const it of target) {
+    try {
+      const img = await fetchDetailImage(it.id);
+      if (img) {
+        it.image = img.origin;
+        if (!it.imageThumb) it.imageThumb = img.small || img.origin;
+        filled += 1;
+      }
+    } catch {
+      /* best-effort — 개별 실패 무시 */
+    }
+    await new Promise((r) => setTimeout(r, 120)); // rate limit 여유
+  }
+  console.log(`  [${label}] ↳ ${filled}/${target.length}개 이미지 보강 완료`);
+}
+
 function mockData(): { festivals: NormalizedItem[]; attractions: NormalizedItem[] } {
   // 키 없을 때 폴백 — 첫 셋업이 막히지 않도록.
   const sample = (
@@ -330,6 +396,11 @@ async function main() {
       '여행지',
     );
     attractions = rawAttr.map((i) => normalize(i, 'attraction'));
+
+    // 이미지 누락 항목 보강 — detailImage2 폴백 (best-effort, 호출 수 제한)
+    console.log('  이미지 보강(detailImage2) 시작...');
+    await enrichMissingImages(festivals, '축제');
+    await enrichMissingImages(attractions, '여행지');
   }
 
   await writeFile(join(OUT_DIR, 'festivals.json'), JSON.stringify(festivals, null, 2), 'utf-8');
@@ -344,12 +415,14 @@ async function main() {
     const withArea = arr.filter((i) => i.areacode).length;
     const withTheme = arr.filter((i) => i.theme).length;
     const withDate = arr.filter((i) => i.startDate).length;
-    return { total: arr.length, area: withArea, theme: withTheme, date: withDate };
+    const withImage = arr.filter((i) => i.image).length;
+    return { total: arr.length, area: withArea, theme: withTheme, date: withDate, image: withImage };
   };
   const fs = stats(festivals);
   const as = stats(attractions);
-  console.log(`✓  festivals.json: ${fs.total}개 (지역 ${fs.area}, 테마 ${fs.theme}, 날짜 ${fs.date})`);
-  console.log(`✓  attractions.json: ${as.total}개 (지역 ${as.area}, 테마 ${as.theme})`);
+  const pct = (n: number, t: number) => (t ? Math.round((100 * n) / t) : 0);
+  console.log(`✓  festivals.json: ${fs.total}개 (지역 ${fs.area}, 테마 ${fs.theme}, 날짜 ${fs.date}, 이미지 ${fs.image} ${pct(fs.image, fs.total)}%)`);
+  console.log(`✓  attractions.json: ${as.total}개 (지역 ${as.area}, 테마 ${as.theme}, 이미지 ${as.image} ${pct(as.image, as.total)}%)`);
   console.log(`✓  saved to ${OUT_DIR}`);
 
   // 클라이언트 필터용 경량 인덱스 (필요 필드만)

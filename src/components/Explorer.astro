@@ -79,15 +79,18 @@ const categories = [
       </div>
     </div>
 
+    <!-- 지역 선택 — 칩 버튼 (모든 카테고리 공통) -->
     <div class="filter-row">
       <span class="filter-label">{tr('region', lang)}</span>
-      <select id="explore-region" class="filter-select" aria-label={tr('region', lang)}>
-        <option value="all">{tr('all', lang)}</option>
+      <div class="chip-group" id="explore-region-chips" role="group" aria-label={tr('region', lang)}>
+        <button type="button" class="chip chip-active" data-region="all">{tr('all', lang)}</button>
         {Object.entries(AREA_CODE).map(([code, names]) => (
-          <option value={code}>{names[lang]}</option>
+          <button type="button" class="chip" data-region={code}>{names[lang]}</button>
         ))}
-      </select>
+      </div>
+    </div>
 
+    <div class="filter-row">
       <span class="filter-label">{tr('exploreTheme', lang)}</span>
       <div class="chip-group" id="explore-theme-chips" role="group" aria-label={tr('exploreTheme', lang)}>
         {themes.map((t) => (

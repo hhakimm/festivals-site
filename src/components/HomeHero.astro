@@ -21,20 +21,6 @@ const L = {
     zh: '6道题了解你的旅行风格',
   },
   exploreCta: { ko: '↓ 둘러보기', en: '↓ Explore', ja: '↓ 探す', zh: '↓ 浏览' },
-  attractionsLabel: { ko: '여행지', en: 'Attractions', ja: '観光地', zh: '景点' },
-  attractionsDesc: {
-    ko: '전국 명소·자연·문화재',
-    en: 'Sights, nature, heritage',
-    ja: '名所・自然・文化財',
-    zh: '名胜·自然·文化遗产',
-  },
-  festivalsLabel: { ko: '축제', en: 'Festivals', ja: 'お祭り', zh: '节庆' },
-  festivalsDesc: {
-    ko: '계절별 축제·이벤트',
-    en: 'Seasonal events',
-    ja: '季節のお祭り',
-    zh: '应季节日活动',
-  },
 } as const;
 function L_(k: keyof typeof L): string { return L[k][lang]; }
 ---
@@ -52,26 +38,6 @@ function L_(k: keyof typeof L): string { return L[k][lang]; }
     <div class="home-hero-cta-card">
       <p class="home-hero-cta-sub">{L_('quizSub')}</p>
       <a href={`${base}${prefix}/quiz/`} class="home-hero-cta-btn">{L_('quizCta')} →</a>
-    </div>
-
-    <!-- 여행지 / 축제 진입 카드 — 큰 두 개로 카테고리 명확화 -->
-    <div class="home-hero-pillars">
-      <a href={`${base}${prefix}/attractions/`} class="home-hero-pillar">
-        <div class="home-hero-pillar-icon" aria-hidden="true">🗺️</div>
-        <div class="home-hero-pillar-text">
-          <strong class="home-hero-pillar-name">{L_('attractionsLabel')}</strong>
-          <span class="home-hero-pillar-count">{attractions.length.toLocaleString(lang)}</span>
-          <span class="home-hero-pillar-desc">{L_('attractionsDesc')}</span>
-        </div>
-      </a>
-      <a href={`${base}${prefix}/festivals/`} class="home-hero-pillar">
-        <div class="home-hero-pillar-icon" aria-hidden="true">🎆</div>
-        <div class="home-hero-pillar-text">
-          <strong class="home-hero-pillar-name">{L_('festivalsLabel')}</strong>
-          <span class="home-hero-pillar-count">{festivals.length.toLocaleString(lang)}</span>
-          <span class="home-hero-pillar-desc">{L_('festivalsDesc')}</span>
-        </div>
-      </a>
     </div>
 
     <a href="#explorer" class="home-hero-scroll">{L_('exploreCta')}</a>
@@ -149,35 +115,6 @@ function L_(k: keyof typeof L): string { return L[k][lang]; }
   }
   .home-hero-cta-btn:hover { background: #fde047; }
   .home-hero-cta-btn:active { transform: scale(0.97); }
-
-  /* 여행지/축제 두 개 큰 카드 */
-  .home-hero-pillars {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin: 0 auto 18px;
-    max-width: 480px;
-  }
-  .home-hero-pillar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 14px;
-    padding: 14px 14px;
-    color: #fff;
-    text-decoration: none;
-    text-align: left;
-    transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
-  }
-  .home-hero-pillar:hover { background: rgba(250, 204, 21, 0.12); border-color: rgba(250, 204, 21, 0.45); }
-  .home-hero-pillar:active { transform: scale(0.98); }
-  .home-hero-pillar-icon { font-size: 1.9rem; line-height: 1; flex-shrink: 0; }
-  .home-hero-pillar-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-  .home-hero-pillar-name { font-size: 1rem; font-weight: 800; line-height: 1.2; }
-  .home-hero-pillar-count { font-size: 0.78rem; color: #facc15; font-weight: 700; font-feature-settings: "tnum"; }
-  .home-hero-pillar-desc { font-size: 0.72rem; color: rgba(255,255,255,0.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   .home-hero-scroll {
     display: inline-block;

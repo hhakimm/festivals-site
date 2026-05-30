@@ -26,6 +26,12 @@ export interface Persona {
   gradient: { from: string; to: string };
   /** 추천 매칭 이유 (1줄) — "이 유형은 ___를 좋아해요" */
   whyRecommend: Record<Lang, string>;
+  /** 여행 궁합 — 찰떡궁합 페르소나 (바이럴: 친구 태그 유도) */
+  compatible: PersonaId;
+  /** 여행 궁합 — 상극 페르소나 */
+  clash: PersonaId;
+  /** 한 줄 캐릭터 요약 — 공감·공유 유도 ("당신은 이런 사람") */
+  archetype: Record<Lang, string>;
 }
 
 export const PERSONAS: Record<PersonaId, Persona> = {
@@ -63,6 +69,14 @@ export const PERSONAS: Record<PersonaId, Persona> = {
       ja: 'このタイプは広大な自然の平和を愛します。国立公園・樹木園・滝中心におすすめ。',
       zh: '此类型最爱大自然中的宁静。推荐以国立公园、植物园、瀑布为主。',
     },
+    compatible: 'cultural',
+    clash: 'urbanite',
+    archetype: {
+      ko: '주말이면 등산화부터 챙기는 자연인',
+      en: 'The friend who grabs hiking boots every weekend',
+      ja: '週末になると登山靴から準備する自然派',
+      zh: '一到周末就先收拾登山鞋的自然派',
+    },
   },
   cultural: {
     id: 'cultural',
@@ -97,6 +111,14 @@ export const PERSONAS: Record<PersonaId, Persona> = {
       en: 'This type savors slowly. Picks focus on palaces, hanok villages, and ancient temples.',
       ja: 'このタイプはゆっくり味わう旅を好みます。宮殿・韓屋村・千年寺院中心におすすめ。',
       zh: '此类型喜欢慢慢品味。推荐以宫殿、韩屋村、千年古刹为主。',
+    },
+    compatible: 'naturalist',
+    clash: 'adventurer',
+    archetype: {
+      ko: '여행지 박물관에서 도슨트를 끝까지 듣는 사람',
+      en: 'The one who stays for the entire museum docent tour',
+      ja: '旅先の博物館で解説を最後まで聞く人',
+      zh: '在旅行地博物馆把讲解听到最后的人',
     },
   },
   resort: {
@@ -133,6 +155,14 @@ export const PERSONAS: Record<PersonaId, Persona> = {
       ja: 'このタイプは何もしない余裕を楽しみます。ビーチ・温泉・島中心におすすめ。',
       zh: '此类型享受什么都不做的悠闲。推荐以海滩、温泉、海岛为主。',
     },
+    compatible: 'family',
+    clash: 'adventurer',
+    archetype: {
+      ko: '체크인하면 수영장에서 안 나오는 사람',
+      en: 'The one who never leaves the pool after check-in',
+      ja: 'チェックインしたらプールから出てこない人',
+      zh: '一入住就泡在泳池里不出来的人',
+    },
   },
   adventurer: {
     id: 'adventurer',
@@ -167,6 +197,14 @@ export const PERSONAS: Record<PersonaId, Persona> = {
       en: 'This type seeks thrill. Picks focus on activities, experiences, and sports spots.',
       ja: 'このタイプはスリルを求めます。アクティビティ・体験・スポーツ名所中心におすすめ。',
       zh: '此类型追求刺激挑战。推荐以活动、体验、运动景点为主。',
+    },
+    compatible: 'urbanite',
+    clash: 'resort',
+    archetype: {
+      ko: '"이거 위험한데?" 하면 더 하고 싶어지는 사람',
+      en: 'The one who wants it MORE when you say "that looks dangerous"',
+      ja: '「危なくない?」と言われるほどやりたくなる人',
+      zh: '听到"这个很危险吧?"反而更想试的人',
     },
   },
   family: {
@@ -203,6 +241,14 @@ export const PERSONAS: Record<PersonaId, Persona> = {
       ja: 'このタイプは皆が楽な旅を求めます。平地・体験・バリアフリーコース中心におすすめ。',
       zh: '此类型追求人人舒适的旅行。推荐以平地、体验、无障碍步道为主。',
     },
+    compatible: 'resort',
+    clash: 'adventurer',
+    archetype: {
+      ko: '단톡방에서 여행 일정 짜는 총무 담당',
+      en: 'The group-chat planner who organizes the whole trip',
+      ja: 'グループチャットで旅程を組む幹事タイプ',
+      zh: '在群里负责安排整个行程的组织者',
+    },
   },
   urbanite: {
     id: 'urbanite',
@@ -237,6 +283,14 @@ export const PERSONAS: Record<PersonaId, Persona> = {
       en: 'This type loves urban energy. Picks focus on streets, markets, night-view spots.',
       ja: 'このタイプは都会の活気を愛します。繁華街・市場・夜景名所中心におすすめ。',
       zh: '此类型热爱都市活力。推荐以闹市街区、市场、夜景为主。',
+    },
+    compatible: 'adventurer',
+    clash: 'naturalist',
+    archetype: {
+      ko: '핫플 오픈런하고 바로 SNS에 올리는 사람',
+      en: 'The one who lines up for the hot spot and posts it instantly',
+      ja: '話題のスポットに開店ダッシュして即SNSに上げる人',
+      zh: '抢着去网红店打卡马上发SNS的人',
     },
   },
 };
@@ -597,6 +651,36 @@ export const QUIZ_LABELS = {
     ja: '友達もテストして結果を比べよう',
     zh: '让朋友也测一下,比较结果',
   },
+  archetypeHeading: {
+    ko: '🎬 한 줄 요약',
+    en: '🎬 In one line',
+    ja: '🎬 ひとことで言うと',
+    zh: '🎬 一句话总结',
+  },
+  compatHeading: {
+    ko: '💞 여행 궁합',
+    en: '💞 Travel chemistry',
+    ja: '💞 旅の相性',
+    zh: '💞 旅行契合度',
+  },
+  compatGood: {
+    ko: '찰떡궁합',
+    en: 'Perfect match',
+    ja: 'ベストパートナー',
+    zh: '绝配',
+  },
+  compatBad: {
+    ko: '환장의 조합',
+    en: 'Total clash',
+    ja: '相性最悪',
+    zh: '冤家组合',
+  },
+  compatTapHint: {
+    ko: '눌러서 이 유형도 확인 →',
+    en: 'Tap to see this type →',
+    ja: 'タップでこのタイプも →',
+    zh: '点击查看此类型 →',
+  },
 } as const;
 
 /** 페르소나별 가상 통계 (전체 100% 합) — 실제 DB 연동 전까지 시드값 */
@@ -611,4 +695,25 @@ export const PERSONA_DISTRIBUTION: Record<PersonaId, number> = {
 
 export function quizT(key: keyof typeof QUIZ_LABELS, lang: Lang): string {
   return QUIZ_LABELS[key][lang];
+}
+
+// ─────────────────────────────────────────────────────────────
+// 희귀도 — PERSONA_DISTRIBUTION 기반. 바이럴: "희귀 유형" 자랑 유도.
+// ─────────────────────────────────────────────────────────────
+export type RarityTier = 'rare' | 'uncommon' | 'common';
+export interface RarityInfo {
+  percent: number;
+  tier: RarityTier;
+  emoji: string;
+  label: Record<Lang, string>;
+}
+const RARITY_LABELS: Record<RarityTier, { emoji: string; label: Record<Lang, string> }> = {
+  rare: { emoji: '🦄', label: { ko: '희귀 유형', en: 'Rare type', ja: 'レアタイプ', zh: '稀有类型' } },
+  uncommon: { emoji: '✨', label: { ko: '개성파 유형', en: 'Distinctive type', ja: '個性派タイプ', zh: '个性派类型' } },
+  common: { emoji: '🔥', label: { ko: '대세 유형', en: 'Trending type', ja: '王道タイプ', zh: '主流类型' } },
+};
+export function getRarity(personaId: PersonaId): RarityInfo {
+  const percent = PERSONA_DISTRIBUTION[personaId];
+  const tier: RarityTier = percent <= 13 ? 'rare' : percent <= 18 ? 'uncommon' : 'common';
+  return { percent, tier, emoji: RARITY_LABELS[tier].emoji, label: RARITY_LABELS[tier].label };
 }

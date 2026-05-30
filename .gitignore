@@ -2,6 +2,9 @@
 dist/
 .astro/
 
+# OG 카드 PNG — 빌드 시 og-*.svg에서 자동 생성(scripts/og-to-png.ts)
+public/og-*.png
+
 # Dependencies
 node_modules/
 

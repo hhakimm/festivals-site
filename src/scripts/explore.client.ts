@@ -481,7 +481,7 @@ export async function initExplorer(rootEl: HTMLElement) {
   const filterBar = $('.filter-bar');
   const searchInput = $<HTMLInputElement>('#explore-search');
   const searchClear = $<HTMLButtonElement>('#explore-search-clear');
-  const regionSelect = $<HTMLSelectElement>('#explore-region');
+  const regionChips = $('#explore-region-chips');
   const themeChips = $('#explore-theme-chips');
   const categoryChips = $('#explore-category-chips');
   const sortSelect = $<HTMLSelectElement>('#explore-sort');
@@ -716,7 +716,9 @@ export async function initExplorer(rootEl: HTMLElement) {
   }
 
   function syncFilterUI() {
-    if (regionSelect) regionSelect.value = state.region;
+    regionChips?.querySelectorAll('.chip').forEach((c) => {
+      c.classList.toggle('chip-active', (c as HTMLElement).dataset.region === state.region);
+    });
     if (sortSelect) sortSelect.value = state.sort;
     if (favBtn) favBtn.setAttribute('aria-pressed', state.favoritesOnly ? 'true' : 'false');
     if (nearbyBtn) nearbyBtn.setAttribute('aria-pressed', state.userLocation ? 'true' : 'false');
@@ -854,8 +856,10 @@ export async function initExplorer(rootEl: HTMLElement) {
     searchInput?.focus();
   });
 
-  regionSelect?.addEventListener('change', (e) => {
-    state.region = (e.target as HTMLSelectElement).value;
+  regionChips?.addEventListener('click', (e) => {
+    const chip = (e.target as HTMLElement).closest<HTMLElement>('.chip');
+    if (!chip || !chip.dataset.region) return;
+    state.region = chip.dataset.region;
     state.visible = INITIAL_VISIBLE;
     update();
   });

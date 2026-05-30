@@ -7,6 +7,7 @@
 import Base from '@/layouts/Base.astro';
 import ItemCard from '@/components/ItemCard.astro';
 import AdSlot from '@/components/AdSlot.astro';
+import PersonaExtras from '@/components/PersonaExtras.astro';
 import {
   PERSONAS,
   PERSONA_IDS,
@@ -51,6 +52,8 @@ const description = `${persona.tagline[lang]} — ${persona.description[lang].sl
     </div>
 
     <p class="persona-desc">{persona.description[lang]}</p>
+
+    <PersonaExtras persona={persona} lang={lang} base={base} />
 
     <section class="persona-traits">
       <h2 class="psn-h">{quizT('traitsHeading', lang)}</h2>

@@ -17,6 +17,7 @@ import {
 import type { Lang } from '@/lib/i18n';
 import ItemCard from './ItemCard.astro';
 import AdSlot from './AdSlot.astro';
+import PersonaExtras from './PersonaExtras.astro';
 
 interface Props {
   lang: Lang;
@@ -102,6 +103,9 @@ const recommendations = getAllRecommendations();
         </div>
 
         <p class="quiz-result-desc">{persona.description[lang]}</p>
+
+        <!-- 바이럴 강화: 희귀도 배지 · 한 줄 요약 · 여행 궁합 -->
+        <PersonaExtras persona={persona} lang={lang} base={base} />
 
         <!-- 특성 (traits) -->
         <section class="quiz-traits">

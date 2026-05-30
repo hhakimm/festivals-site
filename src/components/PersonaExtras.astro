@@ -1,0 +1,126 @@
+---
+/**
+ * PersonaExtras — 결과 화면의 바이럴 강화 블록 (공유 가치 ↑).
+ * QuizApp.astro 와 quiz/r/[type].astro (ko/en/ja/zh) 가 공통으로 사용.
+ *   1) 희귀도 배지 — "🦄 희귀 유형 · 12%"
+ *   2) 한 줄 캐릭터 요약 — 공감·캡처 공유 유도
+ *   3) 여행 궁합 — 찰떡궁합 / 상극 (친구 태그·연쇄 테스트 유도)
+ */
+import { PERSONAS, quizT, getRarity, type Persona } from '@/lib/quiz';
+import type { Lang } from '@/lib/i18n';
+
+interface Props {
+  persona: Persona;
+  lang: Lang;
+  base: string;
+}
+const { persona, lang, base } = Astro.props;
+
+const rarity = getRarity(persona.id);
+const compat = PERSONAS[persona.compatible];
+const clash = PERSONAS[persona.clash];
+
+// 페르소나 결과 페이지 링크 (로케일 인지)
+const resultHref = (id: string) =>
+  lang === 'ko' ? `${base}/quiz/r/${id}/` : `${base}/${lang}/quiz/r/${id}/`;
+---
+
+<div class="persona-extras">
+  {/* 1) 희귀도 배지 */}
+  <div class={`pe-rarity pe-rarity--${rarity.tier}`}>
+    <span class="pe-rarity-emoji" aria-hidden="true">{rarity.emoji}</span>
+    <span class="pe-rarity-label">{rarity.label[lang]}</span>
+    <span class="pe-rarity-pct">{rarity.percent}%</span>
+  </div>
+
+  {/* 2) 한 줄 캐릭터 요약 */}
+  <section class="pe-archetype">
+    <h2 class="pe-h">{quizT('archetypeHeading', lang)}</h2>
+    <p class="pe-archetype-line">“{persona.archetype[lang]}”</p>
+  </section>
+
+  {/* 3) 여행 궁합 */}
+  <section class="pe-compat">
+    <h2 class="pe-h">{quizT('compatHeading', lang)}</h2>
+    <div class="pe-compat-grid">
+      <a
+        class="pe-compat-card pe-compat-card--good"
+        href={resultHref(compat.id)}
+        style={`--g-from:${compat.gradient.from};--g-to:${compat.gradient.to};`}
+      >
+        <span class="pe-compat-tag pe-compat-tag--good">{quizT('compatGood', lang)}</span>
+        <span class="pe-compat-emoji" aria-hidden="true">{compat.emoji}</span>
+        <span class="pe-compat-name">{compat.name[lang]}</span>
+        <span class="pe-compat-hint">{quizT('compatTapHint', lang)}</span>
+      </a>
+      <a
+        class="pe-compat-card pe-compat-card--bad"
+        href={resultHref(clash.id)}
+        style={`--g-from:${clash.gradient.from};--g-to:${clash.gradient.to};`}
+      >
+        <span class="pe-compat-tag pe-compat-tag--bad">{quizT('compatBad', lang)}</span>
+        <span class="pe-compat-emoji" aria-hidden="true">{clash.emoji}</span>
+        <span class="pe-compat-name">{clash.name[lang]}</span>
+        <span class="pe-compat-hint">{quizT('compatTapHint', lang)}</span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<style>
+  .persona-extras { margin: 0 0 24px; }
+  .pe-h { font-size: 1rem; margin: 0 0 12px; font-weight: 700; letter-spacing: -0.01em; color: #171717; }
+
+  /* 희귀도 배지 */
+  .pe-rarity {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; border-radius: 999px;
+    font-weight: 800; font-size: 0.95rem;
+    margin: -8px 0 24px;
+    border: 1.5px solid transparent;
+  }
+  .pe-rarity-emoji { font-size: 1.15rem; line-height: 1; }
+  .pe-rarity-pct { font-feature-settings: "tnum"; opacity: 0.85; font-weight: 700; }
+  .pe-rarity--rare { background: #faf5ff; color: #7c3aed; border-color: #e9d5ff; }
+  .pe-rarity--uncommon { background: #fefce8; color: #a16207; border-color: #fde68a; }
+  .pe-rarity--common { background: #fff1f2; color: #be123c; border-color: #fecdd3; }
+
+  /* 한 줄 요약 */
+  .pe-archetype { margin: 0 0 24px; }
+  .pe-archetype-line {
+    margin: 0; padding: 16px 18px;
+    background: #fafafa; border: 1px solid #f0f0f0; border-radius: 14px;
+    font-size: 1.05rem; font-weight: 600; color: #171717;
+    line-height: 1.5; text-align: center;
+  }
+
+  /* 여행 궁합 */
+  .pe-compat { margin: 0 0 8px; }
+  .pe-compat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pe-compat-card {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 18px 12px 14px;
+    border-radius: 16px;
+    text-decoration: none;
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      linear-gradient(135deg, var(--g-from), var(--g-to)) border-box;
+    border: 2px solid transparent;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .pe-compat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
+  .pe-compat-tag {
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.02em;
+    padding: 3px 10px; border-radius: 999px; margin-bottom: 2px;
+  }
+  .pe-compat-tag--good { background: #dcfce7; color: #15803d; }
+  .pe-compat-tag--bad { background: #fee2e2; color: #b91c1c; }
+  .pe-compat-emoji { font-size: 40px; line-height: 1; }
+  .pe-compat-name { font-size: 1rem; font-weight: 800; color: #171717; text-align: center; }
+  .pe-compat-hint { font-size: 0.72rem; color: #a3a3a3; }
+
+  @media (max-width: 380px) {
+    .pe-compat-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -2,6 +2,7 @@
 import Base from '@/layouts/Base.astro';
 import ItemCard from '@/components/ItemCard.astro';
 import AdSlot from '@/components/AdSlot.astro';
+import PersonaExtras from '@/components/PersonaExtras.astro';
 import { PERSONAS, PERSONA_IDS, PERSONA_DISTRIBUTION, quizT, getAllRecommendations, type PersonaId } from '@/lib/quiz';
 import { tr } from '@/lib/i18n';
 
@@ -28,6 +29,7 @@ const description = `${persona.tagline[lang]} — ${persona.description[lang].sl
       <p class="persona-tagline">"{persona.tagline[lang]}"</p>
     </div>
     <p class="persona-desc">{persona.description[lang]}</p>
+    <PersonaExtras persona={persona} lang={lang} base={base} />
     <section class="persona-traits"><h2 class="psn-h">{quizT('traitsHeading', lang)}</h2>
       <ul class="psn-traits-list">{persona.traits[lang].map((t) => <li class="psn-trait">{t}</li>)}</ul></section>
     <section class="persona-stat"><h2 class="psn-h">{quizT('statHeading', lang)}</h2>

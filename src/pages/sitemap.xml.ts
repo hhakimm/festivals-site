@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
-import { festivals, attractions } from '@/lib/data';
+import { festivals, attractions, AREA_CODE } from '@/lib/data';
 import { LANGS } from '@/lib/i18n';
+import { PERSONA_IDS } from '@/lib/quiz';
 
 // 빌드 타임에 sitemap.xml을 직접 생성한다.
 // @astrojs/sitemap 패키지의 base path 호환 이슈를 우회하면서
@@ -17,6 +18,22 @@ export const GET: APIRoute = ({ site }) => {
   entries.push({ path: '/', priority: 1.0 });
   entries.push({ path: '/festivals/', priority: 0.9 });
   entries.push({ path: '/attractions/', priority: 0.9 });
+
+  // 성향테스트 — 바이럴 진입점. 검색·공유 유입을 인덱싱.
+  entries.push({ path: '/quiz/', priority: 0.8 });
+  entries.push({ path: '/quiz/dna/', priority: 0.6 });
+  for (const pid of PERSONA_IDS) {
+    entries.push({ path: `/quiz/r/${pid}/`, priority: 0.6 });
+  }
+
+  // 지역 랜딩 페이지 — "서울 축제", "제주 관광지" 등 롱테일 검색 대응.
+  // 항목이 1개 이상 있는 지역의 1페이지만 등록.
+  const festAreas = new Set(festivals.map((f) => f.areacode).filter(Boolean));
+  const attrAreas = new Set(attractions.map((a) => a.areacode).filter(Boolean));
+  for (const area of Object.keys(AREA_CODE)) {
+    if (festAreas.has(area)) entries.push({ path: `/festivals/region/${area}/`, priority: 0.7 });
+    if (attrAreas.has(area)) entries.push({ path: `/attractions/region/${area}/`, priority: 0.7 });
+  }
 
   for (const item of allItems) {
     const lastmod = item.updatedAt
