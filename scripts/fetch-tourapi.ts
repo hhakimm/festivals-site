@@ -15,6 +15,7 @@
  */
 
 import { writeFile, mkdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -363,7 +364,15 @@ async function main() {
   let attractions: NormalizedItem[] = [];
 
   if (!TOURAPI_KEY) {
-    console.log('⚠  TOUR_API_KEY 환경변수가 없음 — mock 데이터로 폴백');
+    // 키가 없을 때 기존 커밋 데이터를 mock(6개)으로 덮어쓰면 사이트가 망가짐.
+    // 데이터 파일이 이미 있으면 보존하고 종료(=CI에서 키 미설정 시 안전).
+    const festPath = join(OUT_DIR, 'festivals.json');
+    const attrPath = join(OUT_DIR, 'attractions.json');
+    if (existsSync(festPath) && existsSync(attrPath)) {
+      console.log('⚠  TOURAPI_KEY 없음 — 기존 데이터 유지(덮어쓰지 않음). CI Secrets에 TOURAPI_KEY를 설정하세요.');
+      return;
+    }
+    console.log('⚠  TOURAPI_KEY 없음 & 데이터 파일 없음 — mock 데이터로 초기 생성');
     const mock = mockData();
     festivals = mock.festivals;
     attractions = mock.attractions;

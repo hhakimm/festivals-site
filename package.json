@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "scripts": {
     "fetch": "tsx --env-file=.env scripts/fetch-tourapi.ts",
+    "fetch:ci": "tsx scripts/fetch-tourapi.ts",
     "fetch:i18n": "tsx --env-file=.env scripts/fetch-i18n-titles.ts",
+    "fetch:i18n:ci": "tsx scripts/fetch-i18n-titles.ts",
     "og:png": "tsx scripts/og-to-png.ts",
     "dev": "astro dev",
     "start": "astro dev",

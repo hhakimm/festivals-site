@@ -40,9 +40,10 @@ jobs:
       - name: Fetch TourAPI data
         env:
           TOURAPI_KEY: ${{ secrets.TOURAPI_KEY }}
-        # Secret 미설정·API 일시 장애에도 빌드는 계속 (기존 data JSON 사용)
+        # Secret 미설정·API 일시 장애에도 빌드는 계속 (기존 data JSON 사용).
+        # 키 없으면 스크립트가 기존 데이터를 보존하고 종료(덮어쓰지 않음).
         continue-on-error: true
-        run: npm run fetch
+        run: npm run fetch:ci
 
       - name: Fetch i18n titles (en/ja/zh)
         env:
@@ -50,7 +51,7 @@ jobs:
         # 다국어 fetch는 시간이 길 수 있으니 best-effort
         continue-on-error: true
         timeout-minutes: 30
-        run: npm run fetch:i18n
+        run: npm run fetch:i18n:ci
 
       - name: Build site
         env:
