@@ -21,7 +21,6 @@ export const GET: APIRoute = ({ site }) => {
 
   // 성향테스트 — 바이럴 진입점. 검색·공유 유입을 인덱싱.
   entries.push({ path: '/quiz/', priority: 0.8 });
-  entries.push({ path: '/quiz/dna/', priority: 0.6 });
   for (const pid of PERSONA_IDS) {
     entries.push({ path: `/quiz/r/${pid}/`, priority: 0.6 });
   }

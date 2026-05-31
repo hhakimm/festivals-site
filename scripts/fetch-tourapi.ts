@@ -32,8 +32,9 @@ const EVENT_END_DATE = process.env.EVENT_END_DATE || '20271231';
 const MAX_FESTIVAL_DURATION_DAYS = 30;
 
 // firstimage 없는 항목을 detailImage2로 보강할 때, 타입별 최대 호출 수.
-// (API 사용량·빌드 시간 보호 — 0이면 보강 비활성)
-const IMAGE_ENRICH_LIMIT = Number(process.env.IMAGE_ENRICH_LIMIT ?? '600');
+// 여행지 누락분(~1,200개)을 한 번에 모두 시도하도록 넉넉히 설정.
+// (API 일일 호출 한도가 빡빡한 개발용 키라면 env로 낮추세요. 0이면 보강 비활성)
+const IMAGE_ENRICH_LIMIT = Number(process.env.IMAGE_ENRICH_LIMIT ?? '1500');
 
 // TourAPI contentTypeId — 여행지(12) 만 areaBasedList2로 받음 (축제는 searchFestival2)
 const CONTENT_TYPE = {

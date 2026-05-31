@@ -41,19 +41,6 @@ const recommendations = getAllRecommendations();
     <button type="button" class="btn quiz-start-btn" id="quiz-start-btn">
       {quizT('start', lang)} →
     </button>
-
-    {/* 다른 테스트 안내 — DNA 테스트 (더 전문적) */}
-    <div class="quiz-other-tests">
-      <p class="quiz-other-tests-eyebrow">{lang === 'ko' ? '더 깊은 분석' : lang === 'en' ? 'Deeper analysis' : lang === 'ja' ? 'より深い分析' : '更深入分析'}</p>
-      <a href={lang === 'ko' ? `${base}/quiz/dna/` : `${base}/${lang}/quiz/dna/`} class="quiz-other-test-card">
-        <div class="qot-emoji">🧬</div>
-        <div class="qot-body">
-          <strong class="qot-title">{lang === 'ko' ? '여행 DNA 분석' : lang === 'en' ? 'Travel DNA Analysis' : lang === 'ja' ? '旅行DNA分析' : '旅行DNA分析'}</strong>
-          <span class="qot-desc">{lang === 'ko' ? '4축 × 16유형 · 8문항 90초' : lang === 'en' ? '4 axes × 16 types · 8 Qs / 90s' : lang === 'ja' ? '4軸×16型 · 8問90秒' : '4轴×16型 · 8题90秒'}</span>
-        </div>
-        <span class="qot-arrow">→</span>
-      </a>
-    </div>
   </div>
 
   {/* ── 2. 질문 화면 ─────────────────────────────────── */}

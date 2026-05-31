@@ -208,7 +208,7 @@ function cardHtml(it: IndexItem & { _dist?: number }, lang: Lang): string {
     : '';
   const imgHtml = it.img
     ? `<img src="${escapeHtml(it.img)}" alt="${escapeHtml(it.n)}" loading="lazy" width="320" height="200" />`
-    : `<div class="card-image-placeholder" aria-hidden="true">${isFest ? '🎆' : '🗺️'}</div>`;
+    : `<div class="card-image-placeholder" aria-hidden="true"><span class="card-image-placeholder-emoji">${isFest ? '🎆' : '🗺️'}</span>${region ? `<span class="card-image-placeholder-region">${escapeHtml(region)}</span>` : ''}</div>`;
   const datesHtml = dates ? `<p class="card-dates">${escapeHtml(dates)}</p>` : '';
   return `
     <article class="explore-card" data-id="${escapeHtml(it.i)}">
