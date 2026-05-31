@@ -1,7 +1,7 @@
 /**
  * 날씨 위젯 클라이언트 — Open-Meteo 호출 + 7일 카드 렌더.
  */
-import { fetchDaily7, getWeatherInfo, weatherT, dayLabel } from '@/lib/weather';
+import { fetchDaily7, fetchAirQuality, getAirGrade, getWeatherInfo, weatherT, dayLabel } from '@/lib/weather';
 import type { Lang } from '@/lib/i18n';
 
 export function initWeatherWidget(root: HTMLElement) {
@@ -46,6 +46,21 @@ export function initWeatherWidget(root: HTMLElement) {
   }).catch(() => {
     status.textContent = weatherT('failed', lang);
   });
+
+  // 대기질(미세먼지) — 별도 비동기 (실패해도 날씨엔 영향 없음)
+  fetchAirQuality(lat, lng).then((aq) => {
+    if (!aq) return;
+    const grade = getAirGrade(aq.pm2_5);
+    if (!grade) return;
+    const pm25 = aq.pm2_5 != null ? Math.round(aq.pm2_5) : '-';
+    const pm10 = aq.pm10 != null ? Math.round(aq.pm10) : '-';
+    const el = document.createElement('div');
+    el.className = 'weather-air';
+    el.innerHTML =
+      `<span class="air-badge" style="background:${grade.color}">${grade.emoji} ${escapeHtml(weatherT('airQuality', lang))} ${escapeHtml(grade.label[lang])}</span>` +
+      `<span class="air-vals">PM2.5 ${pm25} · PM10 ${pm10} ㎍/㎥</span>`;
+    content.prepend(el);
+  }).catch(() => { /* 대기질 실패는 무시 */ });
 }
 
 function escapeHtml(s: string): string {

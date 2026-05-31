@@ -164,6 +164,60 @@ export async function fetchCurrent(lat: number, lng: number): Promise<MeteoRespo
 }
 
 // ─────────────────────────────────────────────────────────────
+// 대기질 — Open-Meteo Air Quality API (키 불필요·CORS OK·실시간)
+//   https://open-meteo.com/en/docs/air-quality-api
+// ─────────────────────────────────────────────────────────────
+export interface AirQuality { pm10: number | null; pm2_5: number | null; }
+
+export type AirGradeKey = 'good' | 'moderate' | 'bad' | 'verybad';
+export interface AirGrade { key: AirGradeKey; emoji: string; color: string; label: Record<Lang, string>; }
+
+const AIR_GRADES: Record<AirGradeKey, AirGrade> = {
+  good:     { key: 'good',     emoji: '😊', color: '#2563eb', label: { ko: '좋음', en: 'Good', ja: '良い', zh: '优' } },
+  moderate: { key: 'moderate', emoji: '🙂', color: '#16a34a', label: { ko: '보통', en: 'Moderate', ja: '普通', zh: '良' } },
+  bad:      { key: 'bad',      emoji: '😷', color: '#d97706', label: { ko: '나쁨', en: 'Unhealthy', ja: '悪い', zh: '差' } },
+  verybad:  { key: 'verybad',  emoji: '🤢', color: '#dc2626', label: { ko: '매우나쁨', en: 'Very unhealthy', ja: '非常に悪い', zh: '很差' } },
+};
+
+/** 한국 PM2.5(㎍/㎥) 환경기준 등급 */
+export function getAirGrade(pm25: number | null | undefined): AirGrade | null {
+  if (pm25 == null || !isFinite(pm25)) return null;
+  if (pm25 <= 15) return AIR_GRADES.good;
+  if (pm25 <= 35) return AIR_GRADES.moderate;
+  if (pm25 <= 75) return AIR_GRADES.bad;
+  return AIR_GRADES.verybad;
+}
+
+const AIR_API = 'https://air-quality-api.open-meteo.com/v1/air-quality';
+
+export async function fetchAirQuality(lat: number, lng: number): Promise<AirQuality | null> {
+  const key = `meteo:air:${lat.toFixed(2)}:${lng.toFixed(2)}`;
+  try {
+    const raw = sessionStorage.getItem(key);
+    if (raw) {
+      const e = JSON.parse(raw) as { data: AirQuality; expires: number };
+      if (Date.now() < e.expires) return e.data;
+    }
+  } catch { /* ignore */ }
+
+  const url = `${AIR_API}?latitude=${lat.toFixed(4)}&longitude=${lng.toFixed(4)}` +
+    `&current=pm10,pm2_5&timezone=Asia%2FSeoul`;
+  try {
+    const r = await fetch(url, { headers: { Accept: 'application/json' } });
+    if (!r.ok) return null;
+    const j = await r.json();
+    const data: AirQuality = {
+      pm10: typeof j?.current?.pm10 === 'number' ? j.current.pm10 : null,
+      pm2_5: typeof j?.current?.pm2_5 === 'number' ? j.current.pm2_5 : null,
+    };
+    try { sessionStorage.setItem(key, JSON.stringify({ data, expires: Date.now() + CACHE_TTL_MS })); } catch { /* quota */ }
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
 // 5대 도시 좌표 — 홈 비교용
 // ─────────────────────────────────────────────────────────────
 export interface City { id: string; lat: number; lng: number; name: Record<Lang, string>; }
@@ -210,6 +264,13 @@ export const WEATHER_LABELS = {
     en: 'Outdoor',
     ja: '屋外活動',
     zh: '户外活动',
+  },
+  airQuality: { ko: '미세먼지', en: 'Air quality', ja: '大気質', zh: '空气质量' },
+  airSourceNote: {
+    ko: '대기질: Open-Meteo (CAMS)',
+    en: 'Air quality: Open-Meteo (CAMS)',
+    ja: '大気質: Open-Meteo (CAMS)',
+    zh: '空气质量: Open-Meteo (CAMS)',
   },
 } as const;
 
