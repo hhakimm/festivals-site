@@ -3,6 +3,7 @@ import Base from '@/layouts/Base.astro';
 import Explorer from '@/components/Explorer.astro';
 import HomeHero from '@/components/HomeHero.astro';
 import PickOfDay from '@/components/PickOfDay.astro';
+import PopularRegions from '@/components/PopularRegions.astro';
 import AdSlot from '@/components/AdSlot.astro';
 import WeatherSection from '@/components/WeatherSection.astro';
 import { festivals, attractions } from '@/lib/data';
@@ -36,6 +37,8 @@ const desc = tr('siteDesc', lang);
   <PickOfDay lang={lang} base={base} />
 
   <WeatherSection lang={lang} />
+
+  <PopularRegions lang={lang} base={base} />
 
   <Explorer lang={lang} />
 

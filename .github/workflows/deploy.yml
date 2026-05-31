@@ -53,6 +53,14 @@ jobs:
         timeout-minutes: 30
         run: npm run fetch:i18n:ci
 
+      - name: Fetch visitor statistics (관광빅데이터)
+        env:
+          TOURAPI_KEY: ${{ secrets.TOURAPI_KEY }}
+        # 통계는 부가기능 — 실패해도 빌드 계속(기존 region-stats.json 사용)
+        continue-on-error: true
+        timeout-minutes: 15
+        run: npm run fetch:stats:ci
+
       - name: Build site
         env:
           PUBLIC_ADSENSE_CLIENT: ${{ secrets.PUBLIC_ADSENSE_CLIENT }}

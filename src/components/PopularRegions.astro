@@ -1,0 +1,102 @@
+---
+/**
+ * PopularRegions — 홈 "📊 이번 달 인기 여행지" 위젯.
+ * 12개월 인기 지역을 빌드 때 미리 계산해 임베드 → 클라이언트가 현재 월을 골라 칩 렌더.
+ * 통계 없으면 아무것도 렌더하지 않음.
+ */
+import { hasStats, getMonthlyPopular } from '@/lib/stats';
+import { AREA_CODE } from '@/lib/data';
+import type { Lang } from '@/lib/i18n';
+
+interface Props {
+  lang: Lang;
+  base: string;
+}
+const { lang, base } = Astro.props;
+
+const show = hasStats();
+const monthly = show ? getMonthlyPopular(5) : {};
+
+// 클라이언트로 넘길 지역 메타(이름 + 지역페이지 링크)
+const regionMeta: Record<string, { name: string; href: string }> = {};
+if (show) {
+  const codes = new Set(Object.values(monthly).flat());
+  for (const code of codes) {
+    regionMeta[code] = {
+      name: AREA_CODE[code]?.[lang] ?? code,
+      href: lang === 'ko' ? `${base}/attractions/region/${code}/` : `${base}/${lang}/attractions/region/${code}/`,
+    };
+  }
+}
+
+const T = {
+  heading: { ko: '📊 이번 달 인기 여행지', en: '📊 Trending destinations this month', ja: '📊 今月の人気旅行先', zh: '📊 本月热门旅行地' },
+  sub: {
+    ko: '통신 빅데이터 기반 방문 통계 · 한국관광공사',
+    en: 'Based on mobile big-data visits · KTO',
+    ja: '通信ビッグデータ訪問統計 · 韓国観光公社',
+    zh: '基于通信大数据访问统计 · 韩国旅游公社',
+  },
+} as const;
+---
+
+{show && (
+  <section class="pr" data-popular-regions aria-label={T.heading[lang]}>
+    <div class="pr-head">
+      <h2 class="pr-h">{T.heading[lang]}</h2>
+      <span class="pr-sub">{T.sub[lang]}</span>
+    </div>
+    <div class="pr-chips" id="pr-chips"></div>
+    <script
+      type="application/json"
+      id="pr-data"
+      set:html={JSON.stringify({ monthly, regions: regionMeta })}
+    ></script>
+  </section>
+)}
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('pr-data');
+    var box = document.getElementById('pr-chips');
+    if (!el || !box) return;
+    try {
+      var data = JSON.parse(el.textContent || '{}');
+      var month = new Date().getMonth() + 1; // 1~12
+      var codes = (data.monthly && data.monthly[month]) || [];
+      var html = '';
+      for (var i = 0; i < codes.length; i++) {
+        var r = data.regions[codes[i]];
+        if (!r) continue;
+        var rank = i + 1;
+        html +=
+          '<a class="pr-chip" href="' + r.href + '">' +
+          '<span class="pr-rank">' + rank + '</span>' + r.name +
+          '</a>';
+      }
+      box.innerHTML = html;
+    } catch (e) { /* noop */ }
+  })();
+</script>
+
+<style>
+  .pr { margin: 0 0 20px; }
+  .pr-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .pr-h { font-size: 1.05rem; margin: 0; font-weight: 800; letter-spacing: -0.015em; }
+  .pr-sub { font-size: 0.72rem; color: #a3a3a3; }
+  .pr-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pr-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px 8px 8px; border-radius: 999px;
+    background: #fff; border: 1.5px solid #e5e5e5;
+    font-size: 0.9rem; font-weight: 600; color: #171717; text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.08s ease;
+  }
+  .pr-chip:hover { border-color: #facc15; transform: translateY(-1px); }
+  .pr-rank {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #171717; color: #facc15; font-size: 0.72rem; font-weight: 800;
+  }
+  .pr-chip:first-child .pr-rank { background: #facc15; color: #171717; }
+</style>

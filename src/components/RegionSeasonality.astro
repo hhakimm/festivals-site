@@ -1,0 +1,82 @@
+---
+/**
+ * RegionSeasonality — 지역 페이지 "언제 가면 좋을까?" 월별 방문 추이.
+ * 통계 없으면(데이터 미수집/해당 지역 없음) 아무것도 렌더하지 않음.
+ */
+import { getRegionStat } from '@/lib/stats';
+import type { Lang } from '@/lib/i18n';
+
+interface Props {
+  areacode: string;
+  lang: Lang;
+}
+const { areacode, lang } = Astro.props;
+const stat = getRegionStat(areacode);
+
+const T = {
+  heading: { ko: '📅 언제 가면 좋을까?', en: '📅 Best time to visit', ja: '📅 おすすめの時期', zh: '📅 最佳出行时间' },
+  peak: { ko: '붐비는 달', en: 'Busiest', ja: '混雑', zh: '高峰' },
+  low: { ko: '한산한 달', en: 'Quietest', ja: '閑散', zh: '淡季' },
+  source: {
+    ko: '통계: 한국관광공사 관광빅데이터(통신 기반 방문자수)',
+    en: 'Source: KTO Tourism Big Data (mobile-based visitors)',
+    ja: '出典: 韓国観光公社 観光ビッグデータ',
+    zh: '数据: 韩国旅游公社 旅游大数据',
+  },
+} as const;
+
+const MONTHS: Record<Lang, string[]> = {
+  ko: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+  en: ['J','F','M','A','M','J','J','A','S','O','N','D'],
+  ja: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+  zh: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+};
+const fmtMonths = (arr: number[]) =>
+  arr.map((m) => (lang === 'en' ? ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m - 1] : `${m}${lang === 'ko' ? '월' : lang === 'zh' || lang === 'ja' ? '月' : ''}`)).join('·');
+---
+
+{stat && (
+  <section class="rs">
+    <h2 class="rs-h">{T.heading[lang]}</h2>
+    <div class="rs-chart" role="img" aria-label={T.heading[lang]}>
+      {stat.monthly.map((v, i) => {
+        const isPeak = stat.peak.includes(i + 1);
+        const isLow = stat.low.includes(i + 1);
+        return (
+          <div class="rs-col">
+            <div class="rs-bar-wrap">
+              <div
+                class={`rs-bar${isPeak ? ' is-peak' : ''}${isLow ? ' is-low' : ''}`}
+                style={`height:${Math.max(6, v)}%`}
+              ></div>
+            </div>
+            <span class={`rs-m${isPeak ? ' is-peak' : ''}`}>{MONTHS[lang][i]}</span>
+          </div>
+        );
+      })}
+    </div>
+    <div class="rs-legend">
+      {stat.peak.length > 0 && <span class="rs-tag rs-tag-peak">🔥 {T.peak[lang]} {fmtMonths(stat.peak)}</span>}
+      {stat.low.length > 0 && <span class="rs-tag rs-tag-low">💤 {T.low[lang]} {fmtMonths(stat.low)}</span>}
+    </div>
+    <p class="rs-src">{T.source[lang]}</p>
+  </section>
+)}
+
+<style>
+  .rs { margin: 0 0 24px; background: #fafafa; border: 1px solid #f0f0f0; border-radius: 14px; padding: 16px; }
+  .rs-h { font-size: 1rem; margin: 0 0 14px; font-weight: 700; letter-spacing: -0.01em; color: #171717; }
+  .rs-chart { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; align-items: end; height: 96px; }
+  .rs-col { display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; }
+  .rs-bar-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; }
+  .rs-bar { width: 100%; background: #d4d4d4; border-radius: 4px 4px 0 0; transition: height 0.4s ease; }
+  .rs-bar.is-peak { background: #facc15; }
+  .rs-bar.is-low { background: #e5e5e5; }
+  .rs-m { font-size: 0.7rem; color: #a3a3a3; font-feature-settings: "tnum"; }
+  .rs-m.is-peak { color: #171717; font-weight: 700; }
+  .rs-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .rs-tag { font-size: 0.78rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+  .rs-tag-peak { background: #fefce8; color: #a16207; }
+  .rs-tag-low { background: #f0f0f0; color: #525252; }
+  .rs-src { margin: 10px 0 0; font-size: 0.7rem; color: #a3a3a3; }
+</style>
