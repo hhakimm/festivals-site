@@ -33,9 +33,14 @@ const EVENT_END_DATE = process.env.EVENT_END_DATE || '20271231';
 const MAX_FESTIVAL_DURATION_DAYS = 30;
 
 // firstimage 없는 항목을 detailImage2로 보강할 때, 타입별 최대 호출 수.
-// 여행지 누락분(~1,200개)을 한 번에 모두 시도하도록 넉넉히 설정.
+// 갤러리 매칭(아래)이 먼저 많이 채우므로 detailImage2는 잔여분만 — 한도 절약 위해 축소.
 // (API 일일 호출 한도가 빡빡한 개발용 키라면 env로 낮추세요. 0이면 보강 비활성)
-const IMAGE_ENRICH_LIMIT = Number(process.env.IMAGE_ENRICH_LIMIT ?? '1500');
+const IMAGE_ENRICH_LIMIT = Number(process.env.IMAGE_ENRICH_LIMIT ?? '1000');
+
+// 관광사진(포토코리아) 갤러리 — 전체 카탈로그를 받아 제목/키워드 매칭으로 빈 이미지 채움.
+// galleryList1: 제목으로 그룹화된 사진 목록(galWebImageUrl·galTitle·galPhotographyLocation 등).
+const GALLERY_BASE = 'https://apis.data.go.kr/B551011/PhotoGalleryService1/galleryList1';
+const GALLERY_MAX_PAGES = Number(process.env.GALLERY_MAX_PAGES ?? '120'); // 0이면 비활성
 
 // TourAPI contentTypeId — 여행지(12) 만 areaBasedList2로 받음 (축제는 searchFestival2)
 const CONTENT_TYPE = {
@@ -314,6 +319,88 @@ async function enrichMissingImages(items: NormalizedItem[], label: string): Prom
   console.log(`  [${label}] ↳ ${filled}/${target.length}개 이미지 보강 완료`);
 }
 
+interface GalleryPhoto {
+  title: string;
+  keyword: string;
+  url: string;
+}
+
+/** 관광사진 갤러리 전체 카탈로그 수집 (제목·키워드·웹이미지URL). 실패 시 빈 배열. */
+async function fetchGalleryCatalog(): Promise<GalleryPhoto[]> {
+  if (GALLERY_MAX_PAGES <= 0) return [];
+  const out: GalleryPhoto[] = [];
+  for (let pageNo = 1; pageNo <= GALLERY_MAX_PAGES; pageNo++) {
+    const url = new URL(GALLERY_BASE);
+    url.searchParams.set('serviceKey', TOURAPI_KEY);
+    url.searchParams.set('MobileOS', 'ETC');
+    url.searchParams.set('MobileApp', 'festivals-site');
+    url.searchParams.set('_type', 'json');
+    url.searchParams.set('arrange', 'B'); // 제목순
+    url.searchParams.set('numOfRows', '1000');
+    url.searchParams.set('pageNo', String(pageNo));
+
+    let data: any;
+    try {
+      const res = await fetch(url.toString());
+      if (!res.ok) {
+        console.log(`  [갤러리] page ${pageNo} HTTP ${res.status} — 중단`);
+        break;
+      }
+      data = await res.json();
+    } catch (e) {
+      console.log(`  [갤러리] page ${pageNo} 오류 — 중단: ${(e as Error).message}`);
+      break;
+    }
+    const items = data?.response?.body?.items?.item;
+    if (!items) break;
+    const list = Array.isArray(items) ? items : [items];
+    for (const it of list) {
+      // http → https (혼합콘텐츠 차단 방지; tong.visitkorea.or.kr는 https 지원)
+      const url2 = String(it.galWebImageUrl || it.galWebImageURL || '').trim().replace(/^http:\/\//, 'https://');
+      if (!url2) continue;
+      out.push({
+        title: String(it.galTitle || '').trim(),
+        keyword: String(it.galSearchKeyword || it.galPhotographyLocation || '').trim(),
+        url: url2,
+      });
+    }
+    const total = Number(data?.response?.body?.totalCount ?? 0);
+    if (pageNo * 1000 >= total || list.length < 1000) break;
+    await new Promise((r) => setTimeout(r, 120));
+  }
+  return out;
+}
+
+/** 정규화: 공백·특수문자 제거(매칭용) */
+function normTitle(s: string): string {
+  return s.toLowerCase().replace(/[\s()\[\]{}·,./'"-]/g, '');
+}
+
+/**
+ * 갤러리 사진을 제목/키워드로 매칭해 빈 이미지 채움(in-place, 보수적).
+ * 항목 제목(4자 이상)이 사진 제목/키워드에 포함될 때만 사용 → 엉뚱한 사진 방지.
+ */
+function enrichFromGallery(items: NormalizedItem[], catalog: GalleryPhoto[], label: string): number {
+  if (catalog.length === 0) return 0;
+  // 사진을 정규화 텍스트로 인덱싱
+  const idx = catalog.map((p) => ({ norm: normTitle(`${p.title} ${p.keyword}`), url: p.url, title: normTitle(p.title) }));
+  let filled = 0;
+  for (const it of items) {
+    if (it.image) continue;
+    const t = normTitle(it.title);
+    if (t.length < 4) continue;
+    // 1) 사진 제목이 항목명과 정확히 일치, 2) 사진 텍스트가 항목명을 포함
+    const hit = idx.find((p) => p.title === t) || idx.find((p) => p.norm.includes(t));
+    if (hit) {
+      it.image = hit.url;
+      if (!it.imageThumb) it.imageThumb = hit.url;
+      filled++;
+    }
+  }
+  console.log(`  [갤러리:${label}] ${filled}개 이미지 매칭 완료`);
+  return filled;
+}
+
 function mockData(): { festivals: NormalizedItem[]; attractions: NormalizedItem[] } {
   // 키 없을 때 폴백 — 첫 셋업이 막히지 않도록.
   const sample = (
@@ -407,8 +494,15 @@ async function main() {
     );
     attractions = rawAttr.map((i) => normalize(i, 'attraction'));
 
-    // 이미지 누락 항목 보강 — detailImage2 폴백 (best-effort, 호출 수 제한)
-    console.log('  이미지 보강(detailImage2) 시작...');
+    // 이미지 보강 1/2: 관광사진 갤러리 — 전체 카탈로그 1회 수집 후 제목/키워드 매칭(한도 절약)
+    console.log('  이미지 보강 1/2: 관광사진 갤러리 카탈로그 수집...');
+    const galleryCatalog = await fetchGalleryCatalog();
+    console.log(`  [갤러리] 카탈로그 ${galleryCatalog.length}장 수집`);
+    enrichFromGallery(festivals, galleryCatalog, '축제');
+    enrichFromGallery(attractions, galleryCatalog, '여행지');
+
+    // 이미지 보강 2/2: 남은 빈 이미지 detailImage2 폴백 (per-item, 한도 제한)
+    console.log('  이미지 보강 2/2: detailImage2(잔여분)...');
     await enrichMissingImages(festivals, '축제');
     await enrichMissingImages(attractions, '여행지');
   }
