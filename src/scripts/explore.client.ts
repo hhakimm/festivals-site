@@ -25,6 +25,8 @@ export interface IndexItem {
   lng: number | null;
   sd: string | null;          // startDate (YYYYMMDD)
   ed: string | null;          // endDate (YYYYMMDD)
+  bf?: 1;                     // barrierFree(무장애)
+  pet?: 1;                    // pet(반려동물)
 }
 
 interface ExploreState {
@@ -42,6 +44,9 @@ interface ExploreState {
   quickDate: 'this-weekend' | 'this-week' | 'next-month' | null;
   /** 월 선택 (festival 카테고리에서만, 1~12 또는 'all') */
   month: string;
+  /** 무장애(♿)·반려동물(🐾) 동반 가능만 보기 */
+  barrierFree: boolean;
+  pet: boolean;
 }
 
 interface Collection {
@@ -195,6 +200,13 @@ function showToast(msg: string) {
 // Astro/Vite 환경변수 (빌드 타임에 인라인됨)
 const BASE = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 
+const TAG_LABELS: Record<Lang, { bf: string; pet: string }> = {
+  ko: { bf: '♿ 무장애', pet: '🐾 반려동물' },
+  en: { bf: '♿ Accessible', pet: '🐾 Pet OK' },
+  ja: { bf: '♿ バリアフリー', pet: '🐾 ペット可' },
+  zh: { bf: '♿ 无障碍', pet: '🐾 宠物友好' },
+};
+
 function cardHtml(it: IndexItem & { _dist?: number }, lang: Lang): string {
   const isFest = it.t === 1;
   const langPrefix = lang === 'ko' ? '' : `/${lang}`;
@@ -210,6 +222,10 @@ function cardHtml(it: IndexItem & { _dist?: number }, lang: Lang): string {
     ? `<img src="${escapeHtml(it.img)}" alt="${escapeHtml(it.n)}" loading="lazy" width="320" height="200" />`
     : `<div class="card-image-placeholder" aria-hidden="true"><span class="card-image-placeholder-emoji">${isFest ? '🎆' : '🗺️'}</span>${region ? `<span class="card-image-placeholder-region">${escapeHtml(region)}</span>` : ''}</div>`;
   const datesHtml = dates ? `<p class="card-dates">${escapeHtml(dates)}</p>` : '';
+  const tl = TAG_LABELS[lang];
+  const tagsHtml = (it.bf || it.pet)
+    ? `<div class="card-tags">${it.bf ? `<span class="card-tag tag-bf">${tl.bf}</span>` : ''}${it.pet ? `<span class="card-tag tag-pet">${tl.pet}</span>` : ''}</div>`
+    : '';
   return `
     <article class="explore-card" data-id="${escapeHtml(it.i)}">
       <button type="button" class="fav-btn${fav ? ' is-active' : ''}"
@@ -222,6 +238,7 @@ function cardHtml(it: IndexItem & { _dist?: number }, lang: Lang): string {
           ${region ? `<span class="card-region">${escapeHtml(region)}</span>` : ''}
           <h3 class="card-title">${escapeHtml(it.n)}</h3>
           ${datesHtml}
+          ${tagsHtml}
           <p class="card-addr">${escapeHtml(it.a)}</p>
           ${distHtml}
         </div>
@@ -483,6 +500,7 @@ export async function initExplorer(rootEl: HTMLElement) {
   const searchClear = $<HTMLButtonElement>('#explore-search-clear');
   const regionChips = $('#explore-region-chips');
   const themeChips = $('#explore-theme-chips');
+  const amenityChips = $('#explore-amenity-chips');
   const categoryChips = $('#explore-category-chips');
   const sortSelect = $<HTMLSelectElement>('#explore-sort');
   const favBtn = $<HTMLButtonElement>('#explore-fav-toggle');
@@ -518,6 +536,8 @@ export async function initExplorer(rootEl: HTMLElement) {
     visible: INITIAL_VISIBLE,
     quickDate: (url.searchParams.get('when') as ExploreState['quickDate']) || null,
     month: url.searchParams.get('month') || 'all',
+    barrierFree: url.searchParams.get('bf') === '1',
+    pet: url.searchParams.get('pet') === '1',
   };
 
   // 데이터 로드
@@ -626,6 +646,10 @@ export async function initExplorer(rootEl: HTMLElement) {
       }
     }
 
+    // 무장애(♿)·반려동물(🐾) 동반 가능만
+    if (state.barrierFree) result = result.filter((it) => it.bf === 1);
+    if (state.pet) result = result.filter((it) => it.pet === 1);
+
     // 검색 — 원본 한국어 + 외국어 지역명 별칭 매칭
     if (state.search) {
       const q = state.search.toLowerCase().trim();
@@ -697,6 +721,8 @@ export async function initExplorer(rootEl: HTMLElement) {
     if (state.collection) params.set('collection', state.collection);
     if (state.quickDate) params.set('when', state.quickDate);
     if (state.month !== 'all') params.set('month', state.month);
+    if (state.barrierFree) params.set('bf', '1');
+    if (state.pet) params.set('pet', '1');
     const s = params.toString();
     const newUrl = window.location.pathname + (s ? '?' + s : '');
     window.history.replaceState(null, '', newUrl);
@@ -728,6 +754,10 @@ export async function initExplorer(rootEl: HTMLElement) {
 
     themeChips?.querySelectorAll('.chip').forEach((c) => {
       c.classList.toggle('chip-active', (c as HTMLElement).dataset.theme === state.theme);
+    });
+    amenityChips?.querySelectorAll('.chip').forEach((c) => {
+      const a = (c as HTMLElement).dataset.amenity;
+      c.classList.toggle('chip-active', (a === 'bf' && state.barrierFree) || (a === 'pet' && state.pet));
     });
     categoryChips?.querySelectorAll('.chip').forEach((c) => {
       c.classList.toggle('chip-active', (c as HTMLElement).dataset.category === state.category);
@@ -767,6 +797,8 @@ export async function initExplorer(rootEl: HTMLElement) {
       state.favoritesOnly ||
       state.userLocation != null ||
       state.collection != null ||
+      state.barrierFree ||
+      state.pet ||
       state.sort !== 'default';
     if (resetBtn) resetBtn.hidden = !anyActive;
   }
@@ -868,6 +900,16 @@ export async function initExplorer(rootEl: HTMLElement) {
     const chip = (e.target as HTMLElement).closest<HTMLElement>('.chip');
     if (!chip || !chip.dataset.theme) return;
     state.theme = chip.dataset.theme;
+    state.visible = INITIAL_VISIBLE;
+    update();
+  });
+
+  amenityChips?.addEventListener('click', (e) => {
+    const chip = (e.target as HTMLElement).closest<HTMLElement>('.chip');
+    const a = chip?.dataset.amenity;
+    if (a !== 'bf' && a !== 'pet') return;
+    if (a === 'bf') state.barrierFree = !state.barrierFree;
+    else state.pet = !state.pet;
     state.visible = INITIAL_VISIBLE;
     update();
   });
@@ -978,6 +1020,8 @@ export async function initExplorer(rootEl: HTMLElement) {
     state.collection = null;
     state.quickDate = null;
     state.month = 'all';
+    state.barrierFree = false;
+    state.pet = false;
     state.visible = INITIAL_VISIBLE;
     if (searchInput) searchInput.value = '';
     update();

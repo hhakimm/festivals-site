@@ -42,6 +42,12 @@ const IMAGE_ENRICH_LIMIT = Number(process.env.IMAGE_ENRICH_LIMIT ?? '1000');
 const GALLERY_BASE = 'https://apis.data.go.kr/B551011/PhotoGalleryService1/galleryList1';
 const GALLERY_MAX_PAGES = Number(process.env.GALLERY_MAX_PAGES ?? '120'); // 0이면 비활성
 
+// 무장애(♿)·반려동물(🐾) 동반 가능 장소 — 각 서비스의 areaBasedList2로 contentid 목록 수집.
+// 별도 API(별도 quota). contentid가 국문 관광정보와 동일 체계라 정확 매칭.
+const BARRIER_FREE_BASE = 'https://apis.data.go.kr/B551011/KorWithService2/areaBasedList2';
+const PET_TOUR_BASE = 'https://apis.data.go.kr/B551011/KorPetTourService2/areaBasedList2';
+const TAG_MAX_PAGES = Number(process.env.TAG_MAX_PAGES ?? '60'); // 0이면 비활성
+
 // TourAPI contentTypeId — 여행지(12) 만 areaBasedList2로 받음 (축제는 searchFestival2)
 const CONTENT_TYPE = {
   ATTRACTION: 12,
@@ -147,6 +153,9 @@ interface NormalizedItem {
   startDate: string | null;
   endDate: string | null;
   updatedAt: string;
+  /** 무장애(♿)·반려동물(🐾) 동반 가능 여부 */
+  barrierFree?: boolean;
+  pet?: boolean;
 }
 
 // 한글/영문 혼합 문자열을 URL-safe slug로
@@ -401,6 +410,51 @@ function enrichFromGallery(items: NormalizedItem[], catalog: GalleryPhoto[], lab
   return filled;
 }
 
+/** areaBasedList2(무장애/반려동물)에서 contentid 집합 수집. 실패 시 빈 집합. */
+async function fetchContentIdSet(baseUrl: string, label: string): Promise<Set<string>> {
+  const set = new Set<string>();
+  if (TAG_MAX_PAGES <= 0) return set;
+  for (let pageNo = 1; pageNo <= TAG_MAX_PAGES; pageNo++) {
+    const url = new URL(baseUrl);
+    url.searchParams.set('serviceKey', TOURAPI_KEY);
+    url.searchParams.set('MobileOS', 'ETC');
+    url.searchParams.set('MobileApp', 'festivals-site');
+    url.searchParams.set('_type', 'json');
+    url.searchParams.set('arrange', 'C');
+    url.searchParams.set('numOfRows', '1000');
+    url.searchParams.set('pageNo', String(pageNo));
+    let data: any;
+    try {
+      const res = await fetch(url.toString());
+      if (!res.ok) { console.log(`  [${label}] page ${pageNo} HTTP ${res.status} — 중단`); break; }
+      data = await res.json();
+    } catch (e) {
+      console.log(`  [${label}] page ${pageNo} 오류 — 중단: ${(e as Error).message}`);
+      break;
+    }
+    const items = data?.response?.body?.items?.item;
+    if (!items) break;
+    const list = Array.isArray(items) ? items : [items];
+    for (const it of list) {
+      const cid = String(it.contentid ?? '').trim();
+      if (cid) set.add(cid);
+    }
+    const total = Number(data?.response?.body?.totalCount ?? 0);
+    if (pageNo * 1000 >= total || list.length < 1000) break;
+    await new Promise((r) => setTimeout(r, 120));
+  }
+  console.log(`  [${label}] contentid ${set.size}개 수집`);
+  return set;
+}
+
+/** 무장애·반려동물 플래그를 항목에 적용(in-place) */
+function applyTags(items: NormalizedItem[], bf: Set<string>, pet: Set<string>): void {
+  for (const it of items) {
+    if (bf.has(it.id)) it.barrierFree = true;
+    if (pet.has(it.id)) it.pet = true;
+  }
+}
+
 function mockData(): { festivals: NormalizedItem[]; attractions: NormalizedItem[] } {
   // 키 없을 때 폴백 — 첫 셋업이 막히지 않도록.
   const sample = (
@@ -505,6 +559,15 @@ async function main() {
     console.log('  이미지 보강 2/2: detailImage2(잔여분)...');
     await enrichMissingImages(festivals, '축제');
     await enrichMissingImages(attractions, '여행지');
+
+    // 무장애·반려동물 태그 수집 → 항목에 플래그 적용 (별도 quota)
+    console.log('  태그 수집: 무장애·반려동물...');
+    const [bfSet, petSet] = await Promise.all([
+      fetchContentIdSet(BARRIER_FREE_BASE, '무장애'),
+      fetchContentIdSet(PET_TOUR_BASE, '반려동물'),
+    ]);
+    applyTags(festivals, bfSet, petSet);
+    applyTags(attractions, bfSet, petSet);
   }
 
   await writeFile(join(OUT_DIR, 'festivals.json'), JSON.stringify(festivals, null, 2), 'utf-8');
@@ -546,6 +609,8 @@ interface IndexItem {
   lng: number | null;
   sd: string | null; // startDate
   ed: string | null; // endDate
+  bf?: 1;            // barrierFree(무장애) — true일 때만
+  pet?: 1;           // pet(반려동물) — true일 때만
 }
 
 async function writeIndex(items: NormalizedItem[]) {
@@ -562,6 +627,8 @@ async function writeIndex(items: NormalizedItem[]) {
     lng: it.lng,
     sd: it.startDate,
     ed: it.endDate,
+    ...(it.barrierFree ? { bf: 1 as const } : {}),
+    ...(it.pet ? { pet: 1 as const } : {}),
   }));
   // public/index.json 으로도 복사해 클라이언트 fetch 가능
   const publicDir = join(__dirname, '..', 'public');

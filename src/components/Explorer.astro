@@ -99,6 +99,15 @@ const categories = [
       </div>
     </div>
 
+    <!-- 편의: 무장애·반려동물 (토글, 통신/관광공사 데이터) -->
+    <div class="filter-row">
+      <span class="filter-label">{lang === 'ko' ? '편의' : lang === 'en' ? 'Amenities' : lang === 'ja' ? '設備' : '设施'}</span>
+      <div class="chip-group" id="explore-amenity-chips" role="group" aria-label={lang === 'ko' ? '편의' : 'Amenities'}>
+        <button type="button" class="chip" data-amenity="bf">{lang === 'ko' ? '♿ 무장애' : lang === 'en' ? '♿ Accessible' : lang === 'ja' ? '♿ バリアフリー' : '♿ 无障碍'}</button>
+        <button type="button" class="chip" data-amenity="pet">{lang === 'ko' ? '🐾 반려동물' : lang === 'en' ? '🐾 Pet OK' : lang === 'ja' ? '🐾 ペット可' : '🐾 宠物友好'}</button>
+      </div>
+    </div>
+
     <div class="filter-meta">
       <span id="result-count" class="result-count">{tr('total', lang)} 0 {tr('items', lang)}</span>
       <div class="filter-meta-actions">
