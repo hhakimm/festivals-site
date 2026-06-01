@@ -89,12 +89,23 @@ const { lat, lng, lang } = Astro.props;
   .weather-source { color: #a3a3a3; font-size: 0.72rem; margin: 12px 0 0; text-align: right; }
 
   @media (max-width: 640px) {
-    .weather-grid { grid-template-columns: repeat(4, 1fr); gap: 4px; }
-    /* 모바일에선 7일 모두 보여주되 2줄로 wrap */
-    .weather-day { padding: 10px 2px; font-size: 0.72rem; }
+    /* 모바일: 7일을 가로 스크롤 1줄로 → 세로 길이 압축 */
+    .weather-grid {
+      display: flex;
+      grid-template-columns: none;
+      overflow-x: auto;
+      gap: 6px;
+      padding-bottom: 4px;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+    }
+    .weather-day {
+      flex: 0 0 auto;
+      width: 60px;
+      padding: 10px 4px;
+      font-size: 0.72rem;
+      scroll-snap-align: start;
+    }
     .weather-day-icon { font-size: 1.35rem; }
-  }
-  @media (max-width: 380px) {
-    .weather-grid { grid-template-columns: repeat(3, 1fr); }
   }
 </style>

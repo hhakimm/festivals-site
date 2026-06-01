@@ -58,29 +58,37 @@ const { lang } = Astro.props;
 
   .weather-cities {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
   }
   .weather-city {
     background: #fafafa;
     border: 1px solid #f0f0f0;
     border-radius: 12px;
-    padding: 14px;
+    padding: 11px 12px;
     transition: transform 0.15s ease, border-color 0.15s ease;
   }
   .weather-city.is-top { border-color: #facc15; background: #fefce8; }
-  .weather-city-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; color: #171717; }
-  .weather-city-body { display: flex; align-items: center; gap: 12px; }
-  .weather-city-icon { font-size: 2.2rem; line-height: 1; }
+  .weather-city-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; color: #171717; }
+  .weather-city-body { display: flex; align-items: center; gap: 10px; }
+  .weather-city-icon { font-size: 1.8rem; line-height: 1; }
   .weather-city-info { flex: 1; min-width: 0; }
-  .weather-city-temp { font-size: 1.25rem; font-weight: 700; font-feature-settings: "tnum"; color: #171717; line-height: 1.2; }
-  .weather-city-label { font-size: 0.8rem; margin-top: 2px; }
+  .weather-city-temp { font-size: 1.1rem; font-weight: 700; font-feature-settings: "tnum"; color: #171717; line-height: 1.2; }
+  .weather-city-label { font-size: 0.76rem; margin-top: 1px; }
 
-  .weather-city-score { margin-top: 12px; display: flex; align-items: center; gap: 8px; font-size: 0.75rem; }
+  .weather-city-score { margin-top: 8px; display: flex; align-items: center; gap: 8px; font-size: 0.72rem; }
   .weather-city-score-bar { flex: 1; height: 5px; background: #e5e5e5; border-radius: 999px; overflow: hidden; }
   .weather-city-score-fill { display: block; height: 100%; background: #facc15; width: 0%; transition: width 0.4s ease; }
   .weather-city-score-pct { font-feature-settings: "tnum"; font-weight: 600; min-width: 30px; text-align: right; }
 
   .weather-source-line { color: #a3a3a3; font-size: 0.72rem; margin: 12px 0 0; text-align: right; }
   .muted { color: #737373; }
+
+  /* 모바일: 2열로 압축 (세로 길이 절반) */
+  @media (max-width: 640px) {
+    .weather-cities { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .weather-city { padding: 10px 8px; }
+    .weather-city-icon { font-size: 1.6rem; }
+    .weather-city-temp { font-size: 1.05rem; }
+  }
 </style>

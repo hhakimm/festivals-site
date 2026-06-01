@@ -26,6 +26,34 @@ const ATTRACTION_WORD: Record<Lang, string> = {
   ko: '여행지', en: 'attraction', ja: '観光地', zh: '景点',
 };
 
+// 테마별 안내 문장 — 한 줄짜리 빈약함 보완
+const THEME_HINT: Record<string, Record<Lang, string>> = {
+  '자연': {
+    ko: '복잡한 도심을 벗어나 자연 속에서 여유롭게 힐링하기 좋아요.',
+    en: 'A great place to unwind in nature, away from the busy city.',
+    ja: '都会の喧騒を離れ、自然の中でゆっくり癒されるのに最適です。',
+    zh: '远离喧嚣城市,在大自然中放松身心的好去处。',
+  },
+  '역사': {
+    ko: '한국의 역사와 전통, 옛 정취를 천천히 느껴볼 수 있어요.',
+    en: 'A place to slowly take in Korea’s history and traditions.',
+    ja: '韓国の歴史と伝統、昔ながらの趣をゆっくり感じられます。',
+    zh: '可以慢慢感受韩国历史与传统韵味的地方。',
+  },
+  '휴양': {
+    ko: '바쁜 일정 없이 편안하게 쉬며 시간을 보내기 좋아요.',
+    en: 'Perfect for relaxing without a packed schedule.',
+    ja: '忙しい予定なしに、のんびり過ごすのにぴったりです。',
+    zh: '没有紧凑行程,适合悠闲休息的地方。',
+  },
+  '체험': {
+    ko: '직접 보고 즐기며 추억을 만들 수 있는 체험형 명소예요.',
+    en: 'A hands-on spot where you can see, do, and make memories.',
+    ja: '実際に見て楽しみ、思い出を作れる体験型スポットです。',
+    zh: '可以亲身体验、留下回忆的景点。',
+  },
+};
+
 export function autoDescribe(item: Item, lang: Lang): string {
   const region = AREA_CODE[item.areacode]?.[lang] || '';
   const themeKo = (item.theme as keyof typeof THEME_LABEL) || '';
@@ -43,13 +71,15 @@ export function autoDescribe(item: Item, lang: Lang): string {
     else dateBit = ` · ${y}年${m}月`;
   }
 
+  const hint = THEME_HINT[themeKo]?.[lang] || '';
+  let base = '';
   switch (lang) {
-    case 'ko': return `${region}의 ${themeLabel}${item.type === 'festival' ? '' : ''}${dateBit}`;
-    case 'en': return `A ${themeLabel} in ${region}${dateBit}`;
-    case 'ja': return `${region}の${themeLabel}${dateBit}`;
-    case 'zh': return `${region}的${themeLabel}${dateBit}`;
+    case 'ko': base = `${region}에 자리한 ${themeLabel}${dateBit}예요.`; break;
+    case 'en': base = `A ${themeLabel} in ${region}${dateBit}.`; break;
+    case 'ja': base = `${region}にある${themeLabel}${dateBit}です。`; break;
+    case 'zh': base = `位于${region}的${themeLabel}${dateBit}。`; break;
   }
-  return '';
+  return hint ? `${base} ${hint}` : base;
 }
 
 // ──────────────────────────────────────────

@@ -3,7 +3,7 @@ import type { Item } from '@/lib/data';
 import { AREA_CODE } from '@/lib/data';
 import type { Lang } from '@/lib/i18n';
 import { tr } from '@/lib/i18n';
-import { agodaUrl, yanoljaUrl, bookingUrl, kkdayUrl, skyscannerUrl } from '@/lib/affiliate';
+import { agodaUrl, yanoljaUrl, bookingUrl, kkdayUrl } from '@/lib/affiliate';
 
 interface Props {
   item: Item;
@@ -47,12 +47,6 @@ const kkdayLabel: Record<Lang, string> = {
   ja: '🎫 ツアー·体験 (KKday)',
   zh: '🎫 行程·体验 (KKday)',
 };
-const skyLabel: Record<Lang, string> = {
-  ko: '✈️ 항공권 검색 (Skyscanner)',
-  en: '✈️ Find flights (Skyscanner)',
-  ja: '✈️ 航空券検索 (Skyscanner)',
-  zh: '✈️ 机票搜索 (Skyscanner)',
-};
 const moreTitle: Record<Lang, string> = {
   ko: '🧳 여행 준비',
   en: '🧳 Trip planning',
@@ -95,14 +89,6 @@ const secondaryHref = lang === 'ko' ? yanoljaUrl(item) : bookingUrl(item);
       data-affiliate="kkday"
       data-item-id={item.id}
     >{kkdayLabel[lang]}</a>
-    <a
-      href={skyscannerUrl(item, lang)}
-      target="_blank"
-      rel="noopener nofollow sponsored"
-      class="btn btn-affiliate btn-affiliate-secondary"
-      data-affiliate="skyscanner"
-      data-item-id={item.id}
-    >{skyLabel[lang]}</a>
   </div>
   <p class="affiliate-disclosure">{disclosure[lang]}</p>
 </section>
