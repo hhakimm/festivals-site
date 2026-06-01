@@ -28,14 +28,18 @@ export interface PopularRegion {
   stat: RegionStat;
 }
 
-/** 특정 월(1~12) 기준 인기 지역 — 연간 인기도(share) × 그 달 계절지수. */
+/**
+ * 특정 월(1~12) 기준 "지금 가기 좋은 곳".
+ * 절대 인기(대도시 편중) 대신 그 달의 계절지수(monthly)를 주신호로,
+ * 인기도(share)는 sqrt로 약하게 반영 → 제철 지역이 부각됨(여름 강원·봄 제주 등).
+ */
 export function getPopularRegions(month: number, limit = 5): PopularRegion[] {
   const m = Math.min(12, Math.max(1, month));
   return Object.entries(STATS)
     .map(([areacode, stat]) => ({
       areacode,
       stat,
-      score: (stat.share || 0) * ((stat.monthly?.[m - 1] ?? 0) / 100),
+      score: (stat.monthly?.[m - 1] ?? 0) * Math.sqrt(stat.share || 1),
     }))
     .filter((r) => r.score > 0)
     .sort((a, b) => b.score - a.score)

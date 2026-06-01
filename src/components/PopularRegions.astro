@@ -30,12 +30,12 @@ if (show) {
 }
 
 const T = {
-  heading: { ko: '📊 이번 달 인기 여행지', en: '📊 Trending destinations this month', ja: '📊 今月の人気旅行先', zh: '📊 本月热门旅行地' },
+  heading: { ko: '🔥 지금 가기 좋은 곳', en: '🔥 Best places to go now', ja: '🔥 今が旬の旅行先', zh: '🔥 当下最佳去处' },
   sub: {
-    ko: '통신 빅데이터 기반 방문 통계 · 한국관광공사',
-    en: 'Based on mobile big-data visits · KTO',
-    ja: '通信ビッグデータ訪問統計 · 韓国観光公社',
-    zh: '基于通信大数据访问统计 · 韩国旅游公社',
+    ko: '이번 달이 제철인 지역 · 통신 빅데이터(한국관광공사)',
+    en: 'In-season this month · mobile big-data (KTO)',
+    ja: '今月が旬の地域 · 通信ビッグデータ(韓国観光公社)',
+    zh: '本月正当季 · 通信大数据(韩国旅游公社)',
   },
 } as const;
 ---
@@ -86,17 +86,19 @@ const T = {
   .pr-sub { font-size: 0.72rem; color: #a3a3a3; }
   .pr-chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .pr-chip {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 14px 8px 8px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px 10px 10px; border-radius: 999px;
     background: #fff; border: 1.5px solid #e5e5e5;
-    font-size: 0.9rem; font-weight: 600; color: #171717; text-decoration: none;
-    transition: border-color 0.15s ease, transform 0.08s ease;
+    font-size: 1rem; font-weight: 700; color: #171717; text-decoration: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: border-color 0.15s ease, transform 0.08s ease, box-shadow 0.15s ease;
   }
-  .pr-chip:hover { border-color: #facc15; transform: translateY(-1px); }
+  .pr-chip:hover { border-color: #facc15; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   .pr-rank {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 20px; height: 20px; border-radius: 50%;
-    background: #171717; color: #facc15; font-size: 0.72rem; font-weight: 800;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: #171717; color: #facc15; font-size: 0.82rem; font-weight: 800;
   }
+  .pr-chip:first-child { border-color: #facc15; background: #fffdf5; }
   .pr-chip:first-child .pr-rank { background: #facc15; color: #171717; }
 </style>
