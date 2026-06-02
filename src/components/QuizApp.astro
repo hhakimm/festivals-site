@@ -10,6 +10,8 @@ import {
   PERSONAS,
   PERSONA_IDS,
   PERSONA_DISTRIBUTION,
+  PERSONA_CHARACTER,
+  characterImg,
   quizT,
   getAllRecommendations,
   type PersonaId,
@@ -84,8 +86,9 @@ const recommendations = getAllRecommendations();
           style={`background: linear-gradient(135deg, ${persona.gradient.from}, ${persona.gradient.to});`}
         >
           <p class="quiz-result-label">{quizT('yourType', lang)}</p>
-          <div class="quiz-result-emoji" aria-hidden="true">{persona.emoji}</div>
-          <h1 class="quiz-result-name">{persona.name[lang]}</h1>
+          <img class="quiz-result-char" src={`${base}${characterImg(pid as PersonaId)}`} alt={PERSONA_CHARACTER[pid as PersonaId].name[lang]} width="160" height="160" loading="eager" />
+          <h1 class="quiz-result-name">{PERSONA_CHARACTER[pid as PersonaId].name[lang]}</h1>
+          <p class="quiz-result-type">{persona.emoji} {persona.name[lang]}</p>
           <p class="quiz-result-tagline">"{persona.tagline[lang]}"</p>
         </div>
 
@@ -266,7 +269,15 @@ const recommendations = getAllRecommendations();
     text-transform: uppercase;
     font-weight: 600;
   }
-  .quiz-result-emoji { font-size: 88px; line-height: 1; margin: 8px 0 12px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25)); }
+  .quiz-result-char {
+    width: 160px; height: 160px; object-fit: contain;
+    margin: 8px auto 10px; display: block;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.28));
+  }
+  .quiz-result-type {
+    color: rgba(255,255,255,0.92); font-size: 0.95rem; font-weight: 700;
+    margin: 0 0 6px;
+  }
   .quiz-result-name {
     font-size: clamp(1.9rem, 6vw, 2.8rem);
     margin: 0 0 10px;

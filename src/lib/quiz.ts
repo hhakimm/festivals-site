@@ -717,3 +717,21 @@ export function getRarity(personaId: PersonaId): RarityInfo {
   const tier: RarityTier = percent <= 13 ? 'rare' : percent <= 18 ? 'uncommon' : 'common';
   return { percent, tier, emoji: RARITY_LABELS[tier].emoji, label: RARITY_LABELS[tier].label };
 }
+
+// ─────────────────────────────────────────────────────────────
+// 캐릭터 — 페르소나별 동물 마스코트(일러스트) + 캐릭터명. 공유·바이럴용.
+// 이미지: public/char-{id}.png
+// ─────────────────────────────────────────────────────────────
+export const PERSONA_CHARACTER: Record<PersonaId, { animal: string; name: Record<Lang, string> }> = {
+  naturalist: { animal: '🦌', name: { ko: '숲멍 마스터 사슴', en: 'Forest Healer Deer', ja: '森の癒しジカ', zh: '森林治愈鹿' } },
+  cultural:   { animal: '🦉', name: { ko: '천년 지식 부엉이', en: 'Wise Scholar Owl', ja: '知恵のフクロウ', zh: '千年学者猫头鹰' } },
+  resort:     { animal: '🦥', name: { ko: '프로 휴식러 나무늘보', en: 'Pro Chiller Sloth', ja: 'のんびり達人ナマケモノ', zh: '度假高手树懒' } },
+  adventurer: { animal: '🐒', name: { ko: '아드레날린 원숭이', en: 'Adrenaline Monkey', ja: 'アドレナリン猿', zh: '肾上腺素猴子' } },
+  family:     { animal: '🐻', name: { ko: '정 많은 곰', en: 'Caring Bear', ja: '情に厚いクマ', zh: '暖心熊' } },
+  urbanite:   { animal: '🦊', name: { ko: '핫플 헌터 여우', en: 'Hot-spot Hunter Fox', ja: 'ホットスポット狐', zh: '网红地猎手狐狸' } },
+};
+
+/** 캐릭터 이미지 경로 (base는 호출부에서 붙임) */
+export function characterImg(id: PersonaId): string {
+  return `/char-${id}.png`;
+}

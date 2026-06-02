@@ -19,7 +19,9 @@ const OVERVIEW_FILE = join(DATA_DIR, 'overviews.json');
 
 const KEY = process.env.TOUR_API_KEY || process.env.TOURAPI_KEY || '';
 const BASE = 'https://apis.data.go.kr/B551011/KorService2/detailCommon2';
-const LIMIT = Number(process.env.OVERVIEW_LIMIT ?? '900');
+// FIXME: KorService2 detailCommon2 overview가 빈 값으로 옴(파라미터 점검 필요) → 일시중지(0).
+// 실제 응답 구조 확인 후 파라미터 고치고 overviews.json 리셋 예정.
+const LIMIT = Number(process.env.OVERVIEW_LIMIT ?? '0');
 const MAX_LEN = 800;
 
 function stripHtml(s: string): string {

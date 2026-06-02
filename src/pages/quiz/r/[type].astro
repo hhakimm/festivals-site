@@ -12,6 +12,8 @@ import {
   PERSONAS,
   PERSONA_IDS,
   PERSONA_DISTRIBUTION,
+  PERSONA_CHARACTER,
+  characterImg,
   quizT,
   getAllRecommendations,
   type PersonaId,
@@ -46,8 +48,9 @@ const description = `${persona.tagline[lang]} — ${persona.description[lang].sl
 
     <div class="persona-hero" style={`background: linear-gradient(135deg, ${persona.gradient.from}, ${persona.gradient.to});`}>
       <p class="persona-label">{quizT('yourType', lang)}</p>
-      <div class="persona-emoji" aria-hidden="true">{persona.emoji}</div>
-      <h1 class="persona-name">{persona.name[lang]}</h1>
+      <img class="persona-char" src={`${base}${characterImg(personaId)}`} alt={PERSONA_CHARACTER[personaId].name[lang]} width="180" height="180" loading="eager" />
+      <h1 class="persona-name">{PERSONA_CHARACTER[personaId].name[lang]}</h1>
+      <p class="persona-type">{persona.emoji} {persona.name[lang]}</p>
       <p class="persona-tagline">"{persona.tagline[lang]}"</p>
     </div>
 
@@ -96,7 +99,8 @@ const description = `${persona.tagline[lang]} — ${persona.description[lang].sl
     .persona-back:hover { color: #171717; }
     .persona-hero { text-align: center; padding: 40px 24px; border-radius: 24px; color: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.18); margin-bottom: 24px; }
     .persona-label { color: rgba(255,255,255,0.78); font-size: 0.92rem; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
-    .persona-emoji { font-size: 96px; line-height: 1; margin: 8px 0 12px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25)); }
+    .persona-char { width: 180px; height: 180px; object-fit: contain; margin: 8px auto 10px; display: block; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.28)); }
+    .persona-type { color: rgba(255,255,255,0.92); font-size: 1rem; font-weight: 700; margin: 0 0 6px; }
     .persona-name { font-size: clamp(2rem, 6vw, 3rem); margin: 0 0 10px; letter-spacing: -0.03em; font-weight: 800; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.15); }
     .persona-tagline { font-size: 1.1rem; color: rgba(255,255,255,0.95); font-weight: 500; margin: 0; font-style: italic; }
     .persona-desc { color: #525252; line-height: 1.7; max-width: 620px; margin: 0 auto 24px; font-size: 0.95rem; text-align: center; }
