@@ -19,9 +19,7 @@ const OVERVIEW_FILE = join(DATA_DIR, 'overviews.json');
 
 const KEY = process.env.TOUR_API_KEY || process.env.TOURAPI_KEY || '';
 const BASE = 'https://apis.data.go.kr/B551011/KorService2/detailCommon2';
-// FIXME: KorService2 detailCommon2 overview가 빈 값으로 옴(파라미터 점검 필요) → 일시중지(0).
-// 실제 응답 구조 확인 후 파라미터 고치고 overviews.json 리셋 예정.
-const LIMIT = Number(process.env.OVERVIEW_LIMIT ?? '0');
+const LIMIT = Number(process.env.OVERVIEW_LIMIT ?? '800');
 const MAX_LEN = 800;
 
 function stripHtml(s: string): string {
@@ -41,8 +39,8 @@ async function fetchOverview(id: string): Promise<string | null> {
   url.searchParams.set('MobileApp', 'festivals-site');
   url.searchParams.set('_type', 'json');
   url.searchParams.set('contentId', id);
-  url.searchParams.set('overviewYN', 'Y');
-  url.searchParams.set('defaultYN', 'Y');
+  // KorService2 detailCommon2는 overview를 기본 포함. (YN 파라미터를 붙이면 오히려 누락되어
+  // 작동하는 i18n 호출과 동일하게 최소 파라미터로 호출 — overviewYN/defaultYN 제거)
 
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error(`detailCommon2 ${res.status}`);
