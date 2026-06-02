@@ -9,6 +9,8 @@
     "fetch:i18n:ci": "tsx scripts/fetch-i18n-titles.ts",
     "fetch:stats": "tsx --env-file=.env scripts/fetch-stats.ts",
     "fetch:stats:ci": "tsx scripts/fetch-stats.ts",
+    "fetch:overviews": "tsx --env-file=.env scripts/fetch-overviews.ts",
+    "fetch:overviews:ci": "tsx scripts/fetch-overviews.ts",
     "og:png": "tsx scripts/og-to-png.ts",
     "dev": "astro dev",
     "start": "astro dev",

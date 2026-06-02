@@ -2,6 +2,7 @@
 import Base from '@/layouts/Base.astro';
 import AffiliateButtons from '@/components/AffiliateButtons.astro';
 import { autoDescribe, nameSuffix } from '@/lib/describe';
+import { getOverview } from '@/lib/overview';
 import WeatherWidget from '@/components/WeatherWidget.astro';
 import RelatedItems from '@/components/RelatedItems.astro';
 import AdSlot from '@/components/AdSlot.astro';
@@ -23,6 +24,7 @@ const region = AREA_CODE[item.areacode]?.ko || '';
 const dates = item.startDate
   ? `${formatDate(item.startDate)} ~ ${formatDate(item.endDate || item.startDate)}`
   : '';
+const overview = getOverview(item.id);
 
 const site = Astro.site?.toString().replace(/\/$/, '') || '';
 const path = `/festival/${item.slug}/`;
@@ -65,6 +67,13 @@ const jsonLd = [
       <h1>{item.title}{nameSuffix(item.title, lang)}</h1>
       <p class="detail-desc">{autoDescribe(item, lang)}</p>
     </header>
+
+    {overview && (
+      <section class="detail-overview">
+        <h2>📖 소개</h2>
+        <p>{overview}</p>
+      </section>
+    )}
 
     <dl class="detail-meta">
       {dates && (

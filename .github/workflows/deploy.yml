@@ -9,7 +9,7 @@ on:
     - cron: '0 19 * * *'
 
 permissions:
-  contents: read
+  contents: write   # 소개글 누적(overviews.json) commit-back용
   pages: write
   id-token: write
 
@@ -60,6 +60,29 @@ jobs:
         continue-on-error: true
         timeout-minutes: 15
         run: npm run fetch:stats:ci
+
+      - name: Fetch place overviews (소개글 누적)
+        env:
+          TOURAPI_KEY: ${{ secrets.TOURAPI_KEY }}
+        # 매일 일부씩 모아 overviews.json에 누적 — best-effort
+        continue-on-error: true
+        timeout-minutes: 20
+        run: npm run fetch:overviews:ci
+
+      - name: Persist accumulated overviews (commit-back)
+        # 모은 소개글을 저장소에 영구 보존 → 며칠에 걸쳐 전부 채워짐.
+        # GITHUB_TOKEN 푸시는 새 워크플로를 트리거하지 않음(+[skip ci] 이중 안전).
+        continue-on-error: true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/data/overviews.json
+          if git diff --staged --quiet; then
+            echo "소개글 변경 없음 — 커밋 생략"
+          else
+            git commit -m "data: 상세 소개글 누적 [skip ci]"
+            git push origin HEAD:main || echo "push 실패(다음 빌드에서 재시도)"
+          fi
 
       - name: Build site
         env:

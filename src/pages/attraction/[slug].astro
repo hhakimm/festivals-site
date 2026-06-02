@@ -2,6 +2,7 @@
 import Base from '@/layouts/Base.astro';
 import AffiliateButtons from '@/components/AffiliateButtons.astro';
 import { autoDescribe, nameSuffix } from '@/lib/describe';
+import { getOverview } from '@/lib/overview';
 import WeatherWidget from '@/components/WeatherWidget.astro';
 import RelatedItems from '@/components/RelatedItems.astro';
 import AdSlot from '@/components/AdSlot.astro';
@@ -27,6 +28,7 @@ const url = `${site}${base}${path}`;
 
 const title = `${item.title} | ${region} 가볼 만한 곳`;
 const description = `${item.title} 위치·연락처·지도. ${item.address}`;
+const overview = getOverview(item.id);
 
 const jsonLd = [
   buildAttractionSchema(item, url),
@@ -62,6 +64,13 @@ const jsonLd = [
       <h1>{item.title}{nameSuffix(item.title, lang)}</h1>
       <p class="detail-desc">{autoDescribe(item, lang)}</p>
     </header>
+
+    {overview && (
+      <section class="detail-overview">
+        <h2>📖 소개</h2>
+        <p>{overview}</p>
+      </section>
+    )}
 
     <dl class="detail-meta">
       <dt>📍 {tr('address', lang)}</dt>

@@ -423,6 +423,16 @@ img { max-width: 100%; height: auto; display: block; }
   border: 1px solid var(--c-border);
 }
 
+.detail-overview { margin: 0 0 28px; }
+.detail-overview h2 { font-size: 17px; margin: 0 0 10px; letter-spacing: -0.01em; }
+.detail-overview p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--c-text);
+  white-space: pre-line;
+}
+
 .detail-meta {
   background: var(--c-surface);
   border: 1px solid var(--c-border);
