@@ -55,6 +55,15 @@ const recommendations = getAllRecommendations();
         <p class="test-card-desc">{lang === 'ko' ? '4축 16유형 정밀 분석' : lang === 'en' ? '4 axes · 16 types · deep analysis' : lang === 'ja' ? '4軸16型の精密分析' : '4轴16型精准分析'} · {lang === 'ko' ? '8문항 90초' : lang === 'en' ? '8 Qs / 90s' : lang === 'ja' ? '8問90秒' : '8题90秒'}</p>
         <span class="test-card-cta">{lang === 'ko' ? '분석하러 가기 →' : lang === 'en' ? 'Analyze →' : lang === 'ja' ? '分析する →' : '去分析 →'}</span>
       </a>
+      {/* ③ 여행 빌런 (한국어 전용 — 재미·바이럴) */}
+      {lang === 'ko' && (
+        <a href={`${base}/quiz/villain/`} class="test-card test-card-villain">
+          <div class="test-card-chars" aria-hidden="true">😈</div>
+          <h2 class="test-card-title">여행 빌런 테스트</h2>
+          <p class="test-card-desc">같이 여행 가면 당신은 어떤 빌런? · 7문항 1분</p>
+          <span class="test-card-cta">테스트 하러 가기 →</span>
+        </a>
+      )}
     </div>
   </div>
 
@@ -222,11 +231,11 @@ const recommendations = getAllRecommendations();
   .test-card-chars { font-size: 42px; line-height: 1; margin-bottom: 10px; letter-spacing: 2px; }
   .test-card-title { font-size: 1.3rem; margin: 0 0 6px; font-weight: 800; letter-spacing: -0.02em; }
   .test-card-desc { font-size: 0.86rem; color: #525252; margin: 0 0 16px; line-height: 1.55; }
-  .test-card-dna .test-card-cta {
+  .test-card-dna .test-card-cta, .test-card-villain .test-card-cta {
     display: inline-block; font-weight: 800; font-size: 0.95rem;
     color: #171717; background: #f0f0f0; padding: 11px 24px; border-radius: 999px;
   }
-  .test-card-dna:hover .test-card-cta { background: #facc15; }
+  .test-card-dna:hover .test-card-cta, .test-card-villain:hover .test-card-cta { background: #facc15; }
 
   /* 다른 테스트 안내 카드 */
   .quiz-other-tests { margin-top: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }

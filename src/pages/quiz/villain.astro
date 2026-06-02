@@ -1,0 +1,136 @@
+---
+/**
+ * 여행 빌런 테스트 — /quiz/villain/ (한국어 전용 바이럴 테스트).
+ * intro → questions → 6 result 블록(임베드, JS가 매칭만 표시).
+ */
+import Base from '@/layouts/Base.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import { VILLAIN_QUESTIONS, VILLAINS, VILLAIN_IDS, VILLAIN_LABELS as L } from '@/lib/quiz-villain';
+import { tr } from '@/lib/i18n';
+
+const lang = 'ko' as const;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const title = `${L.pageTitle} | ${tr('siteName', lang)}`;
+const desc = L.pageDesc;
+---
+
+<Base title={title} description={desc} lang={lang} canonicalPath="/quiz/villain/" ogImage="/og-villain.png">
+  <section id="villain-app" class="vil-app">
+
+    {/* intro */}
+    <div class="vil-screen vil-intro" data-screen="intro">
+      <div class="vil-intro-emoji" aria-hidden="true">😈</div>
+      <h1 class="vil-intro-title">{L.pageTitle}</h1>
+      <p class="vil-intro-desc">{L.pageDesc}</p>
+      <p class="vil-intro-meta">{L.startCta}</p>
+      <button type="button" class="btn vil-start-btn" id="vil-start-btn">{L.start} →</button>
+    </div>
+
+    {/* questions */}
+    <div class="vil-screen vil-questions" data-screen="questions" hidden>
+      <div class="vil-progress"><div class="vil-progress-bar"><div class="vil-progress-fill" id="vil-progress-fill"></div></div>
+        <p class="vil-progress-text"><span id="vil-q-current">1</span><span>{L.questionOf}</span></p></div>
+      {VILLAIN_QUESTIONS.map((q, idx) => (
+        <div class="vil-question" data-q-index={idx} hidden={idx > 0}>
+          <h2 class="vil-q-text">{q.q}</h2>
+          <div class="vil-options">
+            {q.options.map((o) => (
+              <button type="button" class="vil-option" data-option-id={o.id}>{o.label}</button>
+            ))}
+          </div>
+        </div>
+      ))}
+      <div class="vil-nav"><button type="button" class="btn-link vil-prev-btn" id="vil-prev-btn" hidden>← {L.prev}</button></div>
+    </div>
+
+    {/* results — 6 blocks */}
+    {VILLAIN_IDS.map((vid) => {
+      const v = VILLAINS[vid];
+      const victim = VILLAINS[v.victim];
+      return (
+        <div class="vil-screen vil-result" data-screen="result" data-villain={vid} hidden>
+          <div class="vil-result-card" style={`background: linear-gradient(135deg, ${v.gradient.from}, ${v.gradient.to});`}>
+            <p class="vil-result-label">{L.yourVillain}</p>
+            <div class="vil-result-emoji" aria-hidden="true">{v.emoji}</div>
+            <h1 class="vil-result-name">{v.name}</h1>
+            <p class="vil-result-tagline">"{v.tagline}"</p>
+          </div>
+          <p class="vil-result-desc">{v.desc}</p>
+
+          <div class="vil-stats">
+            <div class="vil-stat"><span class="vil-stat-k">{L.crimeLabel}</span><span class="vil-stat-v">{v.crime}</span></div>
+            <div class="vil-stat"><span class="vil-stat-k">{L.villainIndex}</span><span class="vil-stat-v"><strong>{v.index}%</strong></span></div>
+            <a class="vil-stat vil-stat-link" href={`${base}/quiz/villain/r/${v.victim}/`}>
+              <span class="vil-stat-k">{L.victimLabel}</span><span class="vil-stat-v">{victim.emoji} {victim.name} →</span>
+            </a>
+          </div>
+
+          <AdSlot lang={lang} layout="horizontal" />
+
+          <div class="vil-actions">
+            <button type="button" class="btn-share vil-share-btn" data-share-action="native" data-villain={vid}>↗ {L.share}</button>
+            <button type="button" class="btn-share vil-share-btn" data-share-action="copy" data-villain={vid}>📋 {L.shareCopy}</button>
+            <button type="button" class="btn-share vil-share-btn" data-share-action="twitter" data-villain={vid}>𝕏 {L.shareTwitter}</button>
+          </div>
+          <p class="vil-tag-friend">{L.tagFriend}</p>
+
+          <div class="vil-retake">
+            <button type="button" class="btn vil-retake-btn">↻ {L.retake}</button>
+            <a class="btn vil-other" href={`${base}/quiz/`}>다른 테스트 →</a>
+          </div>
+        </div>
+      );
+    })}
+  </section>
+
+  <script>
+    import { initVillain } from '@/scripts/villain.client';
+    const root = document.getElementById('villain-app');
+    if (root) initVillain(root);
+  </script>
+
+  <style>
+    #villain-app { max-width: 720px; margin: 0 auto; padding: 24px 16px 80px; }
+    .vil-screen { animation: vfade 0.3s ease-out; }
+    @keyframes vfade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .vil-intro { text-align: center; padding: 40px 16px; }
+    .vil-intro-emoji { font-size: 64px; margin-bottom: 14px; }
+    .vil-intro-title { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: 0 0 12px; letter-spacing: -0.02em; }
+    .vil-intro-desc { color: #525252; margin: 0 0 6px; line-height: 1.5; }
+    .vil-intro-meta { color: #a3a3a3; font-size: 0.85rem; margin: 0 0 26px; }
+    .vil-start-btn { font-size: 1.05rem; padding: 14px 32px; }
+    .vil-progress { margin-bottom: 28px; }
+    .vil-progress-bar { height: 6px; background: #f0f0f0; border-radius: 999px; overflow: hidden; }
+    .vil-progress-fill { height: 100%; background: #facc15; border-radius: 999px; width: 14%; transition: width 0.3s ease; }
+    .vil-progress-text { margin: 8px 0 0; font-size: 0.85rem; color: #737373; text-align: center; font-feature-settings: "tnum"; }
+    .vil-q-text { font-size: clamp(1.2rem, 3vw, 1.5rem); margin: 0 0 22px; line-height: 1.35; letter-spacing: -0.015em; }
+    .vil-options { display: flex; flex-direction: column; gap: 12px; }
+    .vil-option { width: 100%; text-align: left; padding: 17px 20px; background: #fff; border: 2px solid #e5e5e5; border-radius: 14px; font-size: 1rem; font-weight: 500; color: #171717; cursor: pointer; transition: border-color 0.15s ease, background 0.15s ease, transform 0.06s ease; line-height: 1.4; }
+    .vil-option:hover { border-color: #171717; }
+    .vil-option:active { transform: scale(0.985); }
+    .vil-option.is-selected { border-color: #facc15; background: #fefce8; }
+    .vil-nav { margin-top: 22px; text-align: center; }
+    .btn-link { background: none; border: 0; color: #737373; cursor: pointer; padding: 8px 16px; font-size: 0.9rem; }
+    .vil-result-card { text-align: center; padding: 36px 24px 30px; border-radius: 24px; color: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.18); margin-bottom: 22px; }
+    .vil-result-label { color: rgba(255,255,255,0.8); font-size: 0.92rem; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+    .vil-result-emoji { font-size: 90px; line-height: 1; margin: 6px 0 10px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25)); }
+    .vil-result-name { font-size: clamp(1.8rem, 6vw, 2.6rem); margin: 0 0 10px; font-weight: 800; letter-spacing: -0.025em; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+    .vil-result-tagline { font-size: 1.05rem; color: rgba(255,255,255,0.95); font-weight: 500; margin: 0; font-style: italic; }
+    .vil-result-desc { color: #525252; line-height: 1.7; max-width: 600px; margin: 0 auto 22px; text-align: center; font-size: 0.95rem; }
+    .vil-stats { display: flex; flex-direction: column; gap: 8px; margin: 0 0 24px; }
+    .vil-stat { display: flex; align-items: center; gap: 12px; background: #fafafa; border: 1px solid #f0f0f0; border-radius: 12px; padding: 12px 16px; }
+    .vil-stat-k { font-size: 0.85rem; color: #737373; font-weight: 600; flex-shrink: 0; min-width: 92px; }
+    .vil-stat-v { font-size: 0.92rem; color: #171717; }
+    .vil-stat-v strong { font-size: 1.3rem; }
+    .vil-stat-link { text-decoration: none; transition: border-color 0.15s; }
+    .vil-stat-link:hover { border-color: #facc15; }
+    .vil-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 0 0 10px; }
+    .btn-share { background: #171717; color: #fff; border: 0; padding: 10px 16px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; cursor: pointer; }
+    .btn-share[data-share-action="twitter"] { background: #1d9bf0; }
+    .btn-share[data-share-action="copy"] { background: #facc15; color: #171717; }
+    .vil-tag-friend { text-align: center; color: #737373; font-size: 0.85rem; margin: 0 0 32px; }
+    .vil-retake { margin-top: 12px; text-align: center; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .vil-retake-btn { background: transparent; color: #171717; border: 1px solid #e5e5e5; }
+    .vil-other { background: #171717; color: #fff; }
+  </style>
+</Base>

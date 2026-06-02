@@ -1,0 +1,73 @@
+---
+/**
+ * 빌런 유형별 정적 결과 페이지 — /quiz/villain/r/[type]/
+ * 공유 시 빌런별 OG 카드 노출 + SEO. 테스트로 유도.
+ */
+import Base from '@/layouts/Base.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import { VILLAINS, VILLAIN_IDS, VILLAIN_LABELS as L, type VillainId } from '@/lib/quiz-villain';
+import { tr } from '@/lib/i18n';
+
+export function getStaticPaths() {
+  return VILLAIN_IDS.map((id) => ({ params: { type: id }, props: { vid: id } }));
+}
+const { vid } = Astro.props as { vid: VillainId };
+const v = VILLAINS[vid];
+const victim = VILLAINS[v.victim];
+const lang = 'ko' as const;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const title = `${v.emoji} ${v.name} — ${L.pageTitle} | ${tr('siteName', lang)}`;
+const description = `${v.tagline} · ${v.crime}`;
+---
+
+<Base title={title} description={description} lang={lang} canonicalPath={`/quiz/villain/r/${vid}/`} ogImage={`/og-villain-${vid}.png`}>
+  <section class="vr">
+    <a href={`${base}/quiz/villain/`} class="vr-back">← {L.pageTitle}</a>
+
+    <div class="vr-card" style={`background: linear-gradient(135deg, ${v.gradient.from}, ${v.gradient.to});`}>
+      <p class="vr-label">{L.yourVillain}</p>
+      <div class="vr-emoji" aria-hidden="true">{v.emoji}</div>
+      <h1 class="vr-name">{v.name}</h1>
+      <p class="vr-tagline">"{v.tagline}"</p>
+    </div>
+
+    <p class="vr-desc">{v.desc}</p>
+
+    <div class="vr-stats">
+      <div class="vr-stat"><span class="vr-k">{L.crimeLabel}</span><span class="vr-v">{v.crime}</span></div>
+      <div class="vr-stat"><span class="vr-k">{L.villainIndex}</span><span class="vr-v"><strong>{v.index}%</strong></span></div>
+      <a class="vr-stat vr-link" href={`${base}/quiz/villain/r/${v.victim}/`}>
+        <span class="vr-k">{L.victimLabel}</span><span class="vr-v">{victim.emoji} {victim.name} →</span>
+      </a>
+    </div>
+
+    <AdSlot lang={lang} layout="horizontal" />
+
+    <div class="vr-cta">
+      <a href={`${base}/quiz/villain/`} class="btn vr-btn-primary">나도 빌런 테스트 →</a>
+      <a href={`${base}/quiz/`} class="btn vr-btn-secondary">다른 테스트</a>
+    </div>
+  </section>
+
+  <style>
+    .vr { max-width: 720px; margin: 0 auto; padding: 16px 16px 80px; }
+    .vr-back { display: inline-block; color: #525252; text-decoration: none; font-size: 0.88rem; margin-bottom: 12px; }
+    .vr-card { text-align: center; padding: 40px 24px; border-radius: 24px; color: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.18); margin-bottom: 22px; }
+    .vr-label { color: rgba(255,255,255,0.8); font-size: 0.92rem; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+    .vr-emoji { font-size: 96px; line-height: 1; margin: 6px 0 10px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25)); }
+    .vr-name { font-size: clamp(1.9rem, 6vw, 2.8rem); margin: 0 0 10px; font-weight: 800; letter-spacing: -0.025em; color: #fff; }
+    .vr-tagline { font-size: 1.1rem; color: rgba(255,255,255,0.95); font-weight: 500; margin: 0; font-style: italic; }
+    .vr-desc { color: #525252; line-height: 1.7; max-width: 600px; margin: 0 auto 22px; text-align: center; font-size: 0.95rem; }
+    .vr-stats { display: flex; flex-direction: column; gap: 8px; margin: 0 0 24px; }
+    .vr-stat { display: flex; align-items: center; gap: 12px; background: #fafafa; border: 1px solid #f0f0f0; border-radius: 12px; padding: 12px 16px; }
+    .vr-k { font-size: 0.85rem; color: #737373; font-weight: 600; min-width: 92px; flex-shrink: 0; }
+    .vr-v { font-size: 0.92rem; color: #171717; }
+    .vr-v strong { font-size: 1.3rem; }
+    .vr-link { text-decoration: none; }
+    .vr-link:hover { border-color: #facc15; }
+    .vr-cta { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+    .vr-btn-primary { background: #171717; color: #fff; }
+    .vr-btn-secondary { background: #facc15; color: #171717; }
+  </style>
+</Base>

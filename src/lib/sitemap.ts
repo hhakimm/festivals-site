@@ -8,6 +8,7 @@ import { festivals, attractions, AREA_CODE } from './data';
 import { LANGS } from './i18n';
 import { PERSONA_IDS } from './quiz';
 import { DNA_CODES } from './quiz-dna';
+import { VILLAIN_IDS } from './quiz-villain';
 
 export const SITEMAP_ORIGIN = 'https://hhakimm.github.io';
 export const SITEMAP_BASE = '/festivals-site';
@@ -83,6 +84,15 @@ ${altLinks}
     <xhtml:link rel="alternate" hreflang="x-default" href="${defaultLoc}"/>
   </url>`);
     }
+  }
+
+  // 여행 빌런 테스트 — 한국어 전용(다국어 alternate 없음)
+  const villainPaths = ['/quiz/villain/', ...VILLAIN_IDS.map((id) => `/quiz/villain/r/${id}/`)];
+  for (const path of villainPaths) {
+    blocks.push(`  <url>
+    <loc>${origin}${base}${path}</loc>
+    <priority>0.5</priority>
+  </url>`);
   }
 
   _blocksCache = blocks;

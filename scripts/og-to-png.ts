@@ -26,8 +26,37 @@ const PERSONA_OG: Record<string, { from: string; to: string; char: string; type:
   urbanite:   { from: '#7c3aed', to: '#5b21b6', char: '핫플 헌터 여우', type: '🏙️ 도시탐험가' },
 };
 
+// 여행 빌런 카드 (이모지 기반, 일러스트 없음) — quiz-villain.ts와 일치
+const VILLAIN_OG: Record<string, { from: string; to: string; emoji: string; name: string; line: string }> = {
+  photo:   { from: '#ec4899', to: '#be185d', emoji: '📸', name: '인생샷 강요 빌런', line: '여기서 한 장만 더! …다시!' },
+  planner: { from: '#3b82f6', to: '#1d4ed8', emoji: '📋', name: '분 단위 계획 빌런', line: '지금 일정보다 7분 늦었어.' },
+  late:    { from: '#6366f1', to: '#4338ca', emoji: '😴', name: '늦잠 빌런', line: '먼저 가 있어… 5분만…' },
+  budget:  { from: '#16a34a', to: '#15803d', emoji: '💸', name: '가계부 빌런', line: '그거 굳이 사야 돼?' },
+  foodie:  { from: '#f97316', to: '#c2410c', emoji: '🍢', name: '먹부림 빌런', line: '일단 이것도 시켜. 저것도.' },
+  lost:    { from: '#0d9488', to: '#0f766e', emoji: '🗺️', name: '길치 빌런', line: '어? 아까 여기 지나갔나…?' },
+};
+
 function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function villainOgSvg(v: { from: string; to: string; emoji: string; name: string; line: string }): string {
+  const F = 'Pretendard, system-ui, -apple-system, sans-serif';
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${v.from}"/><stop offset="1" stop-color="${v.to}"/></linearGradient>
+    <radialGradient id="glow" cx="0.25" cy="0.5" r="0.6"><stop offset="0" stop-color="#fff" stop-opacity="0.18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <text x="300" y="375" font-size="240" text-anchor="middle">${v.emoji}</text>
+  <text x="582" y="210" font-family="${F}" font-size="30" font-weight="700" fill="#fff" opacity="0.85">😈 여행 빌런 테스트</text>
+  <text x="580" y="312" font-family="${F}" font-size="58" font-weight="800" fill="#fff" letter-spacing="-1.5">${esc(v.name)}</text>
+  <text x="582" y="372" font-family="${F}" font-size="30" font-weight="500" fill="#fff" opacity="0.92" font-style="italic">"${esc(v.line)}"</text>
+  <rect x="582" y="452" width="318" height="62" rx="31" fill="#fff"/>
+  <text x="741" y="492" font-family="${F}" font-size="26" font-weight="800" fill="#171717" text-anchor="middle">나도 빌런 찾기 →</text>
+  <text x="584" y="582" font-family="${F}" font-size="24" font-weight="600" fill="#fff" opacity="0.72">한국 가볼 만한 곳 · TravelKorea</text>
+</svg>`;
 }
 
 function personaOgSvg(p: { from: string; to: string; char: string; type: string }, charB64: string): string {
@@ -82,6 +111,22 @@ async function main() {
       console.log(`  ✗ og-quiz-${id} 합성 실패(폴백): ${(e as Error).message}`);
     }
   }
+
+  // 1.5) 여행 빌런 카드 (이모지 기반)
+  for (const [id, v] of Object.entries(VILLAIN_OG)) {
+    try {
+      const png = renderPng(villainOgSvg(v));
+      await writeFile(join(PUBLIC_DIR, `og-villain-${id}.png`), png);
+      console.log(`  ✓ 빌런 카드 og-villain-${id}.png (${(png.length / 1024).toFixed(0)} KB)`);
+    } catch (e) {
+      console.log(`  ✗ og-villain-${id} 실패: ${(e as Error).message}`);
+    }
+  }
+  try {
+    const png = renderPng(villainOgSvg({ from: '#7c3aed', to: '#4338ca', emoji: '😈', name: '여행 빌런 테스트', line: '같이 여행 가면… 당신은 어떤 빌런?' }));
+    await writeFile(join(PUBLIC_DIR, 'og-villain.png'), png);
+    console.log('  ✓ 기본 빌런 카드 og-villain.png');
+  } catch { /* noop */ }
 
   // 2) 그 외 og-*.svg → PNG (이미 생성한 페르소나 카드는 스킵)
   const files = (await readdir(PUBLIC_DIR)).filter((f) => f.startsWith('og-') && f.endsWith('.svg'));
