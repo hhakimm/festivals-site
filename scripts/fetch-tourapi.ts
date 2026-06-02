@@ -18,6 +18,7 @@ import { writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isNonTourist } from './junk-filter.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = join(__dirname, '..', 'src', 'content', 'data');
@@ -549,6 +550,12 @@ async function main() {
       '여행지',
     );
     attractions = rawAttr.map((i) => normalize(i, 'attraction'));
+
+    // 비관광 업소(병원·의원·약국 등) 제거 — 단, 근대문화유산은 보존
+    const beforeJunk = attractions.length;
+    attractions = attractions.filter((a) => !isNonTourist(a.title));
+    const removedJunk = beforeJunk - attractions.length;
+    if (removedJunk) console.log(`  [정제] 비관광 업소 ${removedJunk}곳 제거(병원·의원 등, 문화유산 제외)`);
 
     // 이미지 보강 1/2: 관광사진 갤러리 — 전체 카탈로그 1회 수집 후 제목/키워드 매칭(한도 절약)
     console.log('  이미지 보강 1/2: 관광사진 갤러리 카탈로그 수집...');

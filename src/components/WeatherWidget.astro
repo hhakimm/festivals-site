@@ -56,56 +56,35 @@ const { lat, lng, lang } = Astro.props;
     padding: 12px 0;
     text-align: center;
   }
-  .weather-air {
-    display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
-    margin: 0 0 14px;
+  /* ⚠ 아래는 클라이언트 JS가 동적 생성하는 요소 → :global 필수 (스코프 CSS는 안 붙음) */
+  :global(.weather-air) {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 0 14px;
   }
-  .air-badge {
+  :global(.weather-air .air-badge) {
     color: #fff; font-weight: 700; font-size: 0.82rem;
     padding: 5px 12px; border-radius: 999px; letter-spacing: -0.01em;
   }
-  .air-vals { color: #737373; font-size: 0.78rem; font-feature-settings: "tnum"; }
-  .weather-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-    margin: 0;
+  :global(.weather-air .air-vals) { color: #737373; font-size: 0.78rem; font-feature-settings: "tnum"; }
+  :global(.weather-grid) {
+    display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 6px; margin: 0;
+    padding-bottom: 4px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
   }
-  .weather-day {
-    text-align: center;
-    padding: 12px 4px;
-    border-radius: 10px;
-    background: #fff;
-    font-size: 0.78rem;
-    color: #525252;
+  :global(.weather-day) {
+    flex: 0 0 auto; width: 13%; min-width: 64px;
+    text-align: center; padding: 12px 4px; border-radius: 10px; background: #fff;
+    font-size: 0.78rem; color: #525252; scroll-snap-align: start;
   }
-  .weather-day.is-today { background: #fefce8; border: 1px solid #facc15; }
-  .weather-day-name { font-weight: 700; color: #171717; margin-bottom: 6px; font-size: 0.82rem; }
-  .weather-day-icon { font-size: 1.6rem; line-height: 1; margin-bottom: 6px; display: block; }
-  .weather-day-temp { font-feature-settings: "tnum"; line-height: 1.3; }
-  .weather-day-temp .hi { color: #dc2626; font-weight: 600; }
-  .weather-day-temp .lo { color: #2563eb; }
-  .weather-day-precip { color: #2563eb; font-size: 0.7rem; margin-top: 4px; }
+  :global(.weather-day.is-today) { background: #fefce8; border: 1px solid #facc15; }
+  :global(.weather-day-name) { font-weight: 700; color: #171717; margin-bottom: 6px; font-size: 0.82rem; }
+  :global(.weather-day-icon) { font-size: 1.6rem; line-height: 1; margin-bottom: 6px; display: block; }
+  :global(.weather-day-temp) { font-feature-settings: "tnum"; line-height: 1.3; }
+  :global(.weather-day-temp .hi) { color: #dc2626; font-weight: 600; }
+  :global(.weather-day-temp .lo) { color: #2563eb; }
+  :global(.weather-day-precip) { color: #2563eb; font-size: 0.7rem; margin-top: 4px; }
   .weather-source { color: #a3a3a3; font-size: 0.72rem; margin: 12px 0 0; text-align: right; }
 
   @media (max-width: 640px) {
-    /* 모바일: 7일을 가로 스크롤 1줄로 → 세로 길이 압축 */
-    .weather-grid {
-      display: flex;
-      grid-template-columns: none;
-      overflow-x: auto;
-      gap: 6px;
-      padding-bottom: 4px;
-      scroll-snap-type: x proximity;
-      -webkit-overflow-scrolling: touch;
-    }
-    .weather-day {
-      flex: 0 0 auto;
-      width: 60px;
-      padding: 10px 4px;
-      font-size: 0.72rem;
-      scroll-snap-align: start;
-    }
-    .weather-day-icon { font-size: 1.35rem; }
+    :global(.weather-day) { width: 60px; min-width: 60px; padding: 10px 4px; font-size: 0.72rem; }
+    :global(.weather-day-icon) { font-size: 1.35rem; }
   }
 </style>

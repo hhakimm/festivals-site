@@ -9526,28 +9526,6 @@
     "updatedAt": "20260422163031"
   },
   {
-    "id": "3441597",
-    "type": "attraction",
-    "slug": "이문원한의원-3441597",
-    "title": "이문원한의원",
-    "address": "서울특별시 강남구 선릉로132길 33 (청담동)",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "체험",
-    "image": null,
-    "imageThumb": null,
-    "lat": 37.51863735746294,
-    "lng": 127.04389700658533,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20260422154016"
-  },
-  {
     "id": "3018654",
     "type": "attraction",
     "slug": "신원체육공원-3018654",
@@ -95368,50 +95346,6 @@
     "startDate": null,
     "endDate": null,
     "updatedAt": "20260102152120"
-  },
-  {
-    "id": "3591228",
-    "type": "attraction",
-    "slug": "차민성형외과의원-3591228",
-    "title": "차민성형외과의원",
-    "address": "서울특별시 서초구 강남대로 503 (반포동) 청하빌딩 4,5,6층",
-    "areacode": "1",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0202",
-      "cat3": "A02020500"
-    },
-    "theme": "체험",
-    "image": null,
-    "imageThumb": null,
-    "lat": 37.5069064137,
-    "lng": 127.0228270043,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20260102151937"
-  },
-  {
-    "id": "3591214",
-    "type": "attraction",
-    "slug": "연세굿데이치과의원-양재점-3591214",
-    "title": "연세굿데이치과의원 양재점",
-    "address": "서울특별시 서초구 강남대로 206 (양재동) 5,6층",
-    "areacode": "1",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0202",
-      "cat3": "A02020500"
-    },
-    "theme": "체험",
-    "image": null,
-    "imageThumb": null,
-    "lat": 37.4827122461,
-    "lng": 127.0365319967,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20260102150637"
   },
   {
     "id": "125572",
@@ -193620,28 +193554,6 @@
     "startDate": null,
     "endDate": null,
     "updatedAt": "20250731084756"
-  },
-  {
-    "id": "127989",
-    "type": "attraction",
-    "slug": "꽃마을-경주한방병원-127989",
-    "title": "꽃마을 경주한방병원",
-    "address": "경상북도 경주시 포석로 924 (탑동)",
-    "areacode": "35",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0202",
-      "cat3": "A02020500"
-    },
-    "theme": "체험",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/56/179456_image2_1.jpg",
-    "imageThumb": "http://tong.visitkorea.or.kr/cms/resource/56/179456_image3_1.jpg",
-    "lat": 35.8232589729,
-    "lng": 129.2109099137,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20250731084652"
   },
   {
     "id": "250374",
