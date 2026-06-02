@@ -7,6 +7,7 @@
 import { festivals, attractions, AREA_CODE } from './data';
 import { LANGS } from './i18n';
 import { PERSONA_IDS } from './quiz';
+import { DNA_CODES } from './quiz-dna';
 
 export const SITEMAP_ORIGIN = 'https://hhakimm.github.io';
 export const SITEMAP_BASE = '/festivals-site';
@@ -30,6 +31,11 @@ function buildEntries(): Entry[] {
   entries.push({ path: '/quiz/', priority: 0.8 });
   for (const pid of PERSONA_IDS) {
     entries.push({ path: `/quiz/r/${pid}/`, priority: 0.6 });
+  }
+  // 여행 MBTI(16유형)
+  entries.push({ path: '/quiz/dna/', priority: 0.7 });
+  for (const code of DNA_CODES) {
+    entries.push({ path: `/quiz/dna/r/${code}/`, priority: 0.5 });
   }
 
   // 지역 랜딩 — "서울 축제", "제주 관광지" 등 롱테일. 항목 있는 지역만.

@@ -34,15 +34,28 @@ const recommendations = getAllRecommendations();
 
 <section id="quiz-app" data-lang={lang}>
 
-  {/* ── 1. 시작 화면 (intro) ──────────────────────────── */}
+  {/* ── 1. 시작 화면 = 테스트 허브 ──────────────────────── */}
   <div class="quiz-screen quiz-intro" data-screen="intro">
     <div class="quiz-intro-emoji" aria-hidden="true">🎒</div>
-    <h1 class="quiz-intro-title">{quizT('pageTitle', lang)}</h1>
-    <p class="quiz-intro-desc">{quizT('pageDesc', lang)}</p>
-    <p class="quiz-intro-meta">{quizT('startCta', lang)}</p>
-    <button type="button" class="btn quiz-start-btn" id="quiz-start-btn">
-      {quizT('start', lang)} →
-    </button>
+    <h1 class="quiz-intro-title">{lang === 'ko' ? '여행 심리테스트' : lang === 'en' ? 'Travel Psychology Tests' : lang === 'ja' ? '旅の心理テスト' : '旅行心理测试'}</h1>
+    <p class="quiz-intro-desc">{lang === 'ko' ? '나에게 맞는 테스트를 골라보세요' : lang === 'en' ? 'Pick a test to discover your travel self' : lang === 'ja' ? '自分に合うテストを選んでね' : '选一个测试,发现你的旅行风格'}</p>
+
+    <div class="test-hub">
+      {/* ① 여행 성향 테스트 (캐릭터) */}
+      <div class="test-card test-card-primary">
+        <div class="test-card-chars" aria-hidden="true">🦌🦊🐻</div>
+        <h2 class="test-card-title">{quizT('pageTitle', lang)}</h2>
+        <p class="test-card-desc">{lang === 'ko' ? '6가지 동물 캐릭터로 보는 내 여행 스타일' : lang === 'en' ? '6 animal characters reveal your travel style' : lang === 'ja' ? '6つの動物キャラで分かる旅スタイル' : '6种动物角色看你的旅行风格'} · {quizT('startCta', lang)}</p>
+        <button type="button" class="btn quiz-start-btn" id="quiz-start-btn">{quizT('start', lang)} →</button>
+      </div>
+      {/* ② 여행 MBTI (정밀 16유형) */}
+      <a href={lang === 'ko' ? `${base}/quiz/dna/` : `${base}/${lang}/quiz/dna/`} class="test-card test-card-dna">
+        <div class="test-card-chars" aria-hidden="true">🧬</div>
+        <h2 class="test-card-title">{lang === 'ko' ? '여행 MBTI' : lang === 'en' ? 'Travel MBTI' : lang === 'ja' ? '旅行MBTI' : '旅行MBTI'}</h2>
+        <p class="test-card-desc">{lang === 'ko' ? '4축 16유형 정밀 분석' : lang === 'en' ? '4 axes · 16 types · deep analysis' : lang === 'ja' ? '4軸16型の精密分析' : '4轴16型精准分析'} · {lang === 'ko' ? '8문항 90초' : lang === 'en' ? '8 Qs / 90s' : lang === 'ja' ? '8問90秒' : '8题90秒'}</p>
+        <span class="test-card-cta">{lang === 'ko' ? '분석하러 가기 →' : lang === 'en' ? 'Analyze →' : lang === 'ja' ? '分析する →' : '去分析 →'}</span>
+      </a>
+    </div>
   </div>
 
   {/* ── 2. 질문 화면 ─────────────────────────────────── */}
@@ -196,6 +209,24 @@ const recommendations = getAllRecommendations();
   .quiz-intro-desc { color: var(--ink-3, #525252); margin: 0 0 4px; line-height: 1.5; }
   .quiz-intro-meta { color: var(--ink-4, #a3a3a3); font-size: 0.85rem; margin: 0 0 28px; }
   .quiz-start-btn { font-size: 1.05rem; padding: 14px 32px; }
+
+  /* 테스트 허브 카드 */
+  .test-hub { display: grid; gap: 14px; max-width: 460px; margin: 28px auto 0; }
+  .test-card {
+    background: #fff; border: 1.5px solid #e5e5e5; border-radius: 18px;
+    padding: 24px 20px; text-align: center; text-decoration: none; color: inherit;
+    display: block; transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .test-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); border-color: #facc15; }
+  .test-card-primary { border-color: #facc15; background: #fffdf5; }
+  .test-card-chars { font-size: 42px; line-height: 1; margin-bottom: 10px; letter-spacing: 2px; }
+  .test-card-title { font-size: 1.3rem; margin: 0 0 6px; font-weight: 800; letter-spacing: -0.02em; }
+  .test-card-desc { font-size: 0.86rem; color: #525252; margin: 0 0 16px; line-height: 1.55; }
+  .test-card-dna .test-card-cta {
+    display: inline-block; font-weight: 800; font-size: 0.95rem;
+    color: #171717; background: #f0f0f0; padding: 11px 24px; border-radius: 999px;
+  }
+  .test-card-dna:hover .test-card-cta { background: #facc15; }
 
   /* 다른 테스트 안내 카드 */
   .quiz-other-tests { margin-top: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
