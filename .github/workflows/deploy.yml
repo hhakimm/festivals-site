@@ -45,10 +45,19 @@ jobs:
         continue-on-error: true
         run: npm run fetch:ci
 
+      # 소개글 수집을 i18n보다 먼저 → KorService2 하루 한도 우선 배정(누적 속도 ↑)
+      - name: Fetch place overviews (소개글 누적)
+        env:
+          TOURAPI_KEY: ${{ secrets.TOURAPI_KEY }}
+        # 매일 일부씩 모아 overviews.json에 누적 — best-effort
+        continue-on-error: true
+        timeout-minutes: 20
+        run: npm run fetch:overviews:ci
+
       - name: Fetch i18n titles (en/ja/zh)
         env:
           TOURAPI_KEY: ${{ secrets.TOURAPI_KEY }}
-        # 다국어 fetch는 시간이 길 수 있으니 best-effort
+        # 다국어 fetch는 시간이 길 수 있으니 best-effort (남은 한도로)
         continue-on-error: true
         timeout-minutes: 30
         run: npm run fetch:i18n:ci
@@ -60,14 +69,6 @@ jobs:
         continue-on-error: true
         timeout-minutes: 15
         run: npm run fetch:stats:ci
-
-      - name: Fetch place overviews (소개글 누적)
-        env:
-          TOURAPI_KEY: ${{ secrets.TOURAPI_KEY }}
-        # 매일 일부씩 모아 overviews.json에 누적 — best-effort
-        continue-on-error: true
-        timeout-minutes: 20
-        run: npm run fetch:overviews:ci
 
       - name: Persist accumulated overviews (commit-back)
         # 모은 소개글을 저장소에 영구 보존 → 며칠에 걸쳐 전부 채워짐.

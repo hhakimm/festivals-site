@@ -19,7 +19,7 @@ const OVERVIEW_FILE = join(DATA_DIR, 'overviews.json');
 
 const KEY = process.env.TOUR_API_KEY || process.env.TOURAPI_KEY || '';
 const BASE = 'https://apis.data.go.kr/B551011/KorService2/detailCommon2';
-const LIMIT = Number(process.env.OVERVIEW_LIMIT ?? '600');
+const LIMIT = Number(process.env.OVERVIEW_LIMIT ?? '900');
 const MAX_LEN = 800;
 
 function stripHtml(s: string): string {

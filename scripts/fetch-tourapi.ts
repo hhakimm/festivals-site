@@ -37,7 +37,7 @@ const MAX_FESTIVAL_DURATION_DAYS = 30;
 // (API 일일 호출 한도가 빡빡한 개발용 키라면 env로 낮추세요. 0이면 보강 비활성)
 // 갤러리(별도 quota)가 이미지 대부분을 채우므로 detailImage2는 소량만 →
 // KorService2 하루 한도를 소개글(detailCommon2) 수집에 양보.
-const IMAGE_ENRICH_LIMIT = Number(process.env.IMAGE_ENRICH_LIMIT ?? '200');
+const IMAGE_ENRICH_LIMIT = Number(process.env.IMAGE_ENRICH_LIMIT ?? '100');
 
 // 관광사진(포토코리아) 갤러리 — 전체 카탈로그를 받아 제목/키워드 매칭으로 빈 이미지 채움.
 // galleryList1: 제목으로 그룹화된 사진 목록(galWebImageUrl·galTitle·galPhotographyLocation 등).
