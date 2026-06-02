@@ -722,13 +722,43 @@ export function getRarity(personaId: PersonaId): RarityInfo {
 // 캐릭터 — 페르소나별 동물 마스코트(일러스트) + 캐릭터명. 공유·바이럴용.
 // 이미지: public/char-{id}.png
 // ─────────────────────────────────────────────────────────────
-export const PERSONA_CHARACTER: Record<PersonaId, { animal: string; name: Record<Lang, string> }> = {
-  naturalist: { animal: '🦌', name: { ko: '숲멍 마스터 사슴', en: 'Forest Healer Deer', ja: '森の癒しジカ', zh: '森林治愈鹿' } },
-  cultural:   { animal: '🦉', name: { ko: '천년 지식 부엉이', en: 'Wise Scholar Owl', ja: '知恵のフクロウ', zh: '千年学者猫头鹰' } },
-  resort:     { animal: '🦥', name: { ko: '프로 휴식러 나무늘보', en: 'Pro Chiller Sloth', ja: 'のんびり達人ナマケモノ', zh: '度假高手树懒' } },
-  adventurer: { animal: '🐒', name: { ko: '아드레날린 원숭이', en: 'Adrenaline Monkey', ja: 'アドレナリン猿', zh: '肾上腺素猴子' } },
-  family:     { animal: '🐻', name: { ko: '정 많은 곰', en: 'Caring Bear', ja: '情に厚いクマ', zh: '暖心熊' } },
-  urbanite:   { animal: '🦊', name: { ko: '핫플 헌터 여우', en: 'Hot-spot Hunter Fox', ja: 'ホットスポット狐', zh: '网红地猎手狐狸' } },
+export interface PersonaCharacter {
+  animal: string;
+  name: Record<Lang, string>;
+  strength: Record<Lang, string>; // 👍 여행 천재 포인트
+  caution: Record<Lang, string>;  // 👀 이런 건 조심
+}
+export const PERSONA_CHARACTER: Record<PersonaId, PersonaCharacter> = {
+  naturalist: {
+    animal: '🦌', name: { ko: '숲멍 마스터 사슴', en: 'Forest Healer Deer', ja: '森の癒しジカ', zh: '森林治愈鹿' },
+    strength: { ko: '어디서든 평온을 찾는 힐링 능력자', en: 'Finds calm anywhere — a natural healer', ja: 'どこでも平穏を見つける癒し系', zh: '随处都能找到宁静的治愈系' },
+    caution: { ko: '가끔 일행을 산속에 너무 오래 끌고 다녀요', en: 'May drag friends deep into nature a bit too long', ja: '仲間を山奥に長く連れ回しがち', zh: '有时把同伴在山里带太久' },
+  },
+  cultural: {
+    animal: '🦉', name: { ko: '천년 지식 부엉이', en: 'Wise Scholar Owl', ja: '知恵のフクロウ', zh: '千年学者猫头鹰' },
+    strength: { ko: '걸어다니는 도슨트, 여행을 깊게 만듦', en: 'A walking docent — adds depth to any trip', ja: '歩く解説員、旅を深くする', zh: '行走的讲解员，让旅行更有深度' },
+    caution: { ko: '설명이 길어져 일행이 졸 수 있어요', en: 'Explanations can run long…', ja: '解説が長くて仲間が眠くなるかも', zh: '讲解太长同伴会犯困' },
+  },
+  resort: {
+    animal: '🦥', name: { ko: '프로 휴식러 나무늘보', en: 'Pro Chiller Sloth', ja: 'のんびり達人ナマケモノ', zh: '度假高手树懒' },
+    strength: { ko: '쉴 때 제대로 쉬는 완벽한 휴식러', en: 'Knows how to truly rest', ja: '休む時はしっかり休む達人', zh: '该休息时彻底放松' },
+    caution: { ko: '너무 안 움직여서 일정이 텅 빌 수 있어요', en: 'So chill the itinerary may stay empty', ja: '動かなさすぎて予定が空くことも', zh: '太不动，行程可能空荡荡' },
+  },
+  adventurer: {
+    animal: '🐒', name: { ko: '아드레날린 원숭이', en: 'Adrenaline Monkey', ja: 'アドレナリン猿', zh: '肾上腺素猴子' },
+    strength: { ko: '겁 없이 도전하는 분위기 메이커', en: 'Fearless mood-maker, tries anything', ja: '怖いもの知らずのムードメーカー', zh: '无所畏惧的气氛担当' },
+    caution: { ko: '체력 약한 일행은 따라가다 지쳐요', en: 'Less-energetic friends may burn out', ja: '体力のない仲間は疲れがち', zh: '体力弱的同伴会跟到累瘫' },
+  },
+  family: {
+    animal: '🐻', name: { ko: '정 많은 곰', en: 'Caring Bear', ja: '情に厚いクマ', zh: '暖心熊' },
+    strength: { ko: '모두를 챙기는 든든한 총무', en: 'The dependable planner who cares for all', ja: '皆を気遣う頼れる幹事', zh: '照顾所有人的可靠组织者' },
+    caution: { ko: '남 챙기다 정작 본인은 못 즐길 때가', en: 'Cares for others but may forget to enjoy', ja: '人の世話で自分が楽しめないことも', zh: '顾着别人，自己反而没玩好' },
+  },
+  urbanite: {
+    animal: '🦊', name: { ko: '핫플 헌터 여우', en: 'Hot-spot Hunter Fox', ja: 'ホットスポット狐', zh: '网红地猎手狐狸' },
+    strength: { ko: '핫플·맛집 정보력 만렙, 트렌드 리더', en: 'Max-level hot-spot intel, trend leader', ja: '人気店情報力MAX、トレンドリーダー', zh: '网红店情报满级，潮流引领者' },
+    caution: { ko: '쉴 틈 없이 돌아다녀 일행이 방전돼요', en: 'Non-stop pace can drain the group', ja: '休みなく動いて仲間が電池切れに', zh: '马不停蹄，同伴会电量耗尽' },
+  },
 };
 
 /** 캐릭터 이미지 경로 (base는 호출부에서 붙임) */

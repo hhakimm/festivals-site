@@ -6,7 +6,7 @@
  *   2) 한 줄 캐릭터 요약 — 공감·캡처 공유 유도
  *   3) 여행 궁합 — 찰떡궁합 / 상극 (친구 태그·연쇄 테스트 유도)
  */
-import { PERSONAS, quizT, getRarity, type Persona } from '@/lib/quiz';
+import { PERSONAS, PERSONA_CHARACTER, quizT, getRarity, type Persona } from '@/lib/quiz';
 import type { Lang } from '@/lib/i18n';
 
 interface Props {
@@ -19,6 +19,7 @@ const { persona, lang, base } = Astro.props;
 const rarity = getRarity(persona.id);
 const compat = PERSONAS[persona.compatible];
 const clash = PERSONAS[persona.clash];
+const char = PERSONA_CHARACTER[persona.id];
 
 // 페르소나 결과 페이지 링크 (로케일 인지)
 const resultHref = (id: string) =>
@@ -37,6 +38,18 @@ const resultHref = (id: string) =>
   <section class="pe-archetype">
     <h2 class="pe-h">{quizT('archetypeHeading', lang)}</h2>
     <p class="pe-archetype-line">“{persona.archetype[lang]}”</p>
+  </section>
+
+  {/* 2.5) 성격 — 장점 / 주의점 */}
+  <section class="pe-sc">
+    <div class="pe-sc-item pe-sc-good">
+      <span class="pe-sc-emoji" aria-hidden="true">👍</span>
+      <span class="pe-sc-text">{char.strength[lang]}</span>
+    </div>
+    <div class="pe-sc-item pe-sc-bad">
+      <span class="pe-sc-emoji" aria-hidden="true">👀</span>
+      <span class="pe-sc-text">{char.caution[lang]}</span>
+    </div>
   </section>
 
   {/* 3) 여행 궁합 */}
@@ -93,6 +106,14 @@ const resultHref = (id: string) =>
     font-size: 1.05rem; font-weight: 600; color: #171717;
     line-height: 1.5; text-align: center;
   }
+
+  /* 성격 — 장점/주의점 */
+  .pe-sc { display: flex; flex-direction: column; gap: 8px; margin: 0 0 24px; }
+  .pe-sc-item { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; font-size: 0.92rem; line-height: 1.45; }
+  .pe-sc-emoji { font-size: 1.15rem; flex-shrink: 0; }
+  .pe-sc-good { background: #f0fdf4; color: #15803d; }
+  .pe-sc-bad { background: #fff7ed; color: #c2410c; }
+  .pe-sc-text { color: #374151; }
 
   /* 여행 궁합 */
   .pe-compat { margin: 0 0 8px; }
