@@ -217,7 +217,7 @@ const siteSchema = {
           <a href={lang === 'ko' ? `${base}/privacy/` : `${base}/${lang}/privacy/`}>{tr('navPrivacy', lang)}</a>
           <a href={lang === 'ko' ? `${base}/terms/` : `${base}/${lang}/terms/`}>{tr('navTerms', lang)}</a>
           <a href="https://github.com/hhakimm/festivals-site" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://buymeacoffee.com/hhakimm" target="_blank" rel="noopener nofollow" class="footer-coffee">☕ {tr('supportCoffee', lang)}</a>
+          {/* 후원 버튼: 유효한 후원 계정 생기면 다시 추가 (이전 buymeacoffee.com/hhakimm 404) */}
         </nav>
         <p>
           자료 © <a href="https://api.visitkorea.or.kr/" rel="noopener">한국관광공사 TourAPI</a> ·
