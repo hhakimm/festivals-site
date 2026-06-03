@@ -54516,28 +54516,6 @@
     "updatedAt": "20260312100433"
   },
   {
-    "id": "2460289",
-    "type": "attraction",
-    "slug": "한국생명공학연구원-2460289",
-    "title": "한국생명공학연구원",
-    "address": "대전광역시 유성구 과학로 125",
-    "areacode": "3",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "체험",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/68/3512668_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/68/3512668_image3_1.jpg",
-    "lat": 36.3771144392989,
-    "lng": 127.359473406621,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20260312100350"
-  },
-  {
     "id": "3076160",
     "type": "attraction",
     "slug": "우장산공원-3076160",
@@ -57898,28 +57876,6 @@
     "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/86/3515186_image3_1.jpg",
     "lat": 35.8686,
     "lng": 128.6016,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20260312090840"
-  },
-  {
-    "id": "704151",
-    "type": "attraction",
-    "slug": "경상북도-산림환경연구원-704151",
-    "title": "경상북도 산림환경연구원",
-    "address": "경상북도 경주시 통일로 367 (배반동)",
-    "areacode": "35",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "자연",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/69/3510669_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/69/3510669_image3_1.jpg",
-    "lat": 35.8118,
-    "lng": 129.2391,
     "tel": null,
     "startDate": null,
     "endDate": null,
@@ -74404,28 +74360,6 @@
     "updatedAt": "20260305095851"
   },
   {
-    "id": "2460287",
-    "type": "attraction",
-    "slug": "한국기계연구원-2460287",
-    "title": "한국기계연구원",
-    "address": "대전광역시 유성구 가정북로 156 (장동)",
-    "areacode": "3",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "체험",
-    "image": null,
-    "imageThumb": null,
-    "lat": 36.396582782929386,
-    "lng": 127.35648613949228,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20260305095851"
-  },
-  {
     "id": "2569512",
     "type": "attraction",
     "slug": "조경철천문대-2569512",
@@ -78186,28 +78120,6 @@
     "startDate": null,
     "endDate": null,
     "updatedAt": "20260227141239"
-  },
-  {
-    "id": "2554350",
-    "type": "attraction",
-    "slug": "한국기초과학지원연구원오창-2554350",
-    "title": "한국기초과학지원연구원(오창)",
-    "address": "충청북도 청주시 청원구 오창읍 연구단지로 162",
-    "areacode": "33",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "체험",
-    "image": null,
-    "imageThumb": null,
-    "lat": 36.7192107517884,
-    "lng": 127.436634319594,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20260227141148"
   },
   {
     "id": "3101682",
@@ -86697,28 +86609,6 @@
     "lat": 35.4854274097272,
     "lng": 126.925069049364,
     "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20260211081009"
-  },
-  {
-    "id": "1865944",
-    "type": "attraction",
-    "slug": "한국핵융합에너지연구원-1865944",
-    "title": "한국핵융합에너지연구원",
-    "address": "대전광역시 유성구 과학로 169-148 (어은동)",
-    "areacode": "3",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "체험",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/73/2431973_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/73/2431973_image3_1.jpg",
-    "lat": 36.373012058476,
-    "lng": 127.354104588797,
-    "tel": "042-879-6216",
     "startDate": null,
     "endDate": null,
     "updatedAt": "20260211081009"
@@ -124960,28 +124850,6 @@
     "updatedAt": "20251120094805"
   },
   {
-    "id": "2768883",
-    "type": "attraction",
-    "slug": "전라남도-산림연구원-2768883",
-    "title": "전라남도 산림연구원",
-    "address": "전라남도 나주시 산포면 다도로 7",
-    "areacode": "38",
-    "category": {
-      "cat1": "A01",
-      "cat2": "A0101",
-      "cat3": "A01010500"
-    },
-    "theme": "자연",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/11/3569911_image2_1.jpg",
-    "imageThumb": "http://tong.visitkorea.or.kr/cms/resource/11/3569911_image3_1.jpg",
-    "lat": 35.0065224945,
-    "lng": 126.8256637018,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20251120093954"
-  },
-  {
     "id": "802358",
     "type": "attraction",
     "slug": "아산-대통령마을농촌전통테마-802358",
@@ -144582,28 +144450,6 @@
     "startDate": null,
     "endDate": null,
     "updatedAt": "20251029092152"
-  },
-  {
-    "id": "2469053",
-    "type": "attraction",
-    "slug": "한국한의약진흥원-2469053",
-    "title": "한국한의약진흥원",
-    "address": "경상북도 경산시 화랑로 94 (갑제동)",
-    "areacode": "35",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0204",
-      "cat3": "A02040800"
-    },
-    "theme": "체험",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/92/3404992_image2_1.jpg",
-    "imageThumb": "http://tong.visitkorea.or.kr/cms/resource/92/3404992_image3_1.jpg",
-    "lat": 35.8231340155,
-    "lng": 128.7669933276,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20251029091956"
   },
   {
     "id": "250313",
@@ -206272,28 +206118,6 @@
     "updatedAt": "20250701110706"
   },
   {
-    "id": "2461725",
-    "type": "attraction",
-    "slug": "서울교통공사-지축차량사업소-2461725",
-    "title": "서울교통공사 지축차량사업소",
-    "address": "경기도 고양시 덕양구 삼송로 300",
-    "areacode": "31",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0204",
-      "cat3": "A02040800"
-    },
-    "theme": "체험",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/44/3501444_image2_1.jpg",
-    "imageThumb": "http://tong.visitkorea.or.kr/cms/resource/44/3501444_image3_1.jpg",
-    "lat": 37.6496045082,
-    "lng": 126.9121524968,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20250630172510"
-  },
-  {
     "id": "3057780",
     "type": "attraction",
     "slug": "오학체육공원-3057780",
@@ -249590,50 +249414,6 @@
     "updatedAt": "20250318192819"
   },
   {
-    "id": "2555938",
-    "type": "attraction",
-    "slug": "서울교통공사-모란차량사업소-2555938",
-    "title": "서울교통공사 모란차량사업소",
-    "address": "경기도 성남시 중원구 여수대로 182 (여수동)",
-    "areacode": "31",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0204",
-      "cat3": "A02041000"
-    },
-    "theme": "체험",
-    "image": null,
-    "imageThumb": null,
-    "lat": 37.4203682524,
-    "lng": 127.1227842502,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20250318192815"
-  },
-  {
-    "id": "2554065",
-    "type": "attraction",
-    "slug": "서울교통공사-고덕차량사업소-2554065",
-    "title": "서울교통공사 고덕차량사업소",
-    "address": "서울특별시 강동구 아리수로87길 32 (고덕동)",
-    "areacode": "1",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0204",
-      "cat3": "A02041000"
-    },
-    "theme": "체험",
-    "image": null,
-    "imageThumb": null,
-    "lat": 37.5646551683,
-    "lng": 127.1717395873,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20250318192809"
-  },
-  {
     "id": "2753660",
     "type": "attraction",
     "slug": "음포해수욕장-2753660",
@@ -256606,28 +256386,6 @@
     "startDate": null,
     "endDate": null,
     "updatedAt": "20250317133751"
-  },
-  {
-    "id": "2457312",
-    "type": "attraction",
-    "slug": "대구경북디자인진흥원-2457312",
-    "title": "대구경북디자인진흥원",
-    "address": "대구광역시 동구 동대구로 461 (신천동)",
-    "areacode": "4",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0204",
-      "cat3": "A02040800"
-    },
-    "theme": "체험",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/36/3348336_image2_1.jpg",
-    "imageThumb": "http://tong.visitkorea.or.kr/cms/resource/36/3348336_image3_1.jpg",
-    "lat": 35.8714286996,
-    "lng": 128.6248600431,
-    "tel": null,
-    "startDate": null,
-    "endDate": null,
-    "updatedAt": "20250317133523"
   },
   {
     "id": "1626622",
