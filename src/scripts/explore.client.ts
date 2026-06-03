@@ -201,7 +201,7 @@ function showToast(msg: string) {
 const BASE = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 
 const TAG_LABELS: Record<Lang, { bf: string; pet: string }> = {
-  ko: { bf: '♿ 무장애', pet: '🐾 반려동물' },
+  ko: { bf: '♿ 휠체어·유모차', pet: '🐾 반려동물' },
   en: { bf: '♿ Accessible', pet: '🐾 Pet OK' },
   ja: { bf: '♿ バリアフリー', pet: '🐾 ペット可' },
   zh: { bf: '♿ 无障碍', pet: '🐾 宠物友好' },
