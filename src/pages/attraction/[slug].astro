@@ -5,6 +5,7 @@ import { autoDescribe, nameSuffix } from '@/lib/describe';
 import { getOverview } from '@/lib/overview';
 import WeatherWidget from '@/components/WeatherWidget.astro';
 import RelatedItems from '@/components/RelatedItems.astro';
+import NearbyItems from '@/components/NearbyItems.astro';
 import AdSlot from '@/components/AdSlot.astro';
 import { attractions, AREA_CODE } from '@/lib/data';
 import { tr } from '@/lib/i18n';
@@ -93,6 +94,7 @@ const jsonLd = [
     {item.lat && item.lng && <WeatherWidget lat={item.lat} lng={item.lng} lang={lang} />}
     <AdSlot lang={lang} />
     <AffiliateButtons item={item} lang={lang} />
+    <NearbyItems item={item} lang={lang} base={base} />
     <RelatedItems item={item} lang={lang} base={base} />
   </article>
 </Base>

@@ -8,9 +8,11 @@ interface Props {
   item: Item;
   lang: Lang;
   base: string;
+  /** 선택: 카드 이미지 좌상단 뱃지(예: 가까운 명소의 거리 "1.2km") */
+  badge?: string;
 }
 
-const { item, lang, base } = Astro.props;
+const { item, lang, base, badge } = Astro.props;
 const prefix = lang === 'ko' ? '' : `/${lang}`;
 const href = `${base}${prefix}/${item.type}/${item.slug}/`;
 const region = AREA_CODE[item.areacode]?.[lang] || '';
@@ -55,6 +57,7 @@ const phEmoji = phEmojiPool[phHash % phEmojiPool.length];
         <span class="card-image-placeholder-region">{region}</span>
       </div>
     )}
+    {badge && <span class="card-badge">{badge}</span>}
   </div>
   <div class="card-body">
     <span class="card-region">{region}</span>
@@ -71,3 +74,16 @@ const phEmoji = phEmojiPool[phHash % phEmojiPool.length];
     <p class="card-addr">{lang === 'ko' ? item.address : (hasLocalized(item.id, lang as 'en'|'ja'|'zh') ? localizedAddress(item.id, item.address, lang) : shortAddress(item, lang))}</p>
   </div>
 </a>
+
+<style>
+  /* 가까운 명소 거리 뱃지 (서버 렌더 — 스코프 CSS 적용됨) */
+  .card-image { position: relative; }
+  .card-badge {
+    position: absolute; top: 8px; left: 8px;
+    background: rgba(23, 23, 23, 0.78); color: #fff;
+    font-size: 0.72rem; font-weight: 700; line-height: 1;
+    padding: 5px 9px; border-radius: 999px;
+    backdrop-filter: blur(2px); letter-spacing: -0.01em;
+    font-feature-settings: "tnum";
+  }
+</style>

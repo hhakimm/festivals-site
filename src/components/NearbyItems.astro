@@ -1,0 +1,74 @@
+---
+/**
+ * "가까운 명소" — 현재 detail 항목과 지리적으로 가장 가까운 항목 4개(거리 표시).
+ * 빌드 타임에 결정 (정적 SEO 친화). '비슷한 명소'(테마 기준) 바로 위에 배치해
+ * "근처에 뭐가 있지?"를 즉시 보여줌 → 체류·내부링크 ↑.
+ *
+ * 성능: 13k 항목 전체에 trig를 돌리면 느리므로, 먼저 bounding-box(±~50km)로
+ *      싼 비교 필터 → 살아남은 후보에만 Haversine 적용 후 거리순 4개.
+ */
+import type { Lang } from '@/lib/i18n';
+import type { Item } from '@/lib/data';
+import { all as allItems } from '@/lib/data';
+import ItemCard from './ItemCard.astro';
+
+interface Props { item: Item; lang: Lang; base: string; }
+const { item, lang, base } = Astro.props;
+
+function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6371;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+let picks: Array<{ it: Item; d: number }> = [];
+if (item.lat != null && item.lng != null) {
+  const lat0 = item.lat;
+  const lng0 = item.lng;
+  const DLAT = 0.5; // ≈ 55km
+  const DLNG = 0.6; // 위도 36°에서 ≈ 54km
+  const cands = allItems.filter(
+    (it) =>
+      it.id !== item.id &&
+      it.image &&
+      it.lat != null &&
+      it.lng != null &&
+      Math.abs(it.lat - lat0) <= DLAT &&
+      Math.abs(it.lng - lng0) <= DLNG,
+  );
+  picks = cands
+    .map((it) => ({ it, d: haversineKm(lat0, lng0, it.lat as number, it.lng as number) }))
+    .sort((a, b) => a.d - b.d)
+    .slice(0, 4);
+}
+
+function fmtDist(km: number): string {
+  if (km < 1) return `${Math.round(km * 1000)}m`;
+  if (km < 10) return `${km.toFixed(1)}km`;
+  return `${Math.round(km)}km`;
+}
+
+const L = {
+  title: { ko: '📍 가까운 명소', en: '📍 Nearby spots', ja: '📍 近くのスポット', zh: '📍 附近景点' },
+} as const;
+---
+
+{picks.length > 0 && (
+  <section class="related-items">
+    <h2 class="related-h">{L.title[lang]}</h2>
+    <div class="grid related-grid">
+      {picks.map(({ it, d }) => <ItemCard item={it} lang={lang} base={base} badge={fmtDist(d)} />)}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-items { margin: 32px 0 24px; }
+  .related-h { font-size: 1.15rem; margin: 0 0 14px; font-weight: 700; letter-spacing: -0.015em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+</style>
