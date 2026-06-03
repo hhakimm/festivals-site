@@ -1,42 +1,89 @@
 ---
 /**
- * PopularRegions — 홈 "📊 이번 달 인기 여행지" 위젯.
- * 12개월 인기 지역을 빌드 때 미리 계산해 임베드 → 클라이언트가 현재 월을 골라 칩 렌더.
- * 통계 없으면 아무것도 렌더하지 않음.
+ * PopularRegions — 홈 "🔥 지금 가기 좋은 곳" 위젯.
+ *
+ * 단순 순위 텍스트가 "왜 여기?"를 못 보여줘서, 다음을 카드로 제시:
+ *   1) 순위 근거 — 한국관광공사 통신 빅데이터(외지인·외국인 방문)의 월별 계절성. (펼침 설명 포함)
+ *   2) 왜 지금? — 그 달의 방문 집중도(성수기/느는 시기) + 이번 달 축제 수.
+ *   3) 무엇이 인기? — 지역 한 줄 소개 + 대표 명소(편집 큐레이션).
+ *
+ * 12개월 데이터를 빌드 때 미리 계산해 임베드 → 클라이언트가 현재 월을 골라 렌더.
+ * 통계(region-stats.json) 없으면 렌더 안 함.
  */
-import { hasStats, getMonthlyPopular } from '@/lib/stats';
-import { AREA_CODE } from '@/lib/data';
+import { hasStats, getPopularRegions, seasonInfo, getRegionGuide } from '@/lib/stats';
+import { AREA_CODE, festivals } from '@/lib/data';
 import type { Lang } from '@/lib/i18n';
 
-interface Props {
-  lang: Lang;
-  base: string;
-}
+interface Props { lang: Lang; base: string; }
 const { lang, base } = Astro.props;
 
 const show = hasStats();
-const monthly = show ? getMonthlyPopular(5) : {};
 
-// 클라이언트로 넘길 지역 메타(이름 + 지역페이지 링크)
-const regionMeta: Record<string, { name: string; href: string }> = {};
+// 축제가 걸쳐 있는 월(1~12) 집합
+function festMonths(sd: string | null, ed: string | null): number[] {
+  if (!sd || sd.length < 6) return [];
+  const sM = parseInt(sd.slice(4, 6), 10);
+  let eM = ed && ed.length >= 6 ? parseInt(ed.slice(4, 6), 10) : sM;
+  if (!(sM >= 1 && sM <= 12)) return [];
+  if (!(eM >= 1 && eM <= 12)) eM = sM;
+  const out: number[] = [];
+  let m = sM;
+  for (let i = 0; i < 12; i++) { out.push(m); if (m === eM) break; m = m === 12 ? 1 : m + 1; }
+  return out;
+}
+
+// 지역×월 축제 수
+const festByMonth: Record<string, number[]> = {};
 if (show) {
-  const codes = new Set(Object.values(monthly).flat());
-  for (const code of codes) {
-    regionMeta[code] = {
-      name: AREA_CODE[code]?.[lang] ?? code,
-      href: lang === 'ko' ? `${base}/attractions/region/${code}/` : `${base}/${lang}/attractions/region/${code}/`,
-    };
+  for (const f of festivals) {
+    if (!f.areacode) continue;
+    const arr = (festByMonth[f.areacode] ??= new Array(12).fill(0));
+    for (const m of festMonths(f.startDate, f.endDate)) arr[m - 1] += 1;
   }
+}
+
+// 월별 Top5 행 + 사용된 지역 메타
+const byMonth: Record<number, Array<{ code: string; idx: number; tier: string; fest: number }>> = {};
+const used = new Set<string>();
+if (show) {
+  for (let m = 1; m <= 12; m++) {
+    byMonth[m] = getPopularRegions(m, 5).map((r) => {
+      used.add(r.areacode);
+      const s = seasonInfo(r.stat, m);
+      return { code: r.areacode, idx: s.idx, tier: s.tier, fest: festByMonth[r.areacode]?.[m - 1] ?? 0 };
+    });
+  }
+}
+
+const regions: Record<string, { name: string; href: string; tagline: string; spots: string[] }> = {};
+for (const code of used) {
+  const g = getRegionGuide(code);
+  regions[code] = {
+    name: AREA_CODE[code]?.[lang] ?? code,
+    href: lang === 'ko' ? `${base}/attractions/region/${code}/` : `${base}/${lang}/attractions/region/${code}/`,
+    tagline: g?.tagline[lang] ?? '',
+    spots: g?.spots ?? [],
+  };
 }
 
 const T = {
   heading: { ko: '🔥 지금 가기 좋은 곳', en: '🔥 Best places to go now', ja: '🔥 今が旬の旅行先', zh: '🔥 当下最佳去处' },
-  sub: {
-    ko: '이번 달이 제철인 지역 · 통신 빅데이터(한국관광공사)',
-    en: 'In-season this month · mobile big-data (KTO)',
-    ja: '今月が旬の地域 · 通信ビッグデータ(韓国観光公社)',
-    zh: '本月正当季 · 通信大数据(韩国旅游公社)',
+  subA: { ko: '월, 한국관광공사 통신 빅데이터 기준', en: ', based on KTO mobile big-data', ja: '月、韓国観光公社の通信ビッグデータ基準', zh: '月，基于韩国旅游公社通信大数据' },
+  methodSummary: { ko: '순위는 어떻게 정했나요?', en: 'How is this ranked?', ja: 'ランキングの基準は?', zh: '排名依据是什么?' },
+  method: {
+    ko: '전국 휴대폰 이동 데이터로 집계한 한국관광공사 관광 빅데이터를 사용해요. 거주민을 뺀 외지인·외국인 방문만 골라 12개월로 나눠 분석하고, “이번 달에 방문이 얼마나 집중되는지(계절성)”를 주 기준으로 순위를 매깁니다. 그래서 인구 많은 도시가 아니라 ‘지금이 제철인 곳’이 위로 올라와요. 대표 명소는 직접 골라 정리했습니다.',
+    en: 'Built on Korea Tourism Organization big-data aggregated from nationwide mobile movement. We use only non-resident (domestic & foreign) visits, split across 12 months, and rank mainly by how concentrated visits are this month (seasonality) — so it surfaces places that are in season now, not just big cities. Highlights are hand-picked.',
+    ja: '全国の携帯移動データから集計した韓国観光公社の観光ビッグデータを使用。住民を除く外地人・外国人の訪問のみを12か月で分析し、「今月どれだけ訪問が集中するか(季節性)」を主基準にランク付けします。だから人口の多い都市ではなく“今が旬の場所”が上位に。見どころは編集で厳選。',
+    zh: '采用基于全国手机移动数据汇总的韩国旅游公社旅游大数据。仅取除居民外的外地及外国游客访问量，按12个月拆分，主要依据“本月访问集中度（季节性）”排名——因此浮现的是当下正当季之地，而非单纯的大城市。看点为人工精选。',
   },
+  why: {
+    peak: { ko: '지금이 성수기', en: 'Peak season now', ja: '今が最盛期', zh: '当下正值旺季' },
+    rising: { ko: '방문 느는 시기', en: 'Visits rising', ja: '訪問が増える時期', zh: '游客渐增' },
+    steady: { ko: '사계절 인기', en: 'Popular year-round', ja: '通年で人気', zh: '四季皆宜' },
+  },
+  idx: { ko: '방문 집중도', en: 'Visit intensity', ja: '訪問集中度', zh: '访问集中度' },
+  fest: { ko: '이번 달 축제', en: 'festivals this month', ja: '今月の祭り', zh: '本月庆典' },
+  spots: { ko: '가볼 만한 곳', en: 'Highlights', ja: '見どころ', zh: '看点' },
 } as const;
 ---
 
@@ -44,13 +91,20 @@ const T = {
   <section class="pr" data-popular-regions aria-label={T.heading[lang]}>
     <div class="pr-head">
       <h2 class="pr-h">{T.heading[lang]}</h2>
-      <span class="pr-sub">{T.sub[lang]}</span>
+      <span class="pr-sub"><span id="pr-month">·</span>{T.subA[lang]}</span>
     </div>
-    <div class="pr-chips" id="pr-chips"></div>
+
+    <details class="pr-method">
+      <summary>{T.methodSummary[lang]}</summary>
+      <p>{T.method[lang]}</p>
+    </details>
+
+    <div class="pr-list" id="pr-list"></div>
+
     <script
       type="application/json"
       id="pr-data"
-      set:html={JSON.stringify({ monthly, regions: regionMeta })}
+      set:html={JSON.stringify({ byMonth, regions, t: { why: { peak: T.why.peak[lang], rising: T.why.rising[lang], steady: T.why.steady[lang] }, idx: T.idx[lang], fest: T.fest[lang], spots: T.spots[lang] } })}
     ></script>
   </section>
 )}
@@ -58,47 +112,109 @@ const T = {
 <script is:inline>
   (function () {
     var el = document.getElementById('pr-data');
-    var box = document.getElementById('pr-chips');
-    if (!el || !box) return;
-    try {
-      var data = JSON.parse(el.textContent || '{}');
-      var month = new Date().getMonth() + 1; // 1~12
-      var codes = (data.monthly && data.monthly[month]) || [];
-      var html = '';
-      for (var i = 0; i < codes.length; i++) {
-        var r = data.regions[codes[i]];
-        if (!r) continue;
-        var rank = i + 1;
-        html +=
-          '<a class="pr-chip" href="' + r.href + '">' +
-          '<span class="pr-rank">' + rank + '</span>' + r.name +
-          '</a>';
+    var list = document.getElementById('pr-list');
+    if (!el || !list) return;
+    var data;
+    try { data = JSON.parse(el.textContent || '{}'); } catch (e) { return; }
+    var month = new Date().getMonth() + 1;
+    var mEl = document.getElementById('pr-month');
+    if (mEl) mEl.textContent = String(month);
+
+    var rows = (data.byMonth && data.byMonth[month]) || [];
+    var t = data.t || {};
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    var html = '';
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var r = data.regions[row.code];
+      if (!r) continue;
+      var rank = i + 1;
+      var whyLabel = (t.why && t.why[row.tier]) ? t.why[row.tier] : '';
+
+      var meta = '';
+      meta += '<span class="pr-why pr-why--' + row.tier + '">' + esc(whyLabel) + '</span>';
+      meta += '<span class="pr-idx">' + esc(t.idx) + ' ' + row.idx + '<span class="pr-idx-max">/100</span></span>';
+      if (row.fest > 0) meta += '<span class="pr-fest">🎉 ' + esc(t.fest) + ' ' + row.fest + '</span>';
+
+      var spots = '';
+      if (r.spots && r.spots.length) {
+        spots = '<div class="pr-spots"><span class="pr-spots-k">' + esc(t.spots) + '</span> ' +
+          r.spots.slice(0, 4).map(function (s) { return '<span class="pr-spot">' + esc(s) + '</span>'; }).join('') + '</div>';
       }
-      box.innerHTML = html;
-    } catch (e) { /* noop */ }
+
+      html +=
+        '<a class="pr-row' + (rank === 1 ? ' pr-row--top' : '') + '" href="' + r.href + '">' +
+          '<span class="pr-rank">' + rank + '</span>' +
+          '<span class="pr-body">' +
+            '<span class="pr-line1"><span class="pr-name">' + esc(r.name) + '</span>' +
+            (r.tagline ? '<span class="pr-tag">' + esc(r.tagline) + '</span>' : '') + '</span>' +
+            '<span class="pr-meta">' + meta + '</span>' +
+            spots +
+          '</span>' +
+          '<span class="pr-go" aria-hidden="true">›</span>' +
+        '</a>';
+    }
+    list.innerHTML = html;
   })();
 </script>
 
 <style>
-  .pr { margin: 0 0 20px; }
-  .pr-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .pr { margin: 0 0 24px; }
+  .pr-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
   .pr-h { font-size: 1.05rem; margin: 0; font-weight: 800; letter-spacing: -0.015em; }
-  .pr-sub { font-size: 0.72rem; color: #a3a3a3; }
-  .pr-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .pr-chip {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 18px 10px 10px; border-radius: 999px;
-    background: #fff; border: 1.5px solid #e5e5e5;
-    font-size: 1rem; font-weight: 700; color: #171717; text-decoration: none;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  .pr-sub { font-size: 0.74rem; color: #a3a3a3; }
+
+  .pr-method { margin: 0 0 12px; }
+  .pr-method > summary {
+    display: inline-flex; align-items: center; gap: 4px; cursor: pointer; list-style: none;
+    font-size: 0.74rem; color: #2563eb; font-weight: 600; padding: 2px 0;
+  }
+  .pr-method > summary::-webkit-details-marker { display: none; }
+  .pr-method > summary::before { content: 'ⓘ'; font-size: 0.8rem; }
+  .pr-method[open] > summary { color: #737373; }
+  .pr-method > p {
+    margin: 6px 0 0; font-size: 0.78rem; line-height: 1.6; color: #525252;
+    background: #f8fafc; border: 1px solid #eef2f7; border-radius: 10px; padding: 12px 14px;
+  }
+
+  .pr-list { display: flex; flex-direction: column; gap: 8px; }
+
+  /* ⚠ 행은 클라이언트가 innerHTML로 동적 생성 → :global 필수(스코프 CSS 안 붙음) */
+  :global(.pr-row) {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 14px; border-radius: 14px;
+    background: #fff; border: 1px solid #ececec; text-decoration: none; color: inherit;
     transition: border-color 0.15s ease, transform 0.08s ease, box-shadow 0.15s ease;
   }
-  .pr-chip:hover { border-color: #facc15; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-  .pr-rank {
+  :global(.pr-row:hover) { border-color: #facc15; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+  :global(.pr-row--top) { background: #fffdf5; border-color: #facc15; }
+
+  :global(.pr-rank) {
+    flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%;
     display: inline-flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px; border-radius: 50%;
-    background: #171717; color: #facc15; font-size: 0.82rem; font-weight: 800;
+    background: #171717; color: #fff; font-size: 0.86rem; font-weight: 800; font-feature-settings: "tnum";
   }
-  .pr-chip:first-child { border-color: #facc15; background: #fffdf5; }
-  .pr-chip:first-child .pr-rank { background: #facc15; color: #171717; }
+  :global(.pr-row--top .pr-rank) { background: #facc15; color: #171717; }
+
+  :global(.pr-body) { flex: 1 1 auto; min-width: 0; }
+  :global(.pr-line1) { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  :global(.pr-name) { font-size: 1.05rem; font-weight: 800; color: #171717; letter-spacing: -0.01em; }
+  :global(.pr-tag) { font-size: 0.8rem; color: #737373; }
+
+  :global(.pr-meta) { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 7px; }
+  :global(.pr-why) { font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+  :global(.pr-why--peak) { background: #fee2e2; color: #b91c1c; }
+  :global(.pr-why--rising) { background: #fef3c7; color: #b45309; }
+  :global(.pr-why--steady) { background: #e0f2fe; color: #0369a1; }
+  :global(.pr-idx) { font-size: 0.72rem; color: #737373; font-feature-settings: "tnum"; }
+  :global(.pr-idx-max) { color: #c4c4c4; }
+  :global(.pr-fest) { font-size: 0.72rem; color: #be185d; font-weight: 600; }
+
+  :global(.pr-spots) { margin-top: 8px; font-size: 0.78rem; color: #404040; line-height: 1.5; }
+  :global(.pr-spots-k) { color: #a3a3a3; font-weight: 600; margin-right: 2px; }
+  :global(.pr-spot) { color: #171717; font-weight: 600; }
+  :global(.pr-spot:not(:last-child)::after) { content: '·'; color: #d4d4d4; margin: 0 4px; font-weight: 400; }
+
+  :global(.pr-go) { flex: 0 0 auto; align-self: center; color: #cbcbcb; font-size: 1.4rem; font-weight: 700; }
+  :global(.pr-row:hover .pr-go) { color: #facc15; }
 </style>
