@@ -11,6 +11,7 @@ import {
   getAllDnaRecommendations, dnaT,
 } from '@/lib/quiz-dna';
 import { tr } from '@/lib/i18n';
+import OtherTests from "@/components/OtherTests.astro";
 
 export function getStaticPaths() {
   return DNA_CODES.map((code) => ({ params: { code }, props: { code } }));
@@ -105,6 +106,7 @@ const radarPts = `0,${-top} ${right},0 0,${bottom} ${-left},0`;
 
     <AdSlot lang={lang} layout="rectangle" />
 
+    <OtherTests current="dna" lang={lang} base={base} />
     <div class="psn-cta">
       <a href={`${base}/ja/quiz/dna/`} class="psn-btn psn-btn-primary">↻ {dnaT('retake', lang)}</a>
       <a href={`${base}/ja/quiz/`} class="psn-btn psn-btn-secondary">🎒 {tr('navQuizShort', lang)}</a>

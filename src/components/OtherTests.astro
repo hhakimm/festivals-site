@@ -1,0 +1,74 @@
+---
+/**
+ * OtherTests — 테스트 결과 하단의 "다른 테스트도 해보세요" 교차 이동 카드.
+ * 현재 테스트(current)는 제외하고 나머지를 카드로 노출 → 연쇄 테스트(바이럴) 유도.
+ * 빌런 테스트는 한국어 전용이므로 ko에서만 노출.
+ * (결과 화면은 서버 렌더라 이 컴포넌트의 스코프 CSS가 정상 적용됨)
+ */
+import type { Lang } from '@/lib/i18n';
+
+interface Props { lang: Lang; base: string; current: 'persona' | 'dna' | 'villain'; }
+const { lang, base, current } = Astro.props;
+const p = lang === 'ko' ? '' : `/${lang}`;
+
+type LS = Record<Lang, string>;
+interface TestDef { id: 'persona' | 'dna' | 'villain'; emoji: string; href: string; title: LS; desc: LS; koOnly?: boolean; }
+
+const ALL: TestDef[] = [
+  {
+    id: 'persona', emoji: '🦊', href: `${base}${p}/quiz/`,
+    title: { ko: '여행 성향 테스트', en: 'Travel Personality', ja: '旅行性向テスト', zh: '旅行性格测试' },
+    desc: { ko: '6가지 동물 캐릭터로 보는 내 스타일', en: '6 animal characters reveal your style', ja: '6つの動物キャラで分かる旅スタイル', zh: '6种动物角色看你的风格' },
+  },
+  {
+    id: 'dna', emoji: '🧬', href: `${base}${p}/quiz/dna/`,
+    title: { ko: '여행 MBTI', en: 'Travel MBTI', ja: '旅行MBTI', zh: '旅行MBTI' },
+    desc: { ko: '4축 16유형 정밀 분석 · 8문항', en: '4 axes · 16 types · 8 Qs', ja: '4軸16型の精密分析・8問', zh: '4轴16型精准分析·8题' },
+  },
+  {
+    id: 'villain', emoji: '😈', href: `${base}/quiz/villain/`, koOnly: true,
+    title: { ko: '여행 빌런 테스트', en: 'Travel Villain', ja: '旅行ヴィラン', zh: '旅行反派' },
+    desc: { ko: '같이 여행 가면 당신은? · 7문항 1분', en: '', ja: '', zh: '' },
+  },
+];
+
+const tests = ALL.filter((t) => t.id !== current && (!t.koOnly || lang === 'ko'));
+const heading: LS = { ko: '🎯 다른 테스트도 해보세요', en: '🎯 Try another test', ja: '🎯 他のテストも', zh: '🎯 试试其他测试' };
+---
+
+{tests.length > 0 && (
+  <section class="other-tests">
+    <h2 class="ot-h">{heading[lang]}</h2>
+    <div class="ot-grid">
+      {tests.map((t) => (
+        <a href={t.href} class="ot-card">
+          <span class="ot-emoji" aria-hidden="true">{t.emoji}</span>
+          <span class="ot-body">
+            <span class="ot-title">{t.title[lang]}</span>
+            <span class="ot-desc">{t.desc[lang]}</span>
+          </span>
+          <span class="ot-go" aria-hidden="true">→</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .other-tests { margin: 36px 0 8px; }
+  .ot-h { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.015em; margin: 0 0 12px; text-align: center; }
+  .ot-grid { display: grid; gap: 10px; }
+  .ot-card {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px; border-radius: 14px;
+    background: #fff; border: 1px solid #e5e5e5; text-decoration: none; color: inherit;
+    transition: border-color .15s ease, transform .08s ease, box-shadow .15s ease;
+  }
+  .ot-card:hover { border-color: #facc15; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+  .ot-emoji { font-size: 2rem; line-height: 1; flex: 0 0 auto; }
+  .ot-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .ot-title { font-weight: 800; font-size: 1rem; color: #171717; }
+  .ot-desc { font-size: 0.82rem; color: #737373; }
+  .ot-go { flex: 0 0 auto; color: #cbcbcb; font-size: 1.3rem; font-weight: 700; }
+  .ot-card:hover .ot-go { color: #facc15; }
+</style>

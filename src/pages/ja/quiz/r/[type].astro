@@ -5,6 +5,7 @@ import AdSlot from '@/components/AdSlot.astro';
 import PersonaExtras from '@/components/PersonaExtras.astro';
 import { PERSONAS, PERSONA_IDS, PERSONA_DISTRIBUTION, PERSONA_CHARACTER, characterImg, quizT, getAllRecommendations, type PersonaId } from '@/lib/quiz';
 import { tr } from '@/lib/i18n';
+import OtherTests from "@/components/OtherTests.astro";
 
 export function getStaticPaths() {
   return PERSONA_IDS.map((id) => ({ params: { type: id }, props: { personaId: id } }));
@@ -41,6 +42,7 @@ const description = `${persona.tagline[lang]} — ${persona.description[lang].sl
       <p class="psn-why">{quizT('whyHeading', lang)} — {persona.whyRecommend[lang]}</p>
       <div class="grid">{recommendations.map((item) => <ItemCard item={item} lang={lang} base={base} />)}</div></section>
     <AdSlot lang={lang} layout="rectangle" />
+    <OtherTests current="persona" lang={lang} base={base} />
     <div class="persona-cta-row">
       <a href={`${base}/ja/quiz/`} class="psn-btn psn-btn-primary">{quizT('retake', lang)} ↻</a>
       <a href={`${base}/ja/`} class="psn-btn psn-btn-secondary">{tr('attractions', lang)} →</a>

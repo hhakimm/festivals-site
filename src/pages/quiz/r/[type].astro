@@ -19,6 +19,7 @@ import {
   type PersonaId,
 } from '@/lib/quiz';
 import { tr } from '@/lib/i18n';
+import OtherTests from "@/components/OtherTests.astro";
 
 export function getStaticPaths() {
   return PERSONA_IDS.map((id) => ({ params: { type: id }, props: { personaId: id } }));
@@ -87,9 +88,10 @@ const description = `${persona.tagline[lang]} — ${persona.description[lang].sl
 
     <AdSlot lang={lang} layout="rectangle" />
 
+    <OtherTests current="persona" lang={lang} base={base} />
     <div class="persona-cta-row">
       <a href={`${base}/quiz/`} class="psn-btn psn-btn-primary">{quizT('retake', lang)} ↻</a>
-      <a href={`${base}/`} class="psn-btn psn-btn-secondary">{tr('exploreFooterNote', lang).slice(0, 12) || tr('attractions', lang)} →</a>
+      <a href={`${base}/`} class="psn-btn psn-btn-secondary">{tr('attractions', lang)} →</a>
     </div>
   </section>
 

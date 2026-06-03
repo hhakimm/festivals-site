@@ -7,6 +7,7 @@ import Base from '@/layouts/Base.astro';
 import AdSlot from '@/components/AdSlot.astro';
 import { VILLAINS, VILLAIN_IDS, VILLAIN_LABELS as L, type VillainId } from '@/lib/quiz-villain';
 import { tr } from '@/lib/i18n';
+import OtherTests from "@/components/OtherTests.astro";
 
 export function getStaticPaths() {
   return VILLAIN_IDS.map((id) => ({ params: { type: id }, props: { vid: id } }));
@@ -44,6 +45,7 @@ const description = `${v.tagline} · ${v.crime}`;
 
     <AdSlot lang={lang} layout="horizontal" />
 
+    <OtherTests current="villain" lang={lang} base={base} />
     <div class="vr-cta">
       <a href={`${base}/quiz/villain/`} class="btn vr-btn-primary">나도 빌런 테스트 →</a>
       <a href={`${base}/quiz/`} class="btn vr-btn-secondary">다른 테스트</a>

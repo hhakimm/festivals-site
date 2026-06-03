@@ -7,6 +7,7 @@ import Base from '@/layouts/Base.astro';
 import AdSlot from '@/components/AdSlot.astro';
 import { VILLAIN_QUESTIONS, VILLAINS, VILLAIN_IDS, VILLAIN_LABELS as L } from '@/lib/quiz-villain';
 import { tr } from '@/lib/i18n';
+import OtherTests from "@/components/OtherTests.astro";
 
 const lang = 'ko' as const;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -74,6 +75,7 @@ const desc = L.pageDesc;
           </div>
           <p class="vil-tag-friend">{L.tagFriend}</p>
 
+          <OtherTests current="villain" lang={lang} base={base} />
           <div class="vil-retake">
             <button type="button" class="btn vil-retake-btn">↻ {L.retake}</button>
             <a class="btn vil-other" href={`${base}/quiz/`}>다른 테스트 →</a>
