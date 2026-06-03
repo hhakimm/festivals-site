@@ -25,3 +25,6 @@ node_modules/
 # Logs
 *.log
 npm-debug.log*
+
+# 캐릭터 원본 백업(로컬 전용, dechecker.ts 재실행용)
+public/_char_orig/
