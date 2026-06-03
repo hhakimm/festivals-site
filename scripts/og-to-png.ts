@@ -18,12 +18,12 @@ const PUBLIC_DIR = join(__dirname, '..', 'public');
 
 // 페르소나별 그라데이션 + 캐릭터명(ko) + 유형 — quiz.ts와 일치
 const PERSONA_OG: Record<string, { from: string; to: string; char: string; type: string }> = {
-  naturalist: { from: '#16a34a', to: '#15803d', char: '숲멍 마스터 사슴', type: '🌿 자연주의자' },
-  cultural:   { from: '#92400e', to: '#78350f', char: '천년 지식 부엉이', type: '🏛️ 문화탐험가' },
-  resort:     { from: '#0891b2', to: '#0e7490', char: '프로 휴식러 나무늘보', type: '🏖️ 휴양가' },
-  adventurer: { from: '#dc2626', to: '#b91c1c', char: '아드레날린 원숭이', type: '⛷️ 모험가' },
-  family:     { from: '#facc15', to: '#eab308', char: '정 많은 곰', type: '👨‍👩‍👧 가족여행자' },
-  urbanite:   { from: '#7c3aed', to: '#5b21b6', char: '핫플 헌터 여우', type: '🏙️ 도시탐험가' },
+  naturalist: { from: '#16a34a', to: '#15803d', char: '숲멍 마스터 사슴', type: '자연주의자' },
+  cultural:   { from: '#92400e', to: '#78350f', char: '천년 지식 부엉이', type: '문화탐험가' },
+  resort:     { from: '#0891b2', to: '#0e7490', char: '프로 휴식러 나무늘보', type: '휴양가' },
+  adventurer: { from: '#dc2626', to: '#b91c1c', char: '아드레날린 원숭이', type: '모험가' },
+  family:     { from: '#facc15', to: '#eab308', char: '정 많은 곰', type: '가족여행자' },
+  urbanite:   { from: '#7c3aed', to: '#5b21b6', char: '핫플 헌터 여우', type: '도시탐험가' },
 };
 
 // 여행 빌런 카드 (이모지 기반, 일러스트 없음) — quiz-villain.ts와 일치
@@ -40,22 +40,25 @@ function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-function villainOgSvg(v: { from: string; to: string; emoji: string; name: string; line: string }): string {
+function villainOgSvg(v: { from: string; to: string; name: string; line: string }): string {
   const F = 'Pretendard, system-ui, -apple-system, sans-serif';
+  // 이모지는 CI(resvg+Noto)에서 렌더 불안정 → 한글·도형만 사용한 타이포그래픽 카드.
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${v.from}"/><stop offset="1" stop-color="${v.to}"/></linearGradient>
-    <radialGradient id="glow" cx="0.25" cy="0.5" r="0.6"><stop offset="0" stop-color="#fff" stop-opacity="0.18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.7"><stop offset="0" stop-color="#fff" stop-opacity="0.16"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
-  <text x="300" y="375" font-size="240" text-anchor="middle">${v.emoji}</text>
-  <text x="582" y="210" font-family="${F}" font-size="30" font-weight="700" fill="#fff" opacity="0.85">😈 여행 빌런 테스트</text>
-  <text x="580" y="312" font-family="${F}" font-size="58" font-weight="800" fill="#fff" letter-spacing="-1.5">${esc(v.name)}</text>
-  <text x="582" y="372" font-family="${F}" font-size="30" font-weight="500" fill="#fff" opacity="0.92" font-style="italic">"${esc(v.line)}"</text>
-  <rect x="582" y="452" width="318" height="62" rx="31" fill="#fff"/>
-  <text x="741" y="492" font-family="${F}" font-size="26" font-weight="800" fill="#171717" text-anchor="middle">나도 빌런 찾기 →</text>
-  <text x="584" y="582" font-family="${F}" font-size="24" font-weight="600" fill="#fff" opacity="0.72">한국 가볼 만한 곳 · TravelKorea</text>
+  <circle cx="1080" cy="110" r="260" fill="#fff" opacity="0.06"/>
+  <circle cx="120" cy="560" r="200" fill="#fff" opacity="0.05"/>
+  <text x="600" y="170" font-family="${F}" font-size="60" font-weight="800" fill="#fff" opacity="0.22" text-anchor="middle">VILLAIN</text>
+  <text x="600" y="232" font-family="${F}" font-size="30" font-weight="700" fill="#fff" opacity="0.9" text-anchor="middle">여행 빌런 테스트</text>
+  <text x="600" y="350" font-family="${F}" font-size="86" font-weight="800" fill="#fff" letter-spacing="-2" text-anchor="middle">${esc(v.name)}</text>
+  <text x="600" y="416" font-family="${F}" font-size="32" font-weight="500" fill="#fff" opacity="0.92" font-style="italic" text-anchor="middle">"${esc(v.line)}"</text>
+  <rect x="441" y="480" width="318" height="64" rx="32" fill="#fff"/>
+  <text x="600" y="521" font-family="${F}" font-size="26" font-weight="800" fill="#171717" text-anchor="middle">나도 빌런 찾기 →</text>
+  <text x="600" y="592" font-family="${F}" font-size="24" font-weight="600" fill="#fff" opacity="0.72" text-anchor="middle">한국 가볼 만한 곳 · TravelKorea</text>
 </svg>`;
 }
 
@@ -123,7 +126,7 @@ async function main() {
     }
   }
   try {
-    const png = renderPng(villainOgSvg({ from: '#7c3aed', to: '#4338ca', emoji: '😈', name: '여행 빌런 테스트', line: '같이 여행 가면… 당신은 어떤 빌런?' }));
+    const png = renderPng(villainOgSvg({ from: '#7c3aed', to: '#4338ca', name: '나는 어떤 여행 빌런?', line: '같이 여행 가면… 당신은 어떤 빌런?' }));
     await writeFile(join(PUBLIC_DIR, 'og-villain.png'), png);
     console.log('  ✓ 기본 빌런 카드 og-villain.png');
   } catch { /* noop */ }
