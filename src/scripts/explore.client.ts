@@ -543,7 +543,7 @@ export async function initExplorer(rootEl: HTMLElement) {
   // 데이터 로드
   let allItems: IndexItem[] = [];
   try {
-    const res = await fetch(`${BASE}/index.json`, { cache: 'force-cache' });
+    const res = await fetch(`${BASE}/index.json`, { cache: 'no-cache' });
     if (!res.ok) throw new Error(`index.json HTTP ${res.status}`);
     allItems = await res.json();
   } catch (err) {
@@ -1164,7 +1164,7 @@ export async function initFavoritesPage(rootEl: HTMLElement) {
 
   let allItems: IndexItem[] = [];
   try {
-    const res = await fetch(`${BASE}/index.json`, { cache: 'force-cache' });
+    const res = await fetch(`${BASE}/index.json`, { cache: 'no-cache' });
     if (!res.ok) throw new Error('index.json 로드 실패');
     allItems = await res.json();
   } catch (err) {
