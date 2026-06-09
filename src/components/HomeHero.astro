@@ -1,7 +1,8 @@
 ---
 /**
- * 홈 상단 Hero — 강력한 퀴즈 CTA + 통계.
- * LandingHero보다 작고 즉시 Explorer로 스크롤 유도.
+ * 홈 상단 Hero — "한국의 새벽" 따뜻한 라이트 무드.
+ * 첫인상 + 바이럴 후킹(동물 캐릭터 성향 테스트) + 통계 + Explorer 스크롤 유도.
+ * 경량: 배경은 CSS 그라데이션 + 인라인 SVG(햇살·산 실루엣), 캐릭터는 220px 소형 PNG.
  */
 import type { Lang } from '@/lib/i18n';
 import { tr } from '@/lib/i18n';
@@ -13,120 +14,156 @@ const prefix = lang === 'ko' ? '' : `/${lang}`;
 const allCount = festivals.length + attractions.length;
 
 const L = {
-  quizCta: { ko: '🎒 여행 성향 테스트', en: '🎒 Travel Quiz', ja: '🎒 旅行性向テスト', zh: '🎒 旅行测试' },
-  quizSub: {
-    ko: '6문항으로 알아보는 나만의 여행 스타일',
-    en: 'Your travel style in 6 questions',
-    ja: '6問でわかる旅スタイル',
-    zh: '6道题了解你的旅行风格',
-  },
-  exploreCta: { ko: '↓ 둘러보기', en: '↓ Explore', ja: '↓ 探す', zh: '↓ 浏览' },
+  eyebrow: { ko: '한국 여행, 여기서 시작', en: 'Korea travel starts here', ja: '韓国旅行はここから', zh: '韩国旅行从这里开始' },
+  quizQ: { ko: '나는 어떤 여행 동물일까?', en: 'Which travel animal are you?', ja: 'あなたはどの旅行動物?', zh: '你是哪种旅行动物?' },
+  quizStart: { ko: '성향 테스트 시작', en: 'Start the quiz', ja: 'テストを始める', zh: '开始测试' },
+  exploreCta: { ko: '여행지 둘러보기', en: 'Explore places', ja: '旅行先を見る', zh: '浏览景点' },
 } as const;
 function L_(k: keyof typeof L): string { return L[k][lang]; }
+
+const faces = ['naturalist', 'family', 'urbanite'];
 ---
 
 <section class="home-hero">
+  <div class="hero-sky" aria-hidden="true">
+    <span class="hero-sun"></span>
+    <svg class="hero-mtn" viewBox="0 0 1200 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 240 V150 L160 96 L330 150 L500 70 L680 140 L860 80 L1040 138 L1200 96 V240 Z" fill="#fcd9b0" opacity="0.9"/>
+      <path d="M0 240 V184 L150 142 L320 188 L470 128 L660 182 L830 130 L1010 180 L1200 150 V240 Z" fill="#f7bd85" opacity="0.95"/>
+      <path d="M0 240 V214 L200 186 L420 216 L640 184 L880 214 L1080 190 L1200 210 V240 Z" fill="#ef9f5e"/>
+    </svg>
+  </div>
+
   <div class="home-hero-inner">
-    <h1 class="home-hero-title">{tr('siteName', lang)}</h1>
+    <span class="hero-eyebrow">✦ {L_('eyebrow')}</span>
+    <h1 class="home-hero-title">{tr('siteName', lang)}<span class="hero-ul" aria-hidden="true"></span></h1>
     <p class="home-hero-sub">{tr('siteDesc', lang)}</p>
     <p class="home-hero-stats">
-      <strong>{allCount.toLocaleString(lang)}</strong>
-      <span> · 🎆 {festivals.length.toLocaleString(lang)} {tr('festivals', lang)}</span>
-      <span> · 🗺️ {attractions.length.toLocaleString(lang)} {tr('attractions', lang)}</span>
+      <strong>{allCount.toLocaleString(lang)}</strong>{tr('attractions', lang)} ·
+      🎆 {festivals.length.toLocaleString(lang)} {tr('festivals', lang)}
     </p>
 
-    <div class="home-hero-cta-card">
-      <p class="home-hero-cta-sub">{L_('quizSub')}</p>
-      <a href={`${base}${prefix}/quiz/`} class="home-hero-cta-btn">{L_('quizCta')} →</a>
-    </div>
+    <a href={`${base}${prefix}/quiz/`} class="hero-quiz">
+      <span class="hero-quiz-faces" aria-hidden="true">
+        {faces.map((id) => (
+          <span class="face"><img src={`${base}/char-${id}-sm.png`} alt="" width="44" height="44" loading="eager" /></span>
+        ))}
+      </span>
+      <span class="hero-quiz-body">
+        <span class="hero-quiz-q">{L_('quizQ')}</span>
+        <span class="hero-quiz-cta">{L_('quizStart')} <span class="arr">→</span></span>
+      </span>
+    </a>
 
-    <a href="#explorer" class="home-hero-scroll">{L_('exploreCta')}</a>
+    <a href="#explorer" class="home-hero-scroll">{L_('exploreCta')} ↓</a>
   </div>
 </section>
 
 <style>
   .home-hero {
-    margin: 0 -16px 24px;
-    padding: 56px 24px 48px;
-    background: #171717;
-    color: #fff;
-    text-align: center;
-    border-radius: 0 0 24px 24px;
     position: relative;
+    margin: 0 -16px 28px;
+    padding: 52px 24px 64px;
+    text-align: center;
     overflow: hidden;
+    border-radius: 0 0 28px 28px;
+    background: linear-gradient(180deg, #fff8ee 0%, #ffedd8 48%, #ffe2c6 100%);
   }
-  .home-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(700px 350px at 85% 15%, rgba(250, 204, 21, 0.18), transparent 60%),
-      radial-gradient(500px 250px at 15% 90%, rgba(250, 204, 21, 0.10), transparent 60%);
-    pointer-events: none;
+  /* 하늘 — 햇살 + 산 */
+  .hero-sky { position: absolute; inset: 0; pointer-events: none; }
+  .hero-sun {
+    position: absolute; top: 26px; right: 12%;
+    width: 92px; height: 92px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, #fde68a 0%, #facc15 55%, rgba(250,204,21,0) 72%);
+    box-shadow: 0 0 60px 24px rgba(251, 191, 36, 0.35);
   }
-  .home-hero-inner { position: relative; max-width: 720px; margin: 0 auto; }
+  .hero-mtn { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 150px; display: block; }
+
+  .home-hero-inner { position: relative; max-width: 680px; margin: 0 auto; }
+
+  .hero-eyebrow {
+    display: block; width: fit-content; margin: 0 auto 18px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.01em;
+    color: #b45309;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(180, 83, 9, 0.18);
+    padding: 5px 14px; border-radius: 999px;
+    backdrop-filter: blur(2px);
+    animation: heroRise 0.6s ease both;
+  }
   .home-hero-title {
-    font-size: clamp(1.7rem, 5vw, 2.4rem);
-    margin: 0 0 12px;
-    letter-spacing: -0.025em;
-    font-weight: 800;
-    line-height: 1.2;
-    color: #fff;
+    position: relative; display: inline-block;
+    font-size: clamp(2rem, 6.4vw, 3rem);
+    margin: 0 0 14px;
+    letter-spacing: -0.03em; font-weight: 800; line-height: 1.12;
+    color: #2a1a0e;
+    animation: heroRise 0.6s ease 0.06s both;
+  }
+  .hero-ul {
+    position: absolute; left: -2%; right: -2%; bottom: 4px; height: 0.42em;
+    background: linear-gradient(90deg, rgba(250,204,21,0) 0%, #facc15 12%, #fbbf24 88%, rgba(250,204,21,0) 100%);
+    border-radius: 999px; z-index: -1; opacity: 0.85;
+    transform: rotate(-1.2deg);
   }
   .home-hero-sub {
-    color: #d4d4d4;
-    font-size: clamp(0.92rem, 1.7vw, 1.05rem);
-    margin: 0 0 16px;
-    line-height: 1.5;
+    color: #7c5a3a; font-weight: 500;
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    margin: 0 0 14px; line-height: 1.55;
+    animation: heroRise 0.6s ease 0.12s both;
   }
   .home-hero-stats {
-    color: #a3a3a3;
-    font-size: 0.88rem;
-    margin: 0 0 28px;
-    font-feature-settings: "tnum";
+    color: #9a7a55; font-size: 0.86rem; margin: 0 0 26px;
+    font-feature-settings: "tnum"; animation: heroRise 0.6s ease 0.16s both;
   }
-  .home-hero-stats strong { color: #facc15; font-weight: 700; }
+  .home-hero-stats strong { color: #c2410c; font-weight: 800; margin-right: 2px; }
 
-  .home-hero-cta-card {
-    background: rgba(250, 204, 21, 0.10);
-    border: 1px solid rgba(250, 204, 21, 0.35);
-    border-radius: 16px;
-    padding: 20px 18px;
-    margin: 0 auto 18px;
-    max-width: 480px;
+  /* 바이럴 후킹 — 캐릭터 + 테스트 CTA */
+  .hero-quiz {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: #fffdf8; border: 1px solid #fde4c4;
+    border-radius: 20px; padding: 12px 18px 12px 14px;
+    text-decoration: none; color: inherit;
+    box-shadow: 0 10px 30px -8px rgba(194, 65, 12, 0.22);
+    margin-bottom: 18px;
+    transition: transform 0.14s ease, box-shadow 0.14s ease;
+    animation: heroPop 0.55s cubic-bezier(0.34,1.56,0.64,1) 0.24s both;
   }
-  .home-hero-cta-sub {
-    color: #fde68a;
-    font-size: 0.88rem;
-    margin: 0 0 12px;
-    letter-spacing: -0.005em;
+  .hero-quiz:hover { transform: translateY(-3px); box-shadow: 0 16px 38px -8px rgba(194, 65, 12, 0.3); }
+  .hero-quiz-faces { display: inline-flex; flex: 0 0 auto; }
+  .hero-quiz-faces .face {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: linear-gradient(160deg, #fff, #fff3e2);
+    border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    display: inline-flex; align-items: center; justify-content: center; overflow: hidden;
   }
-  .home-hero-cta-btn {
-    display: inline-block;
-    background: #facc15;
-    color: #171717;
-    padding: 14px 28px;
-    border-radius: 999px;
-    font-size: 1rem;
-    font-weight: 800;
-    text-decoration: none;
-    letter-spacing: -0.005em;
-    transition: background 0.15s ease, transform 0.1s ease;
+  .hero-quiz-faces .face:not(:first-child) { margin-left: -16px; }
+  .hero-quiz-faces .face img { width: 42px; height: 42px; object-fit: contain; }
+  .hero-quiz-body { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; }
+  .hero-quiz-q { font-size: 0.82rem; font-weight: 600; color: #92400e; }
+  .hero-quiz-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 1.02rem; font-weight: 800; color: #1f140b; letter-spacing: -0.01em;
   }
-  .home-hero-cta-btn:hover { background: #fde047; }
-  .home-hero-cta-btn:active { transform: scale(0.97); }
+  .hero-quiz-cta .arr { transition: transform 0.15s ease; color: #ea580c; }
+  .hero-quiz:hover .hero-quiz-cta .arr { transform: translateX(4px); }
 
   .home-hero-scroll {
-    display: inline-block;
-    margin-top: 8px;
-    color: rgba(255,255,255,0.6);
-    font-size: 0.88rem;
-    text-decoration: none;
-    transition: color 0.15s ease;
+    display: block; margin-top: 4px;
+    color: #a98a64; font-size: 0.86rem; font-weight: 600; text-decoration: none;
+    animation: heroRise 0.6s ease 0.32s both;
   }
-  .home-hero-scroll:hover { color: #fff; }
+  .home-hero-scroll:hover { color: #7c5a3a; }
+
+  @keyframes heroRise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes heroPop { from { opacity: 0; transform: scale(0.94) translateY(10px); } to { opacity: 1; transform: none; } }
 
   @media (max-width: 640px) {
-    .home-hero { padding: 48px 16px 40px; }
+    .home-hero { padding: 44px 16px 56px; }
+    .hero-sun { width: 72px; height: 72px; top: 22px; }
+    .hero-quiz { gap: 11px; padding: 11px 16px 11px 12px; }
+    .hero-quiz-cta { font-size: 0.96rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-eyebrow, .home-hero-title, .home-hero-sub, .home-hero-stats, .hero-quiz, .home-hero-scroll { animation: none; }
   }
 </style>
