@@ -3,7 +3,7 @@ import type { Item } from '@/lib/data';
 import { AREA_CODE } from '@/lib/data';
 import type { Lang } from '@/lib/i18n';
 import { tr } from '@/lib/i18n';
-import { agodaUrl, yanoljaUrl, bookingUrl, kkdayUrl } from '@/lib/affiliate';
+import { agodaUrl, yanoljaUrl, bookingUrl, kkdayUrl, yeogiUrl } from '@/lib/affiliate';
 
 interface Props {
   item: Item;
@@ -20,8 +20,10 @@ const nearbyText: Record<Lang, string> = {
   zh: `查找${region}附近的住宿。`,
 };
 
-const agodaLabel: Record<Lang, string> = {
-  ko: 'Agoda 호텔 보기 →',
+// 1순위 숙소 버튼. 한국어 페이지는 여기어때(국내 숙소), 그 외 언어는 아고다.
+// 유입의 85%가 네이버 모바일 검색 = 국내 사용자라, 한국어 쪽이 실질 수익원이다.
+const primaryLabel: Record<Lang, string> = {
+  ko: '여기어때에서 숙소 보기 →',
   en: 'View hotels on Agoda →',
   ja: 'Agodaでホテルを見る →',
   zh: '在Agoda查看酒店 →',
@@ -34,11 +36,14 @@ const secondaryLabel: Record<Lang, string> = {
   zh: '在Booking.com搜索 →',
 };
 
+// 공정위 추천·보증 심사지침 + 제휴 프로그램(여기어때 등) 필수 요건:
+// "수수료를 받는다"만으로는 부족하고 '광고'임이 명시돼야 수익이 인정된다.
+// 이 문구가 빠지면 해당 링크로 발생한 수익이 지급되지 않을 수 있음.
 const disclosure: Record<Lang, string> = {
-  ko: '※ 위 링크로 예약 시 일정 수수료가 사이트 운영에 사용됩니다.',
-  en: '※ This site earns a commission from qualifying bookings.',
-  ja: '※ リンク経由のご予約には所定の手数料が含まれます。',
-  zh: '※ 通过此链接预订会产生少量佣金,用于网站运营。',
+  ko: '[광고] 이 문단의 링크는 제휴 링크로, 예약 시 운영자가 일정액의 수수료를 지급받습니다.',
+  en: '[Ad] The links above are affiliate links. This site earns a commission from qualifying bookings.',
+  ja: '[広告] 上記はアフィリエイトリンクです。ご予約に応じて運営者が所定の手数料を受け取ります。',
+  zh: '[广告] 以上为联盟推广链接,通过链接预订时本站将获得一定佣金。',
 };
 
 const kkdayLabel: Record<Lang, string> = {
@@ -54,6 +59,8 @@ const moreTitle: Record<Lang, string> = {
   zh: '🧳 行程准备',
 };
 
+const primaryHref = lang === 'ko' ? yeogiUrl(item) : agodaUrl(item, lang);
+const primaryProvider = lang === 'ko' ? 'yeogi' : 'agoda';
 const secondaryHref = lang === 'ko' ? yanoljaUrl(item) : bookingUrl(item);
 ---
 
@@ -62,13 +69,13 @@ const secondaryHref = lang === 'ko' ? yanoljaUrl(item) : bookingUrl(item);
   <p class="muted">{nearbyText[lang]}</p>
   <div class="affiliate-buttons">
     <a
-      href={agodaUrl(item, lang)}
+      href={primaryHref}
       target="_blank"
       rel="noopener nofollow sponsored"
       class="btn btn-affiliate"
-      data-affiliate="agoda"
+      data-affiliate={primaryProvider}
       data-item-id={item.id}
-    >{agodaLabel[lang]}</a>
+    >{primaryLabel[lang]}</a>
     <a
       href={secondaryHref}
       target="_blank"

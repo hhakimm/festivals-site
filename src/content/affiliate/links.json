@@ -1,0 +1,41 @@
+{
+  "_README": [
+    "세시간전(3hoursahead) 제휴링크 표. 링크가 3ha.in/r/<숫자> 형태의 불투명 단축링크라",
+    "URL 규칙으로 계산할 수 없다 → 지역(areacode)별로 미리 만들어 여기에 적어둔다.",
+    "빈 값이면 코드가 제휴 없는 원본 지역 URL로 폴백한다(수수료만 0원, 링크는 정상 동작).",
+    "areacode: 1서울 2인천 3대전 4대구 5광주 6부산 7울산 8세종 31경기 32강원 33충북 34충남 35경북 36경남 37전북 38전남 39제주",
+    "만드는 곳: https://3hoursahead.com/ko/studio/affiliate/programs/yeogi → '링크 붙여넣어 만들기'",
+    "붙여넣을 URL: https://www.yeogi.com/domestic-accommodations?keyword=<약칭>&autoKeyword=<정식명>",
+    "  (정식명은 '강원특별자치도','전북특별자치도','세종특별자치시','제주특별자치도' 처럼 현행 명칭을 써야 검색된다)",
+    "라벨은 festivals-site_<지역>으로 통일 — 수익 리포트에서 이 사이트 기여분만 뽑을 수 있다.",
+    "여기어때 국내숙소 수익률은 등급제: Starter 3.6% / Elite 6%. 목록의 '최대 6%'는 Elite 값이다."
+  ],
+  "agoda": {
+    "default": "",
+    "1": "https://3ha.in/r/664405"
+  },
+  "booking": {
+    "default": ""
+  },
+  "yanolja": {
+    "default": ""
+  },
+  "kkday": {
+    "default": ""
+  },
+  "skyscanner": {
+    "default": ""
+  },
+  "yeogi": {
+    "default": "",
+    "1": "https://3ha.in/r/664446",
+    "2": "https://3ha.in/r/664456",
+    "3": "https://3ha.in/r/664457",
+    "4": "https://3ha.in/r/664458",
+    "5": "https://3ha.in/r/664459",
+    "6": "https://3ha.in/r/664454",
+    "7": "https://3ha.in/r/664469",
+    "8": "https://3ha.in/r/664471",
+    "_남은작업": "31경기 32강원 33충북 34충남 35경북 36경남 37전북 38전남 39제주 — 9개 미생성"
+  }
+}
