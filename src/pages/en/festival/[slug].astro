@@ -52,6 +52,13 @@ const jsonLd = [
 >
   <nav class="crumbs"><a href={`${base}/en/`}>{tr('backToList', lang)}</a></nav>
 
+  {item.ended && (
+    <aside class="detail-ended" role="note">
+      <strong>This festival has ended</strong>
+      <span>The details below are from the last edition. Check the organizer for upcoming dates.</span>
+    </aside>
+  )}
+
   <article class="detail">
     {item.image && (
       <div class="detail-hero">

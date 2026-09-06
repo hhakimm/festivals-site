@@ -56,6 +56,13 @@ const jsonLd = [
     <a href={`${base}/`}>{tr('backToList', lang)}</a>
   </nav>
 
+  {item.ended && (
+    <aside class="detail-ended" role="note">
+      <strong>종료된 축제입니다</strong>
+      <span>아래 정보는 지난 회차 기준입니다. 다음 일정은 주최 측 공지를 확인해 주세요.</span>
+    </aside>
+  )}
+
   <article class="detail">
     {item.image && (
       <div class="detail-hero">

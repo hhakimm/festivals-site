@@ -15,7 +15,7 @@
  */
 
 import { writeFile, mkdir } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isNonTourist } from './junk-filter.ts';
@@ -159,6 +159,8 @@ interface NormalizedItem {
   /** 무장애(♿)·반려동물(🐾) 동반 가능 여부 */
   barrierFree?: boolean;
   pet?: boolean;
+  /** 축제 전용 — TourAPI 목록에서 빠진(=종료된) 축제. 페이지는 유지하고 목록에서만 뺀다. */
+  ended?: boolean;
 }
 
 // 한글/영문 혼합 문자열을 URL-safe slug로
@@ -501,6 +503,59 @@ function mockData(): { festivals: NormalizedItem[]; attractions: NormalizedItem[
   };
 }
 
+/**
+ * 지난 축제 보존 — 끝난 축제의 페이지가 사라지지 않게 한다.
+ *
+ * TourAPI(searchFestival2)는 끝난 축제를 목록에서 빼버린다. 그대로 덮어쓰면
+ * 매일 리빌드할 때마다 그 축제 페이지가 사이트에서 통째로 사라지고,
+ * 네이버·구글 색인에 남아 있는 주소로 들어온 사람은 404를 본다.
+ * (2026-09-07 GA 실측: 28일간 404가 505조회 — 전부 /festival/ 경로였다.)
+ *
+ * 그래서 한 번 수집한 축제는 계속 들고 가고, 이번 응답에서 빠진 것만 ended로 표시한다.
+ * ended는 목록·카운트에서만 제외되고 상세 페이지는 살아남는다(= 색인 유지).
+ */
+function mergePastFestivals(current: NormalizedItem[]): NormalizedItem[] {
+  const festPath = join(OUT_DIR, 'festivals.json');
+  if (!existsSync(festPath)) return current;
+
+  let prev: NormalizedItem[];
+  try {
+    prev = JSON.parse(readFileSync(festPath, 'utf-8'));
+  } catch {
+    return current; // 기존 파일이 깨졌으면 이번 결과만 쓴다
+  }
+  if (!Array.isArray(prev) || prev.length === 0) return current;
+
+  // API가 평소의 절반도 못 준 날은 장애로 보고 '종료' 표시를 보류한다.
+  // (하루 장애 때문에 진행 중인 축제 수백 개가 종료로 뒤집히면 안 된다)
+  const liveBefore = prev.filter((p) => !p.ended).length;
+  const outage = liveBefore > 0 && current.length < liveBefore * 0.5;
+
+  const live = new Set(current.map((i) => i.id));
+  const out: NormalizedItem[] = [...current];
+  let carried = 0;
+  let newlyEnded = 0;
+
+  for (const p of prev) {
+    if (live.has(p.id)) continue; // 이번에도 있으면 최신 데이터로 대체됨
+    if (outage) {
+      out.push(p);
+    } else {
+      if (!p.ended) newlyEnded++;
+      out.push({ ...p, ended: true });
+    }
+    carried++;
+  }
+
+  if (outage) {
+    console.log(
+      `  ⚠ 축제 응답 ${current.length}개 (직전 진행중 ${liveBefore}개) — API 장애로 보고 종료 표시 보류`,
+    );
+  }
+  console.log(`  ↳ 지난 축제 ${carried}개 보존 (이번에 종료 처리 ${newlyEnded}개)`);
+  return out;
+}
+
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });
 
@@ -578,6 +633,9 @@ async function main() {
     applyTags(festivals, bfSet, petSet);
     applyTags(attractions, bfSet, petSet);
   }
+
+  // 끝난 축제까지 들고 가서 페이지가 사라지지 않게 한다(404 방지 + 색인 유지)
+  festivals = mergePastFestivals(festivals);
 
   await writeFile(join(OUT_DIR, 'festivals.json'), JSON.stringify(festivals, null, 2), 'utf-8');
   await writeFile(

@@ -52,6 +52,13 @@ const jsonLd = [
 >
   <nav class="crumbs"><a href={`${base}/ja/`}>{tr('backToList', lang)}</a></nav>
 
+  {item.ended && (
+    <aside class="detail-ended" role="note">
+      <strong>このお祭りは終了しました</strong>
+      <span>以下は前回開催時の情報です。次回の日程は主催者にご確認ください。</span>
+    </aside>
+  )}
+
   <article class="detail">
     {item.image && (
       <div class="detail-hero">

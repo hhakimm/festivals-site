@@ -1,13 +1,14 @@
 import type { Item } from './data';
-import { festivals, attractions, AREA_CODE } from './data';
+import { activeFestivals, attractions, AREA_CODE } from './data';
 import type { Lang } from './i18n';
 
 export type ListingType = 'festival' | 'attraction';
 
 export const PAGE_SIZE = 24;
 
+// 축제 목록에는 끝난 축제를 넣지 않는다(상세 페이지는 살아 있다 — data.ts 참고).
 export function itemsByType(type: ListingType): Item[] {
-  return type === 'festival' ? festivals : attractions;
+  return type === 'festival' ? activeFestivals : attractions;
 }
 
 export interface RegionStat {

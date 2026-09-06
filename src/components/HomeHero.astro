@@ -6,12 +6,12 @@
  */
 import type { Lang } from '@/lib/i18n';
 import { tr } from '@/lib/i18n';
-import { festivals, attractions } from '@/lib/data';
+import { activeFestivals, attractions } from '@/lib/data';
 
 interface Props { lang: Lang; base: string; }
 const { lang, base } = Astro.props;
 const prefix = lang === 'ko' ? '' : `/${lang}`;
-const allCount = festivals.length + attractions.length;
+const allCount = activeFestivals.length + attractions.length;
 
 const L = {
   eyebrow: { ko: '한국 여행, 여기서 시작', en: 'Korea travel starts here', ja: '韓国旅行はここから', zh: '韩国旅行从这里开始' },
@@ -40,7 +40,7 @@ const faces = ['naturalist', 'family', 'urbanite'];
     <p class="home-hero-sub">{tr('siteDesc', lang)}</p>
     <p class="home-hero-stats">
       <strong>{allCount.toLocaleString(lang)}</strong>{tr('attractions', lang)} ·
-      🎆 {festivals.length.toLocaleString(lang)} {tr('festivals', lang)}
+      🎆 {activeFestivals.length.toLocaleString(lang)} {tr('festivals', lang)}
     </p>
 
     <a href={`${base}${prefix}/quiz/`} class="hero-quiz">

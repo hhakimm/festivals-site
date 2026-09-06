@@ -10,7 +10,7 @@ import { tr } from '@/lib/i18n';
 import { quizT, PERSONAS } from '@/lib/quiz';
 import ItemCard from './ItemCard.astro';
 import AdSlot from './AdSlot.astro';
-import { all as allItems, attractions, festivals } from '@/lib/data';
+import { all as allItems, attractions, activeFestivals } from '@/lib/data';
 
 interface Props { lang: Lang; base: string; }
 const { lang, base } = Astro.props;
@@ -139,7 +139,7 @@ function L_(key: keyof typeof L): string { return L[key][lang]; }
       </div>
       <p class="landing-stats">
         <strong>{attractions.length.toLocaleString(lang)}</strong> {tr('attractions', lang)} ·
-        <strong>{festivals.length.toLocaleString(lang)}</strong> {tr('festivals', lang)}
+        <strong>{activeFestivals.length.toLocaleString(lang)}</strong> {tr('festivals', lang)}
       </p>
     </div>
   </section>

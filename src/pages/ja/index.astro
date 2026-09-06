@@ -6,13 +6,14 @@ import PickOfDay from '@/components/PickOfDay.astro';
 import PopularRegions from '@/components/PopularRegions.astro';
 import AdSlot from '@/components/AdSlot.astro';
 import WeatherSection from '@/components/WeatherSection.astro';
-import { festivals, attractions } from '@/lib/data';
+import { activeFestivals, attractions } from '@/lib/data';
 import { tr } from '@/lib/i18n';
 
 const lang = 'ja' as const;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const allCount = festivals.length + attractions.length;
+// 끝난 축제는 페이지만 남고 목록에선 빠지므로 카운트도 진행중 기준
+const allCount = activeFestivals.length + attractions.length;
 
 const title = tr('siteName', lang);
 const desc = tr('siteDesc', lang);

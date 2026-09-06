@@ -70,18 +70,23 @@ jobs:
         timeout-minutes: 15
         run: npm run fetch:stats:ci
 
-      - name: Persist accumulated overviews (commit-back)
+      - name: Persist accumulated data (commit-back)
         # 모은 소개글을 저장소에 영구 보존 → 며칠에 걸쳐 전부 채워짐.
+        #
+        # festivals.json도 함께 커밋한다. TourAPI는 끝난 축제를 목록에서 빼는데,
+        # 커밋하지 않으면 매 빌드가 같은 baseline에서 다시 시작해 누적이 유지되지 않는다.
+        # (fetch-tourapi.ts의 mergePastFestivals가 이 파일을 읽어 지난 축제를 물고 간다)
+        #
         # GITHUB_TOKEN 푸시는 새 워크플로를 트리거하지 않음(+[skip ci] 이중 안전).
         continue-on-error: true
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/content/data/overviews.json
+          git add src/content/data/overviews.json src/content/data/festivals.json
           if git diff --staged --quiet; then
-            echo "소개글 변경 없음 — 커밋 생략"
+            echo "변경 없음 — 커밋 생략"
           else
-            git commit -m "data: 상세 소개글 누적 [skip ci]"
+            git commit -m "data: 소개글·축제 누적 [skip ci]"
             git push origin HEAD:main || echo "push 실패(다음 빌드에서 재시도)"
           fi
 

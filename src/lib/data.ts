@@ -41,11 +41,21 @@ export interface Item {
   startDate: string | null;
   endDate: string | null;
   updatedAt: string;
+  /** 축제 전용 — 이미 끝난 축제. 상세 페이지는 유지하되 목록에서는 뺀다. */
+  ended?: boolean;
 }
 
+// 끝난 축제까지 전부 — 상세 페이지 생성(getStaticPaths)에 쓴다.
+// 끝났다고 페이지를 없애면 네이버·구글 색인에 남은 주소가 404가 된다.
 export const festivals = festivalsData as Item[];
+
+/** 진행 중·예정 축제만 — 목록·카운트용 */
+export const activeFestivals = festivals.filter((f) => !f.ended);
 export const attractions = attractionsData as Item[];
-export const all = [...festivals, ...attractions];
+// 추천·관련·주변·퀴즈 등 '보여주는' 곳은 전부 이걸 쓴다.
+// 끝난 축제가 추천으로 뜨면 안 되므로 activeFestivals 기준.
+// (끝난 축제의 상세 페이지 생성은 위의 festivals를 직접 쓴다)
+export const all = [...activeFestivals, ...attractions];
 
 // areacode → 한국어 지역명
 export const AREA_CODE: Record<string, { ko: string; en: string; ja: string; zh: string }> = {
