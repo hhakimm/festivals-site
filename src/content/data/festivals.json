@@ -1,5 +1,951 @@
 [
   {
+    "id": "1325331",
+    "type": "festival",
+    "slug": "문화다양성축제-mamf맘프-1325331",
+    "title": "문화다양성축제 MAMF(맘프)",
+    "address": "경상남도 창원시 성산구 중앙대로186번길 13 (신월동) 용지문화공원, 성산아트홀, 창원중앙대로 일원",
+    "areacode": "36",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/13/4125113_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/13/4125113_image3_1.JPG",
+    "lat": 35.2293083357,
+    "lng": 128.687083687,
+    "tel": "055-277-8779",
+    "startDate": "20261023",
+    "endDate": "20261025",
+    "updatedAt": "20261014175724"
+  },
+  {
+    "id": "3012116",
+    "type": "festival",
+    "slug": "부여국화축제-3012116",
+    "title": "부여국화축제",
+    "address": "충청남도 부여군 부여읍 동남리 117 부여 궁남지 일원",
+    "areacode": "34",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/69/4124969_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/69/4124969_image3_1.jpg",
+    "lat": 36.269786,
+    "lng": 126.912293,
+    "tel": "041-830-2591",
+    "startDate": "20261030",
+    "endDate": "20261108",
+    "updatedAt": "20261014165712"
+  },
+  {
+    "id": "2853386",
+    "type": "festival",
+    "slug": "2026-단단단페스티벌-2853386",
+    "title": "2026 단단단페스티벌",
+    "address": "강원특별자치도 강릉시 단오장길 1 (노암동)",
+    "areacode": "32",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/82/4124982_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/82/4124982_image3_1.jpg",
+    "lat": 37.7482018271,
+    "lng": 128.8950411936,
+    "tel": "033-641-1593",
+    "startDate": "20261126",
+    "endDate": "20261128",
+    "updatedAt": "20261014165307"
+  },
+  {
+    "id": "2989981",
+    "type": "festival",
+    "slug": "서초뮤직앤아트페스티벌smaf-2989981",
+    "title": "서초뮤직앤아트페스티벌(SMAF)",
+    "address": "서울특별시 서초구 신반포로 194 (반포동)",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/86/4124886_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/86/4124886_image3_1.jpg",
+    "lat": 37.5061540847,
+    "lng": 127.0055699583,
+    "tel": "02-3477-2808",
+    "startDate": "20260829",
+    "endDate": "20260830",
+    "updatedAt": "20261014163104"
+  },
+  {
+    "id": "3028462",
+    "type": "festival",
+    "slug": "구미라면-축제-3028462",
+    "title": "구미라면 축제",
+    "address": "경상북도 구미시 역전로",
+    "areacode": "35",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/59/4124759_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/59/4124759_image3_1.jpg",
+    "lat": 36.1309792684,
+    "lng": 128.3323188678,
+    "tel": "054-480-2651~3",
+    "startDate": "20261106",
+    "endDate": "20261108",
+    "updatedAt": "20261014162656"
+  },
+  {
+    "id": "527789",
+    "type": "festival",
+    "slug": "순천-낙안읍성-민속문화축제-527789",
+    "title": "순천 낙안읍성 민속문화축제",
+    "address": "전남광주통합특별시 순천시 낙안면 충민길 30 순천 낙안읍성",
+    "areacode": "38",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/32/4124832_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/32/4124832_image3_1.jpg",
+    "lat": 34.9060616206,
+    "lng": 127.3417276358,
+    "tel": "061-749-8838",
+    "startDate": "20261024",
+    "endDate": "20261025",
+    "updatedAt": "20261014162352"
+  },
+  {
+    "id": "2640874",
+    "type": "festival",
+    "slug": "서울라이트-ddp-가을-2640874",
+    "title": "서울라이트 DDP 가을",
+    "address": "서울특별시 중구 을지로 281 (을지로7가)",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/71/4124771_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/71/4124771_image3_1.jpg",
+    "lat": 37.5660539726,
+    "lng": 127.0095547691,
+    "tel": "02-2153-0000",
+    "startDate": "20260903",
+    "endDate": "20260913",
+    "updatedAt": "20261014161346"
+  },
+  {
+    "id": "506935",
+    "type": "festival",
+    "slug": "천안흥타령춤축제-506935",
+    "title": "천안흥타령춤축제",
+    "address": "충청남도 천안시 서북구 번영로 208 (백석동)",
+    "areacode": "34",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/35/4056635_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/35/4056635_image3_1.JPG",
+    "lat": 36.8194430336,
+    "lng": 127.1114520361,
+    "tel": "041-900-7021",
+    "startDate": "20261001",
+    "endDate": "20261005",
+    "updatedAt": "20261014155501"
+  },
+  {
+    "id": "3113995",
+    "type": "festival",
+    "slug": "경기양주지작사-드론봇-페스티벌-3113995",
+    "title": "경기‧양주‧지작사 드론봇 페스티벌",
+    "address": "경기도 양주시 광적면 삼일로 52 가납리비행장",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/54/4124654_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/54/4124654_image3_1.JPG",
+    "lat": 37.833553,
+    "lng": 126.989798,
+    "tel": "031-8082-6161",
+    "startDate": "20261030",
+    "endDate": "20261101",
+    "updatedAt": "20261014154844"
+  },
+  {
+    "id": "2846034",
+    "type": "festival",
+    "slug": "안양청년축제-2846034",
+    "title": "안양청년축제",
+    "address": "경기도 안양시 동안구 관평로 149 (평촌동) 평촌중앙공원",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/82/4116882_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/82/4116882_image3_1.JPG",
+    "lat": 37.3901365976,
+    "lng": 126.9613286581,
+    "tel": "031-8045-5779",
+    "startDate": "20261010",
+    "endDate": "20261010",
+    "updatedAt": "20261014153205"
+  },
+  {
+    "id": "506766",
+    "type": "festival",
+    "slug": "영주-풍기인삼축제-506766",
+    "title": "영주 풍기인삼축제",
+    "address": "경상북도 영주시 풍기읍 성내리 240-1",
+    "areacode": "35",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/55/3563955_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/55/3563955_image3_1.jpg",
+    "lat": 36.868718,
+    "lng": 128.521518,
+    "tel": "054-630-8706",
+    "startDate": "20261003",
+    "endDate": "20261011",
+    "updatedAt": "20261014152046"
+  },
+  {
+    "id": "140799",
+    "type": "festival",
+    "slug": "부산국제록페스티벌-140799",
+    "title": "부산국제록페스티벌",
+    "address": "부산광역시 사상구 삼락동 29-50",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/06/4040606_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/06/4040606_image3_1.jpg",
+    "lat": 35.1728573,
+    "lng": 128.9681914,
+    "tel": "051-713-5000",
+    "startDate": "20261002",
+    "endDate": "20261004",
+    "updatedAt": "20261014145223"
+  },
+  {
+    "id": "2558866",
+    "type": "festival",
+    "slug": "예산장터-삼국축제-2558866",
+    "title": "예산장터 삼국축제",
+    "address": "충청남도 예산군 예산읍 예산시장길 2",
+    "areacode": "34",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/59/4095359_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/59/4095359_image3_1.jpg",
+    "lat": 36.6770296847,
+    "lng": 126.8496518916,
+    "tel": "041-332-4317",
+    "startDate": "20261022",
+    "endDate": "20261025",
+    "updatedAt": "20261014142529"
+  },
+  {
+    "id": "2561700",
+    "type": "festival",
+    "slug": "광주서창억새축제-2561700",
+    "title": "광주서창억새축제",
+    "address": "전남광주통합특별시 서구 서창둑길 377 (벽진동)",
+    "areacode": "38",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/22/3546722_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/22/3546722_image3_1.jpg",
+    "lat": 35.1384947137,
+    "lng": 126.8287603579,
+    "tel": "062-350-4792",
+    "startDate": "20261015",
+    "endDate": "20261018",
+    "updatedAt": "20261014131556"
+  },
+  {
+    "id": "4122301",
+    "type": "festival",
+    "slug": "부산돼지국밥대전-4122301",
+    "title": "부산돼지국밥대전",
+    "address": "부산광역시 남구 남동천로 128 (문현동) BIFC2 3층",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/02/4122302_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/02/4122302_image3_1.jpg",
+    "lat": 35.148215631,
+    "lng": 129.0643020394,
+    "tel": "070-4129-1082",
+    "startDate": "20261016",
+    "endDate": "20261018",
+    "updatedAt": "20261014131256"
+  },
+  {
+    "id": "2870929",
+    "type": "festival",
+    "slug": "연천-국화축제-2870929",
+    "title": "연천 국화축제",
+    "address": "경기도 연천군 전곡읍 양연로 1510",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/43/4117543_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/43/4117543_image3_1.jpg",
+    "lat": 38.0156483829,
+    "lng": 127.0614526431,
+    "tel": "031-839-4259",
+    "startDate": "20261016",
+    "endDate": "20261025",
+    "updatedAt": "20261014130146"
+  },
+  {
+    "id": "1275743",
+    "type": "festival",
+    "slug": "금정산성축제-1275743",
+    "title": "금정산성축제",
+    "address": "부산광역시 금정구 산성로 501-2 (금성동)",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/56/4090456_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/56/4090456_image3_1.jpg",
+    "lat": 35.2452812589,
+    "lng": 129.0570297348,
+    "tel": "051-715-6884",
+    "startDate": "20261016",
+    "endDate": "20261018",
+    "updatedAt": "20261014123138"
+  },
+  {
+    "id": "3363802",
+    "type": "festival",
+    "slug": "영덕-웰니스페스타-3363802",
+    "title": "영덕 웰니스페스타",
+    "address": "경상북도 영덕군 병곡면 고래불로 68",
+    "areacode": "35",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/11/4123911_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/11/4123911_image3_1.jpg",
+    "lat": 36.571516196,
+    "lng": 129.4190142309,
+    "tel": "054-730-5852",
+    "startDate": "20261016",
+    "endDate": "20261018",
+    "updatedAt": "20261014113932"
+  },
+  {
+    "id": "4099101",
+    "type": "festival",
+    "slug": "불취무귀야시장-시즌2-4099101",
+    "title": "불취무귀야시장 시즌2",
+    "address": "경기도 수원시 팔달구 팔달문로 9 (팔달로2가)",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/22/4123922_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/22/4123922_image3_1.jpg",
+    "lat": 37.277751177,
+    "lng": 127.0184725227,
+    "tel": "031-8001-1101",
+    "startDate": "20261010",
+    "endDate": "20261031",
+    "updatedAt": "20261014110701"
+  },
+  {
+    "id": "2559006",
+    "type": "festival",
+    "slug": "목포-국가유산야행-2559006",
+    "title": "목포 국가유산야행",
+    "address": "전남광주통합특별시 목포시 번화로 18 (중앙동2가)",
+    "areacode": "38",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/17/4122717_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/17/4122717_image3_1.jpg",
+    "lat": 34.785963747,
+    "lng": 126.3814912601,
+    "tel": "061-270-8321",
+    "startDate": "20261030",
+    "endDate": "20261101",
+    "updatedAt": "20261014095715"
+  },
+  {
+    "id": "3380662",
+    "type": "festival",
+    "slug": "세계문화유산-화순-고인돌-가을꽃-축제-3380662",
+    "title": "세계문화유산 화순 고인돌 가을꽃 축제",
+    "address": "전남광주통합특별시 화순군 도곡면 고인돌1로 180",
+    "areacode": "38",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/97/3547597_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/97/3547597_image3_1.jpg",
+    "lat": 34.9866366704,
+    "lng": 126.9169377939,
+    "tel": "061-379-3575~8",
+    "startDate": "20261016",
+    "endDate": "20261025",
+    "updatedAt": "20261014094918"
+  },
+  {
+    "id": "2621502",
+    "type": "festival",
+    "slug": "제주마축제-2621502",
+    "title": "제주마축제",
+    "address": "제주특별자치도 제주시 애월읍 평화로 2144 렛츠런파크 제주",
+    "areacode": "39",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/65/3545565_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/65/3545565_image3_1.jpg",
+    "lat": 33.409840857,
+    "lng": 126.3931218693,
+    "tel": "1566-3333",
+    "startDate": "20261024",
+    "endDate": "20261025",
+    "updatedAt": "20261014090232"
+  },
+  {
+    "id": "3547712",
+    "type": "festival",
+    "slug": "한미친선-문화-한마당-3547712",
+    "title": "한미친선 문화 한마당",
+    "address": "경기 평택시 쇼핑로1 K-55 정문앞 신장쇼핑몰 일대",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/91/4118191_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/91/4118191_image3_1.jpg",
+    "lat": 37.0807576,
+    "lng": 127.0509268,
+    "tel": "02-3488-8375",
+    "startDate": "20261024",
+    "endDate": "20261025",
+    "updatedAt": "20261013174928"
+  },
+  {
+    "id": "574014",
+    "type": "festival",
+    "slug": "목포항구축제-574014",
+    "title": "목포항구축제",
+    "address": "전남광주통합특별시 목포시 삼학로92번길 6 (산정동)",
+    "areacode": "38",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/90/3498990_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/90/3498990_image3_1.JPG",
+    "lat": 34.7865334008,
+    "lng": 126.3936724331,
+    "tel": "061-270-8441",
+    "startDate": "20261016",
+    "endDate": "20261018",
+    "updatedAt": "20261013174526"
+  },
+  {
+    "id": "3551206",
+    "type": "festival",
+    "slug": "광명동굴-빛-축제-3551206",
+    "title": "광명동굴 빛 축제",
+    "address": "경기도 광명시 가학로 85번길 광명동굴 일원",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/78/4121378_image2_1.png",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/78/4121378_image3_1.png",
+    "lat": 37.4210442021,
+    "lng": 126.8627080043,
+    "tel": "070-4277-8902",
+    "startDate": "20261016",
+    "endDate": "20261017",
+    "updatedAt": "20261013174355"
+  },
+  {
+    "id": "2591661",
+    "type": "festival",
+    "slug": "연천율무축제-2591661",
+    "title": "연천율무축제",
+    "address": "경기도 연천군 전곡읍 전곡리 515",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/82/4105782_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/82/4105782_image3_1.jpg",
+    "lat": 38.014587,
+    "lng": 127.061362,
+    "tel": "031-839-2314",
+    "startDate": "20261023",
+    "endDate": "20261025",
+    "updatedAt": "20261013174009"
+  },
+  {
+    "id": "4123034",
+    "type": "festival",
+    "slug": "동대문구-청소년-페스티벌-4123034",
+    "title": "동대문구 청소년 페스티벌",
+    "address": "서울특별시 동대문구 한천로43길 22 (전농동) 배봉산근린공원 열린광장",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/42/4123042_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/42/4123042_image3_1.jpg",
+    "lat": 37.5805935238,
+    "lng": 127.0669780179,
+    "tel": "02-2127-4231",
+    "startDate": "20261017",
+    "endDate": "20261017",
+    "updatedAt": "20261013172928"
+  },
+  {
+    "id": "574285",
+    "type": "festival",
+    "slug": "김제지평선축제-574285",
+    "title": "김제지평선축제",
+    "address": "전북특별자치도 김제시 부량면 벽골제로 442",
+    "areacode": "37",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/54/3516354_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/54/3516354_image3_1.jpg",
+    "lat": 35.7540218787,
+    "lng": 126.8522718951,
+    "tel": "063-540-3172",
+    "startDate": "20261001",
+    "endDate": "20261005",
+    "updatedAt": "20261013163227"
+  },
+  {
+    "id": "506465",
+    "type": "festival",
+    "slug": "금산세계인삼축제-506465",
+    "title": "금산세계인삼축제",
+    "address": "충청남도 금산군 금산읍 인삼광장로 30",
+    "areacode": "34",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/59/3524159_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/59/3524159_image3_1.JPG",
+    "lat": 36.1001535022,
+    "lng": 127.5005221346,
+    "tel": "041-750-2316",
+    "startDate": "20261002",
+    "endDate": "20261011",
+    "updatedAt": "20261013161051"
+  },
+  {
+    "id": "3019716",
+    "type": "festival",
+    "slug": "대장경기록문화축제-3019716",
+    "title": "대장경기록문화축제",
+    "address": "경상남도 합천군 가야면 가야산로 1160 대장경테마파크",
+    "areacode": "36",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/49/4122749_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/49/4122749_image3_1.jpg",
+    "lat": 35.767343728,
+    "lng": 128.1364929393,
+    "tel": "055-930-4696",
+    "startDate": "20261009",
+    "endDate": "20261101",
+    "updatedAt": "20261013152651"
+  },
+  {
+    "id": "1937428",
+    "type": "festival",
+    "slug": "예천활축제-1937428",
+    "title": "예천활축제",
+    "address": "경북 예천군 예천읍 남본리 310-1 예천 한천체육공원",
+    "areacode": "35",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/67/4122667_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/67/4122667_image3_1.jpg",
+    "lat": 36.6529652915,
+    "lng": 128.4524083386,
+    "tel": "054-650-6045",
+    "startDate": "20261030",
+    "endDate": "20261101",
+    "updatedAt": "20261013151147"
+  },
+  {
+    "id": "2952467",
+    "type": "festival",
+    "slug": "대덕대청호물결축제-2952467",
+    "title": "대덕대청호물결축제",
+    "address": "대전광역시 대덕구 대청로 607 (미호동) 금강로하스대청공원 일원",
+    "areacode": "3",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/33/4119933_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/33/4119933_image3_1.jpg",
+    "lat": 36.4736257434,
+    "lng": 127.4735661509,
+    "tel": "042-608-6733",
+    "startDate": "20261023",
+    "endDate": "20261025",
+    "updatedAt": "20261013150731"
+  },
+  {
+    "id": "2618971",
+    "type": "festival",
+    "slug": "구로청소년축제-2618971",
+    "title": "구로청소년축제",
+    "address": "서울특별시 구로구 부일로 917 (궁동) 우신고등학교 운동장",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/06/3562606_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/06/3562606_image3_1.jpg",
+    "lat": 37.4949023087,
+    "lng": 126.8263535998,
+    "tel": "02-860-3386",
+    "startDate": "20261017",
+    "endDate": "20261017",
+    "updatedAt": "20261013145524"
+  },
+  {
+    "id": "2435280",
+    "type": "festival",
+    "slug": "강진만-춤추는-갈대축제-2435280",
+    "title": "강진만 춤추는 갈대축제",
+    "address": "전남광주통합특별시 강진군 강진읍 생태공원길 47",
+    "areacode": "38",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/37/4115237_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/37/4115237_image3_1.JPG",
+    "lat": 34.6205077903,
+    "lng": 126.7734624104,
+    "tel": "061-430-3413",
+    "startDate": "20261024",
+    "endDate": "20261101",
+    "updatedAt": "20261013142837"
+  },
+  {
+    "id": "4116358",
+    "type": "festival",
+    "slug": "밀양-매운맛-축제-4116358",
+    "title": "밀양 매운맛 축제",
+    "address": "경상남도 밀양시 삼문동 1-1 밀양강변 일원",
+    "areacode": "36",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/59/4116359_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/59/4116359_image3_1.jpg",
+    "lat": 35.489859,
+    "lng": 128.757295,
+    "tel": "055-359-4582",
+    "startDate": "20261031",
+    "endDate": "20261101",
+    "updatedAt": "20261013135619"
+  },
+  {
+    "id": "2860545",
+    "type": "festival",
+    "slug": "보물찾기-축제-금괴를-찾아라-2860545",
+    "title": "보물찾기 축제 - 금괴를 찾아라!",
+    "address": "전북특별자치도 익산시 인북로12길 28 (주현동)",
+    "areacode": "37",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/68/4118568_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/68/4118568_image3_1.jpg",
+    "lat": 35.9335395002,
+    "lng": 126.9540955184,
+    "tel": "070-4909-1196",
+    "startDate": "20261107",
+    "endDate": "20261108",
+    "updatedAt": "20261013132012"
+  },
+  {
+    "id": "638576",
+    "type": "festival",
+    "slug": "대한민국-국향대전-638576",
+    "title": "대한민국 국향대전",
+    "address": "전남광주통합특별시 함평군 함평읍 곤재로 27",
+    "areacode": "38",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/06/4114406_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/06/4114406_image3_1.JPG",
+    "lat": 35.0561887483,
+    "lng": 126.5199494216,
+    "tel": "061-320-2247",
+    "startDate": "20261023",
+    "endDate": "20261108",
+    "updatedAt": "20261013130056"
+  },
+  {
+    "id": "3379752",
+    "type": "festival",
+    "slug": "원주농협-치악산-고구마축제-3379752",
+    "title": "원주농협 치악산 고구마축제",
+    "address": "강원특별자치도 원주시 지정면 소금산길 12 간현관광지 제3주차장",
+    "areacode": "32",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/26/4122226_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/26/4122226_image3_1.jpg",
+    "lat": 37.3645764311,
+    "lng": 127.8340379931,
+    "tel": "033-742-0114",
+    "startDate": "20261017",
+    "endDate": "20261018",
+    "updatedAt": "20261013125314"
+  },
+  {
+    "id": "1307813",
+    "type": "festival",
+    "slug": "강동선사문화축제-1307813",
+    "title": "강동선사문화축제",
+    "address": "서울특별시 강동구 올림픽로 875 (암사동)",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/75/4114675_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/75/4114675_image3_1.JPG",
+    "lat": 37.5590614348,
+    "lng": 127.1306006547,
+    "tel": "02-3425-5247",
+    "startDate": "20261016",
+    "endDate": "20261018",
+    "updatedAt": "20261013112928"
+  },
+  {
+    "id": "293084",
+    "type": "festival",
+    "slug": "영동난계국악축제-293084",
+    "title": "영동난계국악축제",
+    "address": "충청북도 영동군 영동읍 영동힐링로 117 영동 레인보우힐링광장 일원",
+    "areacode": "33",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/72/4058672_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/72/4058672_image3_1.jpg",
+    "lat": 36.1563534107,
+    "lng": 127.786513691,
+    "tel": "043-745-8917",
+    "startDate": "20261015",
+    "endDate": "20261018",
+    "updatedAt": "20261013101827"
+  },
+  {
+    "id": "140930",
+    "type": "festival",
+    "slug": "탐라문화제-140930",
+    "title": "탐라문화제",
+    "address": "제주특별자치도 제주시 연삼로 286 (도남동) 제주시민복지타운광장",
+    "areacode": "39",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/36/4121436_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/36/4121436_image3_1.jpg",
+    "lat": 33.4918468474,
+    "lng": 126.5238513705,
+    "tel": "064-753-3287",
+    "startDate": "20261017",
+    "endDate": "20261021",
+    "updatedAt": "20261013100210"
+  },
+  {
+    "id": "1147035",
+    "type": "festival",
+    "slug": "여주오곡나루축제-1147035",
+    "title": "여주오곡나루축제",
+    "address": "경기도 여주시 천송동 290-3",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/47/4104747_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/47/4104747_image3_1.jpg",
+    "lat": 37.29912,
+    "lng": 127.655753,
+    "tel": "031-881-9693",
+    "startDate": "20261023",
+    "endDate": "20261025",
+    "updatedAt": "20261013093148"
+  },
+  {
+    "id": "525445",
+    "type": "festival",
+    "slug": "영암왕인문화축제-525445",
+    "title": "영암왕인문화축제",
+    "address": "전남광주통합특별시 영암군 군서면 왕인로 440",
+    "areacode": "38",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/45/4121745_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/45/4121745_image3_1.jpg",
+    "lat": 34.7576077189,
+    "lng": 126.6282041505,
+    "tel": "061-470-2346",
+    "startDate": "20260404",
+    "endDate": "20260412",
+    "updatedAt": "20261013085118"
+  },
+  {
     "id": "507531",
     "type": "festival",
     "slug": "한성백제문화제-507531",
@@ -44,28 +990,6 @@
     "updatedAt": "20261012181553"
   },
   {
-    "id": "1806376",
-    "type": "festival",
-    "slug": "강동바람꽃축제-x-강동북페스티벌-1806376",
-    "title": "강동바람꽃축제 X 강동북페스티벌",
-    "address": "서울특별시 강동구 동남로 870 (상일동) 강동아트센터",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/97/4121697_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/97/4121697_image3_1.jpg",
-    "lat": 37.5512204558,
-    "lng": 127.157342547,
-    "tel": "02-440-0516 / 02-2045-7911",
-    "startDate": "20261017",
-    "endDate": "20261017",
-    "updatedAt": "20261012180927"
-  },
-  {
     "id": "2039752",
     "type": "festival",
     "slug": "월출산-국화축제-2039752",
@@ -108,50 +1032,6 @@
     "startDate": "20261015",
     "endDate": "20261015",
     "updatedAt": "20261012170035"
-  },
-  {
-    "id": "140930",
-    "type": "festival",
-    "slug": "탐라문화제-140930",
-    "title": "탐라문화제",
-    "address": "제주특별자치도 제주시 연삼로 286 (도남동) 제주시민복지타운광장",
-    "areacode": "39",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/36/4121436_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/36/4121436_image3_1.jpg",
-    "lat": 33.4918468474,
-    "lng": 126.5238513705,
-    "tel": "064-753-3287",
-    "startDate": "20261017",
-    "endDate": "20261021",
-    "updatedAt": "20261012165729"
-  },
-  {
-    "id": "3551206",
-    "type": "festival",
-    "slug": "광명동굴-빛-축제-3551206",
-    "title": "광명동굴 빛 축제",
-    "address": "경기도 광명시 가학로 85번길 광명동굴 일원",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/78/4121378_image2_1.png",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/78/4121378_image3_1.png",
-    "lat": 37.4210442021,
-    "lng": 126.8627080043,
-    "tel": "02-2090-1414",
-    "startDate": "20261016",
-    "endDate": "20261017",
-    "updatedAt": "20261012163133"
   },
   {
     "id": "4121348",
@@ -284,28 +1164,6 @@
     "startDate": "20261009",
     "endDate": "20261010",
     "updatedAt": "20261012145940"
-  },
-  {
-    "id": "1398980",
-    "type": "festival",
-    "slug": "외암민속마을-짚풀문화제-1398980",
-    "title": "외암민속마을 짚풀문화제",
-    "address": "충청남도 아산시 송악면 외암민속길 5 아산 외암마을",
-    "areacode": "34",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/58/3537258_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/58/3537258_image3_1.JPG",
-    "lat": 36.7303263581,
-    "lng": 127.0137711677,
-    "tel": "041-544-8290",
-    "startDate": "20261016",
-    "endDate": "20261018",
-    "updatedAt": "20261012144857"
   },
   {
     "id": "2618014",
@@ -462,50 +1320,6 @@
     "updatedAt": "20261012132511"
   },
   {
-    "id": "506562",
-    "type": "festival",
-    "slug": "부산-자갈치축제-506562",
-    "title": "부산 자갈치축제",
-    "address": "부산광역시 중구 자갈치로 일원",
-    "areacode": "6",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/31/4120831_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/31/4120831_image3_1.JPG",
-    "lat": 35.0966137769,
-    "lng": 129.030583691,
-    "tel": "051-243-9363",
-    "startDate": "20261015",
-    "endDate": "20261018",
-    "updatedAt": "20261012132420"
-  },
-  {
-    "id": "2561795",
-    "type": "festival",
-    "slug": "유성국화축제-2561795",
-    "title": "유성국화축제",
-    "address": "대전광역시 유성구 어은로 27 (봉명동) 유림공원 일원",
-    "areacode": "3",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/05/3546705_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/05/3546705_image3_1.jpg",
-    "lat": 36.3606844775,
-    "lng": 127.3576881543,
-    "tel": "042-611-2678",
-    "startDate": "20261017",
-    "endDate": "20261101",
-    "updatedAt": "20261012131149"
-  },
-  {
     "id": "4120802",
     "type": "festival",
     "slug": "양재천을-품은-양재도서관-물길-따라-그림책-여행-4120802",
@@ -638,28 +1452,6 @@
     "updatedAt": "20261012102403"
   },
   {
-    "id": "790211",
-    "type": "festival",
-    "slug": "장애인문화예술축제-a-festival-790211",
-    "title": "장애인문화예술축제 A+ Festival",
-    "address": "서울특별시 강서구 마곡중앙5로 지하9 (마곡동) 마곡광장",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/45/4116345_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/45/4116345_image3_1.jpg",
-    "lat": 37.5660114537,
-    "lng": 126.8269274564,
-    "tel": "02-304-6211",
-    "startDate": "20261016",
-    "endDate": "20261018",
-    "updatedAt": "20261012101902"
-  },
-  {
     "id": "3373104",
     "type": "festival",
     "slug": "2026-두근두근-별길마켓-3373104",
@@ -770,28 +1562,6 @@
     "updatedAt": "20261008180421"
   },
   {
-    "id": "1620571",
-    "type": "festival",
-    "slug": "포은문화제-1620571",
-    "title": "포은문화제",
-    "address": "경기도 용인시 처인구 모현면 능곡로 45",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/02/4116102_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/02/4116102_image3_1.jpg",
-    "lat": 37.3377228675,
-    "lng": 127.179586169,
-    "tel": "031-324-9600",
-    "startDate": "20261010",
-    "endDate": "20261011",
-    "updatedAt": "20261008175050"
-  },
-  {
     "id": "2992940",
     "type": "festival",
     "slug": "계룡문화축제-2992940",
@@ -812,50 +1582,6 @@
     "startDate": "20261001",
     "endDate": "20261005",
     "updatedAt": "20261008173817"
-  },
-  {
-    "id": "2828336",
-    "type": "festival",
-    "slug": "시흥월곶포구축제-2828336",
-    "title": "시흥월곶포구축제",
-    "address": "경기도 시흥시 월곶해안로 188 (월곶동) 월곶해안로 일원",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/77/4089877_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/77/4089877_image3_1.jpg",
-    "lat": 37.3873639083,
-    "lng": 126.7402812374,
-    "tel": "031-310-4794",
-    "startDate": "20261009",
-    "endDate": "20261011",
-    "updatedAt": "20261008172616"
-  },
-  {
-    "id": "3380662",
-    "type": "festival",
-    "slug": "세계문화유산-화순-고인돌-가을꽃-축제-3380662",
-    "title": "세계문화유산 화순 고인돌 가을꽃 축제",
-    "address": "전남광주통합특별시 화순군 도곡면 고인돌1로 180",
-    "areacode": "38",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/97/3547597_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/97/3547597_image3_1.jpg",
-    "lat": 34.9866366704,
-    "lng": 126.9169377939,
-    "tel": "061-379-3575",
-    "startDate": "20261016",
-    "endDate": "20261025",
-    "updatedAt": "20261008171917"
   },
   {
     "id": "506600",
@@ -1012,28 +1738,6 @@
     "updatedAt": "20261008142528"
   },
   {
-    "id": "1365782",
-    "type": "festival",
-    "slug": "증평인삼골축제-1365782",
-    "title": "증평인삼골축제",
-    "address": "충청북도 증평군 증평읍 송산리 217 (증평보강천체육공원 일원)",
-    "areacode": "33",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/27/4102927_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/27/4102927_image3_1.jpg",
-    "lat": 36.786207,
-    "lng": 127.574545,
-    "tel": "043-836-3400",
-    "startDate": "20261008",
-    "endDate": "20261011",
-    "updatedAt": "20261008141518"
-  },
-  {
     "id": "3554702",
     "type": "festival",
     "slug": "2026-원도심-야간여행-섬시즌-3554702",
@@ -1120,72 +1824,6 @@
     "startDate": "20261016",
     "endDate": "20261019",
     "updatedAt": "20261008105444"
-  },
-  {
-    "id": "2933008",
-    "type": "festival",
-    "slug": "부안붉은노을축제-2933008",
-    "title": "부안붉은노을축제",
-    "address": "전북특별자치도 부안군 변산면 대항리 567",
-    "areacode": "37",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/06/4107306_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/06/4107306_image3_1.jpg",
-    "lat": 35.675259,
-    "lng": 126.527278,
-    "tel": "063-580-4772",
-    "startDate": "20261016",
-    "endDate": "20261018",
-    "updatedAt": "20261008094906"
-  },
-  {
-    "id": "141236",
-    "type": "festival",
-    "slug": "생거진천-문화축제-141236",
-    "title": "생거진천 문화축제",
-    "address": "충청북도 진천군 진천읍 읍내리 165",
-    "areacode": "33",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/74/4104074_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/74/4104074_image3_1.JPG",
-    "lat": 36.858937,
-    "lng": 127.446288,
-    "tel": "043-532-3325/043-539-3605",
-    "startDate": "20261009",
-    "endDate": "20261011",
-    "updatedAt": "20261007175053"
-  },
-  {
-    "id": "3544911",
-    "type": "festival",
-    "slug": "수봉산-페스티벌-3544911",
-    "title": "수봉산 페스티벌",
-    "address": "인천광역시 미추홀구 수봉안길 84 (숭의동)",
-    "areacode": "2",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/40/4116440_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/40/4116440_image3_1.jpg",
-    "lat": 37.4598298556,
-    "lng": 126.6632947343,
-    "tel": "032-880-7976",
-    "startDate": "20261017",
-    "endDate": "20261018",
-    "updatedAt": "20261007173628"
   },
   {
     "id": "2488086",
@@ -1386,50 +2024,6 @@
     "updatedAt": "20261007153329"
   },
   {
-    "id": "1621746",
-    "type": "festival",
-    "slug": "화도진-축제-1621746",
-    "title": "화도진 축제",
-    "address": "인천광역시 제물포구 화도진로 53 (송현동)",
-    "areacode": "2",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/46/4119046_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/46/4119046_image3_1.jpg",
-    "lat": 37.4764716332,
-    "lng": 126.6319170649,
-    "tel": "032-745-3202",
-    "startDate": "20261016",
-    "endDate": "20261017",
-    "updatedAt": "20261007152151"
-  },
-  {
-    "id": "2485123",
-    "type": "festival",
-    "slug": "순천-푸드앤아트페스티벌-2485123",
-    "title": "순천 푸드앤아트페스티벌",
-    "address": "전남광주통합특별시 순천시 중앙로 93 (영동) 남문터광장",
-    "areacode": "38",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/23/4119023_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/23/4119023_image3_1.jpg",
-    "lat": 34.9539016178,
-    "lng": 127.4831806612,
-    "tel": "061-749-5796",
-    "startDate": "20261016",
-    "endDate": "20261018",
-    "updatedAt": "20261007151116"
-  },
-  {
     "id": "2865258",
     "type": "festival",
     "slug": "노원-북-페스티벌-2865258",
@@ -1450,28 +2044,6 @@
     "startDate": "20261017",
     "endDate": "20261018",
     "updatedAt": "20261007145952"
-  },
-  {
-    "id": "2761411",
-    "type": "festival",
-    "slug": "금천하모니축제-2761411",
-    "title": "금천하모니축제",
-    "address": "서울특별시 금천구 시흥대로73길 70 (시흥동)",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/92/3483192_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/92/3483192_image3_1.jpg",
-    "lat": 37.4564406598,
-    "lng": 126.895507334,
-    "tel": "070-4118-3420",
-    "startDate": "20261017",
-    "endDate": "20261018",
-    "updatedAt": "20261007145224"
   },
   {
     "id": "3540329",
@@ -1496,28 +2068,6 @@
     "updatedAt": "20261007145137"
   },
   {
-    "id": "3007256",
-    "type": "festival",
-    "slug": "정관생태하천학습문화축제-3007256",
-    "title": "정관생태하천학습문화축제",
-    "address": "부산광역시 기장군 정관읍 구연3로 27 정관 중앙공원",
-    "areacode": "6",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/32/4097232_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/32/4097232_image3_1.jpg",
-    "lat": 35.3221880006,
-    "lng": 129.1818961362,
-    "tel": "051-727-6444",
-    "startDate": "20261016",
-    "endDate": "20261018",
-    "updatedAt": "20261007142330"
-  },
-  {
     "id": "4116722",
     "type": "festival",
     "slug": "탄광문화축제-4116722",
@@ -1538,28 +2088,6 @@
     "startDate": "20261007",
     "endDate": "20261010",
     "updatedAt": "20261007140259"
-  },
-  {
-    "id": "1726052",
-    "type": "festival",
-    "slug": "독일마을-맥주축제-1726052",
-    "title": "독일마을 맥주축제",
-    "address": "경상남도 남해군 삼동면 독일로 89-7 남해독일마을",
-    "areacode": "36",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/20/4116920_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/20/4116920_image3_1.jpg",
-    "lat": 34.8001184999,
-    "lng": 128.0383380155,
-    "tel": "055-860-8603",
-    "startDate": "20261009",
-    "endDate": "20261011",
-    "updatedAt": "20261007132551"
   },
   {
     "id": "635451",
@@ -1606,28 +2134,6 @@
     "updatedAt": "20261007131501"
   },
   {
-    "id": "3028462",
-    "type": "festival",
-    "slug": "구미라면-축제-3028462",
-    "title": "구미라면 축제",
-    "address": "경상북도 구미시 역전로",
-    "areacode": "35",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/40/3497640_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/40/3497640_image3_1.jpg",
-    "lat": 36.1309792684,
-    "lng": 128.3323188678,
-    "tel": "054-480-2651~3",
-    "startDate": "20261106",
-    "endDate": "20261108",
-    "updatedAt": "20261007130043"
-  },
-  {
     "id": "2770434",
     "type": "festival",
     "slug": "대전-빵-축제-2770434",
@@ -1650,28 +2156,6 @@
     "updatedAt": "20261007110258"
   },
   {
-    "id": "2860545",
-    "type": "festival",
-    "slug": "보물찾기-축제-금괴를-찾아라-2860545",
-    "title": "보물찾기 축제 - 금괴를 찾아라!",
-    "address": "전북특별자치도 익산시 인북로12길 28 (주현동)",
-    "areacode": "37",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/68/4118568_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/68/4118568_image3_1.jpg",
-    "lat": 35.9335395002,
-    "lng": 126.9540955184,
-    "tel": "070-4909-1196",
-    "startDate": "20261107",
-    "endDate": "20261108",
-    "updatedAt": "20261007103529"
-  },
-  {
     "id": "1398149",
     "type": "festival",
     "slug": "삼랑성역사문화축제-1398149",
@@ -1692,28 +2176,6 @@
     "startDate": "20261003",
     "endDate": "20261011",
     "updatedAt": "20261007101710"
-  },
-  {
-    "id": "2396313",
-    "type": "festival",
-    "slug": "대구-국가유산야행-2396313",
-    "title": "대구 국가유산야행",
-    "address": "대구광역시 중구 달성로 56 (동산동) 일원",
-    "areacode": "4",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/77/4118477_image2_1.png",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/77/4118477_image3_1.png",
-    "lat": 35.8701793656,
-    "lng": 128.5825230488,
-    "tel": "053-661-2194",
-    "startDate": "20261016",
-    "endDate": "20261017",
-    "updatedAt": "20261007100440"
   },
   {
     "id": "2410727",
@@ -1758,28 +2220,6 @@
     "startDate": "20261120",
     "endDate": "20261122",
     "updatedAt": "20261007093756"
-  },
-  {
-    "id": "2986930",
-    "type": "festival",
-    "slug": "울산공업축제-2986930",
-    "title": "울산공업축제",
-    "address": "울산광역시 남구 신정동 태화강국가정원 남구둔치",
-    "areacode": "7",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/54/4116554_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/54/4116554_image3_1.JPG",
-    "lat": 35.550502,
-    "lng": 129.306194,
-    "tel": "052-276-8590052-229-2724",
-    "startDate": "20261008",
-    "endDate": "20261011",
-    "updatedAt": "20261006164617"
   },
   {
     "id": "1849007",
@@ -1892,28 +2332,6 @@
     "updatedAt": "20261006153743"
   },
   {
-    "id": "229057",
-    "type": "festival",
-    "slug": "서울와우북페스티벌-229057",
-    "title": "서울와우북페스티벌",
-    "address": "서울특별시 마포구 서교동 348-24 서울특별시 마포구 어울마당로",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/76/4117576_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/76/4117576_image3_1.jpg",
-    "lat": 37.5564346247,
-    "lng": 126.926273606,
-    "tel": "02-312-1590",
-    "startDate": "20261016",
-    "endDate": "20261018",
-    "updatedAt": "20261006140924"
-  },
-  {
     "id": "589386",
     "type": "festival",
     "slug": "부천국제만화축제-589386",
@@ -1956,28 +2374,6 @@
     "startDate": "20261003",
     "endDate": "20261024",
     "updatedAt": "20261006132759"
-  },
-  {
-    "id": "3113001",
-    "type": "festival",
-    "slug": "대전-동구동락-축제-3113001",
-    "title": "대전 동구동락 축제",
-    "address": "대전광역시 동구 철갑2길 2 (소제동) 소제동 동광장로 및 대동천 일원",
-    "areacode": "3",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/59/4101859_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/59/4101859_image3_1.jpg",
-    "lat": 36.3349767742,
-    "lng": 127.4373883609,
-    "tel": "042-251-6673",
-    "startDate": "20261009",
-    "endDate": "20261011",
-    "updatedAt": "20261006124046"
   },
   {
     "id": "2614760",
@@ -2024,28 +2420,6 @@
     "updatedAt": "20261006113953"
   },
   {
-    "id": "2870929",
-    "type": "festival",
-    "slug": "연천-국화축제-2870929",
-    "title": "연천 국화축제",
-    "address": "경기도 연천군 전곡읍 양연로 1510",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/43/4117543_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/43/4117543_image3_1.jpg",
-    "lat": 38.0156483829,
-    "lng": 127.0614526431,
-    "tel": "031-839-4259",
-    "startDate": "20261016",
-    "endDate": "20261025",
-    "updatedAt": "20261006112430"
-  },
-  {
     "id": "1720025",
     "type": "festival",
     "slug": "다산정약용문화제-1720025",
@@ -2088,28 +2462,6 @@
     "startDate": "20261024",
     "endDate": "20261115",
     "updatedAt": "20261006105731"
-  },
-  {
-    "id": "1275743",
-    "type": "festival",
-    "slug": "금정산성축제-1275743",
-    "title": "금정산성축제",
-    "address": "부산광역시 금정구 산성로 501-2 (금성동)",
-    "areacode": "6",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/56/4090456_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/56/4090456_image3_1.jpg",
-    "lat": 35.2452812589,
-    "lng": 129.0570297348,
-    "tel": "051-715-6884",
-    "startDate": "20261016",
-    "endDate": "20261018",
-    "updatedAt": "20261006102817"
   },
   {
     "id": "3372852",
@@ -2398,28 +2750,6 @@
     "updatedAt": "20261002102021"
   },
   {
-    "id": "790124",
-    "type": "festival",
-    "slug": "홍천-인삼한우-명품축제-790124",
-    "title": "홍천 인삼한우 명품축제",
-    "address": "강원특별자치도 홍천군 홍천읍 갈마곡리 501",
-    "areacode": "32",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/66/3561066_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/66/3561066_image3_1.jpg",
-    "lat": 37.689411,
-    "lng": 127.893468,
-    "tel": "033-439-5800",
-    "startDate": "20261008",
-    "endDate": "20261011",
-    "updatedAt": "20261002094959"
-  },
-  {
     "id": "4116982",
     "type": "festival",
     "slug": "산북ai김장문화축제-4116982",
@@ -2530,50 +2860,6 @@
     "updatedAt": "20261001151859"
   },
   {
-    "id": "2846034",
-    "type": "festival",
-    "slug": "안양청년축제-2846034",
-    "title": "안양청년축제",
-    "address": "경기도 안양시 동안구 관평로 149 (평촌동) 평촌중앙공원",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/82/4116882_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/82/4116882_image3_1.JPG",
-    "lat": 37.3901365976,
-    "lng": 126.9613286581,
-    "tel": "031-8045-5779",
-    "startDate": "20261010",
-    "endDate": "20261010",
-    "updatedAt": "20261001150529"
-  },
-  {
-    "id": "3370452",
-    "type": "festival",
-    "slug": "2026-수성국제비엔날레-3370452",
-    "title": "2026 수성국제비엔날레",
-    "address": "대구광역시 수성구 무학로 112 (두산동)",
-    "areacode": "4",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/75/4116875_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/75/4116875_image3_1.jpg",
-    "lat": 35.8293696738,
-    "lng": 128.6205920321,
-    "tel": "053-668-1541",
-    "startDate": "20261027",
-    "endDate": "20261122",
-    "updatedAt": "20261001145950"
-  },
-  {
     "id": "1846905",
     "type": "festival",
     "slug": "2026-달성-100대-피아노-1846905",
@@ -2682,28 +2968,6 @@
     "startDate": "20261015",
     "endDate": "20261018",
     "updatedAt": "20261001100149"
-  },
-  {
-    "id": "639993",
-    "type": "festival",
-    "slug": "연산대추문화축제-639993",
-    "title": "연산대추문화축제",
-    "address": "충청남도 논산시 연산면 선비로275번길 31-2",
-    "areacode": "34",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/02/4108002_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/02/4108002_image3_1.JPG",
-    "lat": 36.2123719185,
-    "lng": 127.2007368831,
-    "tel": "041-730-2945",
-    "startDate": "20261009",
-    "endDate": "20261011",
-    "updatedAt": "20261001094707"
   },
   {
     "id": "506809",
@@ -2882,28 +3146,6 @@
     "updatedAt": "20260930131223"
   },
   {
-    "id": "574285",
-    "type": "festival",
-    "slug": "김제지평선축제-574285",
-    "title": "김제지평선축제",
-    "address": "전북특별자치도 김제시 부량면 벽골제로 442",
-    "areacode": "37",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/54/3516354_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/54/3516354_image3_1.jpg",
-    "lat": 35.7540218787,
-    "lng": 126.8522718951,
-    "tel": "063-540-3172",
-    "startDate": "20261001",
-    "endDate": "20261005",
-    "updatedAt": "20260930111907"
-  },
-  {
     "id": "1322668",
     "type": "festival",
     "slug": "곡성심청어린이대축제-1322668",
@@ -2924,28 +3166,6 @@
     "startDate": "20261008",
     "endDate": "20261011",
     "updatedAt": "20260930105451"
-  },
-  {
-    "id": "4116358",
-    "type": "festival",
-    "slug": "밀양-매운맛-축제-4116358",
-    "title": "밀양 매운맛 축제",
-    "address": "경상남도 밀양시 삼문동 1-1 밀양강변 일원",
-    "areacode": "36",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/59/4116359_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/59/4116359_image3_1.jpg",
-    "lat": 35.489859,
-    "lng": 128.757295,
-    "tel": "055-359-4582",
-    "startDate": "20261031",
-    "endDate": "20261101",
-    "updatedAt": "20260930085839"
   },
   {
     "id": "3538633",
@@ -3014,28 +3234,6 @@
     "updatedAt": "20260929163803"
   },
   {
-    "id": "506465",
-    "type": "festival",
-    "slug": "금산세계인삼축제-506465",
-    "title": "금산세계인삼축제",
-    "address": "충청남도 금산군 금산읍 인삼광장로 30",
-    "areacode": "34",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/59/3524159_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/59/3524159_image3_1.JPG",
-    "lat": 36.1001535022,
-    "lng": 127.5005221346,
-    "tel": "041-750-2316",
-    "startDate": "20261002",
-    "endDate": "20261011",
-    "updatedAt": "20260929144954"
-  },
-  {
     "id": "2855326",
     "type": "festival",
     "slug": "우륵문화제-2855326",
@@ -3078,72 +3276,6 @@
     "startDate": "20261119",
     "endDate": "20261121",
     "updatedAt": "20260929133341"
-  },
-  {
-    "id": "140799",
-    "type": "festival",
-    "slug": "부산국제록페스티벌-140799",
-    "title": "부산국제록페스티벌",
-    "address": "부산광역시 사상구 삼락동 29-50",
-    "areacode": "6",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/06/4040606_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/06/4040606_image3_1.jpg",
-    "lat": 35.1728573,
-    "lng": 128.9681914,
-    "tel": "051-713-5000",
-    "startDate": "20261002",
-    "endDate": "20261004",
-    "updatedAt": "20260929131547"
-  },
-  {
-    "id": "3364857",
-    "type": "festival",
-    "slug": "군산짬뽕페스티벌-3364857",
-    "title": "군산짬뽕페스티벌",
-    "address": "전북특별자치도 군산시 장미동 13-1",
-    "areacode": "37",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/49/4107749_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/49/4107749_image3_1.jpg",
-    "lat": 35.9896779,
-    "lng": 126.7139462,
-    "tel": "063-454-3912, 3913",
-    "startDate": "20261009",
-    "endDate": "20261011",
-    "updatedAt": "20260929113344"
-  },
-  {
-    "id": "4115702",
-    "type": "festival",
-    "slug": "서초-ai-페스타-4115702",
-    "title": "서초 AI 페스타",
-    "address": "서울특별시 서초구 바우뫼로12길 40 (양재동) 서초문화예술공원",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/04/4115704_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/04/4115704_image3_1.jpg",
-    "lat": 37.4698840183,
-    "lng": 127.0320215881,
-    "tel": "02-2155-8831",
-    "startDate": "20261017",
-    "endDate": "20261017",
-    "updatedAt": "20260929100524"
   },
   {
     "id": "3008665",
@@ -3762,50 +3894,6 @@
     "updatedAt": "20260923110312"
   },
   {
-    "id": "506766",
-    "type": "festival",
-    "slug": "영주-풍기인삼축제-506766",
-    "title": "영주 풍기인삼축제",
-    "address": "경상북도 영주시 풍기읍 성내리 240-1",
-    "areacode": "35",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/55/3563955_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/55/3563955_image3_1.jpg",
-    "lat": 36.868718,
-    "lng": 128.521518,
-    "tel": "054-630-8706",
-    "startDate": "20261003",
-    "endDate": "20261011",
-    "updatedAt": "20260923105749"
-  },
-  {
-    "id": "506935",
-    "type": "festival",
-    "slug": "천안흥타령춤축제-506935",
-    "title": "천안흥타령춤축제",
-    "address": "충청남도 천안시 서북구 번영로 208 (백석동)",
-    "areacode": "34",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/35/4056635_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/35/4056635_image3_1.JPG",
-    "lat": 36.8194430336,
-    "lng": 127.1114520361,
-    "tel": "041-900-7021",
-    "startDate": "20261001",
-    "endDate": "20261005",
-    "updatedAt": "20260923104810"
-  },
-  {
     "id": "506895",
     "type": "festival",
     "slug": "정선아리랑제-506895",
@@ -3894,28 +3982,6 @@
     "updatedAt": "20260922165246"
   },
   {
-    "id": "1307813",
-    "type": "festival",
-    "slug": "강동선사문화축제-1307813",
-    "title": "강동선사문화축제",
-    "address": "서울특별시 강동구 올림픽로 875 (암사동)",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/75/4114675_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/75/4114675_image3_1.JPG",
-    "lat": 37.5590614348,
-    "lng": 127.1306006547,
-    "tel": "02-3425-5247",
-    "startDate": "20261016",
-    "endDate": "20261018",
-    "updatedAt": "20260922162334"
-  },
-  {
     "id": "1328004",
     "type": "festival",
     "slug": "예천-삼강나루-주막축제-1328004",
@@ -4002,28 +4068,6 @@
     "startDate": "20261009",
     "endDate": "20261009",
     "updatedAt": "20260922130925"
-  },
-  {
-    "id": "232325",
-    "type": "festival",
-    "slug": "횡성한우축제-232325",
-    "title": "횡성한우축제",
-    "address": "강원특별자치도 횡성군 횡성읍 북천리 221",
-    "areacode": "32",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/42/4064642_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/42/4064642_image3_1.jpg",
-    "lat": 37.500463,
-    "lng": 127.992519,
-    "tel": "033-808-8007033-808-8009",
-    "startDate": "20261007",
-    "endDate": "20261011",
-    "updatedAt": "20260922130902"
   },
   {
     "id": "506690",
@@ -4532,28 +4576,6 @@
     "updatedAt": "20260918102644"
   },
   {
-    "id": "574014",
-    "type": "festival",
-    "slug": "목포항구축제-574014",
-    "title": "목포항구축제",
-    "address": "전남광주통합특별시 목포시 삼학로92번길 6 (산정동)",
-    "areacode": "38",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/90/3498990_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/90/3498990_image3_1.JPG",
-    "lat": 34.7865334008,
-    "lng": 126.3936724331,
-    "tel": "061-270-8441",
-    "startDate": "20261016",
-    "endDate": "20261018",
-    "updatedAt": "20260918093243"
-  },
-  {
     "id": "3546110",
     "type": "festival",
     "slug": "2026-서울한옥위크-3546110",
@@ -4926,28 +4948,6 @@
     "startDate": "20261016",
     "endDate": "20261018",
     "updatedAt": "20260916160200"
-  },
-  {
-    "id": "3359994",
-    "type": "festival",
-    "slug": "2026-대한민국-해양-모빌리티안전-엑스포-3359994",
-    "title": "2026 대한민국 해양 모빌리티･안전 엑스포",
-    "address": "부산광역시 동구 충장대로 206 (초량동)",
-    "areacode": "6",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/68/4111568_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/68/4111568_image3_1.jpg",
-    "lat": 35.1175129767,
-    "lng": 129.0493834405,
-    "tel": "070-4365-7047",
-    "startDate": "20261026",
-    "endDate": "20261028",
-    "updatedAt": "20260916152334"
   },
   {
     "id": "4110583",
@@ -5500,28 +5500,6 @@
     "updatedAt": "20260910154050"
   },
   {
-    "id": "3532971",
-    "type": "festival",
-    "slug": "부산-서구-의료관광축제-3532971",
-    "title": "부산 서구 의료관광축제",
-    "address": "부산광역시 서구 송도해변로 36 (암남동)",
-    "areacode": "6",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/04/4109704_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/04/4109704_image3_1.jpg",
-    "lat": 35.0727182661,
-    "lng": 129.0174476417,
-    "tel": "051-240-4017",
-    "startDate": "20261016",
-    "endDate": "20261017",
-    "updatedAt": "20260910151048"
-  },
-  {
     "id": "1700219",
     "type": "festival",
     "slug": "함평모악산-꽃무릇축제-1700219",
@@ -5874,28 +5852,6 @@
     "updatedAt": "20260908175517"
   },
   {
-    "id": "2640874",
-    "type": "festival",
-    "slug": "서울라이트-ddp-가을-2640874",
-    "title": "서울라이트 DDP 가을",
-    "address": "서울특별시 중구 을지로 281 (을지로7가)",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/08/4109008_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/08/4109008_image3_1.jpg",
-    "lat": 37.5660539726,
-    "lng": 127.0095547691,
-    "tel": "02-2153-0000",
-    "startDate": "20260903",
-    "endDate": "20260913",
-    "updatedAt": "20260908153554"
-  },
-  {
     "id": "1018971",
     "type": "festival",
     "slug": "국토정중앙-청춘양구-배꼽축제-1018971",
@@ -6004,28 +5960,6 @@
     "startDate": "20260916",
     "endDate": "20260919",
     "updatedAt": "20260908085002"
-  },
-  {
-    "id": "4099101",
-    "type": "festival",
-    "slug": "수원남문시장-불취무귀-야시장-4099101",
-    "title": "수원남문시장 「불취무귀」 야시장",
-    "address": "경기도 수원시 팔달구 팔달문로 9 (팔달로2가)",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/34/4099134_image2_1.png",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/34/4099134_image3_1.png",
-    "lat": 37.277751177,
-    "lng": 127.0184725227,
-    "tel": "070-7575-2352",
-    "startDate": "20260919",
-    "endDate": "20260919",
-    "updatedAt": "20260907150504"
   },
   {
     "id": "3383832",
@@ -6312,28 +6246,6 @@
     "startDate": "20261106",
     "endDate": "20261108",
     "updatedAt": "20260904154720"
-  },
-  {
-    "id": "293084",
-    "type": "festival",
-    "slug": "영동난계국악축제-293084",
-    "title": "영동난계국악축제",
-    "address": "충청북도 영동군 영동읍 영동힐링로 117 영동 레인보우힐링광장 일원",
-    "areacode": "33",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/72/4058672_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/72/4058672_image3_1.jpg",
-    "lat": 36.1563534107,
-    "lng": 127.786513691,
-    "tel": "043-745-8917",
-    "startDate": "20261015",
-    "endDate": "20261018",
-    "updatedAt": "20260904153633"
   },
   {
     "id": "2539802",
@@ -7216,28 +7128,6 @@
     "updatedAt": "20260826183346"
   },
   {
-    "id": "1147035",
-    "type": "festival",
-    "slug": "여주오곡나루축제-1147035",
-    "title": "여주오곡나루축제",
-    "address": "경기도 여주시 천송동 290-3",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/47/4104747_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/47/4104747_image3_1.jpg",
-    "lat": 37.29912,
-    "lng": 127.655753,
-    "tel": "031-881-9693",
-    "startDate": "20261023",
-    "endDate": "20261025",
-    "updatedAt": "20260826170146"
-  },
-  {
     "id": "3020205",
     "type": "festival",
     "slug": "호캠프-리턴즈-3020205",
@@ -7368,28 +7258,6 @@
     "startDate": "20260911",
     "endDate": "20260912",
     "updatedAt": "20260825103422"
-  },
-  {
-    "id": "2989981",
-    "type": "festival",
-    "slug": "서초뮤직앤아트페스티벌smaf-2989981",
-    "title": "서초뮤직앤아트페스티벌(SMAF)",
-    "address": "서울특별시 서초구 신반포로 194 (반포동)",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/29/4094029_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/29/4094029_image3_1.jpg",
-    "lat": 37.5061540847,
-    "lng": 127.0055699583,
-    "tel": "02-3477-2808",
-    "startDate": "20260829",
-    "endDate": "20260830",
-    "updatedAt": "20260825100352"
   },
   {
     "id": "4103719",
@@ -9942,28 +9810,6 @@
     "startDate": "20260404",
     "endDate": "20260405",
     "updatedAt": "20260702144200"
-  },
-  {
-    "id": "525445",
-    "type": "festival",
-    "slug": "영암왕인문화축제-525445",
-    "title": "영암왕인문화축제",
-    "address": "전남광주통합특별시 영암군 군서면 왕인로 440",
-    "areacode": "38",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/27/4027427_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/27/4027427_image3_1.jpg",
-    "lat": 34.7576077189,
-    "lng": 126.6282041505,
-    "tel": "061-470-2346",
-    "startDate": "20260404",
-    "endDate": "20260412",
-    "updatedAt": "20260702144117"
   },
   {
     "id": "3113469",
@@ -16435,11 +16281,287 @@
     "updatedAt": "20251114155335"
   },
   {
-    "id": "2561700",
+    "id": "1806376",
     "type": "festival",
-    "slug": "광주서창억새축제-2561700",
-    "title": "광주서창억새축제",
-    "address": "전남광주통합특별시 서구 서창둑길 377 (벽진동)",
+    "slug": "강동바람꽃축제-x-강동북페스티벌-1806376",
+    "title": "강동바람꽃축제 X 강동북페스티벌",
+    "address": "서울특별시 강동구 동남로 870 (상일동) 강동아트센터",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/97/4121697_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/97/4121697_image3_1.jpg",
+    "lat": 37.5512204558,
+    "lng": 127.157342547,
+    "tel": "02-440-0516 / 02-2045-7911",
+    "startDate": "20261017",
+    "endDate": "20261017",
+    "updatedAt": "20261012180927",
+    "ended": true
+  },
+  {
+    "id": "1398980",
+    "type": "festival",
+    "slug": "외암민속마을-짚풀문화제-1398980",
+    "title": "외암민속마을 짚풀문화제",
+    "address": "충청남도 아산시 송악면 외암민속길 5 아산 외암마을",
+    "areacode": "34",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/58/3537258_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/58/3537258_image3_1.JPG",
+    "lat": 36.7303263581,
+    "lng": 127.0137711677,
+    "tel": "041-544-8290",
+    "startDate": "20261016",
+    "endDate": "20261018",
+    "updatedAt": "20261012144857",
+    "ended": true
+  },
+  {
+    "id": "506562",
+    "type": "festival",
+    "slug": "부산-자갈치축제-506562",
+    "title": "부산 자갈치축제",
+    "address": "부산광역시 중구 자갈치로 일원",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/31/4120831_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/31/4120831_image3_1.JPG",
+    "lat": 35.0966137769,
+    "lng": 129.030583691,
+    "tel": "051-243-9363",
+    "startDate": "20261015",
+    "endDate": "20261018",
+    "updatedAt": "20261012132420",
+    "ended": true
+  },
+  {
+    "id": "2561795",
+    "type": "festival",
+    "slug": "유성국화축제-2561795",
+    "title": "유성국화축제",
+    "address": "대전광역시 유성구 어은로 27 (봉명동) 유림공원 일원",
+    "areacode": "3",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/05/3546705_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/05/3546705_image3_1.jpg",
+    "lat": 36.3606844775,
+    "lng": 127.3576881543,
+    "tel": "042-611-2678",
+    "startDate": "20261017",
+    "endDate": "20261101",
+    "updatedAt": "20261012131149",
+    "ended": true
+  },
+  {
+    "id": "790211",
+    "type": "festival",
+    "slug": "장애인문화예술축제-a-festival-790211",
+    "title": "장애인문화예술축제 A+ Festival",
+    "address": "서울특별시 강서구 마곡중앙5로 지하9 (마곡동) 마곡광장",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/45/4116345_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/45/4116345_image3_1.jpg",
+    "lat": 37.5660114537,
+    "lng": 126.8269274564,
+    "tel": "02-304-6211",
+    "startDate": "20261016",
+    "endDate": "20261018",
+    "updatedAt": "20261012101902",
+    "ended": true
+  },
+  {
+    "id": "1620571",
+    "type": "festival",
+    "slug": "포은문화제-1620571",
+    "title": "포은문화제",
+    "address": "경기도 용인시 처인구 모현면 능곡로 45",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/02/4116102_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/02/4116102_image3_1.jpg",
+    "lat": 37.3377228675,
+    "lng": 127.179586169,
+    "tel": "031-324-9600",
+    "startDate": "20261010",
+    "endDate": "20261011",
+    "updatedAt": "20261008175050",
+    "ended": true
+  },
+  {
+    "id": "2828336",
+    "type": "festival",
+    "slug": "시흥월곶포구축제-2828336",
+    "title": "시흥월곶포구축제",
+    "address": "경기도 시흥시 월곶해안로 188 (월곶동) 월곶해안로 일원",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/77/4089877_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/77/4089877_image3_1.jpg",
+    "lat": 37.3873639083,
+    "lng": 126.7402812374,
+    "tel": "031-310-4794",
+    "startDate": "20261009",
+    "endDate": "20261011",
+    "updatedAt": "20261008172616",
+    "ended": true
+  },
+  {
+    "id": "1365782",
+    "type": "festival",
+    "slug": "증평인삼골축제-1365782",
+    "title": "증평인삼골축제",
+    "address": "충청북도 증평군 증평읍 송산리 217 (증평보강천체육공원 일원)",
+    "areacode": "33",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/27/4102927_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/27/4102927_image3_1.jpg",
+    "lat": 36.786207,
+    "lng": 127.574545,
+    "tel": "043-836-3400",
+    "startDate": "20261008",
+    "endDate": "20261011",
+    "updatedAt": "20261008141518",
+    "ended": true
+  },
+  {
+    "id": "2933008",
+    "type": "festival",
+    "slug": "부안붉은노을축제-2933008",
+    "title": "부안붉은노을축제",
+    "address": "전북특별자치도 부안군 변산면 대항리 567",
+    "areacode": "37",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/06/4107306_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/06/4107306_image3_1.jpg",
+    "lat": 35.675259,
+    "lng": 126.527278,
+    "tel": "063-580-4772",
+    "startDate": "20261016",
+    "endDate": "20261018",
+    "updatedAt": "20261008094906",
+    "ended": true
+  },
+  {
+    "id": "141236",
+    "type": "festival",
+    "slug": "생거진천-문화축제-141236",
+    "title": "생거진천 문화축제",
+    "address": "충청북도 진천군 진천읍 읍내리 165",
+    "areacode": "33",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/74/4104074_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/74/4104074_image3_1.JPG",
+    "lat": 36.858937,
+    "lng": 127.446288,
+    "tel": "043-532-3325/043-539-3605",
+    "startDate": "20261009",
+    "endDate": "20261011",
+    "updatedAt": "20261007175053",
+    "ended": true
+  },
+  {
+    "id": "3544911",
+    "type": "festival",
+    "slug": "수봉산-페스티벌-3544911",
+    "title": "수봉산 페스티벌",
+    "address": "인천광역시 미추홀구 수봉안길 84 (숭의동)",
+    "areacode": "2",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/40/4116440_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/40/4116440_image3_1.jpg",
+    "lat": 37.4598298556,
+    "lng": 126.6632947343,
+    "tel": "032-880-7976",
+    "startDate": "20261017",
+    "endDate": "20261018",
+    "updatedAt": "20261007173628",
+    "ended": true
+  },
+  {
+    "id": "1621746",
+    "type": "festival",
+    "slug": "화도진-축제-1621746",
+    "title": "화도진 축제",
+    "address": "인천광역시 제물포구 화도진로 53 (송현동)",
+    "areacode": "2",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/46/4119046_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/46/4119046_image3_1.jpg",
+    "lat": 37.4764716332,
+    "lng": 126.6319170649,
+    "tel": "032-745-3202",
+    "startDate": "20261016",
+    "endDate": "20261017",
+    "updatedAt": "20261007152151",
+    "ended": true
+  },
+  {
+    "id": "2485123",
+    "type": "festival",
+    "slug": "순천-푸드앤아트페스티벌-2485123",
+    "title": "순천 푸드앤아트페스티벌",
+    "address": "전남광주통합특별시 순천시 중앙로 93 (영동) 남문터광장",
     "areacode": "38",
     "category": {
       "cat1": "",
@@ -16447,14 +16569,359 @@
       "cat3": ""
     },
     "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/22/3546722_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/22/3546722_image3_1.jpg",
-    "lat": 35.1384947137,
-    "lng": 126.8287603579,
-    "tel": "062-350-4792",
-    "startDate": "20261015",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/23/4119023_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/23/4119023_image3_1.jpg",
+    "lat": 34.9539016178,
+    "lng": 127.4831806612,
+    "tel": "061-749-5796",
+    "startDate": "20261016",
     "endDate": "20261018",
-    "updatedAt": "20261007133646",
+    "updatedAt": "20261007151116",
+    "ended": true
+  },
+  {
+    "id": "2761411",
+    "type": "festival",
+    "slug": "금천하모니축제-2761411",
+    "title": "금천하모니축제",
+    "address": "서울특별시 금천구 시흥대로73길 70 (시흥동)",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/92/3483192_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/92/3483192_image3_1.jpg",
+    "lat": 37.4564406598,
+    "lng": 126.895507334,
+    "tel": "070-4118-3420",
+    "startDate": "20261017",
+    "endDate": "20261018",
+    "updatedAt": "20261007145224",
+    "ended": true
+  },
+  {
+    "id": "3007256",
+    "type": "festival",
+    "slug": "정관생태하천학습문화축제-3007256",
+    "title": "정관생태하천학습문화축제",
+    "address": "부산광역시 기장군 정관읍 구연3로 27 정관 중앙공원",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/32/4097232_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/32/4097232_image3_1.jpg",
+    "lat": 35.3221880006,
+    "lng": 129.1818961362,
+    "tel": "051-727-6444",
+    "startDate": "20261016",
+    "endDate": "20261018",
+    "updatedAt": "20261007142330",
+    "ended": true
+  },
+  {
+    "id": "1726052",
+    "type": "festival",
+    "slug": "독일마을-맥주축제-1726052",
+    "title": "독일마을 맥주축제",
+    "address": "경상남도 남해군 삼동면 독일로 89-7 남해독일마을",
+    "areacode": "36",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/20/4116920_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/20/4116920_image3_1.jpg",
+    "lat": 34.8001184999,
+    "lng": 128.0383380155,
+    "tel": "055-860-8603",
+    "startDate": "20261009",
+    "endDate": "20261011",
+    "updatedAt": "20261007132551",
+    "ended": true
+  },
+  {
+    "id": "2396313",
+    "type": "festival",
+    "slug": "대구-국가유산야행-2396313",
+    "title": "대구 국가유산야행",
+    "address": "대구광역시 중구 달성로 56 (동산동) 일원",
+    "areacode": "4",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/77/4118477_image2_1.png",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/77/4118477_image3_1.png",
+    "lat": 35.8701793656,
+    "lng": 128.5825230488,
+    "tel": "053-661-2194",
+    "startDate": "20261016",
+    "endDate": "20261017",
+    "updatedAt": "20261007100440",
+    "ended": true
+  },
+  {
+    "id": "2986930",
+    "type": "festival",
+    "slug": "울산공업축제-2986930",
+    "title": "울산공업축제",
+    "address": "울산광역시 남구 신정동 태화강국가정원 남구둔치",
+    "areacode": "7",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/54/4116554_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/54/4116554_image3_1.JPG",
+    "lat": 35.550502,
+    "lng": 129.306194,
+    "tel": "052-276-8590052-229-2724",
+    "startDate": "20261008",
+    "endDate": "20261011",
+    "updatedAt": "20261006164617",
+    "ended": true
+  },
+  {
+    "id": "229057",
+    "type": "festival",
+    "slug": "서울와우북페스티벌-229057",
+    "title": "서울와우북페스티벌",
+    "address": "서울특별시 마포구 서교동 348-24 서울특별시 마포구 어울마당로",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/76/4117576_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/76/4117576_image3_1.jpg",
+    "lat": 37.5564346247,
+    "lng": 126.926273606,
+    "tel": "02-312-1590",
+    "startDate": "20261016",
+    "endDate": "20261018",
+    "updatedAt": "20261006140924",
+    "ended": true
+  },
+  {
+    "id": "3113001",
+    "type": "festival",
+    "slug": "대전-동구동락-축제-3113001",
+    "title": "대전 동구동락 축제",
+    "address": "대전광역시 동구 철갑2길 2 (소제동) 소제동 동광장로 및 대동천 일원",
+    "areacode": "3",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/59/4101859_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/59/4101859_image3_1.jpg",
+    "lat": 36.3349767742,
+    "lng": 127.4373883609,
+    "tel": "042-251-6673",
+    "startDate": "20261009",
+    "endDate": "20261011",
+    "updatedAt": "20261006124046",
+    "ended": true
+  },
+  {
+    "id": "790124",
+    "type": "festival",
+    "slug": "홍천-인삼한우-명품축제-790124",
+    "title": "홍천 인삼한우 명품축제",
+    "address": "강원특별자치도 홍천군 홍천읍 갈마곡리 501",
+    "areacode": "32",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/66/3561066_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/66/3561066_image3_1.jpg",
+    "lat": 37.689411,
+    "lng": 127.893468,
+    "tel": "033-439-5800",
+    "startDate": "20261008",
+    "endDate": "20261011",
+    "updatedAt": "20261002094959",
+    "ended": true
+  },
+  {
+    "id": "3370452",
+    "type": "festival",
+    "slug": "2026-수성국제비엔날레-3370452",
+    "title": "2026 수성국제비엔날레",
+    "address": "대구광역시 수성구 무학로 112 (두산동)",
+    "areacode": "4",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/75/4116875_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/75/4116875_image3_1.jpg",
+    "lat": 35.8293696738,
+    "lng": 128.6205920321,
+    "tel": "053-668-1541",
+    "startDate": "20261027",
+    "endDate": "20261122",
+    "updatedAt": "20261001145950",
+    "ended": true
+  },
+  {
+    "id": "639993",
+    "type": "festival",
+    "slug": "연산대추문화축제-639993",
+    "title": "연산대추문화축제",
+    "address": "충청남도 논산시 연산면 선비로275번길 31-2",
+    "areacode": "34",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/02/4108002_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/02/4108002_image3_1.JPG",
+    "lat": 36.2123719185,
+    "lng": 127.2007368831,
+    "tel": "041-730-2945",
+    "startDate": "20261009",
+    "endDate": "20261011",
+    "updatedAt": "20261001094707",
+    "ended": true
+  },
+  {
+    "id": "3364857",
+    "type": "festival",
+    "slug": "군산짬뽕페스티벌-3364857",
+    "title": "군산짬뽕페스티벌",
+    "address": "전북특별자치도 군산시 장미동 13-1",
+    "areacode": "37",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/49/4107749_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/49/4107749_image3_1.jpg",
+    "lat": 35.9896779,
+    "lng": 126.7139462,
+    "tel": "063-454-3912, 3913",
+    "startDate": "20261009",
+    "endDate": "20261011",
+    "updatedAt": "20260929113344",
+    "ended": true
+  },
+  {
+    "id": "4115702",
+    "type": "festival",
+    "slug": "서초-ai-페스타-4115702",
+    "title": "서초 AI 페스타",
+    "address": "서울특별시 서초구 바우뫼로12길 40 (양재동) 서초문화예술공원",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/04/4115704_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/04/4115704_image3_1.jpg",
+    "lat": 37.4698840183,
+    "lng": 127.0320215881,
+    "tel": "02-2155-8831",
+    "startDate": "20261017",
+    "endDate": "20261017",
+    "updatedAt": "20260929100524",
+    "ended": true
+  },
+  {
+    "id": "232325",
+    "type": "festival",
+    "slug": "횡성한우축제-232325",
+    "title": "횡성한우축제",
+    "address": "강원특별자치도 횡성군 횡성읍 북천리 221",
+    "areacode": "32",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/42/4064642_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/42/4064642_image3_1.jpg",
+    "lat": 37.500463,
+    "lng": 127.992519,
+    "tel": "033-808-8007033-808-8009",
+    "startDate": "20261007",
+    "endDate": "20261011",
+    "updatedAt": "20260922130902",
+    "ended": true
+  },
+  {
+    "id": "3359994",
+    "type": "festival",
+    "slug": "2026-대한민국-해양-모빌리티안전-엑스포-3359994",
+    "title": "2026 대한민국 해양 모빌리티･안전 엑스포",
+    "address": "부산광역시 동구 충장대로 206 (초량동)",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/68/4111568_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/68/4111568_image3_1.jpg",
+    "lat": 35.1175129767,
+    "lng": 129.0493834405,
+    "tel": "070-4365-7047",
+    "startDate": "20261026",
+    "endDate": "20261028",
+    "updatedAt": "20260916152334",
+    "ended": true
+  },
+  {
+    "id": "3532971",
+    "type": "festival",
+    "slug": "부산-서구-의료관광축제-3532971",
+    "title": "부산 서구 의료관광축제",
+    "address": "부산광역시 서구 송도해변로 36 (암남동)",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/04/4109704_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/04/4109704_image3_1.jpg",
+    "lat": 35.0727182661,
+    "lng": 129.0174476417,
+    "tel": "051-240-4017",
+    "startDate": "20261016",
+    "endDate": "20261017",
+    "updatedAt": "20260910151048",
     "ended": true
   },
   {
@@ -16547,29 +17014,6 @@
     "startDate": "20260930",
     "endDate": "20261012",
     "updatedAt": "20261007164937",
-    "ended": true
-  },
-  {
-    "id": "3547712",
-    "type": "festival",
-    "slug": "한미친선-문화-한마당-3547712",
-    "title": "한미친선 문화 한마당",
-    "address": "경기 평택시 쇼핑로1 K-55 정문앞 신장쇼핑몰 일대",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/91/4118191_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/91/4118191_image3_1.jpg",
-    "lat": 37.0807576,
-    "lng": 127.0509268,
-    "tel": "02-3488-8375",
-    "startDate": "20261024",
-    "endDate": "20261025",
-    "updatedAt": "20261007144605",
     "ended": true
   },
   {
@@ -16734,29 +17178,6 @@
     "ended": true
   },
   {
-    "id": "2435280",
-    "type": "festival",
-    "slug": "강진만-춤추는-갈대축제-2435280",
-    "title": "강진만 춤추는 갈대축제",
-    "address": "전남광주통합특별시 강진군 강진읍 생태공원길 47",
-    "areacode": "38",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/37/4115237_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/37/4115237_image3_1.JPG",
-    "lat": 34.6205077903,
-    "lng": 126.7734624104,
-    "tel": "061-430-3413",
-    "startDate": "20261024",
-    "endDate": "20261101",
-    "updatedAt": "20260928105808",
-    "ended": true
-  },
-  {
     "id": "627825",
     "type": "festival",
     "slug": "정읍사문화제-627825",
@@ -16800,29 +17221,6 @@
     "startDate": "20261002",
     "endDate": "20261005",
     "updatedAt": "20260922140050",
-    "ended": true
-  },
-  {
-    "id": "638576",
-    "type": "festival",
-    "slug": "대한민국-국향대전-638576",
-    "title": "대한민국 국향대전",
-    "address": "전남광주통합특별시 함평군 함평읍 곤재로 27",
-    "areacode": "38",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/06/4114406_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/06/4114406_image3_1.JPG",
-    "lat": 35.0561887483,
-    "lng": 126.5199494216,
-    "tel": "061-320-2247",
-    "startDate": "20261023",
-    "endDate": "20261108",
-    "updatedAt": "20260922113047",
     "ended": true
   },
   {
@@ -16895,29 +17293,6 @@
     "ended": true
   },
   {
-    "id": "2591661",
-    "type": "festival",
-    "slug": "연천율무축제-2591661",
-    "title": "연천율무축제",
-    "address": "경기도 연천군 전곡읍 전곡리 515",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/82/4105782_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/82/4105782_image3_1.jpg",
-    "lat": 38.014587,
-    "lng": 127.061362,
-    "tel": "031-839-2314",
-    "startDate": "20261023",
-    "endDate": "20261025",
-    "updatedAt": "20260831101353",
-    "ended": true
-  },
-  {
     "id": "2828537",
     "type": "festival",
     "slug": "떡볶이-페스티벌-2828537",
@@ -16961,29 +17336,6 @@
     "startDate": "20261022",
     "endDate": "20261025",
     "updatedAt": "20260731172156",
-    "ended": true
-  },
-  {
-    "id": "2558866",
-    "type": "festival",
-    "slug": "예산장터-삼국축제-2558866",
-    "title": "예산장터 삼국축제",
-    "address": "충청남도 예산군 예산읍 예산시장길 2",
-    "areacode": "34",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/59/4095359_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/59/4095359_image3_1.jpg",
-    "lat": 36.6770296847,
-    "lng": 126.8496518916,
-    "tel": "041-332-4317",
-    "startDate": "20261022",
-    "endDate": "20261025",
-    "updatedAt": "20260731162058",
     "ended": true
   },
   {
