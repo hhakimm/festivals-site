@@ -1,25 +1,135 @@
 [
   {
-    "id": "4113301",
+    "id": "4143368",
     "type": "festival",
-    "slug": "2026-렉키의-수상한-피크닉-4113301",
-    "title": "2026 렉키의 수상한 피크닉",
-    "address": "경상남도 창원시 마산합포구 돝섬1길 275 (월영동)",
-    "areacode": "36",
+    "slug": "부락페스타-4143368",
+    "title": "부락페스타",
+    "address": "부산광역시 금정구 장전로12번길 55 (장전동) 부산대역 1번출구 앞 차없는거리 일원",
+    "areacode": "6",
     "category": {
       "cat1": "",
       "cat2": "",
       "cat3": ""
     },
     "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/96/4142596_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/96/4142596_image3_1.jpg",
-    "lat": 35.1782828634,
-    "lng": 128.5809535308,
-    "tel": "02-6953-7101",
-    "startDate": "20261113",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/69/4143369_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/69/4143369_image3_1.jpg",
+    "lat": 35.2301056519,
+    "lng": 129.0881148708,
+    "tel": "051-714-1469",
+    "startDate": "20261106",
+    "endDate": "20261108",
+    "updatedAt": "20261103160145"
+  },
+  {
+    "id": "3545306",
+    "type": "festival",
+    "slug": "포천펫스타-3545306",
+    "title": "포천펫스타",
+    "address": "경기도 포천시 신북면 아트밸리로 234 포천 아트밸리",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/07/4133507_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/07/4133507_image3_1.jpg",
+    "lat": 37.9234466507,
+    "lng": 127.236500949,
+    "tel": "0502-1949-0514",
+    "startDate": "20261114",
     "endDate": "20261114",
-    "updatedAt": "20261102184653"
+    "updatedAt": "20261103154832"
+  },
+  {
+    "id": "140799",
+    "type": "festival",
+    "slug": "부산국제록페스티벌-140799",
+    "title": "부산국제록페스티벌",
+    "address": "부산광역시 사상구 삼락동 29-50",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/02/4143402_image2_1.jpeg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/02/4143402_image3_1.jpeg",
+    "lat": 35.1728573,
+    "lng": 128.9681914,
+    "tel": "051-713-5000",
+    "startDate": "20261002",
+    "endDate": "20261004",
+    "updatedAt": "20261103150547"
+  },
+  {
+    "id": "506935",
+    "type": "festival",
+    "slug": "천안흥타령춤축제-506935",
+    "title": "천안흥타령춤축제",
+    "address": "충청남도 천안시 서북구 번영로 208 (백석동)",
+    "areacode": "34",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/82/4143382_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/82/4143382_image3_1.jpg",
+    "lat": 36.8194430336,
+    "lng": 127.1114520361,
+    "tel": "041-900-7021",
+    "startDate": "20261001",
+    "endDate": "20261005",
+    "updatedAt": "20261103145258"
+  },
+  {
+    "id": "2867300",
+    "type": "festival",
+    "slug": "평택-원평나루-억새축제-2867300",
+    "title": "평택 원평나루 억새축제",
+    "address": "경기도 평택시 평택동 238-2",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/71/4116771_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/71/4116771_image3_1.jpg",
+    "lat": 36.9842467192,
+    "lng": 127.0810967851,
+    "tel": "031-669-0965",
+    "startDate": "20261024",
+    "endDate": "20261024",
+    "updatedAt": "20261103141124"
+  },
+  {
+    "id": "2034167",
+    "type": "festival",
+    "slug": "평택호-물빛축제-2034167",
+    "title": "평택호 물빛축제",
+    "address": "경기도 평택시 현덕면 평택호길 159",
+    "areacode": "31",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/16/4107416_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/16/4107416_image3_1.jpg",
+    "lat": 36.9214412612,
+    "lng": 126.9222261083,
+    "tel": "031-669-0964",
+    "startDate": "20260912",
+    "endDate": "20260912",
+    "updatedAt": "20261103140637"
   },
   {
     "id": "2754421",
@@ -41,7 +151,29 @@
     "tel": "043-830-3463",
     "startDate": "20261105",
     "endDate": "20261108",
-    "updatedAt": "20261102174701"
+    "updatedAt": "20261103091443"
+  },
+  {
+    "id": "4113301",
+    "type": "festival",
+    "slug": "2026-렉키의-수상한-피크닉-4113301",
+    "title": "2026 렉키의 수상한 피크닉",
+    "address": "경상남도 창원시 마산합포구 돝섬1길 275 (월영동)",
+    "areacode": "36",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/96/4142596_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/96/4142596_image3_1.jpg",
+    "lat": 35.1782828634,
+    "lng": 128.5809535308,
+    "tel": "02-6953-7101",
+    "startDate": "20261113",
+    "endDate": "20261114",
+    "updatedAt": "20261102184653"
   },
   {
     "id": "613316",
@@ -196,28 +328,6 @@
     "startDate": "20270116",
     "endDate": "20270214",
     "updatedAt": "20261102151438"
-  },
-  {
-    "id": "3545306",
-    "type": "festival",
-    "slug": "포천펫스타-3545306",
-    "title": "포천펫스타",
-    "address": "경기도 포천시 신북면 아트밸리로 234 포천 아트밸리",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/07/4133507_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/07/4133507_image3_1.jpg",
-    "lat": 37.9234466507,
-    "lng": 127.236500949,
-    "tel": "0502-1949-0514",
-    "startDate": "20261114",
-    "endDate": "20261114",
-    "updatedAt": "20261102135330"
   },
   {
     "id": "506627",
@@ -2530,28 +2640,6 @@
     "updatedAt": "20261014161346"
   },
   {
-    "id": "506935",
-    "type": "festival",
-    "slug": "천안흥타령춤축제-506935",
-    "title": "천안흥타령춤축제",
-    "address": "충청남도 천안시 서북구 번영로 208 (백석동)",
-    "areacode": "34",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/35/4056635_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/35/4056635_image3_1.JPG",
-    "lat": 36.8194430336,
-    "lng": 127.1114520361,
-    "tel": "041-900-7021",
-    "startDate": "20261001",
-    "endDate": "20261005",
-    "updatedAt": "20261014155501"
-  },
-  {
     "id": "2846034",
     "type": "festival",
     "slug": "안양청년축제-2846034",
@@ -2594,28 +2682,6 @@
     "startDate": "20261003",
     "endDate": "20261011",
     "updatedAt": "20261014152046"
-  },
-  {
-    "id": "140799",
-    "type": "festival",
-    "slug": "부산국제록페스티벌-140799",
-    "title": "부산국제록페스티벌",
-    "address": "부산광역시 사상구 삼락동 29-50",
-    "areacode": "6",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/06/4040606_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/06/4040606_image3_1.jpg",
-    "lat": 35.1728573,
-    "lng": 128.9681914,
-    "tel": "051-713-5000",
-    "startDate": "20261002",
-    "endDate": "20261004",
-    "updatedAt": "20261014145223"
   },
   {
     "id": "4122301",
@@ -13135,28 +13201,6 @@
     "updatedAt": "20260514100859"
   },
   {
-    "id": "1032770",
-    "type": "festival",
-    "slug": "부산국제매직페스티벌-1032770",
-    "title": "부산국제매직페스티벌",
-    "address": "부산광역시 해운대구 수영강변대로 120 (우동)",
-    "areacode": "6",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/20/4064420_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/20/4064420_image3_1.jpg",
-    "lat": 35.1710365257136,
-    "lng": 129.127084511585,
-    "tel": "051-626-7002",
-    "startDate": "20260626",
-    "endDate": "20260626",
-    "updatedAt": "20260514093246"
-  },
-  {
     "id": "1717921",
     "type": "festival",
     "slug": "dfesta-거리공연축제-1717921",
@@ -16875,6 +16919,29 @@
     "updatedAt": "20251114155335"
   },
   {
+    "id": "1032770",
+    "type": "festival",
+    "slug": "부산국제매직페스티벌-1032770",
+    "title": "부산국제매직페스티벌",
+    "address": "부산광역시 해운대구 수영강변대로 120 (우동)",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/20/4064420_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/20/4064420_image3_1.jpg",
+    "lat": 35.1710365257136,
+    "lng": 129.127084511585,
+    "tel": "051-626-7002",
+    "startDate": "20260626",
+    "endDate": "20260626",
+    "updatedAt": "20260514093246",
+    "ended": true
+  },
+  {
     "id": "1399532",
     "type": "festival",
     "slug": "부산고등어축제-1399532",
@@ -17470,29 +17537,6 @@
     "startDate": "20261024",
     "endDate": "20261025",
     "updatedAt": "20261020100141",
-    "ended": true
-  },
-  {
-    "id": "2867300",
-    "type": "festival",
-    "slug": "평택-원평나루-억새축제-2867300",
-    "title": "평택 원평나루 억새축제",
-    "address": "경기도 평택시 평택동 238-2",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/71/4116771_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/71/4116771_image3_1.jpg",
-    "lat": 36.9842467192,
-    "lng": 127.0810967851,
-    "tel": "031-669-0965",
-    "startDate": "20261024",
-    "endDate": "20261024",
-    "updatedAt": "20261019132917",
     "ended": true
   },
   {
@@ -20000,29 +20044,6 @@
     "startDate": "20260915",
     "endDate": "20260917",
     "updatedAt": "20260910095226",
-    "ended": true
-  },
-  {
-    "id": "2034167",
-    "type": "festival",
-    "slug": "평택호-물빛축제-2034167",
-    "title": "평택호 물빛축제",
-    "address": "경기도 평택시 현덕면 평택호길 159",
-    "areacode": "31",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/16/4107416_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/16/4107416_image3_1.jpg",
-    "lat": 36.9214412612,
-    "lng": 126.9222261083,
-    "tel": "031-669-0964",
-    "startDate": "20260912",
-    "endDate": "20260912",
-    "updatedAt": "20260903161331",
     "ended": true
   },
   {
