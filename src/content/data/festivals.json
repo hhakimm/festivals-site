@@ -1,5 +1,71 @@
 [
   {
+    "id": "2515174",
+    "type": "festival",
+    "slug": "2026-전국민-ai-페스티벌-2515174",
+    "title": "2026 전국민 AI 페스티벌",
+    "address": "서울특별시 중구 을지로 281 (을지로7가)",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/18/4165118_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/18/4165118_image3_1.jpg",
+    "lat": 37.5680445877,
+    "lng": 127.0108903555,
+    "tel": "02-336-1876",
+    "startDate": "20261211",
+    "endDate": "20261213",
+    "updatedAt": "20261118175134"
+  },
+  {
+    "id": "2802077",
+    "type": "festival",
+    "slug": "2026-과학영재교육-페스티벌-2802077",
+    "title": "2026 과학영재교육 페스티벌",
+    "address": "서울특별시 강남구 테헤란로7길 22 (역삼동)",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/12/4165112_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/12/4165112_image3_1.jpg",
+    "lat": 37.5007217702,
+    "lng": 127.030740311,
+    "tel": "02-559-3887",
+    "startDate": "20261223",
+    "endDate": "20261223",
+    "updatedAt": "20261118173353"
+  },
+  {
+    "id": "2725188",
+    "type": "festival",
+    "slug": "경흥대로-도봉옛길-문화제-2725188",
+    "title": "경흥대로 도봉옛길 문화제",
+    "address": "서울특별시 도봉구 도봉동 1-8",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/75/4060575_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/75/4060575_image3_1.JPG",
+    "lat": 37.691173,
+    "lng": 127.048657,
+    "tel": "02-905-4026",
+    "startDate": "20260620",
+    "endDate": "20260620",
+    "updatedAt": "20261118163627"
+  },
+  {
     "id": "4111479",
     "type": "festival",
     "slug": "제3회-추도-섬-영화제-4111479",
@@ -17029,28 +17095,6 @@
     "updatedAt": "20251126095212"
   },
   {
-    "id": "2802077",
-    "type": "festival",
-    "slug": "2025-과학영재교육-페스티벌-2802077",
-    "title": "2025 과학영재교육 페스티벌",
-    "address": "서울특별시 강남구 테헤란로7길 22 (역삼동)",
-    "areacode": "1",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0208",
-      "cat3": "A02081300"
-    },
-    "theme": "",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/28/3572728_image2_1.jpg",
-    "imageThumb": "http://tong.visitkorea.or.kr/cms/resource/28/3572728_image3_1.jpg",
-    "lat": 37.5007739351,
-    "lng": 127.0307542337,
-    "tel": "070-8803-6226",
-    "startDate": "20251223",
-    "endDate": "20251223",
-    "updatedAt": "20251124155801"
-  },
-  {
     "id": "3578130",
     "type": "festival",
     "slug": "울산-크리스마스-마켓-3578130",
@@ -20613,29 +20657,6 @@
     "startDate": "20260911",
     "endDate": "20260913",
     "updatedAt": "20260428085255",
-    "ended": true
-  },
-  {
-    "id": "2725188",
-    "type": "festival",
-    "slug": "경흥대로-도봉옛길-문화제-2725188",
-    "title": "경흥대로 도봉옛길 문화제",
-    "address": "서울특별시 도봉구 도봉동 1-8",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/75/4060575_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/75/4060575_image3_1.JPG",
-    "lat": 37.691173,
-    "lng": 127.048657,
-    "tel": "02-905-4026",
-    "startDate": "20260620",
-    "endDate": "20260620",
-    "updatedAt": "20260427151521",
     "ended": true
   },
   {
