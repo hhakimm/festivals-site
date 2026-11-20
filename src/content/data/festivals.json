@@ -1,5 +1,49 @@
 [
   {
+    "id": "4088149",
+    "type": "festival",
+    "slug": "발코니-뮤직쇼-앤-스트릿-페스타-4088149",
+    "title": "발코니 뮤직쇼 앤 스트릿 페스타",
+    "address": "부산광역시 중구 광복로 72-1 (광복동2가) 광복로 일원",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/37/4166437_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/37/4166437_image3_1.jpg",
+    "lat": 35.0985979131,
+    "lng": 129.0327114585,
+    "tel": "051-780-4151",
+    "startDate": "20261205",
+    "endDate": "20261205",
+    "updatedAt": "20261119164041"
+  },
+  {
+    "id": "3578130",
+    "type": "festival",
+    "slug": "울산-크리스마스-마켓-3578130",
+    "title": "울산 크리스마스 마켓",
+    "address": "울산광역시 남구 대공원로 94 (옥동)",
+    "areacode": "7",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/40/4153340_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/40/4153340_image3_1.jpg",
+    "lat": 35.5316566254,
+    "lng": 129.2935190325,
+    "tel": "052-271-8701",
+    "startDate": "20261127",
+    "endDate": "20261226",
+    "updatedAt": "20261119150653"
+  },
+  {
     "id": "2515174",
     "type": "festival",
     "slug": "2026-전국민-ai-페스티벌-2515174",
@@ -19,7 +63,95 @@
     "tel": "02-336-1876",
     "startDate": "20261211",
     "endDate": "20261213",
-    "updatedAt": "20261118175134"
+    "updatedAt": "20261119112154"
+  },
+  {
+    "id": "1328004",
+    "type": "festival",
+    "slug": "예천-삼강나루-주막축제-1328004",
+    "title": "예천 삼강나루 주막축제",
+    "address": "경상북도 예천군 풍양면 삼강리길 33",
+    "areacode": "35",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/25/4110525_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/25/4110525_image3_1.jpg",
+    "lat": 36.5635556078,
+    "lng": 128.2988560966,
+    "tel": "054-650-6034",
+    "startDate": "20260925",
+    "endDate": "20260927",
+    "updatedAt": "20261119013004"
+  },
+  {
+    "id": "4053719",
+    "type": "festival",
+    "slug": "서울-불암산-철쭉제-4053719",
+    "title": "서울 불암산 철쭉제",
+    "address": "서울특별시 노원구 한글비석로12길 51-27 (중계동) 불암산 힐링타운",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/29/4053729_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/29/4053729_image3_1.jpg",
+    "lat": 37.6554800513,
+    "lng": 127.080632327,
+    "tel": "02-2116-0546",
+    "startDate": "20260416",
+    "endDate": "20260426",
+    "updatedAt": "20261119013004"
+  },
+  {
+    "id": "1073801",
+    "type": "festival",
+    "slug": "영양고추-hot-페스티벌-1073801",
+    "title": "영양고추 H.O.T 페스티벌",
+    "address": "서울특별시 중구 을지로 지하12 (을지로1가)",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/25/4095025_image2_1.png",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/25/4095025_image3_1.png",
+    "lat": 37.565448355,
+    "lng": 126.9787818353,
+    "tel": "054-680-6381",
+    "startDate": "20260827",
+    "endDate": "20260829",
+    "updatedAt": "20261119013003"
+  },
+  {
+    "id": "2933428",
+    "type": "festival",
+    "slug": "울산-성남동-눈꽃축제-2933428",
+    "title": "울산 성남동 눈꽃축제",
+    "address": "울산광역시 중구 젊음의거리 27-4 (성남동) 성남동 소방서 부지",
+    "areacode": "7",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/64/3586264_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/64/3586264_image3_1.jpg",
+    "lat": 35.553838832,
+    "lng": 129.3179013978,
+    "tel": "010-4825-0560",
+    "startDate": "20251224",
+    "endDate": "20251228",
+    "updatedAt": "20261119013003"
   },
   {
     "id": "2802077",
@@ -328,28 +460,6 @@
     "startDate": "20260613",
     "endDate": "20260614",
     "updatedAt": "20261116131134"
-  },
-  {
-    "id": "2933428",
-    "type": "festival",
-    "slug": "울산-성남동-눈꽃축제-2933428",
-    "title": "울산 성남동 눈꽃축제",
-    "address": "울산광역시 중구 젊음의거리 27-4 (성남동) 성남동 소방서 부지",
-    "areacode": "7",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/64/3586264_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/64/3586264_image3_1.jpg",
-    "lat": 35.553838832,
-    "lng": 129.3179013978,
-    "tel": "010-4825-0560",
-    "startDate": "20251224",
-    "endDate": "20251228",
-    "updatedAt": "20261116130454"
   },
   {
     "id": "1241762",
@@ -5875,28 +5985,6 @@
     "updatedAt": "20260923092022"
   },
   {
-    "id": "1328004",
-    "type": "festival",
-    "slug": "예천-삼강나루-주막축제-1328004",
-    "title": "예천 삼강나루 주막축제",
-    "address": "경상북도 예천군 풍양면 삼강리길 33",
-    "areacode": "35",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/25/4110525_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/25/4110525_image3_1.jpg",
-    "lat": 36.5635556078,
-    "lng": 128.2988560966,
-    "tel": "054-650-6034",
-    "startDate": "20260925",
-    "endDate": "20260927",
-    "updatedAt": "20260922154719"
-  },
-  {
     "id": "3530974",
     "type": "festival",
     "slug": "호법-코스모스-꽃축제-3530974",
@@ -9021,28 +9109,6 @@
     "updatedAt": "20260821170522"
   },
   {
-    "id": "1073801",
-    "type": "festival",
-    "slug": "영양고추-hot-페스티벌-1073801",
-    "title": "영양고추 H.O.T 페스티벌",
-    "address": "서울특별시 중구 을지로 지하12 (을지로1가)",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/25/4095025_image2_1.png",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/25/4095025_image3_1.png",
-    "lat": 37.565448355,
-    "lng": 126.9787818353,
-    "tel": "054-680-6381",
-    "startDate": "20260827",
-    "endDate": "20260829",
-    "updatedAt": "20260821095429"
-  },
-  {
     "id": "1068150",
     "type": "festival",
     "slug": "사천시-삼천포항-자연산-전어축제-1068150",
@@ -9857,28 +9923,6 @@
     "updatedAt": "20260803112807"
   },
   {
-    "id": "4053719",
-    "type": "festival",
-    "slug": "서울-불암산-철쭉제-4053719",
-    "title": "서울 불암산 철쭉제",
-    "address": "서울특별시 노원구 한글비석로12길 51-27 (중계동) 불암산 힐링타운",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/29/4053729_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/29/4053729_image3_1.jpg",
-    "lat": 37.6554800513,
-    "lng": 127.080632327,
-    "tel": "02-2116-0546",
-    "startDate": "20260416",
-    "endDate": "20260426",
-    "updatedAt": "20260803112724"
-  },
-  {
     "id": "3483727",
     "type": "festival",
     "slug": "서대문-봄빛축제-3483727",
@@ -10669,28 +10713,6 @@
     "startDate": "20260723",
     "endDate": "20260726",
     "updatedAt": "20260716102956"
-  },
-  {
-    "id": "4088149",
-    "type": "festival",
-    "slug": "발코니-뮤직쇼-앤-스트릿-페스타-4088149",
-    "title": "발코니 뮤직쇼 앤 스트릿 페스타",
-    "address": "부산광역시 중구 광복로 72-1 (광복동2가)",
-    "areacode": "6",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/50/4088150_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/50/4088150_image3_1.jpg",
-    "lat": 35.0985979131,
-    "lng": 129.0327114585,
-    "tel": "070-4006-6849",
-    "startDate": "20260725",
-    "endDate": "20260725",
-    "updatedAt": "20260715174222"
   },
   {
     "id": "2611034",
@@ -17093,29 +17115,6 @@
     "startDate": "20251205",
     "endDate": "20251207",
     "updatedAt": "20251126095212"
-  },
-  {
-    "id": "3578130",
-    "type": "festival",
-    "slug": "울산-크리스마스-마켓-3578130",
-    "title": "울산 크리스마스 마켓",
-    "address": "울산광역시 남구 대공원로 94 (옥동)",
-    "areacode": "7",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/40/4153340_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/40/4153340_image3_1.jpg",
-    "lat": 35.5316566254,
-    "lng": 129.2935190325,
-    "tel": "052-271-8701",
-    "startDate": "20261127",
-    "endDate": "20261226",
-    "updatedAt": "20261111175754",
-    "ended": true
   },
   {
     "id": "2646950",
