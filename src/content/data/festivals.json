@@ -1,5 +1,27 @@
 [
   {
+    "id": "2560161",
+    "type": "festival",
+    "slug": "2026-헬로메이커-2560161",
+    "title": "2026 헬로메이커",
+    "address": "부산광역시 기장군 기장읍 동부산관광6로 59",
+    "areacode": "6",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/37/4103837_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/37/4103837_image3_1.jpg",
+    "lat": 35.2045970007,
+    "lng": 129.2127018203,
+    "tel": "1422-23",
+    "startDate": "20260905",
+    "endDate": "20260906",
+    "updatedAt": "20261121013000"
+  },
+  {
     "id": "3420072",
     "type": "festival",
     "slug": "2027-선양-맨몸마라톤-3420072",
@@ -8953,28 +8975,6 @@
     "startDate": "20260829",
     "endDate": "20260906",
     "updatedAt": "20260825150923"
-  },
-  {
-    "id": "2560161",
-    "type": "festival",
-    "slug": "2026-헬로메이커-2560161",
-    "title": "2026 헬로메이커",
-    "address": "부산광역시 기장군 기장읍 동부산관광6로 59",
-    "areacode": "6",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/37/4103837_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/37/4103837_image3_1.jpg",
-    "lat": 35.2045970007,
-    "lng": 129.2127018203,
-    "tel": "1422-23",
-    "startDate": "20260905",
-    "endDate": "20260906",
-    "updatedAt": "20260825112454"
   },
   {
     "id": "2614762",
