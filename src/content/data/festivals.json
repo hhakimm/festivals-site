@@ -1,5 +1,49 @@
 [
   {
+    "id": "674023",
+    "type": "festival",
+    "slug": "정미년-해맞이-행사-with-주문진-도깨비-불꽃-축제-674023",
+    "title": "정미년 해맞이 행사 with 주문진 도깨비 불꽃 축제",
+    "address": "강원특별자치도 강릉시 경포로 515 (안현동) 주문진 도깨비 방파제, 경포해변, 정동진 모래시계공원",
+    "areacode": "32",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/77/4175077_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/77/4175077_image3_1.jpg",
+    "lat": 37.8052239456,
+    "lng": 128.9067457491,
+    "tel": "033-640-5130",
+    "startDate": "20261231",
+    "endDate": "20270101",
+    "updatedAt": "20261125144646"
+  },
+  {
+    "id": "604097",
+    "type": "festival",
+    "slug": "광주김치축제-604097",
+    "title": "광주김치축제",
+    "address": "전남광주통합특별시 서구 내방로 111 (치평동)",
+    "areacode": "38",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/83/4173983_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/83/4173983_image3_1.jpg",
+    "lat": 35.1590033102,
+    "lng": 126.8530264839,
+    "tel": "062-613-3955",
+    "startDate": "20261023",
+    "endDate": "20261025",
+    "updatedAt": "20261125091536"
+  },
+  {
     "id": "3049823",
     "type": "festival",
     "slug": "제4회-겨울엔-양평-3049823",
@@ -3123,28 +3167,6 @@
     "startDate": "20261025",
     "endDate": "20261025",
     "updatedAt": "20261020161412"
-  },
-  {
-    "id": "604097",
-    "type": "festival",
-    "slug": "광주김치축제-604097",
-    "title": "광주김치축제",
-    "address": "전남광주통합특별시 서구 내방로 111 (치평동)",
-    "areacode": "38",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/32/3545732_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/32/3545732_image3_1.JPG",
-    "lat": 35.1590033102,
-    "lng": 126.8530264839,
-    "tel": "062-613-3955",
-    "startDate": "20261023",
-    "endDate": "20261025",
-    "updatedAt": "20261020160415"
   },
   {
     "id": "506600",
@@ -16963,28 +16985,6 @@
     "updatedAt": "20251226095533"
   },
   {
-    "id": "674023",
-    "type": "festival",
-    "slug": "병오년-해맞이-행사-674023",
-    "title": "병오년 해맞이 행사",
-    "address": "강원특별자치도 강릉시 경포로 515 (안현동) 경포해변 및 정동진 모래시계공원",
-    "areacode": "32",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0207",
-      "cat3": "A02070200"
-    },
-    "theme": "",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/40/3588540_image2_1.jpg",
-    "imageThumb": "http://tong.visitkorea.or.kr/cms/resource/40/3588540_image3_1.jpg",
-    "lat": 37.8052793467,
-    "lng": 128.9067724937,
-    "tel": "033-640-5130",
-    "startDate": "20251231",
-    "endDate": "20260101",
-    "updatedAt": "20251224132726"
-  },
-  {
     "id": "2702333",
     "type": "festival",
     "slug": "카운트다운-부산-2702333",
@@ -17136,7 +17136,8 @@
     "tel": "042-611-2080",
     "startDate": "20251205",
     "endDate": "20251207",
-    "updatedAt": "20251126095212"
+    "updatedAt": "20251126095212",
+    "ended": true
   },
   {
     "id": "3301415",
