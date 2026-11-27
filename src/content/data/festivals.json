@@ -1,5 +1,93 @@
 [
   {
+    "id": "4178087",
+    "type": "festival",
+    "slug": "제3회-익산-크리스마스-마켓-4178087",
+    "title": "제3회 익산 크리스마스 마켓",
+    "address": "전북특별자치도 익산시 중앙로 12-151 (중앙동2가)",
+    "areacode": "37",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/91/4178091_image2_1.png",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/91/4178091_image3_1.png",
+    "lat": 35.9381102381,
+    "lng": 126.948006124,
+    "tel": "063-853-6783",
+    "startDate": "20261218",
+    "endDate": "20261225",
+    "updatedAt": "20261126172749"
+  },
+  {
+    "id": "4178037",
+    "type": "festival",
+    "slug": "서울한국춤페스티벌-4178037",
+    "title": "서울한국춤페스티벌",
+    "address": "서울특별시 중구 퇴계로34길 28 (필동2가) 남산골한옥마을",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/40/4178040_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/40/4178040_image3_1.JPG",
+    "lat": 37.55954227,
+    "lng": 126.9947387353,
+    "tel": "1800-4746",
+    "startDate": "20261207",
+    "endDate": "20261208",
+    "updatedAt": "20261126170204"
+  },
+  {
+    "id": "2802077",
+    "type": "festival",
+    "slug": "2026-과학영재교육-페스티벌-2802077",
+    "title": "2026 과학영재교육 페스티벌",
+    "address": "서울특별시 강남구 테헤란로7길 22 (역삼동)",
+    "areacode": "1",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/16/4176716_image2_1.jpg",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/16/4176716_image3_1.jpg",
+    "lat": 37.5007217702,
+    "lng": 127.030740311,
+    "tel": "02-559-3887",
+    "startDate": "20261223",
+    "endDate": "20261223",
+    "updatedAt": "20261126132127"
+  },
+  {
+    "id": "2641128",
+    "type": "festival",
+    "slug": "수성빛예술제-2641128",
+    "title": "수성빛예술제",
+    "address": "대구광역시 수성구 무학로 112 (두산동) 수성못",
+    "areacode": "4",
+    "category": {
+      "cat1": "",
+      "cat2": "",
+      "cat3": ""
+    },
+    "theme": "",
+    "image": "https://tong.visitkorea.or.kr/cms/resource/58/4173758_image2_1.JPG",
+    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/58/4173758_image3_1.JPG",
+    "lat": 35.8293753137,
+    "lng": 128.6205782501,
+    "tel": "053-668-1504",
+    "startDate": "20261224",
+    "endDate": "20270103",
+    "updatedAt": "20261126105335"
+  },
+  {
     "id": "674023",
     "type": "festival",
     "slug": "정미년-해맞이-행사-with-주문진-도깨비-불꽃-축제-674023",
@@ -64,28 +152,6 @@
     "startDate": "20261231",
     "endDate": "20261231",
     "updatedAt": "20261124174742"
-  },
-  {
-    "id": "2641128",
-    "type": "festival",
-    "slug": "수성빛예술제-2641128",
-    "title": "수성빛예술제",
-    "address": "대구광역시 수성구 무학로 112 (두산동) 수성못",
-    "areacode": "4",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/58/4173758_image2_1.JPG",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/58/4173758_image3_1.JPG",
-    "lat": 35.8293753137,
-    "lng": 128.6205782501,
-    "tel": "053-668-1504",
-    "startDate": "20261224",
-    "endDate": "20270103",
-    "updatedAt": "20261124173810"
   },
   {
     "id": "2930662",
@@ -614,28 +680,6 @@
     "startDate": "20260827",
     "endDate": "20260829",
     "updatedAt": "20261119013003"
-  },
-  {
-    "id": "2802077",
-    "type": "festival",
-    "slug": "2026-과학영재교육-페스티벌-2802077",
-    "title": "2026 과학영재교육 페스티벌",
-    "address": "서울특별시 강남구 테헤란로7길 22 (역삼동)",
-    "areacode": "1",
-    "category": {
-      "cat1": "",
-      "cat2": "",
-      "cat3": ""
-    },
-    "theme": "",
-    "image": "https://tong.visitkorea.or.kr/cms/resource/12/4165112_image2_1.jpg",
-    "imageThumb": "https://tong.visitkorea.or.kr/cms/resource/12/4165112_image3_1.jpg",
-    "lat": 37.5007217702,
-    "lng": 127.030740311,
-    "tel": "02-559-3887",
-    "startDate": "20261223",
-    "endDate": "20261223",
-    "updatedAt": "20261118173353"
   },
   {
     "id": "2725188",
@@ -16941,28 +16985,6 @@
     "updatedAt": "20251230172145"
   },
   {
-    "id": "141375",
-    "type": "festival",
-    "slug": "울주-간절곶-해맞이-141375",
-    "title": "울주 간절곶 해맞이",
-    "address": "울산광역시 울주군 서생면 대송리 간절곶",
-    "areacode": "7",
-    "category": {
-      "cat1": "A02",
-      "cat2": "A0207",
-      "cat3": "A02070200"
-    },
-    "theme": "",
-    "image": "http://tong.visitkorea.or.kr/cms/resource/79/3588879_image2_1.jpg",
-    "imageThumb": "http://tong.visitkorea.or.kr/cms/resource/79/3588879_image2_1.jpg",
-    "lat": 35.3591723598,
-    "lng": 129.3619181517,
-    "tel": "052-980-2232",
-    "startDate": "20251231",
-    "endDate": "20260101",
-    "updatedAt": "20251229094204"
-  },
-  {
     "id": "1769697",
     "type": "festival",
     "slug": "홍천강-꽁꽁축제-1769697",
@@ -17115,6 +17137,29 @@
     "startDate": "20251219",
     "endDate": "20251225",
     "updatedAt": "20251204180141"
+  },
+  {
+    "id": "141375",
+    "type": "festival",
+    "slug": "울주-간절곶-해맞이-141375",
+    "title": "울주 간절곶 해맞이",
+    "address": "울산광역시 울주군 서생면 대송리 간절곶",
+    "areacode": "7",
+    "category": {
+      "cat1": "A02",
+      "cat2": "A0207",
+      "cat3": "A02070200"
+    },
+    "theme": "",
+    "image": "http://tong.visitkorea.or.kr/cms/resource/79/3588879_image2_1.jpg",
+    "imageThumb": "http://tong.visitkorea.or.kr/cms/resource/79/3588879_image2_1.jpg",
+    "lat": 35.3591723598,
+    "lng": 129.3619181517,
+    "tel": "052-980-2232",
+    "startDate": "20251231",
+    "endDate": "20260101",
+    "updatedAt": "20251229094204",
+    "ended": true
   },
   {
     "id": "2915307",
